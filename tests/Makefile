@@ -1,4 +1,6 @@
-TESTS		=	tuples.c simple.c
+NAME		=	tests
+
+TESTS		=	tuples.c
 
 SRC_DIR		=	../src
 OBJ_DIR		=	../obj
@@ -16,7 +18,7 @@ CRITERION	=	-lcriterion -I/Users/johnnymosby/.brew/Cellar/criterion/2.4.1_2/incl
 ifeq ($(UNAME), Darwin)
 		MLX_DIR		=	../lib/mlx_osx/
 		MLX_FLAGS	=	-L $(MLX_DIR) -l mlx -framework OpenGl -framework Appkit
-		INC_DIRS	= -I ../inc/ -I../lib/libft/inc/ -I $(MLX_DIR)
+		INC_DIRS	=	-I../inc/ -I../lib/libft/inc/ -I$(MLX_DIR)
 endif
 
 ifeq ($(UNAME), Linux)
@@ -36,7 +38,7 @@ $(LIBFT):
 
 OBJ		= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SOURCE))
 
-$(OBJ): $(SOURCE) $(LIBFT)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 			@mkdir -p $(@D)
 			$(CC) $(CFLAGS) $(INC_DIRS) -c $< -o $@
 
@@ -44,19 +46,16 @@ $(MLX):
 			make -C $(MLX_DIR)
 
 define compile
- 	$(CC) $^ $(MLX_FLAGS) $(MLX) $(LIBFT) $(CRITERION) $(INC_DIRS) -o $@ && ./$@ --verbose
+ 	$(CC) $(CFLAGS) $^ $(LIBFT) $(MLX_FLAGS) $(CRITERION) $(INC_DIRS) -o $@ && ./$@ --verbose
 endef
 
 # -------------------------------- TESTS ------------------------------------- #
 
+all: $(TESTS) clean
+
 echo_wow: $(SOURCE) $(OBJ)
 	echo $(SOURCE)
 	echo $(OBJ)
-
-all: $(TESTS) clean
-
-simple: $(OBJ) $(LIBFT) $(MLX) simple.c
-	@$(call compile, "$^")
 
 tuples: $(OBJ) $(LIBFT) $(MLX) tuples.c
 	@$(call compile, "$^")
@@ -65,9 +64,6 @@ clean:
 	rm -rf $(OBJ_DIR)
 	make clean -C $(LIBFT_DIR)
 	@rm -f $(patsubst %.c,%,$(TESTS))
-
-wow:
-	$(CC) $(CFLAGS) simple.c $(OFLAGS) $(LIBFT_DIR) -I $(INC_DIRS) -o simple && ./simple --verbose
 
 fclean: clean
 	make clean -C $(MLX_DIR)

@@ -10,7 +10,7 @@ CFLAGS	=	-Wall -Wextra -Werror
 
 MAIN	=	main.c
 
-TUPLES	=	tuples.c
+TUPLES	=	create_tuples.c logical_operations.c
 TUPLES	:=	$(addprefix tuples/, $(TUPLES))
 
 SOURCE	=	$(MAIN)
@@ -49,10 +49,12 @@ $(OBJ): $(SRC)
 
 clean:
 			make clean -C ./lib/libft/
+			make clean -C ./tests/
 			rm -rf $(OBJ_DIR)
 
 fclean:		clean
 			make fclean -C ./lib/libft/
+			make fclean -C ./tests/
 			rm -f $(NAME)
 
 re:			fclean all
