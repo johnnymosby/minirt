@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tuples.c                                           :+:      :+:    :+:   */
+/*   tuples.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/06 16:38:03 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/08/06 16:47:17 by rbasyrov         ###   ########.fr       */
+/*   Created: 2023/08/06 14:22:41 by rbasyrov          #+#    #+#             */
+/*   Updated: 2023/08/06 18:37:16 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tests.h"
+#ifndef TUPLES_H
+# define TUPLES_H
 
-Test(tuples, is_point)
+typedef struct s_tuple
 {
-	t_tuple a = tuple(4.3, -4.2, 3.1, 1.0);
+	double	x;
+	double	y;
+	double	z;
+	double	w;
+}	t_tuple;
 
-	cr_assert(a.x == 4.3);
-	cr_assert(a.y == -4.2);
-	cr_assert(a.z == 3.1);
-	cr_assert(a.w == 1.0, "The tuple is not a point");
-}
+t_tuple	tuple(double x, double y, double z, double w);
+t_tuple	point(double x, double y, double z);
+t_tuple	vector(double x, double y, double z);
 
-Test(tuples, is_vector)
-{
-	t_tuple a = tuple(4.3, -4.2, 3.1, 0.0);
-
-	cr_assert(a.x == 4.3);
-	cr_assert(a.y == -4.2);
-	cr_assert(a.z == 3.1);
-	cr_assert(a.w == 0.0, "The tuple is not a vector");
-}
+#endif

@@ -20,17 +20,20 @@ SRC		=	$(addprefix $(SRC_DIR), $(SOURCE))
 OBJ_DIR	=	obj/
 OBJ		=	$(addprefix $(OBJ_DIR), $(SOURCE:.c=.o))
 
-INC_DIR	=	inc/
 
 ifeq ($(UNAME), Darwin)
-		MLX_DIR		=	lib/mlx_osx
-		OFLAGS		= 	$(CFLAGS) -L $(MLX) -l mlx -framework OpenGl -framework Appkit
+		MLX_DIR		=	../lib/mlx_osx/
+		MLX_FLAGS	=	-L $(MLX_DIR) -l mlx -framework OpenGl -framework Appkit
+		INC_DIRS	= -I ../inc/ -I../lib/libft/inc/ -I $(MLX_DIR)
 endif
 
 ifeq ($(UNAME), Linux)
-		MLX_DIR		= lib/mlx_linux
-		OFLAGS		= 	$(CFLAGS) -L $(MLX) -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+		MLX_DIR		=	../lib/mlx_linux/
+		MLX_FLAGS	=	-L $(MLX_DIR) -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+		INC_DIRS		= 	-I../inc/ -I../lib/libft/inc/ -I$(MLX_DIR)
 endif
+
+MLX		=	$(MLX_DIR)libmlx.a
 
 all:		$(NAME)
 
@@ -42,7 +45,7 @@ $(LIBFT):
 
 $(OBJ): $(SRC)
 			@mkdir -p $(@D)
-			$(CC) -c $< -o $@ -I $(INC_DIR)
+			$(CC) -c $< -o $@ $(INC_DIRS)
 
 clean:
 			make clean -C ./lib/libft/
