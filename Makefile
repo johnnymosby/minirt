@@ -44,19 +44,13 @@ $(OBJ): $(SRC)
 			@mkdir -p $(@D)
 			$(CC) -c $< -o $@ -I $(INC_DIR)
 
-$(OBJ_DIR)%.o : $(SRC_DIR)%.c
-			@mkdir -p $(@D)
-			$(CC) $(RDL_HEAD) -c $< -o $@
-
 clean:
 			make clean -C ./lib/libft/
 			rm -rf $(OBJ_DIR)
-			rm -rf $(OBJTESTDIR)
 
 fclean:		clean
-			rm -f $(NAME)
-			rm -f test
 			make fclean -C ./lib/libft/
+			rm -f $(NAME)
 
 re:			fclean all
 
