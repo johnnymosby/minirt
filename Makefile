@@ -10,7 +10,8 @@ CFLAGS	=	-Wall -Wextra -Werror
 
 MAIN	=	main.c
 
-TUPLES	=	create_tuples.c logical_operations.c
+TUPLES	=	create_tuples.c logical_operations.c arithmetic_operations.c \
+			vectors_manipulation.c
 TUPLES	:=	$(addprefix tuples/, $(TUPLES))
 
 SOURCE	=	$(MAIN)

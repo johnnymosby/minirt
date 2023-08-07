@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "__tuple": "c",
+        "memory_resource": "c",
+        "mutex": "c",
+        "optional": "c",
+        "tuple": "c",
+        "utility": "c",
+        "variant": "c",
+        "version": "c",
+        "math.h": "c"
+    }
+}
