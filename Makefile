@@ -10,11 +10,17 @@ CFLAGS	=	-Wall -Wextra -Werror
 
 MAIN	=	main.c
 
-TUPLES	=	create_tuples.c logical_operations.c arithmetic_operations.c \
+TUPLES	=	create_tuple.c logical_operations.c arithmetic_operations.c \
 			vectors_manipulation.c
 TUPLES	:=	$(addprefix tuples/, $(TUPLES))
 
-SOURCE	=	$(MAIN)
+COLORS	=	create_color.c arithmetic_operations.c logical_operations.c
+COLORS	:=	$(addprefix colors/, $(COLORS))
+
+CANVAS	=	create_canvas.c pixels.c
+CANVAS	:=	$(addprefix canvas/, $(CANVAS))
+
+SOURCE	=	$(MAIN) $(TUPLES) $(COLORS) $(CANVAS)
 SRC_DIR	=	src/
 SRC		=	$(addprefix $(SRC_DIR), $(SOURCE))
 

@@ -1,6 +1,6 @@
 NAME		=	tests
 
-TESTS		=	tuples.c
+TESTS		=	tuples.c colors.c canvas.c
 
 SRC_DIR		=	../src
 OBJ_DIR		=	../obj
@@ -58,6 +58,12 @@ echo_wow: $(SOURCE) $(OBJ)
 	echo $(OBJ)
 
 tuples: $(OBJ) $(LIBFT) $(MLX) tuples.c
+	@$(call compile, "$^")
+
+colors: $(OBJ) $(LIBFT) $(MLX) colors.c
+	@$(call compile, "$^")
+
+canvas: $(OBJ) $(LIBFT) $(MLX) canvas.c
 	@$(call compile, "$^")
 
 clean:
