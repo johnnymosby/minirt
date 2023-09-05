@@ -13,7 +13,8 @@ UNAME		=	$(shell uname -s)
 CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror
 
-CRITERION	=	-lcriterion -I/Users/johnnymosby/.brew/Cellar/criterion/2.4.1_2/include/ \
+CRITERION_EXISTS := $(shell pkg-config --exists criterion && echo "yes" || echo "no")
+#CRITERION	=	-lcriterion -I/Users/johnnymosby/.brew/Cellar/criterion/2.4.1_2/include/ \
 				-L/Users/johnnymosby/.brew/Cellar/criterion/2.4.1_2/lib/
 
 ifeq ($(UNAME), Darwin)
@@ -24,8 +25,15 @@ endif
 
 ifeq ($(UNAME), Linux)
 		MLX_DIR		=	../lib/mlx_linux/
-		MLX_FLAGS	=	-lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+		MLX_FLAGS	=	-L $(MLX_DIR) -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 		INC_DIRS	= 	-I../inc/ -I../lib/libft/inc/ -I$(MLX_DIR)
+endif
+
+ifeq ($(CRITERION_EXISTS), yes)
+		CRITERION_FLAGS:= $(shell pkg-config --cflags-only-I criterion | sed 's/-I//')
+else
+		CRITERION_FLAGS := -lcriterion  -L../lib/criterion/lib/
+		CRITERION_DIRS := -I..lib/criterion/include/
 endif
 
 
@@ -49,8 +57,11 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 $(MLX):
 			make -C $(MLX_DIR)
 
+$(TESTS): $(OBJ) $(LIBFT) $(MLX)
+	@$(call compile, "$^")
+
 define compile
- 	$(CC) $(CFLAGS) $^ $(LIBFT) $(MLX_FLAGS) $(CRITERION) $(INC_DIRS) -o $@ && ./$@ --verbose
+ 	$(CC) $(CFLAGS) $^ $(LIBFT) $(INC_DIRS) $(MLX_FLAGS) -lcriterion -L../lib/criterion/lib/ -I..lib/criterion/include/ -o $@ && ./$@ --verbose
 endef
 
 # -------------------------------- TESTS ------------------------------------- #
