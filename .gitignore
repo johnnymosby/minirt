@@ -1,3 +1,4 @@
-
 obj/
+lib/libft/*
+.vscode/
 .DS_Store

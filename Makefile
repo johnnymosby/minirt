@@ -1,6 +1,7 @@
 NAME	=	minirt
 
 LIBFT	=	./lib/libft/libft.a
+LIBFT_MAKE	=	./lib/libft/Makefile
 
 OS		=	$(shell uname)
 USER	=	$(shell whoami)
@@ -27,7 +28,6 @@ SRC		=	$(addprefix $(SRC_DIR), $(SOURCE))
 OBJ_DIR	=	obj/
 OBJ		=	$(addprefix $(OBJ_DIR), $(SOURCE:.c=.o))
 
-
 ifeq ($(UNAME), Darwin)
 		MLX_DIR		=	../lib/mlx_osx/
 		MLX_FLAGS	=	-L $(MLX_DIR) -l mlx -framework OpenGl -framework Appkit
@@ -48,6 +48,9 @@ $(NAME):	$(OBJ) $(LIBFT)
 			$(CC) $(OBJ) $(CFLAGS) $(RDL_LIB) $(LIBFT) -o $(NAME)
 
 $(LIBFT):
+			if [ ! -e $(LIBFT_MAKE) ]; then \
+				git submodule update --init --recursive; \
+			fi
 			make -C ./lib/libft/
 
 $(OBJ): $(SRC)

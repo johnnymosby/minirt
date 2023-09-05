@@ -6,6 +6,7 @@ SRC_DIR		=	../src
 OBJ_DIR		=	../obj
 LIBFT_DIR 	=	../lib/libft/
 LIBFT		=	../lib/libft/libft.a
+LIBFT_MAKE	=	../lib/libft/Makefile
 
 UNAME		=	$(shell uname -s)
 
@@ -34,6 +35,9 @@ SOURCE = $(shell find $(SRC_DIR) -name '*.c')
 SOURCE := $(filter-out $(SRC_DIR)/main.c, $(SOURCE))
 
 $(LIBFT):
+			if [ ! -e $(LIBFT_MAKE) ]; then \
+				git submodule update --init --recursive; \
+			fi
 			make -C $(LIBFT_DIR)
 
 OBJ		= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SOURCE))
