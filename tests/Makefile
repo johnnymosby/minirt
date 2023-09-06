@@ -73,13 +73,13 @@ echo_wow: $(SOURCE) $(OBJ)
 	echo $(SOURCE)
 	echo $(OBJ)
 
-tuples: $(OBJ) $(LIBFT) $(MLX)
+tuples: $(LIBFT) $(OBJ) $(MLX)
 	@$(call compile, "$^")
 
-colors: $(OBJ) $(LIBFT) $(MLX)
+colors: $(LIBFT) $(OBJ) $(MLX)
 	@$(call compile, "$^")
 
-canvas: $(OBJ) $(LIBFT) $(MLX)
+canvas: $(LIBFT) $(OBJ) $(MLX)
 	@$(call compile, "$^")
 
 clean:
