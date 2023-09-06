@@ -62,24 +62,20 @@ $(TESTS): $(OBJ) $(LIBFT) $(MLX)
 	@$(call compile, "$^")
 
 define compile
- 	$(CC) $(TESTS) $(CFLAGS) $^ $(LIBFT) $(INC_DIRS) $(MLX_FLAGS) -L../lib/criterion/lib/ -lcriterion -I..lib/criterion/include/ -o $@ && ./$@ --verbose
+ 	$(CC) $(CFLAGS) $^ $(LIBFT) $(INC_DIRS) $(MLX_FLAGS) -L../lib/criterion/lib/ -lcriterion -I..lib/criterion/include/ -o $(basename $@ .c) && ./$(basename $@ .c) --verbose
 endef
 
 # -------------------------------- TESTS ------------------------------------- #
 
 all: $(TESTS) clean
 
-echo_wow: $(SOURCE) $(OBJ)
-	echo $(SOURCE)
-	echo $(OBJ)
-
-tuples: $(LIBFT) $(OBJ) $(MLX)
+tuples: $(LIBFT) $(OBJ) $(MLX) tuples.c
 	@$(call compile, "$^")
 
-colors: $(LIBFT) $(OBJ) $(MLX)
+colors: $(LIBFT) $(OBJ) $(MLX) colors.c
 	@$(call compile, "$^")
 
-canvas: $(LIBFT) $(OBJ) $(MLX)
+canvas: $(LIBFT) $(OBJ) $(MLX) canvas.c
 	@$(call compile, "$^")
 
 clean:
