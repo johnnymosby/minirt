@@ -34,6 +34,7 @@ ifeq ($(CRITERION_EXISTS), yes)
 else
 		CRITERION_FLAGS := -lcriterion  -L../lib/criterion/lib/
 		CRITERION_DIRS := -I..lib/criterion/include/
+		export LD_LIBRARY_PATH := $(LD_LIBRARY_PATH):$(realpath ../lib/criterion/lib)
 endif
 
 
@@ -61,7 +62,7 @@ $(TESTS): $(OBJ) $(LIBFT) $(MLX)
 	@$(call compile, "$^")
 
 define compile
- 	$(CC) $(CFLAGS) $^ $(LIBFT) $(INC_DIRS) $(MLX_FLAGS) -lcriterion -L../lib/criterion/lib/ -I..lib/criterion/include/ -o $@ && ./$@ --verbose
+ 	$(CC) $(TESTS) $(CFLAGS) $^ $(LIBFT) $(INC_DIRS) $(MLX_FLAGS) -L../lib/criterion/lib/ -lcriterion -I..lib/criterion/include/ -o $@ && ./$@ --verbose
 endef
 
 # -------------------------------- TESTS ------------------------------------- #
@@ -72,13 +73,13 @@ echo_wow: $(SOURCE) $(OBJ)
 	echo $(SOURCE)
 	echo $(OBJ)
 
-tuples: $(OBJ) $(LIBFT) $(MLX) tuples.c
+tuples: $(OBJ) $(LIBFT) $(MLX)
 	@$(call compile, "$^")
 
-colors: $(OBJ) $(LIBFT) $(MLX) colors.c
+colors: $(OBJ) $(LIBFT) $(MLX)
 	@$(call compile, "$^")
 
-canvas: $(OBJ) $(LIBFT) $(MLX) canvas.c
+canvas: $(OBJ) $(LIBFT) $(MLX)
 	@$(call compile, "$^")
 
 clean:
