@@ -14,8 +14,6 @@ CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror
 
 CRITERION_EXISTS := $(shell pkg-config --exists criterion && echo "yes" || echo "no")
-#CRITERION	=	-lcriterion -I/Users/johnnymosby/.brew/Cellar/criterion/2.4.1_2/include/ \
-				-L/Users/johnnymosby/.brew/Cellar/criterion/2.4.1_2/lib/
 
 ifeq ($(UNAME), Darwin)
 		MLX_DIR		=	../lib/mlx_osx/
@@ -62,7 +60,7 @@ $(TESTS): $(OBJ) $(LIBFT) $(MLX)
 	@$(call compile, "$^")
 
 define compile
- 	$(CC) $(CFLAGS) $^ $(LIBFT) $(INC_DIRS) $(MLX_FLAGS) -L../lib/criterion/lib/ -lcriterion -I..lib/criterion/include/ -o $(basename $@ .c) && ./$(basename $@ .c) --verbose
+ 	$(CC) $(CFLAGS) $^ $(LIBFT) $(INC_DIRS) $(MLX_FLAGS) -L../lib/criterion/lib/ -lcriterion -I$(realpath ../lib/criterion/include) -o $(basename $@ .c) && ./$(basename $@ .c) --verbose
 endef
 
 # -------------------------------- TESTS ------------------------------------- #
