@@ -53,9 +53,9 @@ $(LIBFT):
 			fi
 			make -C ./lib/libft/
 
-$(OBJ): $(SRC)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 			@mkdir -p $(@D)
-			$(CC) -c $< -o $@ $(INC_DIRS)
+			$(CC) $(CFLAGS) $(INC_DIRS) -c $< -o $@
 
 clean:
 			make clean -C ./lib/libft/
