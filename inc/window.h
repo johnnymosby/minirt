@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 12:38:27 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/10 14:07:00 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/11 17:33:53 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define WINDOW_H
 
 #include <mlx.h>
+#include  "libft.h"
 #include <stddef.h>// NULL
 #include <stdlib.h>// exit
 #include <stdbool.h>// bool
