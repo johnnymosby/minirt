@@ -5,5 +5,6 @@
 # include "tuples.h"
 # include "colors.h"
 # include "canvas.h"
+# include "matrices.h"
 
 #endif

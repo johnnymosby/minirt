@@ -21,7 +21,10 @@ COLORS	:=	$(addprefix colors/, $(COLORS))
 CANVAS	=	create_canvas.c pixels.c
 CANVAS	:=	$(addprefix canvas/, $(CANVAS))
 
-SOURCE	=	$(MAIN) $(TUPLES) $(COLORS) $(CANVAS)
+MATRICES	=	
+MATRICES	:=	$(addprefix matrices/, $(MATRICES))
+
+SOURCE	=	$(MAIN) $(TUPLES) $(COLORS) $(CANVAS) $(MATRICES)
 SRC_DIR	=	src/
 SRC		=	$(addprefix $(SRC_DIR), $(SOURCE))
 
