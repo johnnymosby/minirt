@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 14:52:22 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/14 16:07:27 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/09/14 17:15:59 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_matrix	multiply_matrices(t_matrix a, t_matrix b)
 	t_tuple		col_b;
 
 	row = 0;
-	ret.total_size = MAX_TOTAL_SIZE;
+	ret.side_size = MAX_TOTAL_SIZE;
 	while (row < MAX_SIDE_SIZE)
 	{
 		col = 0;
