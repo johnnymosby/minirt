@@ -65,9 +65,14 @@ endef
 
 # -------------------------------- TESTS ------------------------------------- #
 
-all: $(TESTS) clean
+all: $(LIBFT) $(OBJ) $(MLX)
+	make tuples
+	make colors
+	make canvas
+	make matrices
 
 tuples: $(LIBFT) $(OBJ) $(MLX) tuples.c
+	@rm -f $(patsubst %.c,%,$(TESTS))
 	@$(call compile, "$^")
 
 colors: $(LIBFT) $(OBJ) $(MLX) colors.c

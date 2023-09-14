@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectors_manipulation.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 01:31:26 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/08/07 02:47:37 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/09/14 12:05:48 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

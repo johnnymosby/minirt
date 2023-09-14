@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tuples.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 16:38:03 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/08/07 02:46:59 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/09/14 14:22:47 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ Test(tuples, create_vector)
 Test(tuples, add_tuples)
 {
 	t_tuple a1 = tuple(3, -2, 5, 1);
-    t_tuple a2 = tuple(-2, 3, 1, 0);
-    t_tuple a3 = add_tuples(a1, a2);
-    t_tuple a4 = tuple(1, 1, 6, 1);
+	t_tuple a2 = tuple(-2, 3, 1, 0);
+	t_tuple a3 = add_tuples(a1, a2);
+	t_tuple a4 = tuple(1, 1, 6, 1);
 
 	cr_assert(are_equal_tuples(a3, a4), "The tuples are not equal");
 }
@@ -73,9 +73,9 @@ Test(tuples, add_tuples)
 Test(tuples, substract_points)
 {
 	t_tuple p1 = point(3, 2, 1);
-    t_tuple p2 = point(5, 6, 7);
-    t_tuple v1 = substract_tuples(p1, p2);
-    t_tuple v2 = vector(-2, -4, -6);
+	t_tuple p2 = point(5, 6, 7);
+	t_tuple v1 = substract_tuples(p1, p2);
+	t_tuple v2 = vector(-2, -4, -6);
 
 	cr_assert(are_equal_tuples(v1, v2), "The tuples are not equal");
 }
@@ -83,9 +83,9 @@ Test(tuples, substract_points)
 Test(tuples, substract_point_and_vector)
 {
 	t_tuple p1 = point(3, 2, 1);
-    t_tuple v = vector(5, 6, 7);
-    t_tuple p2 = substract_tuples(p1, v);
-    t_tuple p3 = point(-2, -4, -6);
+	t_tuple v = vector(5, 6, 7);
+	t_tuple p2 = substract_tuples(p1, v);
+	t_tuple p3 = point(-2, -4, -6);
 
 	cr_assert(are_equal_tuples(p2, p3), "The tuples are not equal");
 }
@@ -93,9 +93,9 @@ Test(tuples, substract_point_and_vector)
 Test(tuples, substract_vectors)
 {
 	t_tuple v1 = vector(3, 2, 1);
-    t_tuple v2 = vector(5, 6, 7);
-    t_tuple v3 = substract_tuples(v1, v2);
-    t_tuple v4 = vector(-2, -4, -6);
+	t_tuple v2 = vector(5, 6, 7);
+	t_tuple v3 = substract_tuples(v1, v2);
+	t_tuple v4 = vector(-2, -4, -6);
 
 	cr_assert(are_equal_tuples(v3, v4), "The tuples are not equal");
 }
@@ -103,9 +103,9 @@ Test(tuples, substract_vectors)
 Test(tuples, substract_zero_vector_and_vector)
 {
 	t_tuple zero = vector(0, 0, 0);
-    t_tuple v = vector(1, -2, 3);
-    t_tuple v1 = substract_tuples(zero, v);
-    t_tuple v2 = vector(-1, 2, -3);
+	t_tuple v = vector(1, -2, 3);
+	t_tuple v1 = substract_tuples(zero, v);
+	t_tuple v2 = vector(-1, 2, -3);
 
 	cr_assert(are_equal_tuples(v1, v2), "The tuples are not equal");
 }

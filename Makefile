@@ -1,13 +1,13 @@
 NAME	=	minirt
 
-LIBFT	=	./lib/libft/libft.a
+LIBFT		=	./lib/libft/libft.a
 LIBFT_MAKE	=	./lib/libft/Makefile
+INC_LIBFT	=	-I./lib/libft/inc
 
-OS		=	$(shell uname)
-USER	=	$(shell whoami)
+UNAME	=	$(shell uname -s)
 
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	+=	-Wall -Wextra -Werror
 
 MAIN	=	main.c
 
@@ -21,7 +21,8 @@ COLORS	:=	$(addprefix colors/, $(COLORS))
 CANVAS	=	create_canvas.c pixels.c
 CANVAS	:=	$(addprefix canvas/, $(CANVAS))
 
-MATRICES	=	
+MATRICES	=	create_matrix.c logical_operations.c arithmetic_operations.c \
+				transformations.c
 MATRICES	:=	$(addprefix matrices/, $(MATRICES))
 
 SOURCE	=	$(MAIN) $(TUPLES) $(COLORS) $(CANVAS) $(MATRICES)
@@ -34,13 +35,13 @@ OBJ		=	$(addprefix $(OBJ_DIR), $(SOURCE:.c=.o))
 ifeq ($(UNAME), Darwin)
 		MLX_DIR		=	../lib/mlx_osx/
 		MLX_FLAGS	=	-L $(MLX_DIR) -l mlx -framework OpenGl -framework Appkit
-		INC_DIRS	= -I ../inc/ -I../lib/libft/inc/ -I $(MLX_DIR)
+		INC_DIRS	=	-I./inc -I./lib/libft/inc/ -I$(MLX_DIR)
 endif
 
 ifeq ($(UNAME), Linux)
-		MLX_DIR		=	../lib/mlx_linux/
+		MLX_DIR		=	./lib/mlx_linux/
 		MLX_FLAGS	=	-L $(MLX_DIR) -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
-		INC_DIRS		= 	-I../inc/ -I../lib/libft/inc/ -I$(MLX_DIR)
+		INC_DIRS	= 	-I./inc/ -I./lib/libft/inc/ -I$(MLX_DIR)
 endif
 
 MLX		=	$(MLX_DIR)libmlx.a
@@ -48,7 +49,7 @@ MLX		=	$(MLX_DIR)libmlx.a
 all:		$(NAME)
 
 $(NAME):	$(OBJ) $(LIBFT)
-			$(CC) $(OBJ) $(CFLAGS) $(RDL_LIB) $(LIBFT) -o $(NAME)
+			$(CC) $(OBJ) $(CFLAGS) $(INC_DIRS) -lm $(RDL_LIB) $(LIBFT) -o $(NAME)
 
 $(LIBFT):
 			if [ ! -e $(LIBFT_MAKE) ]; then \
@@ -56,7 +57,7 @@ $(LIBFT):
 			fi
 			make -C ./lib/libft/
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
 			@mkdir -p $(@D)
 			$(CC) $(CFLAGS) $(INC_DIRS) -c $< -o $@
 
