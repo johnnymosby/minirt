@@ -25,6 +25,9 @@ MATRICES	=	utils.c logical_operations.c arithmetic_operations.c \
 				properties.c transformations.c rotations.c
 MATRICES	:=	$(addprefix matrices/, $(MATRICES))
 
+RAYS	=	utils.c
+RAYS	:=	$(addprefix rays/, $(RAYS))
+
 SOURCE	=	$(MAIN) $(TUPLES) $(COLORS) $(CANVAS) $(MATRICES)
 SRC_DIR	=	src/
 SRC		=	$(addprefix $(SRC_DIR), $(SOURCE))

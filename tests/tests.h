@@ -6,5 +6,6 @@
 # include "colors.h"
 # include "canvas.h"
 # include "matrices.h"
+# include "rays.h"
 
 #endif

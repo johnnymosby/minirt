@@ -1,6 +1,7 @@
 NAME		=	tests
 
-TESTS		=	tuples.c colors.c canvas.c matrices.c transformations.c
+TESTS		=	tuples.c colors.c canvas.c matrices.c transformations.c \
+				rays.c
 
 SRC_DIR		=	../src
 OBJ_DIR		=	../obj
@@ -85,6 +86,9 @@ matrices: $(LIBFT) $(OBJ) $(MLX) matrices.c
 	@$(call compile, "$^")
 
 transformations: $(LIBFT) $(OBJ) $(MLX) transformations.c
+	@$(call compile, "$^")
+
+rays: $(LIBFT) $(OBJ) $(MLX) rays.c
 	@$(call compile, "$^")
 
 clean:
