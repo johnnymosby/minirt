@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 15:24:16 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/15 17:18:49 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/09/15 18:25:26 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@ typedef struct s_matrix
 	double	table[MAX_SIDE_SIZE][MAX_SIDE_SIZE];
 	int		side_size;
 }	t_matrix;
+
+// l - left, r - right
+typedef struct s_shearing
+{
+	double	l;
+	double	r;
+}	t_shearing;
 
 /*
 ** ------------------------------- MATRIX UTILS ------------------------------
@@ -62,5 +69,14 @@ bool		is_invertible(t_matrix m);
 
 t_matrix	translation(double x, double y, double z);
 t_matrix	scaling(double x, double y, double z);
+t_matrix	shearing(t_shearing x, t_shearing y, t_shearing z);
+
+/*
+** ------------------------------- MATRIX ROTATIONS --------------------------
+*/
+
+t_matrix	rotation_x(double r);
+t_matrix	rotation_y(double r);
+t_matrix	rotation_z(double r);
 
 #endif
