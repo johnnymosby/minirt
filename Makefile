@@ -21,8 +21,8 @@ COLORS	:=	$(addprefix colors/, $(COLORS))
 CANVAS	=	create_canvas.c pixels.c
 CANVAS	:=	$(addprefix canvas/, $(CANVAS))
 
-MATRICES	=	create_matrix.c logical_operations.c arithmetic_operations.c \
-				transformations.c
+MATRICES	=	utils.c logical_operations.c arithmetic_operations.c \
+				properties.c
 MATRICES	:=	$(addprefix matrices/, $(MATRICES))
 
 SOURCE	=	$(MAIN) $(TUPLES) $(COLORS) $(CANVAS) $(MATRICES)

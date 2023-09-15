@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 15:24:16 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/14 20:34:54 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/09/15 16:13:45 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,20 @@ typedef struct s_matrix
 	int		side_size;
 }	t_matrix;
 
+/*
+** ------------------------------- MATRIX UTILS ------------------------------
+*/
+
 t_matrix	matrix(const double matrix[MAX_SIDE_SIZE][MAX_SIDE_SIZE],
 				int side_size);
+t_matrix	transpose(t_matrix m);
+t_matrix	submatrix(t_matrix m, int row_to_remove, int col_to_remove);
+t_matrix	inverse(t_matrix m);
 
 /*
 ** ------------------------------- LOGICAL OPERATIONS ------------------------
 */
+
 bool		are_equal_matrices(t_matrix a, t_matrix b);
 
 /*
@@ -40,17 +48,12 @@ t_matrix	multiply_matrices(t_matrix a, t_matrix b);
 t_tuple		multiply_matrix_by_tuple(t_matrix a, t_tuple b);
 
 /*
-** ------------------------------- MATRIX TRANSFORMATIONS --------------------
-*/
-
-t_matrix	transpose(t_matrix m);
-t_matrix	submatrix(t_matrix m, int row_to_remove, int col_to_remove);
-
-/*
 ** ------------------------------- MATRIX PROPERTIES -------------------------
 */
 
 double		determinant(t_matrix m);
 double		minor(t_matrix m, int row, int col);
+double		cofactor(t_matrix m, int row, int col);
+bool		is_invertible(t_matrix m);
 
 #endif

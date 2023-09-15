@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 15:19:33 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/14 20:33:35 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/09/15 16:05:10 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,4 +242,146 @@ Test(matrices_properties, minor_of_3_by_3)
 	double m = minor(A, 1, 0);
 	cr_assert(are_equal_doubles(d, 25)
 		&& are_equal_doubles(m, 25));
+}
+
+Test(matrices_properties, cofactor_of_3_by_3)
+{
+	const double a_table[MAX_SIDE_SIZE][MAX_SIDE_SIZE] = {
+		{3, 5, 0},
+		{2, -1, -7},
+		{6, -1, 5}
+	};
+	t_matrix A = matrix(a_table, 3);
+
+	double minor_0 = minor(A, 0, 0);
+	double cofactor_0 = cofactor(A, 0, 0);
+	double minor_1 = minor(A, 1, 0);
+	double cofactor_1 = cofactor(A, 1, 0);
+	cr_assert(are_equal_doubles(minor_0, -12));
+	cr_assert(are_equal_doubles(cofactor_0, -12));
+	cr_assert(are_equal_doubles(minor_1, 25));
+	cr_assert(are_equal_doubles(cofactor_1, -25));
+}
+
+Test(matrices_properties, get_determinant_of_3_by_3)
+{
+	const double a_table[MAX_SIDE_SIZE][MAX_SIDE_SIZE] = {
+		{1, 2, 6},
+		{-5, 8, -4},
+		{2, 6, 4}
+	};
+	t_matrix A = matrix(a_table, 3);
+
+	double cofactor_0 = cofactor(A, 0, 0);
+	double cofactor_1 = cofactor(A, 0, 1);
+	double cofactor_2 = cofactor(A, 0, 2);
+	double det = determinant(A);
+	cr_assert(are_equal_doubles(cofactor_0, 56));
+	cr_assert(are_equal_doubles(cofactor_1, 12));
+	cr_assert(are_equal_doubles(cofactor_2, -46));
+	cr_assert(are_equal_doubles(det, -196));
+}
+
+Test(matrices_properties, is_invertible)
+{
+	const double a_table[MAX_SIDE_SIZE][MAX_SIDE_SIZE] = {
+		{6, 4, 4, 4},
+		{5, 5, 7, 6},
+		{4, -9, 3, -7},
+		{9, 1, 7, -6}
+	};
+	t_matrix A = matrix(a_table, 4);
+
+	double det_A = determinant(A);
+	bool A_is_invertible = is_invertible(A);
+	cr_assert(are_equal_doubles(det_A, -2120));
+	cr_assert(A_is_invertible == true);
+
+	const double b_table[MAX_SIDE_SIZE][MAX_SIDE_SIZE] = {
+		{-4, 2, -2, -3},
+		{9, 6, 2, 6},
+		{0, -5, 1, -5},
+		{0, 0, 0, 0}
+	};
+	t_matrix B = matrix(b_table, 4);
+
+	double det_B = determinant(B);
+	bool B_is_invertible = is_invertible(B);
+	cr_assert(are_equal_doubles(det_B, 0));
+	cr_assert(B_is_invertible == false);
+}
+
+Test(matrices_inverse, inverse_0)
+{
+	const double a_table[MAX_SIDE_SIZE][MAX_SIDE_SIZE] = {
+		{-5, 2, 6, -8},
+		{1, -5, 1, 8},
+		{7, 7, -6, -7},
+		{1, -3, 7, 4}
+	};
+	t_matrix A = matrix(a_table, 4);
+	t_matrix B = inverse(A);
+
+	const double c_table[MAX_SIDE_SIZE][MAX_SIDE_SIZE] = {
+		{0.21805, 0.45113, 0.24060, -0.04511},
+		{-0.80827, -1.45677, -0.44361, 0.52068},
+		{-0.07895, -0.22368, -0.05263, 0.19737},
+		{-0.52256, -0.81391, -0.30075, 0.30639}
+	};
+	t_matrix C = matrix(c_table, 4);
+
+	double det_A = determinant(A);
+	double cofactor_0 = cofactor(A, 2, 3);
+	double cofactor_1 = cofactor(A, 3, 2);
+	cr_assert(are_equal_doubles(det_A, 532));
+	cr_assert(are_equal_doubles(cofactor_0, -160));
+	cr_assert(are_equal_doubles(B.table[3][2], (double) -160 / 532));
+	cr_assert(are_equal_doubles(cofactor_1, 105));
+	cr_assert(are_equal_doubles(B.table[2][3], (double) 105 / 532));
+	cr_assert(B.side_size == 4);
+	cr_assert(are_equal_matrices(B, C));
+}
+
+Test(matrices_inverse, inverse_1)
+{
+	const double a_table[MAX_SIDE_SIZE][MAX_SIDE_SIZE] = {
+		{8, -5, 9, 2},
+		{7, 5, 6, 1},
+		{-6, 0, 9, 6},
+		{-3, 0, -9, -4}
+	};
+	t_matrix A = matrix(a_table, 4);
+	t_matrix B = inverse(A);
+
+	const double c_table[MAX_SIDE_SIZE][MAX_SIDE_SIZE] = {
+		{-0.15385, -0.15385, -0.28205, -0.53846},
+		{-0.07692, 0.12308, 0.02564, 0.03077},
+		{0.35897, 0.35897, 0.43590, 0.92308},
+		{-0.69231, -0.69231, -0.76923, -1.92308}
+	};
+	t_matrix C = matrix(c_table, 4);
+
+	cr_assert(are_equal_matrices(B, C));
+}
+
+Test(matrices_inverse, inverse_2)
+{
+	const double a_table[MAX_SIDE_SIZE][MAX_SIDE_SIZE] = {
+		{3, -9, 7, 3},
+		{3, -8, 2, -9},
+		{-4, 4, 4, 1},
+		{-6, 5, -1, 1}
+	};
+	t_matrix A = matrix(a_table, 4);
+	const double b_table[MAX_SIDE_SIZE][MAX_SIDE_SIZE] = {
+		{8, 2, 2, 2},
+		{3, -1, 7, 0},
+		{7, 0, 5, 4},
+		{6, -2, 0, 5}
+	};
+	t_matrix B = matrix(b_table, 4);
+	t_matrix C = multiply_matrices(A, B);
+	t_matrix B_inverted = inverse(B);
+
+	cr_assert(are_equal_matrices(multiply_matrices(C, B_inverted), A));
 }
