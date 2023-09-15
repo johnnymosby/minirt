@@ -22,7 +22,7 @@ CANVAS	=	create_canvas.c pixels.c
 CANVAS	:=	$(addprefix canvas/, $(CANVAS))
 
 MATRICES	=	utils.c logical_operations.c arithmetic_operations.c \
-				properties.c
+				properties.c transformations.c
 MATRICES	:=	$(addprefix matrices/, $(MATRICES))
 
 SOURCE	=	$(MAIN) $(TUPLES) $(COLORS) $(CANVAS) $(MATRICES)

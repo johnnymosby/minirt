@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 15:19:33 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/15 16:05:10 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/09/15 16:57:20 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ Test(matrices_arithmetic_operations, multiply_identity_matrix_by_tuple)
 	cr_assert(are_equal_tuples(product, b));
 }
 
-Test(matrices_transformations, transpose_matrix)
+Test(matrices_utils, transpose_matrix)
 {
 	const double a_table[MAX_SIDE_SIZE][MAX_SIDE_SIZE] = {
 		{0, 9, 3, 0},
@@ -164,7 +164,7 @@ Test(matrices_transformations, transpose_matrix)
 	cr_assert(are_equal_matrices(product, b));
 }
 
-Test(matrices_transformations, transpose_identity_matrix)
+Test(matrices_utils, transpose_identity_matrix)
 {
 	const double a_table[MAX_SIDE_SIZE][MAX_SIDE_SIZE] = {
 		{1, 0, 0, 0},

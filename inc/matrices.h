@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 15:24:16 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/15 16:13:45 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/09/15 17:18:49 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,12 @@ double		determinant(t_matrix m);
 double		minor(t_matrix m, int row, int col);
 double		cofactor(t_matrix m, int row, int col);
 bool		is_invertible(t_matrix m);
+
+/*
+** ------------------------------- MATRIX TRANSFORMATIONS --------------------
+*/
+
+t_matrix	translation(double x, double y, double z);
+t_matrix	scaling(double x, double y, double z);
 
 #endif
