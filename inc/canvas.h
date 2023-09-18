@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 23:48:26 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/18 13:18:58 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/18 21:10:03 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ t_color		pixel_at(t_canvas *const canvas, int x, int y);
 ** ------------------------------- SAVE CANVAS -------------------------------
 */
 
-void		*canvas_to_mlx_image(t_canvas *const canvas);
-
+void		canvas_to_mlx_image(t_canvas *const canvas, int *img);
 
 #endif

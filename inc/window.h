@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 12:38:27 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/18 16:16:45 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/18 21:04:40 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 typedef struct s_image {
     void	*img_ptr;
-    char	*addr;
+    void	*addr;
     int		bpp;
     int		line_len;
     int		endian;
