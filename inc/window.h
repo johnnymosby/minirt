@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 12:38:27 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/11 17:33:53 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/18 13:10:45 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ t_image	pct;
 t_win	window(void);
 bool	initialise_picture(t_win *window);
 bool	initialise_menu(t_win *window);
+void	free_mlx_memory(t_win *window);
 
 #endif
