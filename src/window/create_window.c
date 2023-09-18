@@ -6,11 +6,32 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 12:58:41 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/18 13:09:32 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/18 16:16:20 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "window.h"
+
+
+static void	free_mlx_memory(t_win *window)
+{
+	if (window == NULL)
+		return ;
+	if (window->menu.img_ptr)
+		mlx_destroy_image(window->mlx_ptr, window->menu.img_ptr);
+	if (window->pct.img_ptr)
+		mlx_destroy_image(window->mlx_ptr, window->pct.img_ptr);
+	if (window->win_ptr)
+		mlx_destroy_window(window->mlx_ptr, window->win_ptr);
+	if (window->mlx_ptr)
+	{
+		mlx_destroy_display(window->mlx_ptr);
+		free(window->mlx_ptr);
+	}
+	window = NULL;
+	return ;
+}
+
 
 /*
 *	creates a MLX ptr and a window ptr
@@ -30,7 +51,8 @@ t_win	window(void)
 	{
 		mlx_destroy_display(window.mlx_ptr);
 		free(window.mlx_ptr);
-		exit(EXIT_FAILURE); /// print_error in an error.h src/error/error.c?
+		ft_bzero(&window, sizeof(t_win));
+		return(window); /// print_error in an error.h src/error/error.c?
 	}	
 	return (window);
 	
@@ -43,7 +65,7 @@ bool	initialise_picture(t_win *window)
 	t_image	pct;
 
 	ft_bzero(&pct, sizeof(t_image));
-	pct.img_ptr = mlx_new_image(window->win_ptr, PCT_WIDTH, WIN_HEIGHT);
+	pct.img_ptr = mlx_new_image(window->mlx_ptr, PCT_WIDTH, WIN_HEIGHT);
 	if (pct.img_ptr == NULL)
 	{
 		free_mlx_memory(window);
@@ -61,7 +83,7 @@ bool	initialise_menu(t_win *window)
 	t_image	menu;
 
 	ft_bzero(&menu, sizeof(t_image));
-	menu.img_ptr = mlx_new_image(window->win_ptr, MENU_WIDTH, WIN_HEIGHT);
+	menu.img_ptr = mlx_new_image(window->mlx_ptr, MENU_WIDTH, WIN_HEIGHT);
 	if (menu.img_ptr == NULL)
 	{
 		free_mlx_memory(window);
@@ -71,21 +93,4 @@ bool	initialise_menu(t_win *window)
 	window->menu = menu;
 	return (true);
 }
-void	free_mlx_memory(t_win *window)
-{
-	if (window == NULL)
-		return ;
-	if (window->menu.img_ptr)
-		mlx_destroy_image(window->mlx_ptr, window->menu.img_ptr);
-	if (window->pct.img_ptr)
-		mlx_destroy_image(window->mlx_ptr, window->pct.img_ptr);
-	if (window->win_ptr)
-		mlx_destroy_window(window->mlx_ptr, window->win_ptr);
-	if (window->mlx_ptr)
-	{
-		mlx_destroy_display(window->mlx_ptr);
-		free(window->mlx_ptr);
-	}
-	window = NULL;
-	return ;
-}
+

@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 12:38:27 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/18 13:10:45 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/18 16:16:45 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 #include <stdlib.h>// exit
 #include <stdbool.h>// bool
 
-#define		WIN_HEIGHT	1920
-#define		MENU_WIDTH	980
-#define		PCT_WIDTH	100
+#define		WIN_HEIGHT	1024
+#define		MENU_WIDTH	256
+#define		PCT_WIDTH	768
 
 typedef struct s_image {
     void	*img_ptr;
@@ -41,6 +41,5 @@ t_image	pct;
 t_win	window(void);
 bool	initialise_picture(t_win *window);
 bool	initialise_menu(t_win *window);
-void	free_mlx_memory(t_win *window);
 
 #endif
