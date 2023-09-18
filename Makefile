@@ -21,6 +21,9 @@ COLORS	:=	$(addprefix colors/, $(COLORS))
 CANVAS	=	create_canvas.c pixels.c
 CANVAS	:=	$(addprefix canvas/, $(CANVAS))
 
+WINDOW	=	create_window.c
+WINDOW	:=	$(addprefix window/, $(WINDOW))
+
 MATRICES	=	utils.c logical_operations.c arithmetic_operations.c \
 				properties.c transformations.c rotations.c
 MATRICES	:=	$(addprefix matrices/, $(MATRICES))
@@ -28,7 +31,7 @@ MATRICES	:=	$(addprefix matrices/, $(MATRICES))
 RAYS	=	utils.c
 RAYS	:=	$(addprefix rays/, $(RAYS))
 
-SOURCE	=	$(MAIN) $(TUPLES) $(COLORS) $(CANVAS) $(MATRICES)
+SOURCE	=	$(MAIN) $(TUPLES) $(COLORS) $(CANVAS) $(WINDOW) $(MATRICES)
 SRC_DIR	=	src/
 SRC		=	$(addprefix $(SRC_DIR), $(SOURCE))
 
@@ -52,7 +55,7 @@ MLX		=	$(MLX_DIR)libmlx.a
 all:		$(NAME)
 
 $(NAME):	$(OBJ) $(LIBFT)
-			$(CC) $(OBJ) $(CFLAGS) $(INC_DIRS) -lm $(RDL_LIB) $(LIBFT) -o $(NAME)
+			$(CC) $(OBJ) $(CFLAGS) $(MLX_FLAGS) $(INC_DIRS) -lm $(RDL_LIB) $(LIBFT) -o $(NAME)
 
 $(LIBFT):
 			if [ ! -e $(LIBFT_MAKE) ]; then \
