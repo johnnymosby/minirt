@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   create_canvas.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 23:47:18 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/08/07 23:58:01 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/09/18 13:17:36 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "canvas.h"
+
+void		free_canvas(t_canvas *c)
+{
+	free (c->pixels);
+	free (c);
+	return ;
+}
 
 t_canvas	*canvas(int width, int height)
 {

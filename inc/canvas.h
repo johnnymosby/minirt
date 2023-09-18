@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 23:48:26 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/11 20:14:54 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/18 13:18:58 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_canvas {
 */
 
 t_canvas	*canvas(int width, int height);
-
+void		free_canvas(t_canvas *c);
 /*
 ** ------------------------------- LOGICAL OPERATIONS ------------------------
 */
