@@ -18,7 +18,7 @@ TUPLES	:=	$(addprefix tuples/, $(TUPLES))
 COLORS	=	create_color.c arithmetic_operations.c logical_operations.c
 COLORS	:=	$(addprefix colors/, $(COLORS))
 
-CANVAS	=	create_canvas.c pixels.c
+CANVAS	=	create_canvas.c pixels.c save_canvas.c
 CANVAS	:=	$(addprefix canvas/, $(CANVAS))
 
 WINDOW	=	create_window.c
