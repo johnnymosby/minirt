@@ -38,9 +38,9 @@ int	main(void)
 {
 	t_canvas	*c;
 	t_win		win;
-	int 		width = 500;
-	int 		height = 1000;
-	t_color		blue = color(0, 0, 1);
+	int 		width = PCT_WIDTH;
+	int 		height = WIN_HEIGHT;
+	t_color		blue = color(0, -2, 1.5); // = 0,0,1
 	t_color		red = color(1, 0, 0);
 	int			i = 0;
 
@@ -51,13 +51,13 @@ int	main(void)
 	i = 0;
 	while (i < width)
 	{
-		write_pixel(c, i, 50, blue);
+		write_pixel(c, i, 200, blue);
 		i++;	
 	}
 	i = 0;
 	while (i < height)
 	{
-		write_pixel(c, 50, i, red);
+		write_pixel(c, 200, i, red);
 		i++;
 	}
 //	INITIALISE MLX
@@ -81,7 +81,8 @@ int	main(void)
 	mlx_hook(win.win_ptr, 2, 1L << 0, &escape_key, &win);
 	mlx_hook(win.win_ptr, 17, 1L << 17, &close_button, &win);
 //	RENDERING IMAGE
-
+	canvas_to_mlx_image(c, win.pct.addr);
+	mlx_put_image_to_window(win.mlx_ptr, win.win_ptr, win.pct.img_ptr, 0, 0);
 //	MLX LOOP
 	mlx_loop(win.mlx_ptr);
 //	FREE EVERYTHING
