@@ -6,13 +6,13 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 23:47:18 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/18 13:17:36 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/19 21:39:07 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "canvas.h"
 
-void		free_canvas(t_canvas *c)
+void	free_canvas(t_canvas *c)
 {
 	free (c->pixels);
 	free (c);

@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/19 21:43:54 by aguilmea          #+#    #+#             */
+/*   Updated: 2023/09/19 21:47:58 by aguilmea         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "window.h"
 #include "tuples.h"
 #include "colors.h"
 #include "canvas.h"
 #include "X11/keysym.h"
 
-#define	ERR_MEMORY_ALLOCATION	-1
-#define	ERR_MLX_FUNCTION		-2
+#define ERR_MEMORY_ALLOCATION	-1
+#define ERR_MLX_FUNCTION		-2
 
 static int	escape_key(int keysym, t_win *win)
 {
@@ -38,12 +50,17 @@ int	main(void)
 {
 	t_canvas	*c;
 	t_win		win;
-	int 		width = PCT_WIDTH;
-	int 		height = WIN_HEIGHT;
-	t_color		blue = color(0, -2, 1.5); // = 0,0,1
-	t_color		red = color(1, 0, 0);
-	int			i = 0;
+	int			width;
+	int			height;
+	t_color		blue;
+	t_color		red;
+	int			i;
 
+	width = PCT_WIDTH;
+	height = WIN_HEIGHT;
+	blue = color(0, -2, 1.5);
+	red = color(1, 0, 0);
+	i = 0;
 //	INITIALISE CANVAS WITH 2 LINES (WILL BE OUR PARSING WITH FIGURES IN FUTURE)
 	c = canvas(width, height);
 	if (c == NULL)
@@ -52,7 +69,7 @@ int	main(void)
 	while (i < width)
 	{
 		write_pixel(c, i, 200, blue);
-		i++;	
+		i++;
 	}
 	i = 0;
 	while (i < height)
@@ -63,7 +80,7 @@ int	main(void)
 //	INITIALISE MLX
 	win = window();
 	if (win.mlx_ptr == NULL)
-	{	
+	{
 		free_canvas(c);
 		return (ERR_MLX_FUNCTION);
 	}

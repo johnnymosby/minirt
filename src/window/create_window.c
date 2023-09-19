@@ -6,12 +6,11 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 12:58:41 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/18 16:16:20 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/19 21:36:56 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "window.h"
-
 
 static void	free_mlx_memory(t_win *window)
 {
@@ -32,7 +31,6 @@ static void	free_mlx_memory(t_win *window)
 	return ;
 }
 
-
 /*
 *	creates a MLX ptr and a window ptr
 *	exits on errors
@@ -40,7 +38,7 @@ static void	free_mlx_memory(t_win *window)
 t_win	window(void)
 {
 	t_win	window;
-	
+
 	ft_bzero(&window, sizeof(t_win));
 	window.mlx_ptr = mlx_init();
 	if (window.mlx_ptr == NULL)
@@ -52,11 +50,11 @@ t_win	window(void)
 		mlx_destroy_display(window.mlx_ptr);
 		free(window.mlx_ptr);
 		ft_bzero(&window, sizeof(t_win));
-		return(window); /// print_error in an error.h src/error/error.c?
-	}	
+		return (window); /// print_error in an error.h src/error/error.c?
+	}
 	return (window);
-	
 }
+
 /*
 	returns false if mlx_new_image fails (t_win has been correctly freed)
 */
@@ -71,10 +69,12 @@ bool	initialise_picture(t_win *window)
 		free_mlx_memory(window);
 		return (false);
 	}
-	pct.addr = mlx_get_data_addr(pct.img_ptr, &(pct.bpp), &(pct.line_len), &(pct.endian));
+	pct.addr = mlx_get_data_addr(pct.img_ptr, \
+		&(pct.bpp), &(pct.line_len), &(pct.endian));
 	window->pct = pct;
 	return (true);
 }
+
 /*
 	returns false if mlx_new_image fails (t_win has been correctly freed)
 */
@@ -89,8 +89,8 @@ bool	initialise_menu(t_win *window)
 		free_mlx_memory(window);
 		return (false);
 	}
-	menu.addr = mlx_get_data_addr(menu.img_ptr, &(menu.bpp), &(menu.line_len), &(menu.endian)); // do we need that - it is only relevant for drawing points?
+	menu.addr = mlx_get_data_addr(menu.img_ptr, \
+		&(menu.bpp), &(menu.line_len), &(menu.endian));
 	window->menu = menu;
 	return (true);
 }
-

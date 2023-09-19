@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 17:08:17 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/12 19:32:12 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/19 21:38:53 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 bool	are_equal_images(void *const image1, void *const image2, int size)
 {
 	int		i;
-	
+
 	i = 0;
 	while (i < size)
 	{
