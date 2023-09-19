@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrices.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 15:24:16 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/15 18:25:26 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/09/19 18:34:21 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ bool		are_equal_matrices(t_matrix a, t_matrix b);
 */
 
 t_matrix	multiply_matrices(t_matrix a, t_matrix b);
-t_tuple		multiply_matrix_by_tuple(t_matrix a, t_tuple b);
+t_tuple		multiply_matrix_by_tuple(t_matrix a, t_tuple *b);
 
 /*
 ** ------------------------------- MATRIX PROPERTIES -------------------------

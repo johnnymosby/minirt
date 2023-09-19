@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tuples.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 14:22:41 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/08/07 02:45:17 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/09/19 18:08:49 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,25 +42,25 @@ t_tuple	vector(double x, double y, double z);
 */
 
 bool	are_equal_doubles(double a, double b);
-bool	are_equal_tuples(t_tuple a, t_tuple b);
+bool	are_equal_tuples(t_tuple *a, t_tuple *b);
 
 /*
 ** ------------------------------- ARITHMETIC OPERATIONS ---------------------
 */
 
-t_tuple	add_tuples(t_tuple a, t_tuple b);
-t_tuple	substract_tuples(t_tuple a, t_tuple b);
-t_tuple	negate_tuple(t_tuple a);
-t_tuple	multiply_tuple_by_scalar(t_tuple a, double sc);
-t_tuple	divide_tuple_by_scalar(t_tuple a, double sc);
+t_tuple	add_tuples(t_tuple *a, t_tuple *b);
+t_tuple	substract_tuples(t_tuple *a, t_tuple *b);
+t_tuple	negate_tuple(t_tuple *a);
+t_tuple	multiply_tuple_by_scalar(t_tuple *a, double sc);
+t_tuple	divide_tuple_by_scalar(t_tuple *a, double sc);
 
 /*
 ** ------------------------------- VECTORS' MANIPULATION ---------------------
 */
 
-double	magnitude(t_tuple a);
-t_tuple	normalize(t_tuple a);
-double	dot(t_tuple a, t_tuple b);
-t_tuple	cross(t_tuple a, t_tuple b);
+double	magnitude(t_tuple *a);
+t_tuple	normalize(t_tuple *a);
+double	dot(t_tuple *a, t_tuple *b);
+t_tuple	cross(t_tuple *a, t_tuple *b);
 
 #endif
