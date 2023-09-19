@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrices.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 15:19:33 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/15 16:57:20 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/09/19 20:16:25 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ Test(matrices_logical_operations, are_equal_matrices)
 	t_matrix b = matrix(b_table, 4);
 	t_matrix c = matrix(c_table, 4);
 
-	cr_assert(are_equal_matrices(a, b));
-	cr_assert(!are_equal_matrices(a, c));
+	cr_assert(are_equal_matrices(&a, &b));
+	cr_assert(!are_equal_matrices(&a, &c));
 }
 
 Test(matrices_arithmetic_operations, multiply_matrix_by_tuple)
@@ -100,9 +100,9 @@ Test(matrices_arithmetic_operations, multiply_matrix_by_tuple)
 	t_tuple b = tuple(1, 2, 3, 1);
 	t_tuple c = tuple(18, 24, 33, 1);
 
-	t_tuple product = multiply_matrix_by_tuple(a, b);
+	t_tuple product = multiply_matrix_by_tuple(&a, &b);
 
-	cr_assert(are_equal_tuples(product, c));
+	cr_assert(are_equal_tuples(&product, &c));
 }
 
 Test(matrices_arithmetic_operations, multiply_matrix_by_identity_matrix)
@@ -122,9 +122,9 @@ Test(matrices_arithmetic_operations, multiply_matrix_by_identity_matrix)
 	t_matrix a = matrix(a_table, 4);
 	t_matrix I = matrix(I_table, 4);
 
-	t_matrix product = multiply_matrices(a, I);
+	t_matrix product = multiply_matrices(&a, &I);
 
-	cr_assert(are_equal_matrices(product, a));
+	cr_assert(are_equal_matrices(&product, &a));
 }
 
 Test(matrices_arithmetic_operations, multiply_identity_matrix_by_tuple)
@@ -138,9 +138,9 @@ Test(matrices_arithmetic_operations, multiply_identity_matrix_by_tuple)
 	t_matrix a = matrix(a_table, 4);
 	t_tuple b = tuple(1, 2, 3, 4);
 
-	t_tuple product = multiply_matrix_by_tuple(a, b);
+	t_tuple product = multiply_matrix_by_tuple(&a, &b);
 
-	cr_assert(are_equal_tuples(product, b));
+	cr_assert(are_equal_tuples(&product, &b));
 }
 
 Test(matrices_utils, transpose_matrix)
@@ -160,8 +160,8 @@ Test(matrices_utils, transpose_matrix)
 	t_matrix a = matrix(a_table, 4);
 	t_matrix b = matrix(b_table, 4);
 
-	t_matrix product = transpose(a);
-	cr_assert(are_equal_matrices(product, b));
+	t_matrix product = transpose(&a);
+	cr_assert(are_equal_matrices(&product, &b));
 }
 
 Test(matrices_utils, transpose_identity_matrix)
@@ -174,8 +174,8 @@ Test(matrices_utils, transpose_identity_matrix)
 	};
 	t_matrix a = matrix(a_table, 4);
 
-	t_matrix product = transpose(a);
-	cr_assert(are_equal_matrices(product, a));
+	t_matrix product = transpose(&a);
+	cr_assert(are_equal_matrices(&product, &a));
 }
 
 Test(matrices_properties, get_determinant_of_2_by_2)
@@ -186,7 +186,7 @@ Test(matrices_properties, get_determinant_of_2_by_2)
 	};
 	t_matrix a = matrix(a_table, 2);
 
-	double product = determinant(a);
+	double product = determinant(&a);
 	cr_assert(are_equal_doubles(product, 17));
 }
 
@@ -204,8 +204,8 @@ Test(matrices_properties, submatrix_of_3_by_3)
 	t_matrix a = matrix(a_table, 3);
 	t_matrix b = matrix(b_table, 2);
 
-	t_matrix product = submatrix(a, 0, 2);
-	cr_assert(are_equal_matrices(product, b));
+	t_matrix product = submatrix(&a, 0, 2);
+	cr_assert(are_equal_matrices(&product, &b));
 }
 
 Test(matrices_properties, submatrix_of_4_by_4)
@@ -224,8 +224,8 @@ Test(matrices_properties, submatrix_of_4_by_4)
 	t_matrix a = matrix(a_table, 4);
 	t_matrix b = matrix(b_table, 3);
 
-	t_matrix product = submatrix(a, 2, 1);
-	cr_assert(are_equal_matrices(product, b));
+	t_matrix product = submatrix(&a, 2, 1);
+	cr_assert(are_equal_matrices(&product, &b));
 }
 
 Test(matrices_properties, minor_of_3_by_3)
@@ -237,9 +237,9 @@ Test(matrices_properties, minor_of_3_by_3)
 	};
 	t_matrix A = matrix(a_table, 3);
 
-	t_matrix B = submatrix(A, 1, 0);
-	double d = determinant(B);
-	double m = minor(A, 1, 0);
+	t_matrix B = submatrix(&A, 1, 0);
+	double d = determinant(&B);
+	double m = minor(&A, 1, 0);
 	cr_assert(are_equal_doubles(d, 25)
 		&& are_equal_doubles(m, 25));
 }
@@ -253,10 +253,10 @@ Test(matrices_properties, cofactor_of_3_by_3)
 	};
 	t_matrix A = matrix(a_table, 3);
 
-	double minor_0 = minor(A, 0, 0);
-	double cofactor_0 = cofactor(A, 0, 0);
-	double minor_1 = minor(A, 1, 0);
-	double cofactor_1 = cofactor(A, 1, 0);
+	double minor_0 = minor(&A, 0, 0);
+	double cofactor_0 = cofactor(&A, 0, 0);
+	double minor_1 = minor(&A, 1, 0);
+	double cofactor_1 = cofactor(&A, 1, 0);
 	cr_assert(are_equal_doubles(minor_0, -12));
 	cr_assert(are_equal_doubles(cofactor_0, -12));
 	cr_assert(are_equal_doubles(minor_1, 25));
@@ -272,10 +272,10 @@ Test(matrices_properties, get_determinant_of_3_by_3)
 	};
 	t_matrix A = matrix(a_table, 3);
 
-	double cofactor_0 = cofactor(A, 0, 0);
-	double cofactor_1 = cofactor(A, 0, 1);
-	double cofactor_2 = cofactor(A, 0, 2);
-	double det = determinant(A);
+	double cofactor_0 = cofactor(&A, 0, 0);
+	double cofactor_1 = cofactor(&A, 0, 1);
+	double cofactor_2 = cofactor(&A, 0, 2);
+	double det = determinant(&A);
 	cr_assert(are_equal_doubles(cofactor_0, 56));
 	cr_assert(are_equal_doubles(cofactor_1, 12));
 	cr_assert(are_equal_doubles(cofactor_2, -46));
@@ -292,8 +292,8 @@ Test(matrices_properties, is_invertible)
 	};
 	t_matrix A = matrix(a_table, 4);
 
-	double det_A = determinant(A);
-	bool A_is_invertible = is_invertible(A);
+	double det_A = determinant(&A);
+	bool A_is_invertible = is_invertible(&A);
 	cr_assert(are_equal_doubles(det_A, -2120));
 	cr_assert(A_is_invertible == true);
 
@@ -305,8 +305,8 @@ Test(matrices_properties, is_invertible)
 	};
 	t_matrix B = matrix(b_table, 4);
 
-	double det_B = determinant(B);
-	bool B_is_invertible = is_invertible(B);
+	double det_B = determinant(&B);
+	bool B_is_invertible = is_invertible(&B);
 	cr_assert(are_equal_doubles(det_B, 0));
 	cr_assert(B_is_invertible == false);
 }
@@ -320,7 +320,7 @@ Test(matrices_inverse, inverse_0)
 		{1, -3, 7, 4}
 	};
 	t_matrix A = matrix(a_table, 4);
-	t_matrix B = inverse(A);
+	t_matrix B = inverse(&A);
 
 	const double c_table[MAX_SIDE_SIZE][MAX_SIDE_SIZE] = {
 		{0.21805, 0.45113, 0.24060, -0.04511},
@@ -330,16 +330,16 @@ Test(matrices_inverse, inverse_0)
 	};
 	t_matrix C = matrix(c_table, 4);
 
-	double det_A = determinant(A);
-	double cofactor_0 = cofactor(A, 2, 3);
-	double cofactor_1 = cofactor(A, 3, 2);
+	double det_A = determinant(&A);
+	double cofactor_0 = cofactor(&A, 2, 3);
+	double cofactor_1 = cofactor(&A, 3, 2);
 	cr_assert(are_equal_doubles(det_A, 532));
 	cr_assert(are_equal_doubles(cofactor_0, -160));
 	cr_assert(are_equal_doubles(B.table[3][2], (double) -160 / 532));
 	cr_assert(are_equal_doubles(cofactor_1, 105));
 	cr_assert(are_equal_doubles(B.table[2][3], (double) 105 / 532));
 	cr_assert(B.side_size == 4);
-	cr_assert(are_equal_matrices(B, C));
+	cr_assert(are_equal_matrices(&B, &C));
 }
 
 Test(matrices_inverse, inverse_1)
@@ -351,7 +351,7 @@ Test(matrices_inverse, inverse_1)
 		{-3, 0, -9, -4}
 	};
 	t_matrix A = matrix(a_table, 4);
-	t_matrix B = inverse(A);
+	t_matrix B = inverse(&A);
 
 	const double c_table[MAX_SIDE_SIZE][MAX_SIDE_SIZE] = {
 		{-0.15385, -0.15385, -0.28205, -0.53846},
@@ -361,7 +361,7 @@ Test(matrices_inverse, inverse_1)
 	};
 	t_matrix C = matrix(c_table, 4);
 
-	cr_assert(are_equal_matrices(B, C));
+	cr_assert(are_equal_matrices(&B, &C));
 }
 
 Test(matrices_inverse, inverse_2)
@@ -380,8 +380,8 @@ Test(matrices_inverse, inverse_2)
 		{6, -2, 0, 5}
 	};
 	t_matrix B = matrix(b_table, 4);
-	t_matrix C = multiply_matrices(A, B);
-	t_matrix B_inverted = inverse(B);
-
-	cr_assert(are_equal_matrices(multiply_matrices(C, B_inverted), A));
+	t_matrix C = multiply_matrices(&A, &B);
+	t_matrix B_inverted = inverse(&B);
+	t_matrix mult = multiply_matrices(&C, &B_inverted);
+	cr_assert(are_equal_matrices(&mult, &A));
 }

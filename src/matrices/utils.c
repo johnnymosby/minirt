@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 16:22:57 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/15 16:11:45 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/09/19 19:48:55 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,20 @@ t_matrix	matrix(const double matrix[MAX_SIDE_SIZE][MAX_SIDE_SIZE],
 	return (ret);
 }
 
-t_matrix	transpose(t_matrix m)
+t_matrix	transpose(t_matrix *m)
 {
 	t_matrix	ret;
 	int			x;
 	int			y;
 
 	x = 0;
-	ret.side_size = m.side_size;
+	ret.side_size = m->side_size;
 	while (x < MAX_SIDE_SIZE)
 	{
 		y = 0;
 		while (y < MAX_SIDE_SIZE)
 		{
-			ret.table[x][y] = m.table[y][x];
+			ret.table[x][y] = m->table[y][x];
 			y++;
 		}
 		x++;
@@ -43,24 +43,24 @@ t_matrix	transpose(t_matrix m)
 	return (ret);
 }
 
-t_matrix	submatrix(t_matrix m, int row_to_remove, int col_to_remove)
+t_matrix	submatrix(t_matrix *m, int row_to_remove, int col_to_remove)
 {
 	t_matrix	ret;
 	int			row;
 	int			col;
 
 	ft_bzero(&ret, sizeof(t_matrix));
-	if (m.side_size < 1 || m.side_size > 4)
+	if (m->side_size < 1 || m->side_size > 4)
 		return (ret);
 	row = 0;
-	ret.side_size = m.side_size - 1;
+	ret.side_size = m->side_size - 1;
 	while (row < ret.side_size)
 	{
 		col = 0;
 		while (col < ret.side_size)
 		{
 			ret.table[row][col]
-				= m.table[row + (row >= row_to_remove)] \
+				= m->table[row + (row >= row_to_remove)] \
 					[col + (col >= col_to_remove)];
 			col++;
 		}
@@ -69,7 +69,7 @@ t_matrix	submatrix(t_matrix m, int row_to_remove, int col_to_remove)
 	return (ret);
 }
 
-t_matrix	inverse(t_matrix m)
+t_matrix	inverse(t_matrix *m)
 {
 	double		det;
 	t_matrix	ret;
@@ -79,12 +79,12 @@ t_matrix	inverse(t_matrix m)
 	det = determinant(m);
 	if (det == 0)
 		return (ft_bzero(&ret, sizeof(t_matrix)), ret);
-	ret.side_size = m.side_size;
+	ret.side_size = m->side_size;
 	row = 0;
-	while (row < m.side_size)
+	while (row < m->side_size)
 	{
 		col = 0;
-		while (col < m.side_size)
+		while (col < m->side_size)
 		{
 			ret.table[col][row] = cofactor(m, row, col) / determinant(m);
 			col++;
