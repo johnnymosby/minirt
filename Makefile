@@ -11,6 +11,9 @@ CFLAGS	+=	-Wall -Wextra -Werror
 
 MAIN	=	main.c
 
+PARSER	=	parser.c
+PARSER	:=	$(addprefix canvas/, $(PARSER))
+
 TUPLES	=	create_tuple.c logical_operations.c arithmetic_operations.c \
 			vectors_manipulation.c
 TUPLES	:=	$(addprefix tuples/, $(TUPLES))
@@ -31,7 +34,7 @@ MATRICES	:=	$(addprefix matrices/, $(MATRICES))
 RAYS	=	utils.c
 RAYS	:=	$(addprefix rays/, $(RAYS))
 
-SOURCE	=	$(MAIN) $(TUPLES) $(COLORS) $(CANVAS) $(WINDOW) $(MATRICES)
+SOURCE	=	$(MAIN) $(PARSER) $(TUPLES) $(COLORS) $(CANVAS) $(WINDOW) $(MATRICES)
 SRC_DIR	=	src/
 SRC		=	$(addprefix $(SRC_DIR), $(SOURCE))
 

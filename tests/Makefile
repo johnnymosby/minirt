@@ -1,6 +1,6 @@
 NAME		=	tests
 
-TESTS		=	tuples.c colors.c canvas.c matrices.c transformations.c \
+TESTS		=	parser.c tuples.c colors.c canvas.c matrices.c transformations.c \
 				rays.c
 
 SRC_DIR		=	../src
@@ -67,10 +67,14 @@ endef
 # -------------------------------- TESTS ------------------------------------- #
 
 all: $(LIBFT) $(OBJ) $(MLX)
+	make parser
 	make tuples
 	make colors
 	make canvas
 	make matrices
+
+parser: $(LIBFT) $(OBJ) $(MLX) parser.c
+	@$(call compile, "$^")
 
 tuples: $(LIBFT) $(OBJ) $(MLX) tuples.c
 	@rm -f $(patsubst %.c,%,$(TESTS))
