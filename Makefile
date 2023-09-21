@@ -31,7 +31,10 @@ MATRICES	:=	$(addprefix matrices/, $(MATRICES))
 RAYS	=	utils.c
 RAYS	:=	$(addprefix rays/, $(RAYS))
 
-SOURCE	=	$(MAIN) $(TUPLES) $(COLORS) $(CANVAS) $(WINDOW) $(MATRICES)
+SHAPES	=	utils.c spheres.c intersection.c
+SHAPES	:=	$(addprefix shapes/, $(SHAPES))
+
+SOURCE	=	$(MAIN) $(TUPLES) $(COLORS) $(CANVAS) $(WINDOW) $(MATRICES) $(RAYS) $(SHAPES)
 SRC_DIR	=	src/
 SRC		=	$(addprefix $(SRC_DIR), $(SOURCE))
 
@@ -54,8 +57,11 @@ MLX		=	$(MLX_DIR)libmlx.a
 
 all:		$(NAME)
 
-$(NAME):	$(OBJ) $(LIBFT)
+$(NAME):	$(OBJ) $(LIBFT) $(MLX)
 			$(CC) $(OBJ) $(CFLAGS) $(MLX_FLAGS) $(INC_DIRS) -lm $(RDL_LIB) $(LIBFT) -o $(NAME)
+
+$(MLX):
+			make -C $(MLX_DIR)
 
 $(LIBFT):
 			if [ ! -e $(LIBFT_MAKE) ]; then \

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:43:54 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/19 21:47:58 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/21 14:46:51 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "window.h"
-#include "tuples.h"
 #include "colors.h"
 #include "canvas.h"
+#include "shapes.h"
 #include "X11/keysym.h"
 
 #define ERR_MEMORY_ALLOCATION	-1
@@ -108,3 +108,12 @@ int	main(void)
 	free(win.mlx_ptr);
 	return (0);
 }
+
+// int	main(void)
+// {
+// 	t_tuple	p = point(0, 0, -5);
+// 	t_tuple	v = vector(0, 0, 1);
+// 	t_ray r = ray(&p, &v);
+// 	t_shape sph = create_sphere();
+// 	t_hit xs = intersect_sphere(&sph, &r);
+// }

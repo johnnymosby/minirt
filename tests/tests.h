@@ -7,5 +7,6 @@
 # include "canvas.h"
 # include "matrices.h"
 # include "rays.h"
+# include "shapes.h"
 
 #endif

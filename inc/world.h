@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   spheres.h                                          :+:      :+:    :+:   */
+/*   world.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/20 15:31:30 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/20 16:28:40 by rbasyrov         ###   ########.fr       */
+/*   Created: 2023/09/21 16:09:02 by rbasyrov          #+#    #+#             */
+/*   Updated: 2023/09/21 16:10:10 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SPHERES_H
-# define SPHERES_H
+#ifndef WORLD_H
+# define WORLD_H
 
-# include "shapes.h"
-
-typedef struct s_shape
+typedef struct s_world
 {
-	union {
-		t_sphere	sphere;
-	};
-}	t_shape;
-
-t_shape	create_sphere(void);
+	
+}	t_world;
 
 #endif

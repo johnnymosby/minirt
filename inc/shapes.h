@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 11:51:29 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/20 15:37:42 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/09/21 15:17:40 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,24 @@
 
 # include "rays.h"
 
+typedef enum e_shape_type
+{
+	SPHERE
+}	t_shape_type;
+
 typedef struct s_sphere
 {
 	t_tuple	origin;
 	double	radius;
 }	t_sphere;
 
-typedef enum e_shape_type
+typedef struct s_disc_calc
 {
-	SPHERE
-}	t_shape_type;
+	double	a;
+	double	b;
+	double	c;
+	double	dscr;
+}	t_disc_calc;
 
 typedef struct s_shape
 {
@@ -33,5 +41,13 @@ typedef struct s_shape
 	};
 	t_shape_type	shape_type;
 }	t_shape;
+
+/*
+** ------------------------------- SPHERES' FUNCTIONS ------------------------
+*/
+
+t_shape	create_sphere(void);
+t_hit	intersect_sphere(t_shape *sphere, t_ray *r);
+t_intrs	intersection(double t, t_shape *shape);
 
 #endif
