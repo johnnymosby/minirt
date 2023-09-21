@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 11:51:29 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/21 15:17:40 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/09/21 18:11:08 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,10 @@ typedef struct s_shape
 		t_sphere	sphere;
 	};
 	t_shape_type	shape_type;
+	t_intersect		intersect;
 }	t_shape;
+
+typedef t_hit *	(*t_intersect)(t_shape *, t_ray *, t_hit **);
 
 /*
 ** ------------------------------- SPHERES' FUNCTIONS ------------------------
@@ -48,6 +51,5 @@ typedef struct s_shape
 
 t_shape	create_sphere(void);
 t_hit	intersect_sphere(t_shape *sphere, t_ray *r);
-t_intrs	intersection(double t, t_shape *shape);
 
 #endif

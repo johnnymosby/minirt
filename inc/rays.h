@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 18:49:06 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/21 16:08:31 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/09/21 18:03:50 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,38 +16,25 @@
 # include "matrices.h"
 
 # define MAX_INTERSECTIONS 256
-# define MAX_HITS 16
+# define MAX_HITS 7
 
 typedef struct s_hit	t_hit;
 typedef struct s_shape	t_shape;
 
 typedef struct s_hit
 {
-	double	t[2];
-	int		count;
-	t_shape	*obj;
-	t_hit	*next;
-}	t_hit;
-
-typedef struct s_intrs
-{
 	double	t;
 	t_shape	*obj;
-}	t_intrs;
+	t_hit	*prev;
+	t_hit	*left;
+	t_hit	*right;
+}	t_hit;
 
-//structure with memory pool for hits
-typedef struct s_hpool
+typedef struct s_btree
 {
-	t_hit	pool[MAX_HITS];
+	t_hit	root[MAX_INTERSECTIONS];
 	int		last;
-}	t_hpool;
-
-//structure with memory pool for intersections
-typedef struct s_ipool
-{
-	t_hit	pool[MAX_INTERSECTIONS];
-	int		last;
-}	t_ipool;
+}	t_btree;
 
 typedef struct s_ray
 {
