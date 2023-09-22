@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 15:09:40 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/22 18:39:31 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/09/22 19:07:46 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,9 +257,36 @@ Test(spheres, changing_sphere_transformation)
 
 Test(spheres, intersecting_a_scaled_sphere_with_a_ray)
 {
-	t_shape sph = create_sphere();
-	t_matrix i_matrix = identity_matrix();
+	t_tuple	p = point(0, 0, -5);
+	t_tuple v = vector(0, 0, 1);
+	t_ray r = ray(&p, &v);
+	t_shape s = create_sphere();
 
-	cr_assert(are_equal_matrices(&sph.transform, &i_matrix));
-	
+	t_matrix m_scale = scaling(2, 2, 2);
+	set_transform(&s, &m_scale);
+
+	t_hit	*xs;
+	xs = NULL;
+	intersect(&s, &r, &xs);
+
+	cr_assert(count_intersections(xs, false) == 2);
+	cr_assert(are_equal_doubles(xs->t, 3));
+	cr_assert(are_equal_doubles(xs->right->t, 7));
+}
+
+Test(spheres, intersecting_a_translated_sphere_with_a_ray)
+{
+	t_tuple	p = point(0, 0, -5);
+	t_tuple v = vector(0, 0, 1);
+	t_ray r = ray(&p, &v);
+	t_shape s = create_sphere();
+
+	t_matrix m_scale = translation(5, 0, 0);
+	set_transform(&s, &m_scale);
+
+	t_hit	*xs;
+	xs = NULL;
+	intersect(&s, &r, &xs);
+
+	cr_assert(count_intersections(xs, false) == 0);
 }

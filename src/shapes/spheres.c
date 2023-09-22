@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:55:05 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/22 18:25:54 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/09/22 18:55:16 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ t_shape	create_sphere(void)
 	shape.sphere.radius = 1;
 	shape.shape_type = SPHERE;
 	shape.transform = identity_matrix();
+	shape.inverse = identity_matrix();
 	shape.intersect = intersect_sphere;
 	return (shape);
 }

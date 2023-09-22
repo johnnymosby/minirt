@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 12:21:49 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/22 17:33:51 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/09/22 18:55:53 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ t_hit	*intersection(double t, t_shape *shape)
 
 void	intersect(t_shape *shape, t_ray *r, t_hit **hits)
 {
-	shape->intersect(shape, r, hits);
+	t_ray		transformed_ray;
+
+	transformed_ray = transform(r, &shape->inverse);
+	shape->intersect(shape, &transformed_ray, hits);
 }
 
 void	add_intersection(t_hit **hits, t_hit *intrs)

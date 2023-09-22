@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 11:51:29 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/22 18:20:17 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/09/22 19:03:01 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_shape
 	t_shape_type	shape_type;
 	t_intersect		intersect;
 	t_matrix		transform;
+	t_matrix		inverse;
 }	t_shape;
 
 /*
@@ -61,5 +62,11 @@ int		count_intersections(t_hit *xs, bool if_left_branch);
 
 t_shape	create_sphere(void);
 void	intersect_sphere(t_shape *sphere, t_ray *r, t_hit **hits);
+
+/*
+** ------------------------------- UTILS -------------------------------------
+*/
+
+void	set_transform(t_shape *shape, t_matrix *m);
 
 #endif
