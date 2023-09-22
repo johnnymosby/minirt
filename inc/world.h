@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   world.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/16 12:00:17 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/22 19:03:50 by rbasyrov         ###   ########.fr       */
+/*   Created: 2023/09/21 16:09:02 by rbasyrov          #+#    #+#             */
+/*   Updated: 2023/09/21 16:10:10 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shapes.h"
+#ifndef WORLD_H
+# define WORLD_H
 
-void	set_transform(t_shape *shape, t_matrix *m)
+typedef struct s_world
 {
-	shape->transform = *m;
-	shape->inverse = inverse(m);
-}
+	
+}	t_world;
+
+#endif

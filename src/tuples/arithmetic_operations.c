@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arithmetic_operations.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 22:49:16 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/19 17:58:12 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/21 14:46:09 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
