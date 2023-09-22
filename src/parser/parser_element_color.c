@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   parser_element_color.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/22 12:26:46 by aguilmea         ###   ########.fr       */
+/*   Created: 2023/09/22 17:08:51 by aguilmea          #+#    #+#             */
+/*   Updated: 2023/09/22 17:12:38 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-bool	parser(char *filename)
+bool	parse_color(char *start, t_element *element)
 {
-	char		*file_string;
-	t_element	*elmts;
-	
-	file_string = get_file_into_string(filename);
-	if (file_string == NULL)
-		return (false);
-	elmts = get_elements(file_string);
-	if (elmts == NULL)
-	{
-		free(file_string);
-		return (false);
-	}
+	(void)start;
+	(void)element;
+	element->material.color = color(10/255, 0, 1);
 	return (true);
 }

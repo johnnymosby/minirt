@@ -11,8 +11,10 @@ CFLAGS	+=	-Wall -Wextra -Werror
 
 MAIN	=	main.c
 
-PARSER	=	parser.c
-PARSER	:=	$(addprefix canvas/, $(PARSER))
+PARSER	=	get_elements.c get_file_into_string.c open_file.c \
+			parser.c parser_sphere.c\
+			parser_double.c parser_element_color.c parser_point.c
+PARSER	:=	$(addprefix parser/, $(PARSER))
 
 TUPLES	=	create_tuple.c logical_operations.c arithmetic_operations.c \
 			vectors_manipulation.c
