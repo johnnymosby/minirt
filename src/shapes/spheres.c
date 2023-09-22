@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:55:05 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/21 18:11:24 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/09/22 11:19:08 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,28 +23,24 @@ static void	discriminant(t_sphere *sphere, t_ray *r, t_disc_calc *d_calc)
 	d_calc->dscr = d_calc->b * d_calc->b - 4 * d_calc->a * d_calc->c;
 }
 
-t_hit	intersect_sphere(t_shape *shape, t_ray *r)
+void	intersect_sphere(t_shape *shape, t_ray *r, t_hit **hits)
 {
-	t_hit		hit;
 	t_disc_calc	d_calc;
 	double		d_squared;
+	double		t[2];
+	t_hit		*intrs[2];
 
 	discriminant(&shape->sphere, r, &d_calc);
-	hit.count = 0;
-	if (d_calc.dscr < 0)
-		return (hit); //to change to pointer when return value of the function's signature is changed
-	else
+	if (d_calc.dscr >= 0)
 	{
 		d_squared = sqrt(d_calc.dscr);
-		hit.t[0] = (-d_calc.b - d_squared) / (2 * d_calc.a);
-		hit.t[1] = (-d_calc.b + d_squared) / (2 * d_calc.a);
+		t[0] = (-d_calc.b - d_squared) / (2 * d_calc.a);
+		t[1] = (-d_calc.b + d_squared) / (2 * d_calc.a);
+		intrs[0] = intersection(t[0], shape);
+		intrs[1] = intersection(t[1], shape);
+		intrs[0]->right = intrs[1];
+		add_intersection(hits, intrs[0]);
 	}
-	if (are_equal_doubles(d_calc.dscr, 0) == true)
-		hit.count = 1;
-	else
-		hit.count = 2;
-	hit.obj = shape;
-	return (hit);
 }
 
 t_shape	create_sphere(void)

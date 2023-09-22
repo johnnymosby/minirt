@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 11:51:29 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/21 18:11:08 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/09/22 12:18:19 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ typedef struct s_disc_calc
 	double	dscr;
 }	t_disc_calc;
 
+typedef void	(*t_intersect)(t_shape *, t_ray *, t_hit **);
+
 typedef struct s_shape
 {
 	union {
@@ -43,13 +45,20 @@ typedef struct s_shape
 	t_intersect		intersect;
 }	t_shape;
 
-typedef t_hit *	(*t_intersect)(t_shape *, t_ray *, t_hit **);
+/*
+** ------------------------------- INTERSECTION ------------------------------
+*/
+
+void	add_intersection(t_hit **hits, t_hit *intrs);
+t_hit	*intersection(double t, t_shape *shape);
+void	intersect(t_shape *shape, t_ray *r, t_hit **hits);
+int		count_intersections(t_hit *xs, bool if_left_branch);
 
 /*
 ** ------------------------------- SPHERES' FUNCTIONS ------------------------
 */
 
 t_shape	create_sphere(void);
-t_hit	intersect_sphere(t_shape *sphere, t_ray *r);
+void	intersect_sphere(t_shape *sphere, t_ray *r, t_hit **hits);
 
 #endif
