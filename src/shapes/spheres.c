@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:55:05 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/22 11:19:08 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/09/22 13:49:33 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	intersect_sphere(t_shape *shape, t_ray *r, t_hit **hits)
 		intrs[0] = intersection(t[0], shape);
 		intrs[1] = intersection(t[1], shape);
 		intrs[0]->right = intrs[1];
+		intrs[1]->prev = intrs[0];
 		add_intersection(hits, intrs[0]);
 	}
 }

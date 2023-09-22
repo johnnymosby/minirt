@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 12:21:49 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/22 12:30:11 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/09/22 13:48:40 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	add_intersection(t_hit **hits, t_hit *intrs)
 		prev = this;
 		this = this->left;
 	}
+	intrs->prev = prev;
 	prev->left = intrs;
 	intrs->left = this;
 }
