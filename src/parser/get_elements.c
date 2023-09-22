@@ -6,16 +6,16 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/22 16:23:18 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/22 21:19:26 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static bool	set_one_element(char *start, t_element *element)
+static bool	set_one_element(char *start, int *index, t_element *element)
 {
 	if (ft_strncmp(start, "sp ", 3))
-		return (parse_sphere(start, element));
+		return (parse_sphere(start, index +3, element));
 	else
 		return (NULL);
 }
@@ -55,11 +55,11 @@ static int	count_elements(char *file_string)
 t_element	*get_elements(char *file_string)
 {
 	t_element	*elements;
-	char		*start;
+	int			index;
 	int			nb_elements;
 	int			i;
 	
-	start = file_string;
+	index = 0;
 	nb_elements = count_elements(file_string);
 	if (nb_elements < 3)
 		return (NULL);
@@ -69,7 +69,7 @@ t_element	*get_elements(char *file_string)
 	i = 0;
 	while (i < nb_elements)
 	{
-		if (set_one_element(start, elements +i) == false)
+		if (set_one_element(file_string, &index, elements +i) == false)
 		{
 			free(elements);
 			return (NULL);

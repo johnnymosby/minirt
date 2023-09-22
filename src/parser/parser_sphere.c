@@ -6,42 +6,46 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/22 17:59:34 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/22 21:15:41 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
 
-static bool	parse_origin(char *start, t_element *element)
+static bool	parse_origin(char *file_string, int *index, t_element *element)
 {
-	(void)start;
-	(void)element;
-	element->sphere.origin = point(0,0,20.6);
+	if (parse_point(file_string, index, &(element->sphere.origin)) == false)
+		return (false);
+	if (file_string[*index] != ' ')
+		return (false);
+	while (file_string[*index] == ' ')
+		(*index)++;
 	return (true);
 }
-static bool	parse_radius(char *start, t_element *element)
+static bool	parse_radius(char *file_string, int *index, t_element *element)
 {
-	(void)start;
+	(void)file_string;
 	(void)element;
+	(void)index;
 	element->sphere.radius = 12.6 / 2;
 	return (true);
 }
 
-bool	parse_sphere(char *start, t_element *element)
+bool	parse_sphere(char *file_string, int *index, t_element *element)
 {
 	element->element_type = SPHERE;
-	while (*start == ' ')
-		start++;
-	if (parse_origin(start, element) == false)
+	while (file_string[*index] == ' ')
+		(*index)++;
+	if (parse_origin(file_string, index, element) == false)
 		return (false);
-	while (*start == ' ')
-		start++;
-	if (parse_radius(start, element) == false)
+	while (file_string[*index] == ' ')
+		(*index)++;
+	if (parse_radius(file_string, index, element) == false)
 		return (false);
-	while (*start == ' ')
-		start++;
-	if (parse_color(start, element) == false)
+	while (file_string[*index] == ' ')
+		(*index)++;
+	if (parse_color(file_string, index, element) == false)
 		return (false);
 	return (true);	
 }

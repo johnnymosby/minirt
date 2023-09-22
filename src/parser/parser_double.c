@@ -6,59 +6,55 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 14:31:05 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/22 16:20:44 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/22 21:09:46 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-/*
-static bool	set_absolut_result(char *str, double *result)
+
+static int	set_absolut_result(char *file_string, int *index, double *result)
 {
     double	fraction;
     bool	is_decimal;
 	
 	fraction = 0.1;
 	is_decimal = false;
-	if (!ft_isdigit(*str))
-		return (false)
-	while (*str != '\0')
+	if (!ft_isdigit(file_string[*index]))
+		return (false);
+	while (ft_isdigit(file_string[*index]) || file_string[*index] == '.')
 	{
-		if (ft_isdigit(*str) && is_decimal == false)
-			*result = *result * 10.0 + (*str - '0');
-		else if (ft_isdigit(*str) && is_decimal == true)
+		if (ft_isdigit(file_string[*index]) && is_decimal == false)
+			*result = *result * 10.0 + (file_string[*index] - '0');
+		else if (ft_isdigit(file_string[*index]) && is_decimal == true)
 		{
-			result = result + (*str - '0') * fraction;
+			*result = *result + (file_string[*index] - '0') * fraction;
 			fraction *= 0.1;
 		} 
-		else if (*str == '.' && is_decimal == false)
-			hasFraction = true;
-		str++;
+		else if (file_string[*index] == '.' && is_decimal == false)
+			is_decimal = true;
+		else if (file_string[*index] == '.')
+			return (false);
+		(*index)++;
     }
-	if (*str != '\0')
-		return (false)
+	return (true);
 }
 
 
-bool parser_double(char *str, double *result)
+bool parse_double(char *file_string, int *index, double *result)
 {
     bool	is_negative;
     
-	result = 0;
+	*result = 0;
 	is_negative = false;
-    if (*buf == '-')
+    if (file_string[*index] == '-')
 	{
         is_negative = true;
-        byte = read(fd, bufcd ..);
+        (*index)++;
     }
-	set_absolut_result(str, result)
+	if (set_absolut_result(file_string, index, result) == false)
+		return (false);
     if (is_negative)
-        result *= -1;
-    return result;
-}*/
-
-bool parse_double(char *str, double *result)
-{
-	(void)str;
-	(void)result;
-	return (true);
+        *result = *result * -1;
+    return (true);
 }
+

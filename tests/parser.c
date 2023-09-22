@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:14:28 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/22 17:59:57 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/22 21:22:12 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,7 @@ static bool	are_equal_spheres(t_element *sp1, t_element *sp2)
 	if (sp1->sphere.radius != sp2->sphere.radius)
 		return (false);
 	if (!are_equal_colors(&(sp1->material.color), &(sp2->material.color)))
-	{	
-		printf("%f vs %f\n", sp1->material.color.blue, sp2->material.color.blue);
-		printf("%f vs %f\n", sp1->material.color.red, sp2->material.color.red);
-		printf("%f vs %f\n", sp1->material.color.green, sp2->material.color.green);
 		return (false);
-	}
 	return (true);
 }
 static bool	are_equal_shapes(t_element *sp1, t_element *sp2)
@@ -58,9 +53,10 @@ static bool	are_equal_shapes(t_element *sp1, t_element *sp2)
 
 Test(parser, parse_sphere_exemple_subject)
 {
-	char	buf[4];
-	t_element sh_parser[5];
-	t_element sh_control[5];
+	char		buf[4];
+	t_element	sh_parser[5];
+	t_element	sh_control[5];
+	int			index;
 	
 	ft_bzero(buf, 4);
 	ft_bzero(sh_parser, sizeof(t_element) * 5);
@@ -70,6 +66,7 @@ Test(parser, parse_sphere_exemple_subject)
 	sh_control[0].sphere.radius = 12.6 / 2;
 	sh_control[0].element_type = SPHERE;
 	sh_control[0].material.color = color(10/255,0,1);
-	parse_sphere("0.0,0.0,20.6 12.6 10,0,255", sh_parser + 0);
+	index = 3;
+	parse_sphere("sp 0.0,0.0,20.6 12.6 10,0,255", &index, sh_parser + 0);
 	cr_assert(are_equal_shapes(sh_parser + 0, sh_control + 0));
 }
