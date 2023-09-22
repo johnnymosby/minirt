@@ -6,12 +6,11 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/22 21:15:41 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/22 21:45:48 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
 
 static bool	parse_origin(char *file_string, int *index, t_element *element)
 {
@@ -28,7 +27,9 @@ static bool	parse_radius(char *file_string, int *index, t_element *element)
 	(void)file_string;
 	(void)element;
 	(void)index;
-	element->sphere.radius = 12.6 / 2;
+	if (parse_double(file_string, index, &(element->sphere.radius)) == false)
+		return (false);
+	element->sphere.radius *= 0.5;
 	return (true);
 }
 
