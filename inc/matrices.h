@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrices.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 15:24:16 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/19 19:23:06 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/22 18:25:41 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_matrix	matrix(const double matrix[MAX_SIDE_SIZE][MAX_SIDE_SIZE],
 t_matrix	transpose(t_matrix *m);
 t_matrix	submatrix(t_matrix *m, int row_to_remove, int col_to_remove);
 t_matrix	inverse(t_matrix *m);
+t_matrix	identity_matrix(void);
 
 /*
 ** ------------------------------- LOGICAL OPERATIONS ------------------------

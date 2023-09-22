@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 11:51:29 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/22 12:18:19 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/09/22 18:20:17 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_shape
 	};
 	t_shape_type	shape_type;
 	t_intersect		intersect;
+	t_matrix		transform;
 }	t_shape;
 
 /*
