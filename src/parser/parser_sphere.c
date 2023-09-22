@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/22 21:45:48 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/22 22:10:54 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ bool	parse_sphere(char *file_string, int *index, t_element *element)
 		return (false);
 	while (file_string[*index] == ' ')
 		(*index)++;
-	if (parse_color(file_string, index, element) == false)
+	if (parse_color(file_string, index, &(element->material.color)) == false)
 		return (false);
 	return (true);	
 }

@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:41:27 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/22 21:12:04 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/22 22:10:07 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ typedef struct s_element		// has to be modified when t_shape and t_material are 
 t_element	*get_elements(char *file_string);
 char 		*get_file_into_string(char *filename);
 int			open_file(char *filename);
-bool	 	parse_double(char *str, int *index, double *result);
-bool	 	parse_point(char *str, int *index, t_tuple *point);
-bool		parse_sphere(char *start, int *index, t_element *element);
-bool		parse_color(char *start, int *index, t_element *element);
+bool	 	parse_double(char *file_string, int *index, double *result);
+bool	 	parse_point(char *file_string, int *index, t_tuple *point);
+bool		parse_sphere(char *file_string, int *index, t_element *element);
+bool		parse_color(char *file_string, int *index, t_color *color);
 
 #endif

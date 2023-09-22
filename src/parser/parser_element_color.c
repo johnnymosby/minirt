@@ -6,17 +6,39 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 17:08:51 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/22 21:19:57 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/22 22:17:33 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-bool	parse_color(char *start, int *index, t_element *element)
+static bool	parse_primary(char *file_string, int *index, double *rgb)
 {
-	(void)start;
-	(void)element;
-	(void)index;
-	element->material.color = color(10/255, 0, 1);
+	*rgb = 0;
+	if (!ft_isdigit(file_string[*index]))
+		return (false);
+	while(*rgb < 256 && ft_isdigit(file_string[*index]))
+	{
+		*rgb = *rgb * 10 + file_string[*index] - '0';
+		(*index)++;
+	}
+	*rgb /= 255;
+	return (true);
+}
+
+bool	parse_color(char *file_string, int *index, t_color *color)
+{
+	if (parse_primary (file_string, index, &(color->red)) == false)
+		return (false);
+	if (file_string[*index] != ',')
+		return (false);
+	(*index)++;
+	if (parse_primary (file_string, index, &(color->green)) == false)
+		return (false);
+	if (file_string[*index] != ',')
+		return (false);
+	(*index)++;
+	if (parse_primary (file_string, index, &(color->blue)) == false)
+		return (false);
 	return (true);
 }

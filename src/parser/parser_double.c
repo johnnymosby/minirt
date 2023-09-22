@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 14:31:05 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/22 21:09:46 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/22 22:06:05 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	set_absolut_result(char *file_string, int *index, double *result)
 	while (ft_isdigit(file_string[*index]) || file_string[*index] == '.')
 	{
 		if (ft_isdigit(file_string[*index]) && is_decimal == false)
-			*result = *result * 10.0 + (file_string[*index] - '0');
+			*result = *result * 10 + (file_string[*index] - '0');
 		else if (ft_isdigit(file_string[*index]) && is_decimal == true)
 		{
 			*result = *result + (file_string[*index] - '0') * fraction;

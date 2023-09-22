@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:14:28 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/22 21:22:12 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/22 22:41:49 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,49 @@ static bool	are_equal_shapes(t_element *sp1, t_element *sp2)
 
 Test(parser, parse_sphere_exemple_subject)
 {
-	char		buf[4];
-	t_element	sh_parser[5];
-	t_element	sh_control[5];
+	t_element	sh_parser;
+	t_element	sh_control;
 	int			index;
+	char		*str;
 	
-	ft_bzero(buf, 4);
-	ft_bzero(sh_parser, sizeof(t_element) * 5);
-	ft_bzero(sh_control, sizeof(t_element) * 5);
+	ft_bzero(&sh_control, sizeof(t_element));
+	sh_control.sphere.origin = point(0,0,20.6);
+	sh_control.sphere.radius = 12.6 / 2;
+	sh_control.element_type = SPHERE;
+	sh_control.material.color = color(10.0/255,0,1);
 	
-	sh_control[0].sphere.origin = point(0,0,20.6);
-	sh_control[0].sphere.radius = 12.6 / 2;
-	sh_control[0].element_type = SPHERE;
-	sh_control[0].material.color = color(10/255,0,1);
+	str = "sp 0.0,0.0,20.6 12.6 10,0,255";
 	index = 3;
-	parse_sphere("sp 0.0,0.0,20.6 12.6 10,0,255", &index, sh_parser + 0);
-	cr_assert(are_equal_shapes(sh_parser + 0, sh_control + 0));
+	ft_bzero(&sh_parser, sizeof(t_element));
+	parse_sphere(str, &index, &sh_parser);
+	cr_assert(are_equal_shapes(&sh_parser, &sh_control));
+	cr_assert(index = ft_strlen(str));
+
+	str = "sp            0.0,0.0,20.6 12.6 10,0,255";
+	index = 3;
+	ft_bzero(&sh_parser, sizeof(t_element));
+	parse_sphere(str, &index, &sh_parser);
+	cr_assert(are_equal_shapes(&sh_parser, &sh_control));
+	cr_assert(index = ft_strlen(str));
+	
+	str = "sp 0.0,0.0,20.6       12.6 10,0,255";
+	index = 3;
+	ft_bzero(&sh_parser, sizeof(t_element));
+	parse_sphere(str, &index, &sh_parser);
+	cr_assert(are_equal_shapes(&sh_parser, &sh_control));
+	cr_assert(index = ft_strlen(str));
+
+	str = "sp 0.0,0.0,20.6 12.6      10,0,255";
+	index = 3;
+	ft_bzero(&sh_parser, sizeof(t_element));
+	parse_sphere(str, &index, &sh_parser);
+	cr_assert(are_equal_shapes(&sh_parser, &sh_control));
+	cr_assert(index = ft_strlen(str));
+	
+	str = "sp 0.0,0.0,20.6 12.6 10,0,255        ";
+	index = 3;
+	ft_bzero(&sh_parser, sizeof(t_element));
+	parse_sphere(str, &index, &sh_parser);
+	cr_assert(are_equal_shapes(&sh_parser, &sh_control));
+	cr_assert(index = ft_strlen(str));
 }
