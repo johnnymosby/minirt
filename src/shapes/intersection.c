@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 12:21:49 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/22 20:41:28 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/09/23 13:43:28 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ t_hit	*intersection(double t, t_shape *shape)
 	static t_btree	tree;
 	t_hit			*hit;
 
-	// if (tree.last == MAX_INTERSECTIONS - 1)
-	// 	return (NULL);
 	hit = tree.root + tree.last++ % MAX_INTERSECTIONS;
 	hit->left = NULL;
 	hit->right = NULL;

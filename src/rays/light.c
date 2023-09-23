@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/16 12:00:17 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/23 15:30:23 by rbasyrov         ###   ########.fr       */
+/*   Created: 2023/09/23 15:20:01 by rbasyrov          #+#    #+#             */
+/*   Updated: 2023/09/23 16:31:56 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shapes.h"
+#include "light.h"
 
-void	set_transform(t_shape *shape, t_matrix *m)
+t_light	point_light(t_color *intensity, t_tuple *position)
 {
-	shape->transform = *m;
-	shape->inverse = inverse(m);
-	shape->transpose = transpose(&shape->inverse);
-}
+	t_light	created_light;
 
-void	set_shape_to_default(t_shape *shape)
-{
-	shape->transform = identity_matrix();
-	shape->inverse = identity_matrix();
-	shape->transpose = identity_matrix();
-	set_material_to_default(&shape->material);
+	created_light.position = *position;
+	created_light.intensity = *intensity;
+	return (created_light);
 }

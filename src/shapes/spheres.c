@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:55:05 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/22 20:35:44 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/09/23 15:29:57 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,29 @@ void	intersect_sphere(t_shape *shape, t_ray *r, t_hit **hits)
 t_shape	create_sphere(void)
 {
 	t_shape	shape;
+	t_tuple	null_point;
 
-	shape.sphere.origin = point(0, 0, 0);
+	set_shape_to_default(&shape);
+	null_point = point(0, 0, 0);
+	shape.sphere.origin = null_point;
+	shape.sphere.null_point = null_point;
 	shape.sphere.radius = 1;
 	shape.shape_type = SPHERE;
-	shape.transform = identity_matrix();
-	shape.inverse = identity_matrix();
 	shape.intersect = intersect_sphere;
 	return (shape);
+}
+
+t_tuple	normal_at_sphere(t_shape *shape, t_tuple *point)
+{
+	t_tuple	object_point;
+	t_tuple	object_normal;
+	t_tuple	world_normal;
+	t_tuple	world_normal_normalized;
+
+	object_point = multiply_matrix_by_tuple(&shape->inverse, point);
+	object_normal = substract_tuples(&object_point, &shape->sphere.null_point);
+	world_normal = multiply_matrix_by_tuple(&shape->transpose, &object_normal);
+	world_normal.w = 0;
+	world_normal_normalized = normalize(&world_normal);
+	return (world_normal_normalized);
 }

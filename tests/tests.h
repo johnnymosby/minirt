@@ -8,5 +8,6 @@
 # include "matrices.h"
 # include "rays.h"
 # include "shapes.h"
+# include "light.h"
 
 #endif

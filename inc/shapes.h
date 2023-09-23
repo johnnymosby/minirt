@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 11:51:29 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/22 19:03:01 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/09/23 16:28:00 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define SHAPES_H
 
 # include "rays.h"
+# include "light.h"
 
 typedef enum e_shape_type
 {
@@ -24,6 +25,7 @@ typedef struct s_sphere
 {
 	t_tuple	origin;
 	double	radius;
+	t_tuple	null_point;
 }	t_sphere;
 
 typedef struct s_disc_calc
@@ -36,6 +38,15 @@ typedef struct s_disc_calc
 
 typedef void	(*t_intersect)(t_shape *, t_ray *, t_hit **);
 
+typedef struct s_material
+{
+	double	ambient;
+	double	diffuse;
+	double	specular;
+	double	shininess;
+	t_color	color;
+}	t_material;
+
 typedef struct s_shape
 {
 	union {
@@ -45,6 +56,8 @@ typedef struct s_shape
 	t_intersect		intersect;
 	t_matrix		transform;
 	t_matrix		inverse;
+	t_matrix		transpose;
+	t_material		material;
 }	t_shape;
 
 /*
@@ -62,11 +75,25 @@ int		count_intersections(t_hit *xs, bool if_left_branch);
 
 t_shape	create_sphere(void);
 void	intersect_sphere(t_shape *sphere, t_ray *r, t_hit **hits);
+t_tuple	normal_at_sphere(t_shape *shape, t_tuple *point);
 
 /*
 ** ------------------------------- UTILS -------------------------------------
 */
 
 void	set_transform(t_shape *shape, t_matrix *m);
+void	set_shape_to_default(t_shape *shape);
+
+/*
+** ------------------------------- REFLECTION ---------------------------------
+*/
+
+t_tuple	reflect(t_tuple *v, t_tuple *n);
+
+/*
+** ------------------------------- MATERIAL -----------------------------------
+*/
+bool	are_equal_materials(t_material *mtrl1, t_material *mtrl2);
+void	set_material_to_default(t_material *material);
 
 #endif

@@ -28,10 +28,10 @@ MATRICES	=	utils.c logical_operations.c arithmetic_operations.c \
 				properties.c transformations.c rotations.c
 MATRICES	:=	$(addprefix matrices/, $(MATRICES))
 
-RAYS	=	utils.c
+RAYS	=	utils.c light.c lightning.c
 RAYS	:=	$(addprefix rays/, $(RAYS))
 
-SHAPES	=	utils.c spheres.c intersection.c
+SHAPES	=	utils.c spheres.c intersection.c reflection.c
 SHAPES	:=	$(addprefix shapes/, $(SHAPES))
 
 SOURCE	=	$(MAIN) $(TUPLES) $(COLORS) $(CANVAS) $(WINDOW) $(MATRICES) $(RAYS) $(SHAPES)

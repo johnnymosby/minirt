@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   reflection.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/16 12:00:17 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/23 15:30:23 by rbasyrov         ###   ########.fr       */
+/*   Created: 2023/09/23 14:33:21 by rbasyrov          #+#    #+#             */
+/*   Updated: 2023/09/23 14:47:16 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shapes.h"
 
-void	set_transform(t_shape *shape, t_matrix *m)
+t_tuple	reflect(t_tuple *in, t_tuple *normal)
 {
-	shape->transform = *m;
-	shape->inverse = inverse(m);
-	shape->transpose = transpose(&shape->inverse);
-}
+	double	p_dot;
+	t_tuple	multiplication;
 
-void	set_shape_to_default(t_shape *shape)
-{
-	shape->transform = identity_matrix();
-	shape->inverse = identity_matrix();
-	shape->transpose = identity_matrix();
-	set_material_to_default(&shape->material);
+	p_dot = dot(in, normal);
+	multiplication = multiply_tuple_by_scalar(normal, 2 * p_dot);
+	return (substract_tuples(in, &multiplication));
 }

@@ -1,7 +1,7 @@
 NAME		=	tests
 
 TESTS		=	tuples.c colors.c canvas.c matrices.c transformations.c \
-				rays.c spheres.c
+				rays.c spheres.c reflection.c
 
 SRC_DIR		=	../src
 OBJ_DIR		=	../obj
@@ -92,6 +92,9 @@ rays: $(LIBFT) $(OBJ) $(MLX) rays.c
 	@$(call compile, "$^")
 
 spheres: $(LIBFT) $(OBJ) $(MLX) spheres.c
+	@$(call compile, "$^")
+
+reflection: $(LIBFT) $(OBJ) $(MLX) reflection.c
 	@$(call compile, "$^")
 
 clean:
