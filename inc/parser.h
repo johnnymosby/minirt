@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:41:27 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/22 22:10:07 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/23 19:27:52 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,15 @@
 # include "libft.h"
 
 # include "colors.h"
+# include "shapes.h"
 # define ERR_FILE -1
 
-typedef struct s_material	// has to be modified when t_shape and t_material are final:
-{
-	t_color	color;
-}	t_material;
-
-typedef struct s_sphere
-{
-	t_tuple	origin;
-	double	radius;
-}	t_sphere;
+typedef enum e_shape_type	t_shape_type;
 
 typedef enum e_element_type	// has to be modified when t_shape and t_material are final:
 {
-	SPHERE
+	SPHERE1
 }	t_element_type;
-
 
 typedef struct s_element		// has to be modified when t_shape and t_material are final:
 {

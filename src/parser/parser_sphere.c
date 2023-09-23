@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_sphere.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/22 22:10:54 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/23 19:27:46 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static bool	parse_radius(char *file_string, int *index, t_element *element)
 
 bool	parse_sphere(char *file_string, int *index, t_element *element)
 {
-	element->element_type = SPHERE;
+	element->element_type = SPHERE1;
 	while (file_string[*index] == ' ')
 		(*index)++;
 	if (parse_origin(file_string, index, element) == false)
@@ -48,5 +48,5 @@ bool	parse_sphere(char *file_string, int *index, t_element *element)
 		(*index)++;
 	if (parse_color(file_string, index, &(element->material.color)) == false)
 		return (false);
-	return (true);	
+	return (true);
 }
