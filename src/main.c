@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:43:54 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/23 18:06:46 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/23 18:38:45 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,67 +64,21 @@ static void	render_sphere(t_canvas *c)
 
 }
 
-// void	draw_lines(t_canvas *c)
-// {
-// 	int			i;
-// 	t_color		blue;
-// 	t_color		red;
-// 	int			width;
-// 	int			height;
-
-// 	width = PCT_WIDTH;
-// 	height = WIN_HEIGHT;
-// 	blue = color(0, -2, 1.5);
-// 	red = color(1, 0, 0);
-// 	i = 0;
-// 	while (i < width)
-// 	{
-// 		write_pixel(c, i, 200, blue);
-// 		i++;
-// 	}
-// 	i = 0;
-// 	while (i < height)
-// 	{
-// 		write_pixel(c, 200, i, red);
-// 		i++;
-// 	}
-// }
-
 int	main(void)
 {
 	t_canvas	*c;
 	t_win		win;
+	
 
-//	INITIALISE CANVAS WITH 2 LINES (WILL BE OUR PARSING WITH FIGURES IN FUTURE)
-	c = canvas(PCT_WIDTH, WIN_HEIGHT);
-	if (c == NULL)
-		return (ERR_MEMORY_ALLOCATION);
-//	INITIALISE MLX
-	render_sphere(c);
-	win = window();
-	if (win.mlx_ptr == NULL)
-	{
+	if (initialise_mlx(&win) == false)
+	{	
 		free_canvas(c);
 		return (ERR_MLX_FUNCTION);
 	}
-	if (initialise_picture(&win) == false)
-	{
-		free_canvas(c);
-		return (ERR_MLX_FUNCTION);
-	}
-	if (initialise_menu(&win) == false)
-	{
-		free_canvas(c);
-		return (ERR_MLX_FUNCTION);
-	}
-//	MLX HOOKS
 	catch_mlx_hooks(&win);
-//	RENDERING IMAGE
 	canvas_to_mlx_image(c, win.pct.addr);
 	mlx_put_image_to_window(win.mlx_ptr, win.win_ptr, win.pct.img_ptr, 0, 0);
-//	MLX LOOP
 	mlx_loop(win.mlx_ptr);
-//	FREE EVERYTHING
 	free_canvas(c);
 	mlx_destroy_display(win.mlx_ptr);
 	free(win.mlx_ptr);
