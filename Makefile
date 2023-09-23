@@ -36,7 +36,7 @@ MATRICES	:=	$(addprefix matrices/, $(MATRICES))
 RAYS	=	utils.c light.c lightning.c
 RAYS	:=	$(addprefix rays/, $(RAYS))
 
-SHAPES	=	utils.c spheres.c intersection.c reflection.c
+SHAPES	=	utils.c spheres.c intersection.c reflection.c material.c
 SHAPES	:=	$(addprefix shapes/, $(SHAPES))
 
 SOURCE	=	$(MAIN) $(PARSER) $(TUPLES) $(COLORS) $(CANVAS) $(WINDOW) $(MATRICES) $(RAYS) $(SHAPES)

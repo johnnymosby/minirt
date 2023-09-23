@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:43:54 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/23 19:19:52 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/09/23 19:48:03 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "colors.h"
 #include "canvas.h"
 #include "shapes.h"
+#include "light.h"
 
 #define ERR_MEMORY_ALLOCATION	-1
 #define ERR_MLX_FUNCTION		-2
@@ -28,16 +29,23 @@ static void	render_sphere(t_canvas *c)
 	double	world_y;
 	double	world_x;
 	double	wall_z;
-	t_tuple	position;
+	t_tuple	positioned;
 	t_tuple pos_minus_origin;
 	t_tuple	normalized;
 	t_hit	*xs;
-	t_color		red;
-
-	red = color(1, 0, 0);
+	t_tuple	light_position = point(-10, 10, -10);
+	t_color light_color = color(1, 1, 1);
+	t_light light = point_light(&light_color, &light_position);
+	t_hit	*h;
+	t_tuple pos;
+	t_tuple normal;
+	t_tuple eye;
+	t_color col;
+	t_lightning data;
 	wall_z = 1000;
 	origin = point(0, 0, -5);
 	s = create_sphere();
+	s.material.color = color(1, 0.2, 1);
 	y = 0;
 	while (y < WIN_HEIGHT)
 	{
@@ -46,14 +54,26 @@ static void	render_sphere(t_canvas *c)
 		while (x < PCT_WIDTH)
 		{
 			world_x = -1 * PCT_WIDTH / 2 + x;
-			position = point(world_x, world_y, wall_z);
-			pos_minus_origin = substract_tuples(&position, &origin);
+			positioned = point(world_x, world_y, wall_z);
+			pos_minus_origin = substract_tuples(&positioned, &origin);
 			normalized = normalize(&pos_minus_origin);
 			r = ray(&origin, &normalized);
 			xs = NULL;
 			intersect(&s, &r, &xs);
-			if (hit(xs, false) != NULL)
-				write_pixel(c, x, y, red);
+			h = hit(xs, false);
+			if (h != NULL)
+			{
+				pos = position(&r, h->t);
+				normal = normal_at_sphere(h->obj, &pos);
+				eye = negate_tuple(&r.direction);
+				data.material = &h->obj->material;
+				data.light = &light;
+				data.point = &pos;
+				data.eyev = &eye;
+				data.normalv = &normal;
+				col = lightning(&data);
+				write_pixel(c, x, y, col);
+			}
 			x++;
 		}
 		y++;
@@ -65,11 +85,15 @@ int	main(void)
 	t_canvas	*c;
 	t_win		win;
 
+	c = canvas(PCT_WIDTH, WIN_HEIGHT);
+	if (c == NULL)
+		return (ERR_MEMORY_ALLOCATION);
 	if (initialise_mlx(&win) == false)
 	{
 		free_canvas(c);
 		return (ERR_MLX_FUNCTION);
 	}
+	render_sphere(c);
 	catch_mlx_hooks(&win);
 	canvas_to_mlx_image(c, win.pct.addr);
 	mlx_put_image_to_window(win.mlx_ptr, win.win_ptr, win.pct.img_ptr, 0, 0);
