@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:43:54 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/22 20:41:52 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/09/23 18:06:46 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,9 @@
 #include "colors.h"
 #include "canvas.h"
 #include "shapes.h"
-#include "X11/keysym.h"
 
 #define ERR_MEMORY_ALLOCATION	-1
 #define ERR_MLX_FUNCTION		-2
-
-static int	escape_key(int keysym, t_win *win)
-{
-	if (keysym == XK_Escape)
-	{
-		if (win->menu.img_ptr)
-			mlx_destroy_image(win->mlx_ptr, win->menu.img_ptr);
-		if (win->pct.img_ptr)
-			mlx_destroy_image(win->mlx_ptr, win->pct.img_ptr);
-		if (win->win_ptr)
-			mlx_destroy_window(win->mlx_ptr, win->win_ptr);
-		mlx_loop_end(win->mlx_ptr);
-	}
-	return (0);
-}
-
-static int	close_button(t_win *win)
-{
-	if (win->menu.img_ptr)
-		mlx_destroy_image(win->mlx_ptr, win->menu.img_ptr);
-	if (win->pct.img_ptr)
-		mlx_destroy_image(win->mlx_ptr, win->pct.img_ptr);
-	if (win->win_ptr)
-		mlx_destroy_window(win->mlx_ptr, win->win_ptr);
-	mlx_loop_end(win->mlx_ptr);
-	return (0);
-}
 
 static void	render_sphere(t_canvas *c)
 {
@@ -123,9 +95,6 @@ int	main(void)
 	t_canvas	*c;
 	t_win		win;
 
-
-
-
 //	INITIALISE CANVAS WITH 2 LINES (WILL BE OUR PARSING WITH FIGURES IN FUTURE)
 	c = canvas(PCT_WIDTH, WIN_HEIGHT);
 	if (c == NULL)
@@ -149,8 +118,7 @@ int	main(void)
 		return (ERR_MLX_FUNCTION);
 	}
 //	MLX HOOKS
-	mlx_hook(win.win_ptr, 2, 1L << 0, &escape_key, &win);
-	mlx_hook(win.win_ptr, 17, 1L << 17, &close_button, &win);
+	catch_mlx_hooks(&win);
 //	RENDERING IMAGE
 	canvas_to_mlx_image(c, win.pct.addr);
 	mlx_put_image_to_window(win.mlx_ptr, win.win_ptr, win.pct.img_ptr, 0, 0);
