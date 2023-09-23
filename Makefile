@@ -11,6 +11,11 @@ CFLAGS	+=	-Wall -Wextra -Werror
 
 MAIN	=	main.c
 
+PARSER	=	get_elements.c get_file_into_string.c open_file.c \
+			parser.c parser_sphere.c\
+			parser_double.c parser_element_color.c parser_point.c
+PARSER	:=	$(addprefix parser/, $(PARSER))
+
 TUPLES	=	create_tuple.c logical_operations.c arithmetic_operations.c \
 			vectors_manipulation.c
 TUPLES	:=	$(addprefix tuples/, $(TUPLES))
@@ -21,7 +26,7 @@ COLORS	:=	$(addprefix colors/, $(COLORS))
 CANVAS	=	create_canvas.c pixels.c save_canvas.c
 CANVAS	:=	$(addprefix canvas/, $(CANVAS))
 
-WINDOW	=	create_window.c
+WINDOW	=	create_window.c mlx_hooks.c mlx_initialise.c
 WINDOW	:=	$(addprefix window/, $(WINDOW))
 
 MATRICES	=	utils.c logical_operations.c arithmetic_operations.c \
@@ -34,7 +39,8 @@ RAYS	:=	$(addprefix rays/, $(RAYS))
 SHAPES	=	utils.c spheres.c intersection.c reflection.c
 SHAPES	:=	$(addprefix shapes/, $(SHAPES))
 
-SOURCE	=	$(MAIN) $(TUPLES) $(COLORS) $(CANVAS) $(WINDOW) $(MATRICES) $(RAYS) $(SHAPES)
+SOURCE	=	$(MAIN) $(PARSER) $(TUPLES) $(COLORS) $(CANVAS) $(WINDOW) $(MATRICES) $(RAYS) $(SHAPES)
+
 SRC_DIR	=	src/
 SRC		=	$(addprefix $(SRC_DIR), $(SOURCE))
 

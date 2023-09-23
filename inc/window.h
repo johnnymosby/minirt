@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 12:38:27 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/21 13:58:05 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/09/23 18:28:29 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ t_image	pct;
 } 	t_win;
 
 t_win	window(void);
+bool	initialise_mlx(t_win *window);
 bool	initialise_picture(t_win *window);
 bool	initialise_menu(t_win *window);
+void	catch_mlx_hooks(t_win *window);
 
 #endif
