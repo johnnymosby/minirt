@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_sphere.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/23 19:27:46 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/09/24 19:39:41 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,17 @@ static bool	parse_origin(char *file_string, int *index, t_element *element)
 }
 static bool	parse_radius(char *file_string, int *index, t_element *element)
 {
-	(void)file_string;
-	(void)element;
-	(void)index;
 	if (parse_double(file_string, index, &(element->sphere.radius)) == false)
 		return (false);
 	element->sphere.radius *= 0.5;
+	if (element->sphere.radius < 0)
+		return (false);
 	return (true);
 }
 
 bool	parse_sphere(char *file_string, int *index, t_element *element)
 {
-	element->element_type = SPHERE1;
+	element->element_type = ELMT_SPHERE;
 	while (file_string[*index] == ' ')
 		(*index)++;
 	if (parse_origin(file_string, index, element) == false)
