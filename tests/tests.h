@@ -10,5 +10,6 @@
 # include "rays.h"
 # include "shapes.h"
 # include "light.h"
+# include "world.h"
 
 #endif
