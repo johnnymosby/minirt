@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_file_into_string.c                             :+:      :+:    :+:   */
+/*   pre_put_file_into_string.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:29:33 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/22 13:32:10 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/25 18:47:52 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static char	*read_file(int fd)
 	return (file_string);
 }
 
-char *get_file_into_string(char *filename)
+char *put_file_into_string(char *filename)
 {
 	char	*str;
 	int		fd;

@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/24 19:39:41 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/25 18:02:35 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static bool	parse_origin(char *file_string, int *index, t_element *element)
 {
-	if (parse_point(file_string, index, &(element->sphere.origin)) == false)
+	if (parse_point(file_string, index, &(element->sphere_origin)) == false)
 		return (false);
 	if (file_string[*index] != ' ')
 		return (false);
@@ -24,10 +24,10 @@ static bool	parse_origin(char *file_string, int *index, t_element *element)
 }
 static bool	parse_radius(char *file_string, int *index, t_element *element)
 {
-	if (parse_double(file_string, index, &(element->sphere.radius)) == false)
+	if (parse_double(file_string, index, &(element->sphere_radius)) == false)
 		return (false);
-	element->sphere.radius *= 0.5;
-	if (element->sphere.radius < 0)
+	element->sphere_radius *= 0.5;
+	if (element->sphere_radius < 0)
 		return (false);
 	return (true);
 }
@@ -45,7 +45,7 @@ bool	parse_sphere(char *file_string, int *index, t_element *element)
 		return (false);
 	while (file_string[*index] == ' ')
 		(*index)++;
-	if (parse_color(file_string, index, &(element->material.color)) == false)
+	if (parse_color(file_string, index, &(element->sphere_color)) == false)
 		return (false);
 	return (true);
 }

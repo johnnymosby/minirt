@@ -11,11 +11,10 @@ CFLAGS	+=	-Wall -Wextra -Werror
 
 MAIN	=	main.c
 
-PARSER	=	get_elements.c get_file_into_string.c open_file.c \
+PARSER	=	pre_open_file.c pre_put_file_into_string.c pre_get_elements_from_string.c \
 			parser.c \
-			parser_sphere.c\
-			parser_ambient.c parser_light.c \
-			parser_double.c parser_element_color.c parser_point.c
+			parser_ambient.c parser_light.c parser_sphere.c\
+			parser__color.c parser__double.c parser__point.c
 PARSER	:=	$(addprefix parser/, $(PARSER))
 
 TUPLES	=	create_tuple.c logical_operations.c arithmetic_operations.c \
