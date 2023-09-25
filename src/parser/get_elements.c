@@ -6,16 +6,20 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/22 21:19:26 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/24 20:57:40 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static bool	set_one_element(char *start, int *index, t_element *element)
+static bool	set_one_element(char *file_string, int *index, t_element *element)
 {
-	if (ft_strncmp(start, "sp ", 3))
-		return (parse_sphere(start, index +3, element));
+	if (ft_strncmp(file_string, "A", 2))
+		return (parse_ambient(file_string, index +2, element));
+	else if (ft_strncmp(file_string, "L", 2))
+		return (parse_light(file_string, index +2, element));
+	else if (ft_strncmp(file_string, "sp ", 3))
+		return (parse_sphere(file_string, index +3, element));
 	else
 		return (NULL);
 }
