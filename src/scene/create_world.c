@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_world.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 12:54:29 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/24 17:26:44 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/27 11:20:00 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	set_default_spheres(t_shape s[2])
 {
 	t_matrix	m;
-	
+
 	s[0] = create_sphere();
 	s[0].material.color = color(0.8, 1.0, 0.6);
 	s[0].material.diffuse = 0.7;
