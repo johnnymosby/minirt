@@ -6,13 +6,13 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 12:54:29 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/27 11:20:00 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/28 11:34:42 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "world.h"
 
-static void	set_default_spheres(t_shape s[2])
+static void	set_default_spheres(t_shape *s)
 {
 	t_matrix	m;
 
@@ -27,7 +27,7 @@ static void	set_default_spheres(t_shape s[2])
 	set_transform(s+1, &m);
 }
 
-static void	set_default_light(t_light l[1])
+static void	set_default_light(t_light *l)
 {
 	t_color		intensity;
 	t_tuple		position;
@@ -39,8 +39,8 @@ static void	set_default_light(t_light l[1])
 
 static void	set_world_to_default(t_world *w)
 {
-	t_light		l[1];
-	t_shape		s[2];
+	t_light		*l = ft_calloc(1, sizeof(t_light));
+	t_shape		*s = ft_calloc(2, sizeof(t_shape));
 	
 	set_default_light(l);
 	set_default_spheres(s);
