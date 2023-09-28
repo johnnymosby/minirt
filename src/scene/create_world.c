@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 12:54:29 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/28 11:34:42 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/28 19:17:04 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	set_world_to_default(t_world *w)
 	
 	set_default_light(l);
 	set_default_spheres(s);
-	w->light = l;
+	w->lightning.light = l;
 	w->shape = s;
 }
 t_world	default_world(void)

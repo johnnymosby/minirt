@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 16:09:02 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/28 13:47:13 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/28 19:14:46 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 
 # include "libft.h"
 # include "shapes.h"
-#include "rays.h"
+# include "rays.h"
+# include "light.h"
 
 typedef struct s_world
 {
-	t_light	*light;
-	t_shape	*shape;
-	int		nb_shapes;
+	t_hit		*xs;
+	t_lightning lightning;
+	t_shape		*shape;
+	int			nb_shapes;
 }	t_world;
 
 #endif
