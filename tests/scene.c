@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 12:41:44 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/28 12:21:03 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/28 15:00:32 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,15 @@ Test(scene, the_default_world)
 Test(scene, intersect_world_with_a_ray)
 {
 	t_world		w;
+	t_ray		r;
+	t_tuple		p = point(0, 0, -5);
+	t_tuple		v = vector(0, 0, 1);
+	t_hit		**xs;
 
 	w = default_world();
-	
-	cr_assert(true);
+	r = ray(&p, &v);
+	xs = intersect_world(&w, &r);
+	printf("%p\n", xs);
+	//printf("%f\n", xs[0][0].t);
+	cr_assert(xs[0][0].t == 4.0);
 }

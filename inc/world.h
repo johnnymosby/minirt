@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 16:09:02 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/24 17:57:05 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/28 13:47:13 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "libft.h"
 # include "shapes.h"
+#include "rays.h"
+
 typedef struct s_world
 {
 	t_light	*light;
@@ -24,5 +26,5 @@ typedef struct s_world
 
 #endif
 
-t_world	world(void);
 t_world	default_world(void);
+t_hit	**intersect_world(t_world *w, t_ray *ray);
