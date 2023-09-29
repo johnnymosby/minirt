@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 12:38:27 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/23 18:28:29 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/29 12:45:28 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include <stddef.h>// NULL
 #include <stdlib.h>// exit
 #include <stdbool.h>// bool
+#include "X11/keysym.h"
+#include "stdio.h"
 
 #define		WIN_HEIGHT	1024
 #define		MENU_WIDTH	256
