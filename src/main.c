@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:43:54 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/23 19:48:03 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/09/29 09:08:11 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,26 @@
 #include "canvas.h"
 #include "shapes.h"
 #include "light.h"
+#include "world.h"
 
 #define ERR_MEMORY_ALLOCATION	-1
 #define ERR_MLX_FUNCTION		-2
 
-static void	render_sphere(t_canvas *c)
+static void	parse_scene(t_world *w)
 {
-	t_shape	s;
+	t_tuple	light_position = point(-10, 10, -10);
+	t_color light_color = color(1, 1, 1);
+	
+	w->shape = ft_calloc(1, sizeof(t_shape));
+	w->shape[0] = create_sphere();
+	w->shape[0].material.color = color(1, 0.2, 1);
+
+	w->lightning.light = ft_calloc(1, sizeof(t_light));
+	*w->lightning.light = point_light(&light_color, &light_position);
+	
+}
+static void	render_sphere(t_world *w, t_canvas *c)
+{
 	t_ray	r;
 	t_tuple	origin;
 	int		y;
@@ -32,20 +45,14 @@ static void	render_sphere(t_canvas *c)
 	t_tuple	positioned;
 	t_tuple pos_minus_origin;
 	t_tuple	normalized;
-	t_hit	*xs;
-	t_tuple	light_position = point(-10, 10, -10);
-	t_color light_color = color(1, 1, 1);
-	t_light light = point_light(&light_color, &light_position);
 	t_hit	*h;
 	t_tuple pos;
 	t_tuple normal;
 	t_tuple eye;
-	t_color col;
-	t_lightning data;
+	
 	wall_z = 1000;
 	origin = point(0, 0, -5);
-	s = create_sphere();
-	s.material.color = color(1, 0.2, 1);
+
 	y = 0;
 	while (y < WIN_HEIGHT)
 	{
@@ -58,21 +65,19 @@ static void	render_sphere(t_canvas *c)
 			pos_minus_origin = substract_tuples(&positioned, &origin);
 			normalized = normalize(&pos_minus_origin);
 			r = ray(&origin, &normalized);
-			xs = NULL;
-			intersect(&s, &r, &xs);
-			h = hit(xs, false);
+			w->xs = NULL;
+			intersect(w->shape, &r, &w->xs);
+			h = hit(w->xs, false);
 			if (h != NULL)
 			{
 				pos = position(&r, h->t);
 				normal = normal_at_sphere(h->obj, &pos);
 				eye = negate_tuple(&r.direction);
-				data.material = &h->obj->material;
-				data.light = &light;
-				data.point = &pos;
-				data.eyev = &eye;
-				data.normalv = &normal;
-				col = lightning(&data);
-				write_pixel(c, x, y, col);
+				w->lightning.material = &h->obj->material;
+				w->lightning.point = &pos;
+				w->lightning.eyev = &eye;
+				w->lightning.normalv = &normal;
+				write_pixel(c, x, y, lightning(&w->lightning));
 			}
 			x++;
 		}
@@ -84,6 +89,7 @@ int	main(void)
 {
 	t_canvas	*c;
 	t_win		win;
+	t_world		w;
 
 	c = canvas(PCT_WIDTH, WIN_HEIGHT);
 	if (c == NULL)
@@ -93,7 +99,8 @@ int	main(void)
 		free_canvas(c);
 		return (ERR_MLX_FUNCTION);
 	}
-	render_sphere(c);
+	parse_scene(&w);
+	render_sphere(&w, c);
 	catch_mlx_hooks(&win);
 	canvas_to_mlx_image(c, win.pct.addr);
 	mlx_put_image_to_window(win.mlx_ptr, win.win_ptr, win.pct.img_ptr, 0, 0);

@@ -1,7 +1,7 @@
 NAME		=	tests
 
 TESTS		=	parser.c tuples.c colors.c canvas.c matrices.c transformations.c \
-				rays.c spheres.c reflection.c
+				rays.c spheres.c reflection.c scene.c
 
 SRC_DIR		=	../src
 OBJ_DIR		=	../obj
@@ -72,6 +72,7 @@ all: $(LIBFT) $(OBJ) $(MLX)
 	make colors
 	make canvas
 	make matrices
+	make scene
 
 parser: $(LIBFT) $(OBJ) $(MLX) parser.c
 	@$(call compile, "$^")
@@ -99,6 +100,9 @@ spheres: $(LIBFT) $(OBJ) $(MLX) spheres.c
 	@$(call compile, "$^")
 
 reflection: $(LIBFT) $(OBJ) $(MLX) reflection.c
+	@$(call compile, "$^")
+
+scene: $(LIBFT) $(OBJ) $(MLX) scene.c
 	@$(call compile, "$^")
 
 clean:

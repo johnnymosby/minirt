@@ -40,7 +40,10 @@ RAYS	:=	$(addprefix rays/, $(RAYS))
 SHAPES	=	utils.c spheres.c intersection.c reflection.c material.c
 SHAPES	:=	$(addprefix shapes/, $(SHAPES))
 
-SOURCE	=	$(MAIN) $(PARSER) $(TUPLES) $(COLORS) $(CANVAS) $(WINDOW) $(MATRICES) $(RAYS) $(SHAPES)
+SCENE	=	create_world.c intersect_world_ray.c
+SCENE	:=	$(addprefix scene/, $(SCENE))
+
+SOURCE	=	$(MAIN) $(PARSER) $(TUPLES) $(COLORS) $(CANVAS) $(WINDOW) $(MATRICES) $(RAYS) $(SHAPES) $(SCENE)
 
 SRC_DIR	=	src/
 SRC		=	$(addprefix $(SRC_DIR), $(SOURCE))
