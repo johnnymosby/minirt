@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_world.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 12:54:29 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/28 19:17:04 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/29 13:06:30 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static void	set_world_to_default(t_world *w)
 	set_default_spheres(s);
 	w->lightning.light = l;
 	w->shape = s;
+	w->nb_shapes = 2;
 }
 t_world	default_world(void)
 {
