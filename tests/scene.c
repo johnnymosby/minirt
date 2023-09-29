@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 12:41:44 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/28 15:00:32 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/29 09:29:04 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ Test(scene, the_default_world)
 	l = point_light(&c, &p);
 
 	w = default_world();
-	cr_assert(are_equal_lights(w.light, &l));
+	cr_assert(are_equal_lights(w.lightning.light, &l));
 	cr_assert(w.shape[0].shape_type == SPHERE);
 	cr_assert(are_equal_materials(&w.shape->material, &sp1.material));
 	cr_assert(w.shape[1].shape_type == SPHERE);
@@ -54,16 +54,17 @@ Test(scene, the_default_world)
 
 Test(scene, intersect_world_with_a_ray)
 {
-	t_world		w;
-	t_ray		r;
-	t_tuple		p = point(0, 0, -5);
-	t_tuple		v = vector(0, 0, 1);
-	t_hit		**xs;
+	//t_world		w;
+	//t_ray		r;
+//	t_tuple		p = point(0, 0, -5);
+//	t_tuple		v = vector(0, 0, 1);
+//	t_hit		**xs;
 
-	w = default_world();
-	r = ray(&p, &v);
-	xs = intersect_world(&w, &r);
-	printf("%p\n", xs);
+	//w = default_world();
+	//r = ray(&p, &v);
+	//xs = intersect_world(&w, &r);
+//	printf("%p\n", xs);
 	//printf("%f\n", xs[0][0].t);
-	cr_assert(xs[0][0].t == 4.0);
+	//cr_assert(xs[0][0].t == 4.0);
+	cr_assert(false);
 }
