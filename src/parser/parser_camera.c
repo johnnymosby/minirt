@@ -1,38 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_ambient.c                                   :+:      :+:    :+:   */
+/*   parser_camera.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/25 09:48:43 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/25 18:19:37 by aguilmea         ###   ########.fr       */
+/*   Created: 2023/09/29 19:43:18 by aguilmea          #+#    #+#             */
+/*   Updated: 2023/09/29 21:50:28 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static bool	parse_lightning_ratio(char *file_string, int *index, t_element *element)
+bool	parse_fov(char *file_string, int *index, t_element *element)
 {
-	if (parse_double(file_string, index, \
-		&element->ambient_lightning_ratio) == false)
+	if (parse_double(file_string, index, &element->fov) == false)
 		return (false);
-	if (element->ambient_lightning_ratio < 0 \
-		|| element->ambient_lightning_ratio > 1.0)
+	if (element->fov < 0 || element->fov > 180.0)
 		return (false);
 	return (true);
 }
 
-bool	parse_ambient(char *file_string, int *index, t_element *element)
+bool	parse_camera(char *file_string, int *index, t_element *element)
 {
-	element->element_type = ELMT_LIGHTNING;
+	element->element_type = ELMT_CAMERA;
 	while (file_string[*index] == ' ')
 		(*index)++;
-	if (parse_lightning_ratio(file_string, index, element) == false)
+	if (parse_coordinates(file_string, index, element) == false)
 		return (false);
 	while (file_string[*index] == ' ')
 		(*index)++;
-	if (parse_color(file_string, index, &element->ambient_color) == false)
+	if (parse_orientation(file_string, index, element) == false)
+		return (false);
+	while (file_string[*index] == ' ')
+		(*index)++;
+	if (parse_fov(file_string, index, element) == false)
 		return (false);
 	return (true);
 }

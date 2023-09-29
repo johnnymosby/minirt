@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:14:28 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/25 18:16:57 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/29 22:50:37 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,27 +40,27 @@ static bool	are_equal_lightning(t_element *l1, t_element *l2)
 	if (!are_equal_doubles(l1->ambient_lightning_ratio, \
 		l2->ambient_lightning_ratio))
 		return (false);
-	if (!are_equal_colors(&l1->ambient_color, &l2->ambient_color))
+	if (!are_equal_colors(&l1->color, &l2->color))
 		return (false);
 	return (true);
 }
 
 static bool	are_equal_lights(t_element *l1, t_element *l2)
 {
-	if (!are_equal_tuples(&(l1->light_position), &(l2->light_position)))
+	if (!are_equal_tuples(&l1->coordinates, &l2->coordinates))
 		return (false);
-	if (!are_equal_colors(&(l1->light_intensity), &(l2->light_intensity)))
+	if (!are_equal_colors(&l1->light_intensity, &l2->light_intensity))
 		return (false);
 	return (true);
 }
 
 static bool	are_equal_spheres(t_element *sp1, t_element *sp2)
 {
-	if (!are_equal_tuples(&(sp1->sphere_origin), &(sp2->sphere_origin)))
+	if (!are_equal_tuples(&sp1->coordinates, &sp2->coordinates))
 		return (false);
-	if (sp1->sphere_radius != sp2->sphere_radius)
+	if (sp1->radius != sp2->radius)
 		return (false);
-	if (!are_equal_colors(&(sp1->sphere_color), &(sp2->sphere_color)))
+	if (!are_equal_colors(&sp1->color, &sp2->color))
 		return (false);
 	return (true);
 }
@@ -70,7 +70,7 @@ static bool	are_equal_shapes(t_element *elmt1, t_element *elmt2)
 		return (are_equal_spheres(elmt1, elmt2));
 	if (elmt1->element_type == ELMT_LIGHT && elmt2->element_type == ELMT_LIGHT)
 		return (are_equal_lights(elmt1, elmt2));
-	if (elmt1->element_type == ELMT_LIGHTNING && elmt2->element_type == ELMT_LIGHTNING)
+	if (elmt1->element_type == ELMT_AMBIENT && elmt2->element_type == ELMT_AMBIENT)
 		return (are_equal_lightning(elmt1, elmt2));	
 	return (false);
 }
@@ -83,10 +83,10 @@ Test(parser, parse_sphere_exemple_subject)
 	char		*str;
 	
 	ft_bzero(&sh_control, sizeof(t_element));
-	sh_control.sphere_origin = point(0,0,20.6);
-	sh_control.sphere_radius = 12.6 / 2;
+	sh_control.coordinates = point(0,0,20.6);
+	sh_control.radius = 12.6 / 2;
 	sh_control.element_type = ELMT_SPHERE;
-	sh_control.sphere_color = color(10.0/255,0,1);
+	sh_control.color = color(10.0/255,0,1);
 	
 	str = "sp 0.0,0.0,20.6 12.6 10,0,255";
 	index = 3;
@@ -133,7 +133,7 @@ Test(parser, parse_light_exemple_subject)
 		
 	ft_bzero(&sh_control, sizeof(t_element));
 	sh_control.element_type = ELMT_LIGHT;
-	sh_control.light_position = point(-40.0,50.0,0.0);
+	sh_control.coordinates = point(-40.0,50.0,0.0);
 	sh_control.light_intensity = color(0.6, 0.6, 0.6);
 	
 	
@@ -181,9 +181,9 @@ Test(parser, parse_ambient_exemple_subject)
 	char		*str;
 		
 	ft_bzero(&sh_control, sizeof(t_element));
-	sh_control.element_type = ELMT_LIGHTNING;
+	sh_control.element_type = ELMT_AMBIENT;
 	sh_control.ambient_lightning_ratio = 0.2;
-	sh_control.ambient_color = color (1,1,1);
+	sh_control.color = color (1,1,1);
 	
 	str = "A 0.2 255,255,255";
 	index = 2;
@@ -191,4 +191,46 @@ Test(parser, parse_ambient_exemple_subject)
 	parse_ambient(str, &index, &sh_parser);
 	cr_assert(are_equal_shapes(&sh_parser, &sh_control));
 	cr_assert(index = ft_strlen(str));
+
+	str = "A             0.2 255,255,255";
+	index = 2;
+	ft_bzero(&sh_parser, sizeof(t_element));
+	parse_ambient(str, &index, &sh_parser);
+	cr_assert(are_equal_shapes(&sh_parser, &sh_control));
+	cr_assert(index = ft_strlen(str));
+	
+	str = "A 0.2                  255,255,255";
+	index = 2;
+	ft_bzero(&sh_parser, sizeof(t_element));
+	parse_ambient(str, &index, &sh_parser);
+	cr_assert(are_equal_shapes(&sh_parser, &sh_control));
+	cr_assert(index = ft_strlen(str));
+	
+	str = "A 0.2 255,255,255          ";
+	index = 2;
+	ft_bzero(&sh_parser, sizeof(t_element));
+	parse_ambient(str, &index, &sh_parser);
+	cr_assert(are_equal_shapes(&sh_parser, &sh_control));
+	cr_assert(index = ft_strlen(str));
 }
+/*
+Test(parser, parse_camera_exemple_subject)
+{
+	t_element	cam_parser;
+	t_element	cam_control;
+	int			index;
+	char		*str;
+		
+	ft_bzero(&cam_control, sizeof(t_element));
+	cam_control.element_type = ELMT_CAMERA;
+	cam_control.coordinates = point(-50.0, 0.0, 20.0);
+	cam_control.camera_orientation = vector(0.0, 0.0, 1.0);
+	cam_control.fov_in_rad = 70;
+	
+	str = "C -50.0,0,20 0,0,1 70";
+	index = 2;
+	ft_bzero(&cam_parser, sizeof(t_element));
+	parse_camera(str, &index, &cam_parser);
+	cr_assert(are_equal_shapes(&cam_parser, &cam_control));
+	cr_assert(index = ft_strlen(str));
+}*/

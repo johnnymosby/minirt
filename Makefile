@@ -13,7 +13,7 @@ MAIN	=	main.c
 
 PARSER	=	pre_open_file.c pre_put_file_into_string.c pre_get_elements_from_string.c \
 			parser.c \
-			parser_ambient.c parser_light.c parser_sphere.c\
+			parser_lightning.c parser_light.c parser_objects.c\
 			parser__color.c parser__double.c parser__point.c
 PARSER	:=	$(addprefix parser/, $(PARSER))
 
