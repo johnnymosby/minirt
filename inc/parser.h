@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:41:27 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/29 22:37:47 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/30 15:01:21 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "colors.h"
 # include "shapes.h"
 # include "world.h"
+# include "camera.h"
 # define ERR_FILE -1
 
 typedef enum e_shape_type	t_shape_type;
@@ -67,5 +68,8 @@ bool		parse_light(char *file_string, int *index, t_element *element);
 bool		parse_sphere(char *file_string, int *index, t_element *element);
 bool		parse_plane(char *file_string, int *index, t_element *element);
 bool		parse_cylinder(char *file_string, int *index, t_element *element);
+void		put_elements_into_camera(t_element *element, t_camera *cam);
+void		put_elements_into_lightning(t_element *element, int index, t_world *w);
+void		put_elements_into_shapes(t_element *element, int index, t_world *w);
 
 #endif

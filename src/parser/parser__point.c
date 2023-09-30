@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 12:47:17 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/29 21:25:45 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/30 20:02:31 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 bool	parse_coordinates(char *file_string, int *index, t_element *element)
 {
 	double	coord[3];
-	
+
 	if (parse_double (file_string, index, coord) == false)
 		return (false);
 	if (file_string[*index] != ',')
@@ -37,7 +37,7 @@ bool	parse_coordinates(char *file_string, int *index, t_element *element)
 bool	parse_orientation(char *file_string, int *index, t_element *element)
 {
 	double	coord[3];
-	
+
 	if (parse_double (file_string, index, coord) == false)
 		return (false);
 	if (file_string[*index] != ',')
@@ -57,4 +57,3 @@ bool	parse_orientation(char *file_string, int *index, t_element *element)
 		(*index)++;
 	return (true);
 }
-

@@ -6,13 +6,14 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 09:48:43 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/29 22:32:01 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/30 19:52:15 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static bool	parse_lightning_ratio(char *file_string, int *index, t_element *element)
+static bool	parse_lightning_ratio(char *file_string, int *index, \
+	t_element *element)
 {
 	if (parse_double(file_string, index, \
 		&element->ambient_lightning_ratio) == false)

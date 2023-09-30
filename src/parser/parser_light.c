@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 19:27:48 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/29 19:04:46 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/30 19:50:51 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static bool	parse_brightness(char *file_string, int *index, t_element *element)
 {
 	double	onecolor;
-	
+
 	if (parse_double(file_string, index, &onecolor) == false)
 		return (false);
 	if (onecolor < 0 || onecolor > 1.0)
@@ -24,7 +24,8 @@ static bool	parse_brightness(char *file_string, int *index, t_element *element)
 	return (true);
 }
 
-static bool	modify_brightness_with_color(char *file_string, int *index, t_element *element)
+static bool	modify_brightness_with_color(char *file_string, int *index, \
+	t_element *element)
 {
 	t_color	modif;
 

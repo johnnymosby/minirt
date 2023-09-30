@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_double.c                                    :+:      :+:    :+:   */
+/*   parser__double.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 14:31:05 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/22 22:06:05 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/30 20:09:24 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static int	set_absolut_result(char *file_string, int *index, double *result)
 {
-    double	fraction;
-    bool	is_decimal;
-	
+	double	fraction;
+	bool	is_decimal;
+
 	fraction = 0.1;
 	is_decimal = false;
 	if (!ft_isdigit(file_string[*index]))
@@ -29,32 +29,30 @@ static int	set_absolut_result(char *file_string, int *index, double *result)
 		{
 			*result = *result + (file_string[*index] - '0') * fraction;
 			fraction *= 0.1;
-		} 
+		}
 		else if (file_string[*index] == '.' && is_decimal == false)
 			is_decimal = true;
 		else if (file_string[*index] == '.')
 			return (false);
 		(*index)++;
-    }
+	}
 	return (true);
 }
 
-
-bool parse_double(char *file_string, int *index, double *result)
+bool	parse_double(char *file_string, int *index, double *result)
 {
-    bool	is_negative;
-    
+	bool	is_negative;
+
 	*result = 0;
 	is_negative = false;
-    if (file_string[*index] == '-')
+	if (file_string[*index] == '-')
 	{
-        is_negative = true;
-        (*index)++;
-    }
+		is_negative = true;
+		(*index)++;
+	}
 	if (set_absolut_result(file_string, index, result) == false)
 		return (false);
-    if (is_negative)
-        *result = *result * -1;
-    return (true);
+	if (is_negative)
+		*result = *result * -1;
+	return (true);
 }
-

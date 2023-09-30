@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/29 22:32:36 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/30 19:55:15 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,11 @@ static bool	set_one_element(char *file_string, int *index, t_element *element)
 		return (NULL);
 }
 
-
 static int	count_elements(char *file_string)
 {
 	int	nb_elements;
 	int	i;
-		
+
 	nb_elements = 0;
 	i = 0;
 	while (file_string[i] == '\n')
@@ -39,7 +38,7 @@ static int	count_elements(char *file_string)
 		if (file_string[i] == '\n')
 		{
 			nb_elements++;
-			while(file_string[i] == '\n')
+			while (file_string[i] == '\n')
 				i++;
 		}
 		else
@@ -59,18 +58,18 @@ t_element	*get_elements(char *file_string, int *nb_elmts)
 	t_element	*elements;
 	int			index;
 	int			i;
-	
+
 	index = 0;
 	*nb_elmts = count_elements(file_string);
 	if (*nb_elmts < 3)
 		return (NULL);
 	elements = ft_calloc(*nb_elmts, sizeof(t_element));
 	if (elements == NULL)
-		return (NULL);		
+		return (NULL);
 	i = 0;
 	while (i < *nb_elmts)
 	{
-		if (set_one_element(file_string, &index, elements +i) == false)
+		if (set_one_element(file_string, &index, elements + i) == false)
 		{
 			free(elements);
 			return (NULL);

@@ -6,12 +6,11 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:29:33 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/25 18:47:52 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/30 19:51:48 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
 
 static char	*read_file(int fd)
 {
@@ -21,7 +20,7 @@ static char	*read_file(int fd)
 	ssize_t	r;
 
 	ft_bzero(buf, BUFFER_SIZE);
-	file_string = ft_calloc(1,1);
+	file_string = ft_calloc(1, 1);
 	if (file_string == NULL)
 		return (NULL);
 	r = BUFFER_SIZE -1;
@@ -42,11 +41,11 @@ static char	*read_file(int fd)
 	return (file_string);
 }
 
-char *put_file_into_string(char *filename)
+char	*put_file_into_string(char *filename)
 {
 	char	*str;
 	int		fd;
-	
+
 	fd = open_file(filename);
 	if (fd < 0)
 		return (NULL);

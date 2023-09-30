@@ -13,8 +13,9 @@ MAIN	=	main.c
 
 PARSER	=	pre_open_file.c pre_put_file_into_string.c pre_get_elements_from_string.c \
 			parser.c \
-			parser_lightning.c parser_light.c parser_objects.c\
-			parser__color.c parser__double.c parser__point.c
+			parser_camera.c parser_lightning.c parser_light.c parser_objects.c\
+			parser__color.c parser__double.c parser__point.c\
+			put_elements_into_camera.c put_elements_into_lightning.c put_elements_into_shapes.c
 PARSER	:=	$(addprefix parser/, $(PARSER))
 
 TUPLES	=	create_tuple.c logical_operations.c arithmetic_operations.c \
