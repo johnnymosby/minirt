@@ -1,7 +1,7 @@
 NAME		=	tests
 
 TESTS		=	parser.c tuples.c colors.c canvas.c matrices.c transformations.c \
-				rays.c spheres.c reflection.c scene.c
+				rays.c spheres.c reflection.c world.c camera.c
 
 SRC_DIR		=	../src
 OBJ_DIR		=	../obj
