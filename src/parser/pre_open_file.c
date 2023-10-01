@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*   pre_open_file.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 12:47:17 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/22 15:34:51 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/09/30 19:52:33 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 int	open_file(char *filename)
 {
 	int	fd;
-	
+
 	if (filename == NULL || ft_strlen(filename) < 4)
 		return (ERR_FILE);
 	if (ft_strncmp(filename + ft_strlen(filename) -3, ".rt", 4))
