@@ -72,7 +72,8 @@ all: $(LIBFT) $(OBJ) $(MLX)
 	make colors
 	make canvas
 	make matrices
-	make scene
+	make world
+	make camera
 
 parser: $(LIBFT) $(OBJ) $(MLX) parser.c
 	@$(call compile, "$^")
@@ -102,7 +103,10 @@ spheres: $(LIBFT) $(OBJ) $(MLX) spheres.c
 reflection: $(LIBFT) $(OBJ) $(MLX) reflection.c
 	@$(call compile, "$^")
 
-scene: $(LIBFT) $(OBJ) $(MLX) scene.c
+world: $(LIBFT) $(OBJ) $(MLX) world.c
+	@$(call compile, "$^")
+
+camera: $(LIBFT) $(OBJ) $(MLX) camera.c
 	@$(call compile, "$^")
 
 clean:
