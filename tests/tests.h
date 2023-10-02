@@ -11,5 +11,6 @@
 # include "shapes.h"
 # include "light.h"
 # include "world.h"
-
+# include "camera.h"
+# include "computations.h"
 #endif

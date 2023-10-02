@@ -1,7 +1,7 @@
 NAME		=	tests
 
 TESTS		=	parser.c tuples.c colors.c canvas.c matrices.c transformations.c \
-				rays.c spheres.c reflection.c world.c camera.c
+				rays.c spheres.c reflection.c world.c camera.c computations.c
 
 SRC_DIR		=	../src
 OBJ_DIR		=	../obj
@@ -74,6 +74,7 @@ all: $(LIBFT) $(OBJ) $(MLX)
 	make matrices
 	make world
 	make camera
+	make computations
 
 parser: $(LIBFT) $(OBJ) $(MLX) parser.c
 	@$(call compile, "$^")
@@ -107,6 +108,9 @@ world: $(LIBFT) $(OBJ) $(MLX) world.c
 	@$(call compile, "$^")
 
 camera: $(LIBFT) $(OBJ) $(MLX) camera.c
+	@$(call compile, "$^")
+
+computations: $(LIBFT) $(OBJ) $(MLX) computations.c
 	@$(call compile, "$^")
 
 clean:
