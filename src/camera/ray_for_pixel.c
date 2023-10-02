@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   camera.h                                           :+:      :+:    :+:   */
+/*   ray_for_pixel.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/26 16:19:52 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/02 14:37:45 by aguilmea         ###   ########.fr       */
+/*   Created: 2023/10/02 13:09:29 by aguilmea          #+#    #+#             */
+/*   Updated: 2023/10/02 15:23:13 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CAMERA_H
-# define CAMERA_H
+#include "camera.h"
+/*
+t_ray ray_for_pixel(t_camera *camera, int x, int y) 
+{
+    t_ray   ray;
+    double  xoffset;
+    double  yoffset;
+    double  world_x;
+    double  world_y;
 
-#include "matrices.h"
-#include "rays.h"
-
-typedef struct s_camera {
-	int			hsize;
-	int			vsize;
-	double		field_of_view;
-	double		half_width;
-	double		half_height;
-	double		pixel_size;
-	t_matrix	transform;
-} t_camera;
-
-t_camera	camera(int hsize, int vsize, double field_of_view);
-
-#endif
+    xoffset = (x + 0.5) * camera->pixel_size;
+    yoffset = (y + 0.5) * camera->pixel_size;
+    
+    ray.origin = point(0, 0, 0);    
+    ray.direction = vector()
+    (void)camera;
+    (void)x;
+    (void)y;
+}*/
