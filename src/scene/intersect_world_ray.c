@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_world_ray.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 17:52:37 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/29 15:44:38 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/02 17:22:55 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_hit	**intersect_world(t_world *w, t_ray *ray)
 	i = 0;
 	while (i < w->nb_shapes)
 	{
-		(w->shape + i)->intersect(w->shape + i, ray, &w->xs + i);
+		intersect(w->shape + i, ray, &w->xs);
 		i++;
 	}
 	return (&w->xs);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 12:41:44 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/01 10:53:40 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/02 17:24:57 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ Test(scene, the_default_world)
 	
 	sp2 = create_sphere();
 	set_material_to_default(&sp2.material);
-	sp1.material.color = color(0.8, 1.0, 0.6);
-	sp1.material.diffuse = 0.7;
-	sp1.material.specular = 0.2;
+	t_matrix	m;
+	m = scaling(0.5, 0.5, 0.5);
+	set_transform(&sp2, &m);
 
 	t_color c = color(1,1,1);
 	t_tuple p = point(-10, 10, -10);
@@ -58,25 +58,15 @@ Test(scene, intersect_world_with_a_ray)
 	t_ray		r;
 	t_tuple		p = point(0, 0, -5);
 	t_tuple		v = vector(0, 0, 1);
-	t_hit		**xs;
 
 	w = default_world();
 	r = ray(&p, &v);
 	w.xs = NULL;
-	xs = intersect_world(&w, &r);
-	w.xs = *xs;
-	//cr_assert(xs[0][0].t == 4.0);
-	//printf("%d\n", count_intersections(xs[0], false));
-	printf("%f\n", w.xs[0].t);
-	printf("%f\n", w.xs[1].t);
-	printf("%f\n", w.xs[2].t);
-	printf("%f\n", w.xs[3].t);
-	printf("%f\n", w.xs[4].t);
-	cr_assert(false);
-//	printf("%f\n", xs[0][0].left->t);
-//	cr_assert(xs[0][1].t == 4.5);
-//	printf("%f\n", xs[0][2].t);
-//	cr_assert(xs[0][2].t == 5.5);
-//	printf("%f\n", xs[0][3].t);
-//	cr_assert(xs[0][3].t == 6.0);
+	intersect_world(&w, &r);
+
+	cr_assert(count_intersections(w.xs, true) == 4);
+	cr_assert(are_equal_doubles(w.xs->t, 4.0));
+	cr_assert(are_equal_doubles(w.xs->left->t, 4.5));
+	cr_assert(are_equal_doubles(w.xs->left->left->t, 5.5));
+	cr_assert(are_equal_doubles(w.xs->left->left->left->t, 6));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   spheres.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:55:05 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/28 14:23:26 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/02 17:20:35 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,10 @@ void	intersect_sphere(t_shape *shape, t_ray *r, t_hit **hits)
 		t[1] = (-d_calc.b + d_squared) / (2 * d_calc.a);
 		intrs[0] = intersection(t[0], shape);
 		intrs[1] = intersection(t[1], shape);
-		intrs[0]->right = intrs[1];
+		intrs[0]->left = intrs[1];
 		intrs[1]->prev = intrs[0];
 		add_intersection(hits, intrs[0]);
+		add_intersection(hits, intrs[1]);
 	}
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:43:54 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/29 09:08:11 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/02 16:51:15 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ static void	render_sphere(t_world *w, t_canvas *c)
 	
 	wall_z = 1000;
 	origin = point(0, 0, -5);
-
+	t_matrix trans = scaling(1, 0.5, 1);
+	set_transform(w->shape, &trans);
 	y = 0;
 	while (y < WIN_HEIGHT)
 	{

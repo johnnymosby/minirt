@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 15:09:40 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/23 14:40:51 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/02 16:57:20 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ Test(spheres, intersect_at_two_points)
 	r = ray(&p, &v);
 	intersect(&sph, &r, &xs);
 	cr_assert(are_equal_doubles(xs->t, 4.0));
-	cr_assert(are_equal_doubles(xs->right->t, 6.0));
+	cr_assert(are_equal_doubles(xs->left->t, 6.0));
 }
 
 Test(spheres, intersect_at_tangent)
@@ -39,7 +39,7 @@ Test(spheres, intersect_at_tangent)
 	r = ray(&p, &v);
 	intersect(&sph, &r, &xs);
 	cr_assert(are_equal_doubles(xs->t, 5.0));
-	cr_assert(are_equal_doubles(xs->right->t, 5.0));
+	cr_assert(are_equal_doubles(xs->left->t, 5.0));
 }
 
 Test(spheres, no_intersect)
@@ -68,9 +68,9 @@ Test(spheres, ray_originates_inside_sphere)
 	r = ray(&p, &v);
 	intersect(&sph, &r, &xs);
 
-	cr_assert(count_intersections(xs, false) == 2);
+	cr_assert(count_intersections(xs, true) == 2);
 	cr_assert(are_equal_doubles(xs->t, -1));
-	cr_assert(are_equal_doubles(xs->right->t, 1));
+	cr_assert(are_equal_doubles(xs->left->t, 1));
 }
 
 Test(spheres, ray_is_behind_sphere)
@@ -85,9 +85,9 @@ Test(spheres, ray_is_behind_sphere)
 	r = ray(&p, &v);
 	intersect(&sph, &r, &xs);
 
-	cr_assert(count_intersections(xs, false) == 2);
+	cr_assert(count_intersections(xs, true) == 2);
 	cr_assert(are_equal_doubles(xs->t, -6));
-	cr_assert(are_equal_doubles(xs->right->t, -4));
+	cr_assert(are_equal_doubles(xs->left->t, -4));
 }
 
 Test(spheres, intersection_encapsulates_t_and_object)
@@ -141,7 +141,7 @@ Test(spheres, hit_when_all_intersections_have_positive_t)
 	t_hit *i2 = intersection(2, &sph);
 
 	xs = NULL;
-	i1->right = i2;
+	i1->left = i2;
 	add_intersection(&xs, i1);
 
 	t_hit *i = hit(xs, false);
@@ -269,9 +269,9 @@ Test(spheres, intersecting_a_scaled_sphere_with_a_ray)
 	xs = NULL;
 	intersect(&s, &r, &xs);
 
-	cr_assert(count_intersections(xs, false) == 2);
+	cr_assert(count_intersections(xs, true) == 2);
 	cr_assert(are_equal_doubles(xs->t, 3));
-	cr_assert(are_equal_doubles(xs->right->t, 7));
+	cr_assert(are_equal_doubles(xs->left->t, 7));
 }
 
 Test(spheres, intersecting_a_translated_sphere_with_a_ray)
@@ -288,7 +288,7 @@ Test(spheres, intersecting_a_translated_sphere_with_a_ray)
 	xs = NULL;
 	intersect(&s, &r, &xs);
 
-	cr_assert(count_intersections(xs, false) == 0);
+	cr_assert(count_intersections(xs, true) == 0);
 }
 
 Test(spheres_normal, the_normal_on_a_sphere_at_a_point_on_the_x_axis)
@@ -375,3 +375,29 @@ Test(spheres_normal, computing_the_normal_on_a_transformed_sphere)
 
 	cr_assert(are_equal_tuples(&n, &v));
 }
+
+Test(spheres_intersection, intersecting_two_spheres)
+{
+	t_shape s = create_sphere();
+	t_shape s1 = create_sphere();
+	t_matrix m = scaling(0.5, 0.5, 0.5);
+	set_transform(&s1, &m);
+
+	t_hit		*xs;
+	xs = NULL;
+
+	t_tuple		p = point(0, 0, -5);
+	t_tuple		v = vector(0, 0, 1);
+
+	t_ray r = ray(&p, &v);
+
+	intersect(&s, &r, &xs);
+	intersect(&s1, &r, &xs);
+
+	cr_assert(are_equal_doubles(xs->t, 4.0));
+	cr_assert(are_equal_doubles(xs->left->t, 4.5));
+	cr_assert(are_equal_doubles(xs->left->left->t, 5.5));
+	cr_assert(are_equal_doubles(xs->left->left->left->t, 6));
+	cr_assert(xs->left->left->left->left == NULL);
+}
+
