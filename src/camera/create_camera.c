@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 11:35:55 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/02 11:53:07 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/02 12:49:52 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 void    set_size_values(t_camera *c)
 {
-    double  half_view;
+    float  half_view;
     double  aspect;
-
-    half_view = tan(c->field_of_view / 2);
-    aspect = c->hsize / c->vsize;
+    
+   half_view = tan(c->field_of_view / 2);
+    if (half_view == 0.0000)
+        half_view = 0.01;
+    aspect = (double)c->hsize / (double)c->vsize;
     if (aspect >= 1)
     {
         c->half_width = half_view;
