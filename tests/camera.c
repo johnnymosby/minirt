@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 10:53:19 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/01 19:40:51 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/02 11:53:51 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ Test(pixel_size, camera)
 {
 	t_camera	c;
 	
-//	c = camera(200, 125, M_PI_2);
-//	printf("1 - camera.pixel_size %f\n", c.pixel_size);
-//	cr_assert(c.pixel_size == 0.01);
+	c = camera(200, 125, M_PI_2);
+	printf("1 - camera.pixel_size %f\n", c.pixel_size);
+	cr_assert(c.pixel_size == 0.01);
 
 	c = camera(125, 200, M_PI_2);
 	printf("2 - camera.pixel_size %f\n", c.pixel_size);
