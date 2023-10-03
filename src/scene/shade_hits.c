@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 18:14:35 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/03 19:16:08 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/03 19:34:02 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_color shade_hit(t_world *world, t_comp *comps)
     l.point = &comps->point;
     l.eyev = &comps->eyev;
     l.normalv = &comps->normalv;
-//    printf("%f %f %f\n", lightning(&l).red, lightning(&l).green, lightning(&l).blue);
     return (lightning(&l));
 }
 
