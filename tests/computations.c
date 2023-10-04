@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:43:44 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/04 11:54:14 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/04 12:23:20 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ Test(the_color_when_ray_misses ,precomputation)
     col = color_at(&w, &r);
     col_check = color(0.0, 0.0, 0.0);
     cr_assert(are_equal_colors(&col, &col_check));
-    
 }
 /*
 Test(the_color_when_ray_hits ,precomputation)
