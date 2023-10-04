@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:43:44 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/03 19:33:22 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/04 11:54:14 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ Test(shading_an_intersection ,precomputation)
     col_check = color(0.380661, 0.475826, 0.285496);
    cr_assert(are_equal_colors(&col, &col_check));
     
-}/*
+}
 Test(the_color_when_ray_misses ,precomputation)
 {
 	t_world     w;
@@ -105,7 +105,7 @@ Test(the_color_when_ray_misses ,precomputation)
     cr_assert(are_equal_colors(&col, &col_check));
     
 }
-
+/*
 Test(the_color_when_ray_hits ,precomputation)
 {
 	t_world     w;
@@ -122,4 +122,21 @@ Test(the_color_when_ray_hits ,precomputation)
     col = color_at(&w, &r);
     col_check = color(0.38066, 0.47583, 0.2855);
     cr_assert(are_equal_colors(&col, &col_check));
+}
+Test(the_color_intersection_behind_ray ,precomputation)
+{
+	t_world     w;
+    t_tuple     p;
+    t_tuple     v;
+    t_ray       r;
+    t_color     col;
+
+    w = default_world();
+    w.shape[0].material.ambient = 1; // outer
+    w.shape[1].material.ambient = 1; // inner
+    p = point(0, 0, -5);
+    v = vector(0, 0,1);
+    r = ray(&p, &v);
+    col = color_at(&w, &r);
+    cr_assert(are_equal_colors(&col, &w.shape[0].material.color));
 }*/
