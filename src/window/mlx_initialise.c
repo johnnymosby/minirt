@@ -6,14 +6,14 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 18:13:02 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/23 18:28:42 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/05 14:03:57 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "window.h"
 
 bool	initialise_mlx(t_win *win)
-{	
+{
 	*win = window();
 	if (win->mlx_ptr == NULL)
 		return (false);

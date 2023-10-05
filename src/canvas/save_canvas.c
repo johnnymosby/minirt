@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 09:04:54 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/19 21:40:29 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/05 14:05:42 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,20 @@ inline static void	correct_values(int i, int *img, t_canvas *const canvas)
 		((char *)img)[i] = 0;
 }
 
-void	canvas_to_mlx_image(t_canvas *const canvas, int *img) // name of the function in the book: canvas_to_ppm
+void	canvas_to_mlx_image(t_canvas *const canvas, int *img)
+// name of the function in the book: canvas_to_ppm
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (i < canvas->width * canvas->height)
 	{
 		img[i] = 0;
-		if ((int)canvas->pixels[i].red >= 0 && canvas->pixels[i].red <= 1) 
+		if ((int)canvas->pixels[i].red >= 0 && canvas->pixels[i].red <= 1)
 			img[i] += (int)(canvas->pixels[i].red * 255) << 16;
-		if ((int)canvas->pixels[i].green >= 0 && canvas->pixels[i].green <= 1) 
+		if ((int)canvas->pixels[i].green >= 0 && canvas->pixels[i].green <= 1)
 			img[i] += (int)(canvas->pixels[i].green * 255) << 8;
-		if ((int)canvas->pixels[i].blue >= 0 && canvas->pixels[i].blue <= 1) 
+		if ((int)canvas->pixels[i].blue >= 0 && canvas->pixels[i].blue <= 1)
 			img[i] += (int)(canvas->pixels[i].blue * 255);
 		correct_values(i, img, canvas);
 		i++;

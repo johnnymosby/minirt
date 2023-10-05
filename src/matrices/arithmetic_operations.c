@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 14:52:22 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/19 21:41:39 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/05 14:09:52 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_matrix	multiply_matrices(t_matrix *a, t_matrix *b)
 		col = 0;
 		while (col < a->side_size)
 		{
-			row_a = (t_tuple){a->table[row][0], a->table[row][1], 
+			row_a = (t_tuple){a->table[row][0], a->table[row][1],
 				a->table[row][2], a->table[row][3]};
 			col_b = (t_tuple){b->table[0][col], b->table[1][col],
 				b->table[2][col], b->table[3][col]};
