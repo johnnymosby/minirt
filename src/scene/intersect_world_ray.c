@@ -6,17 +6,16 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 17:52:37 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/04 11:55:46 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/05 13:36:26 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "world.h"
 
-//t_hit	**intersect_world(t_world *w, t_ray *ray)
 void	intersect_world(t_world *w, t_ray *ray)
 {
 	int		i;
-	
+
 	i = 0;
 	while (i < w->nb_shapes)
 	{
