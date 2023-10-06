@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 16:09:02 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/04 10:55:53 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/06 15:07:44 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@
 typedef struct s_world
 {
 	t_hit		*xs;
-	t_lightning lightning;
+	t_light		*lights;
+	t_lightning	lightning;
 	t_shape		*shape;
+	int			nb_lights;
 	int			nb_shapes;
 }	t_world;
 

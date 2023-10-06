@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shade_hits.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 18:14:35 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/05 13:50:38 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/06 14:42:02 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_color	shade_hit(t_world *world, t_comp *comps)
 
 	ft_bzero(&l, sizeof(t_lightning));
 	l.material = &comps->object.material;
-	l.light = world->lightning.light;
+	l.light = world->lights;
 	l.point = &comps->point;
 	l.eyev = &comps->eyev;
 	l.normalv = &comps->normalv;
