@@ -41,7 +41,7 @@ RAYS	:=	$(addprefix rays/, $(RAYS))
 SHAPES	=	utils.c spheres.c intersection.c reflection.c material.c
 SHAPES	:=	$(addprefix shapes/, $(SHAPES))
 
-SCENE	=	create_world.c intersect_world_ray.c
+SCENE	=	create_world.c intersect_world_ray.c view_transform.c
 SCENE	:=	$(addprefix scene/, $(SCENE))
 
 SOURCE	=	$(MAIN) $(PARSER) $(TUPLES) $(COLORS) $(CANVAS) $(WINDOW) $(MATRICES) $(RAYS) $(SHAPES) $(SCENE)

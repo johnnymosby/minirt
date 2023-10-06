@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 16:19:52 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/02 14:37:45 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/06 18:12:00 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ typedef struct s_camera {
 	double		half_height;
 	double		pixel_size;
 	t_matrix	transform;
-} t_camera;
+	t_matrix	inverse;
+}	t_camera;
 
 t_camera	camera(int hsize, int vsize, double field_of_view);
+t_ray		ray_for_pixel(t_camera *camera, int px, int py);
 
 #endif

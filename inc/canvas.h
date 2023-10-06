@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   canvas.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 23:48:26 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/18 21:10:03 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/06 17:33:20 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "colors.h"
 # include "tuples.h"
+# include "matrices.h"
 
 typedef struct s_canvas {
 	int		width;
