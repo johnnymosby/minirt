@@ -28,10 +28,13 @@ ifeq ($(UNAME), Linux)
 		INC_DIRS	= 	-I../inc/ -I../lib/libft/inc/ -I$(MLX_DIR)
 endif
 
-ifeq ($(CRITERION_EXISTS), yes)
+ifeq ($(UNAME), Darwin)
+		CRITERION_FLAGS := -lcriterion -I/Users/johnnymosby/.brew/Cellar/criterion/2.4.1_3/include/ \
+				-L/Users/johnnymosby/.brew/Cellar/criterion/2.4.1_3/lib/
+else ifeq ($(CRITERION_EXISTS), yes)
 		CRITERION_FLAGS:= $(shell pkg-config --cflags-only-I criterion | sed 's/-I//')
 else
-		CRITERION_FLAGS := -lcriterion  -L../lib/criterion/lib/
+		CRITERION_FLAGS := -lcriterion  -L../lib/criterion/lib/ -I$(realpath ../lib/criterion/include)
 		CRITERION_DIRS := -I..lib/criterion/include/
 		export LD_LIBRARY_PATH := $(LD_LIBRARY_PATH):$(realpath ../lib/criterion/lib)
 endif
@@ -61,7 +64,7 @@ $(TESTS): $(OBJ) $(LIBFT) $(MLX)
 	@$(call compile, "$^")
 
 define compile
- 	$(CC) $(CFLAGS) $^ $(LIBFT) $(INC_DIRS) $(MLX_FLAGS) -L../lib/criterion/lib/ -lcriterion -I$(realpath ../lib/criterion/include) -o $(basename $@ .c) && ./$(basename $@ .c) --verbose
+ 	$(CC) $(CFLAGS) $^ $(LIBFT) $(INC_DIRS) $(MLX_FLAGS) $(CRITERION_FLAGS) -o $(basename $@ .c) && ./$(basename $@ .c) --verbose
 endef
 
 # -------------------------------- TESTS ------------------------------------- #

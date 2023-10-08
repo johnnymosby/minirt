@@ -41,10 +41,14 @@ RAYS	:=	$(addprefix rays/, $(RAYS))
 SHAPES	=	utils.c spheres.c intersection.c reflection.c material.c
 SHAPES	:=	$(addprefix shapes/, $(SHAPES))
 
-SCENE	=	create_world.c intersect_world_ray.c view_transform.c
+SCENE	=	create_world.c intersect_world_ray.c view_transform.c shade_hits.c prepare_computation.c
 SCENE	:=	$(addprefix scene/, $(SCENE))
 
-SOURCE	=	$(MAIN) $(PARSER) $(TUPLES) $(COLORS) $(CANVAS) $(WINDOW) $(MATRICES) $(RAYS) $(SHAPES) $(SCENE)
+CAMERA	=	create_camera.c ray_for_pixel.c render.c
+CAMERA	:=	$(addprefix camera/, $(CAMERA))
+
+SOURCE	=	$(MAIN) $(PARSER) $(TUPLES) $(COLORS) $(CANVAS) $(WINDOW) $(MATRICES) \
+			$(RAYS) $(SHAPES) $(SCENE) $(CAMERA)
 
 SRC_DIR	=	src/
 SRC		=	$(addprefix $(SRC_DIR), $(SOURCE))
@@ -53,7 +57,7 @@ OBJ_DIR	=	obj/
 OBJ		=	$(addprefix $(OBJ_DIR), $(SOURCE:.c=.o))
 
 ifeq ($(UNAME), Darwin)
-		MLX_DIR		=	../lib/mlx_osx/
+		MLX_DIR		=	./lib/mlx_osx/
 		MLX_FLAGS	=	-L $(MLX_DIR) -l mlx -framework OpenGl -framework Appkit
 		INC_DIRS	=	-I./inc -I./lib/libft/inc/ -I$(MLX_DIR)
 endif

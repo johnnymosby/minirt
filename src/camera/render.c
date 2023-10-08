@@ -1,23 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pixels.c                                           :+:      :+:    :+:   */
+/*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/08 00:01:33 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/08 21:02:13 by rbasyrov         ###   ########.fr       */
+/*   Created: 2023/10/08 19:50:03 by rbasyrov          #+#    #+#             */
+/*   Updated: 2023/10/08 21:04:36 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "canvas.h"
+#include "camera.h"
 
-void	write_pixel(t_canvas *canvas, int x, int y, t_color color)
+t_canvas	*render(t_camera *c, t_world *w)
 {
-	canvas->pixels[x + y * canvas->width] = color;
-}
+	t_canvas	*image;
+	int			x;
+	int			y;
+	t_ray		r;
+	t_color		color;
 
-t_color	pixel_at(t_canvas *canvas, int x, int y)
-{
-	return (canvas->pixels[x + y * canvas->width]);
+	image = canvas(c->hsize, c->vsize);
+	if (image == NULL)
+		return (NULL);
+	y = 0;
+	while (y < c->vsize)
+	{
+		x = 0;
+		while (x < c->hsize)
+		{
+			r = ray_for_pixel(c, x, y);
+			color = color_at(w, &r);
+			write_pixel(image, x, y, color);
+			x++;
+		}
+		y++;
+	}
+	return (image);
 }
