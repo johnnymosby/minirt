@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 12:38:27 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/08 21:36:03 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/08 22:50:49 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@
 # include "mlx_keys.h"
 # include "stdio.h"
 
-# define WIN_HEIGHT 1024
-# define MENU_WIDTH 256
-# define PCT_WIDTH 768
+# define WIN_HEIGHT 100
+# define MENU_WIDTH 100
+# define PCT_WIDTH 200
 
 typedef struct s_image
 {

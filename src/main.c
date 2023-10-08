@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:43:54 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/08 22:03:40 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/08 22:56:30 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,14 @@ static void	parse_scene2(t_world *w)
 	w->shape[5].material.color = color(1, 0.8, 0.1);
 	w->shape[5].material.diffuse = 0.7;
 	w->shape[5].material.specular = 0.3;
+	w->lights = ft_calloc(1, sizeof(t_light));
+	w->nb_lights = 1;
+	t_tuple	light_position;
+	t_color	light_color;
+
+	light_position = point(-10, 10, -10);
+	light_color = color(1, 1, 1);
+	w->lights[0] = point_light(&light_color, &light_position);
 }
 
 // static void	render_sphere(t_world *w, t_canvas *c)
