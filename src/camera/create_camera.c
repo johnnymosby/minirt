@@ -3,23 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   create_camera.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 11:35:55 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/05 13:29:37 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/08 19:46:38 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "camera.h"
 
-void	set_size_values(t_camera *c)
+static void	set_size_values(t_camera *c)
 {
-	float	half_view;
+	double	half_view;
 	double	aspect;
 
-	half_view = tan(c->field_of_view / 2);
-	if (half_view == 0.0000)
-		half_view = 0.01;
+	half_view = tanf(c->field_of_view / 2);
 	aspect = (double)c->hsize / (double)c->vsize;
 	if (aspect >= 1)
 	{
@@ -34,6 +32,12 @@ void	set_size_values(t_camera *c)
 	c->pixel_size = (c->half_width * 2 / c->hsize);
 }
 
+void	set_transform_in_camera(t_camera *shape, t_matrix *m)
+{
+	shape->transform = *m;
+	shape->inverse = inverse(m);
+}
+
 t_camera	camera(int hsize, int vsize, double field_of_view)
 {
 	t_camera	c;
@@ -42,6 +46,7 @@ t_camera	camera(int hsize, int vsize, double field_of_view)
 	c.vsize = vsize;
 	c.field_of_view = field_of_view;
 	c.transform = identity_matrix();
+	c.inverse = inverse(&c.transform);
 	set_size_values(&c);
 	return (c);
 }

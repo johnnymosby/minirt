@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/06 11:06:21 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/09 14:21:30 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ static bool	check_nb_elements(t_element *elmts, int nb_elmts, t_world *w)
 	if (nb_a != 1 || nb_c != 1 || nb_l != 1)
 		return (false);
 	w->nb_shapes = nb_elmts - 3;
-	w->lightning.light = ft_calloc(1, sizeof(t_light));
-	if (w->lightning.light == NULL)
+	w->lights = ft_calloc(1, sizeof(t_light));
+	if (w->lights == NULL)
 		return (false);
 	return (true);
 	//		[BONUS]

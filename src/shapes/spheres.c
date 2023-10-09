@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   spheres.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:55:05 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/02 17:20:35 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/08 21:42:51 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ t_shape	create_sphere(void)
 	t_tuple	null_point;
 
 	set_shape_to_default(&shape);
+	set_material_to_default(&shape.material);
 	null_point = point(0, 0, 0);
 	shape.sphere.origin = null_point;
 	shape.sphere.null_point = null_point;
