@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:43:54 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/10 11:03:24 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/10 12:10:00 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,30 +207,26 @@ static double	to_world_coordinate(t_camera *camera, double coordinate,
 static void	render_sphere(t_world *w, t_canvas *c)
 {
 	t_ray	r;
-	t_tuple	origin;
 	int		y;
 	int		x;
-	double	world_y;
-	double	world_x;
-	t_tuple	positioned;
-	t_tuple pos_minus_origin;
-	t_tuple	normalized;
 	t_hit	*h;
-	double	wall_z = 10;
-	origin = point(0, 0, -5);
 
 	y = 0;
-	t_camera	cam = camera(WIN_HEIGHT, PCT_WIDTH, 2 / 2.5 * M_PI);
+	t_camera	cam = camera(WIN_HEIGHT, PCT_WIDTH, M_PI * 2 / 2.5);//
+	// t_matrix	m_translated = translation(0, 0, -5);
+	// set_transform_in_camera(&cam, &m_translated);
 	while (y < WIN_HEIGHT)
 	{
 		x = 0;
 		while (x < PCT_WIDTH)
 		{
-			world_x = to_world_coordinate(&cam, x, true);
-			world_y = to_world_coordinate(&cam, y, false);
-			positioned = point(world_x, world_y, wall_z);
-			pos_minus_origin = substract_tuples(&positioned, &origin);
-			normalized = normalize(&pos_minus_origin);
+			double	wall_z = 10;
+			double	world_x = to_world_coordinate(&cam, x, true);
+			double	world_y = to_world_coordinate(&cam, y, false);
+			t_tuple	origin = point(0, 0, -5);
+			t_tuple	positioned = point(world_x, world_y, wall_z);
+			t_tuple pos_minus_origin = substract_tuples(&positioned, &origin);
+			t_tuple	normalized = normalize(&pos_minus_origin);
 			r = ray(&origin, &normalized);
 			// r = ray_for_pixel(&cam, x, y);
 			w->xs = NULL;
