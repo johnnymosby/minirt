@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_elements_into_shapes.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 13:35:23 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/30 20:09:47 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/10 10:15:46 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	put_shape_into_sphere(t_element *element, int index, t_world *w)
 	w->shape[index] = create_sphere();
 	w->shape[index].sphere.origin = element->coordinates;
 	w->shape[index].sphere.radius = element->radius;
+	w->shape[index].material.color = element->color;
 }
 
 static void	put_shape_into_cylinder(t_element *element, int index, t_world *w)

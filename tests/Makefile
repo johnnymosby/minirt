@@ -79,7 +79,7 @@ all: $(LIBFT) $(OBJ) $(MLX)
 	make camera
 	make computations
 
-parser: $(LIBFT) $(OBJ) $(MLX) parser_elements.c parser_files.c parser_shapes.c
+parser: $(LIBFT) $(OBJ) $(MLX) parser_elements.c parser_full_files.c parser_open_files.c parser_shapes.c
 	@$(call compile, "$^")
 
 tuples: $(LIBFT) $(OBJ) $(MLX) tuples.c

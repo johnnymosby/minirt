@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 19:27:48 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/06 16:12:42 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/10 13:58:14 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static bool	modify_brightness_with_color(char *file_string, int *index, \
 bool	parse_light(char *file_string, int *index, t_element *element)
 {
 	element->element_type = ELMT_LIGHT;
-	(*index)+=2;
+	(*index) += 2;
 	while (file_string[*index] == ' ')
 		(*index)++;
 	if (parse_coordinates(file_string, index, element) == false)

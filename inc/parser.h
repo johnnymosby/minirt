@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:41:27 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/06 12:05:44 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/10 14:42:08 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,6 @@ void		put_elements_into_camera(t_element *element, t_camera *cam);
 void		put_elements_into_lightning(t_element *element, int index, t_world *w);
 void		put_elements_into_shapes(t_element *element, int index, t_world *w);
 void		*print_error_parsing(char *str);
+bool		parser(char *filename, t_world *w, t_camera *cam);
 
 #endif

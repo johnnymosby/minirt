@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pre_put_file_into_string.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:29:33 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/30 19:51:48 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/10 15:24:46 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,32 @@
 
 static char	*read_file(int fd)
 {
-	char	buf[BUFFER_SIZE];
+	char	buf[BUFFER_SIZE +1];
 	char	*tmp;
 	char	*file_string;
 	ssize_t	r;
 
-	ft_bzero(buf, BUFFER_SIZE);
+	ft_bzero(buf, BUFFER_SIZE +1);
 	file_string = ft_calloc(1, 1);
 	if (file_string == NULL)
 		return (NULL);
-	r = BUFFER_SIZE -1;
-	while (r == BUFFER_SIZE -1)
+	r = read(fd, buf, BUFFER_SIZE);
+	while (r == BUFFER_SIZE)
 	{
-		r = read(fd, buf, BUFFER_SIZE -1);
-		if (r < 0)
-		{
-			free (file_string);
-			return (NULL);
-		}
 		tmp = file_string;
 		file_string = ft_strjoin(file_string, buf);
 		free(tmp);
 		if (file_string == NULL)
 			return (NULL);
+		r = read(fd, buf, BUFFER_SIZE);
+	}
+	if (r < 0)
+		free (file_string);
+	else
+	{
+		tmp = file_string;
+		file_string = ft_strjoin(file_string, buf);
+		free(tmp);
 	}
 	return (file_string);
 }

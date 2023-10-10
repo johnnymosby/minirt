@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 09:48:43 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/06 16:09:42 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/10 13:58:45 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static bool	parse_lightning_ratio(char *file_string, int *index, \
 bool	parse_ambient(char *file_string, int *index, t_element *element)
 {
 	element->element_type = ELMT_AMBIENT;
-	(*index)+=2;
+	(*index) += 2;
 	while (file_string[*index] == ' ')
 		(*index)++;
 	if (parse_lightning_ratio(file_string, index, element) == false)

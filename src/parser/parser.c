@@ -6,15 +6,28 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/09 14:21:30 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/10 16:55:37 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
+static bool	allocate_shapes_and_lights(t_world *w)
+{
+	w->lights = ft_calloc(w->nb_lights, sizeof(t_light));
+	if (w->lights == NULL)
+		return (false);
+	w->shape = ft_calloc(w->nb_shapes, sizeof(t_shape));
+	if (w->shape == NULL)
+	{
+		free(w->lights);
+		return (false);
+	}
+	return (true);
+}
+
 static bool	check_nb_elements(t_element *elmts, int nb_elmts, t_world *w)
 {
-	//		[MANDATORY]
 	int		i;
 	int		nb_a;
 	int		nb_c;
@@ -37,12 +50,14 @@ static bool	check_nb_elements(t_element *elmts, int nb_elmts, t_world *w)
 	if (nb_a != 1 || nb_c != 1 || nb_l != 1)
 		return (false);
 	w->nb_shapes = nb_elmts - 3;
-	w->lights = ft_calloc(1, sizeof(t_light));
-	if (w->lights == NULL)
-		return (false);
+	w->nb_lights = 1;
 	return (true);
-	//		[BONUS]
-/*	int		i;
+}
+/*
+	[BONUS]
+static bool	check_nb_elements(t_element *elmts, int nb_elmts, t_world *w)
+{
+	int		i;
 	int		nb_a;
 	int		nb_c;
 	int		nb_l;
@@ -68,19 +83,19 @@ static bool	check_nb_elements(t_element *elmts, int nb_elmts, t_world *w)
 	if (lightning == NULL)
 		return (false);
 	// I need to write somewhere how many lights there are
-	return (true);*/
-}
+	return (true);
+}*/
 
 static void	put_elements_into_world_and_camera(t_element *elmts, \
 	int nb_elmts, t_world *w, t_camera *cam)
 {
 	int	i;
-	int	nb_lights;
-	int	nb_shapes;
+	int	index_lights;
+	int	index_shapes;
 
 	i = 0;
-	nb_lights = 0;
-	nb_shapes = 0;
+	index_lights = 0;
+	index_shapes = 0;
 	while (i < nb_elmts)
 	{
 		if (elmts[i].element_type == ELMT_CAMERA)
@@ -88,15 +103,9 @@ static void	put_elements_into_world_and_camera(t_element *elmts, \
 		if (elmts[i].element_type == ELMT_AMBIENT)
 			put_elements_into_lightning (elmts + i, 0, w);
 		if (elmts[i].element_type == ELMT_LIGHT)
-		{
-			put_elements_into_lightning (elmts + i, nb_lights, w);
-			nb_lights++;
-		}
+			put_elements_into_lightning (elmts + i, index_lights++, w);
 		else
-		{
-			put_elements_into_shapes (elmts + i, nb_shapes, w);
-			nb_shapes++;
-		}
+			put_elements_into_shapes (elmts + i, index_shapes++, w);
 		i++;
 	}
 }
@@ -107,6 +116,8 @@ bool	parser(char *filename, t_world *w, t_camera *cam)
 	t_element	*elmts;
 	int			nb_elmts;
 
+	ft_bzero(w, sizeof (t_world));
+	ft_bzero(cam, sizeof (t_world));
 	file_string = put_file_into_string(filename);
 	if (file_string == NULL)
 		return (false);
@@ -117,6 +128,11 @@ bool	parser(char *filename, t_world *w, t_camera *cam)
 	if (check_nb_elements(elmts, nb_elmts, w) == false)
 	{
 		free (elmts);
+		return (false);
+	}
+	if (allocate_shapes_and_lights(w) == false)
+	{	
+		free(elmts);
 		return (false);
 	}
 	put_elements_into_world_and_camera(elmts, nb_elmts, w, cam);

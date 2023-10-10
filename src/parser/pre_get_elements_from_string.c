@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/06 17:29:03 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/10 13:59:59 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	count_elements(char *file_string)
 		tmp++;
 	while (*tmp != '\0')
 	{
-		if (*tmp == '\n' && tmp != file_string 
+		if (*tmp == '\n' && tmp != file_string
 			&& *(tmp +1) != '\n' && *(tmp +1) != '\0')
 			nb_elements++;
 		tmp++;
@@ -71,7 +71,7 @@ t_element	*get_elements(char *file_string, int *nb_elmts)
 	i = 0;
 	while (i < *nb_elmts)
 	{
-		while(file_string[index] == '\n')
+		while (file_string[index] == '\n')
 			index++;
 		if (set_one_element(file_string, &index, elements + i) == false)
 		{
