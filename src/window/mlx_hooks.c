@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 17:55:59 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/09 23:45:08 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/10 16:29:12 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	close_button(t_win *win)
 		mlx_destroy_image(win->mlx_ptr, win->pct.img_ptr);
 	if (win->win_ptr)
 		mlx_destroy_window(win->mlx_ptr, win->win_ptr);
-	// mlx_loop_end(win->mlx_ptr);
+	mlx_loop_end(win->mlx_ptr);
 	return (0);
 }
 
@@ -43,8 +43,18 @@ static int	escape_key(int keysym, t_win *win)
 	return (0);
 }
 
+
+static int	key_hook(int keycode, t_win *win)
+{
+	if (keycode == KEY_ESC)
+		escape_key(keycode, win);
+	return (0);
+}
+
+
 void	catch_mlx_hooks(t_win *window)
 {
-	mlx_hook(window->win_ptr, 2, 1L << 0, &escape_key, window);
+	mlx_key_hook(window->win_ptr, key_hook, window);
+	/* mlx_hook(window->win_ptr, 2, 1L << 0, &escape_key, window); */
 	mlx_hook(window->win_ptr, 17, 1L << 17, &close_button, window);
 }
