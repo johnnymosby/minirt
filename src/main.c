@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:43:54 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/10 22:35:39 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/10 22:39:59 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 
 
-/* static t_matrix	set_transform_for_second_scene_wall(bool is_left_wall)
+static t_matrix	set_transform_for_second_scene_wall(bool is_left_wall)
 {
 	t_matrix	m_translated;
 	t_matrix	m_rotated_y;
@@ -122,10 +122,10 @@ static void	parse_scene2(t_world *w)
 	light_position = point(-10, 10, -10);
 	light_color = color(1, 1, 1);
 	w->lights[0] = point_light(&light_color, &light_position);
-} */
+}
 
 
-static void	parse_scene(t_world *w)
+/* static void	parse_scene(t_world *w)
 {
 	t_tuple	light_position;
 	t_color	light_color;
@@ -139,7 +139,7 @@ static void	parse_scene(t_world *w)
 	w->nb_lights = 1;
 	w->lights = ft_calloc(1, sizeof(t_light));
 	w->lights[0] = point_light(&light_color, &light_position);
-}
+} */
 
 static t_camera	set_camera(void)
 {
@@ -149,9 +149,9 @@ static t_camera	set_camera(void)
 	t_tuple		up;
 
 	cam = camera(PCT_WIDTH, WIN_HEIGHT, 2.2);
-	from = point(0, 2, 0);
-	to = point(0, -2, 0);
-	up = vector(0, 0, -1);
+	from = point(0, 1.5, -5);
+	to = point(0, 1, 0);
+	up = vector(0, 1, 0);
 	cam.transform = view_transform(&from, &to, &up);
 	cam.inverse = inverse(&cam.transform);
 	return (cam);
@@ -183,7 +183,7 @@ int	main(void)
 	t_scene		scene;
 
 	scene.zoom = 2.2;
-	parse_scene(&w);
+	parse_scene2(&w);
 	scene.camera = set_camera();
 	scene.world = &w;
 	if (render(&scene) == false)
