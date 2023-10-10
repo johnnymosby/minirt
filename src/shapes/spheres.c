@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   spheres.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:55:05 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/08 21:42:51 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/09 15:51:42 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static void	discriminant(t_sphere *sphere, t_ray *r, t_disc_calc *d_calc)
 {
 	t_tuple	sphere_to_ray;
+
 
 	sphere_to_ray = substract_tuples(&r->origin, &sphere->origin);
 	d_calc->a = dot(&r->direction, &r->direction);
@@ -51,7 +52,6 @@ t_shape	create_sphere(void)
 	t_tuple	null_point;
 
 	set_shape_to_default(&shape);
-	set_material_to_default(&shape.material);
 	null_point = point(0, 0, 0);
 	shape.sphere.origin = null_point;
 	shape.sphere.null_point = null_point;

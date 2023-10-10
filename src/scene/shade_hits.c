@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 18:14:35 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/06 15:33:52 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/09 14:28:38 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_color	color_at(t_world *w, t_ray *r)
 	h = hit(w->xs, true);
 	if (h == NULL)
 	{
-		col = color(0.0, 0.0, 0.0);
+		col = color(0, 0, 0);
 	}
 	else
 	{

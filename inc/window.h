@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 12:38:27 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/08 22:50:49 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/09 13:15:23 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define WINDOW_H
 
 # include "libft.h"
-# include <../lib/mlx_osx/mlx.h>
+# include <mlx.h>
 # include <stdbool.h> // bool
 # include <stddef.h>  // NULL
 # include <stdlib.h>  // exit
