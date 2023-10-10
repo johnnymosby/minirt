@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 12:21:49 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/09 15:51:29 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/10 21:33:19 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_hit	*intersection(double t, t_shape *shape)
 	static t_btree	tree;
 	t_hit			*hit;
 
-	hit = tree.root + tree.last++ % MAX_INTERSECTIONS;
+	hit = tree.root + (tree.last++ % MAX_INTERSECTIONS);
 	hit->left = NULL;
 	hit->right = NULL;
 	hit->obj = shape;

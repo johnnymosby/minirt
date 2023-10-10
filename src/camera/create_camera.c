@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   create_camera.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 11:35:55 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/10 17:09:45 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/10 21:25:10 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "camera.h"
 
-static void	set_size_values(t_camera *c)
+void	set_size_values(t_camera *c)
 {
 	double	half_view;
 	double	aspect;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 16:19:52 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/10 15:13:54 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/10 21:52:51 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_scene
 t_camera	camera(int hsize, int vsize, double field_of_view);
 t_ray		ray_for_pixel(t_camera *camera, int px, int py);
 void		set_transform_in_camera(t_camera *shape, t_matrix *m);
-t_canvas	*render(t_camera *c, t_world *w);
+bool		render(t_scene *scene);
+void		set_size_values(t_camera *c);
 
 #endif
