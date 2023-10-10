@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/10 16:55:37 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/10 20:00:38 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ static bool	check_nb_elements(t_element *elmts, int nb_elmts, t_world *w)
 	nb_l = 0;
 	while (i < nb_elmts)
 	{
-		if (elmts[i].element_type == ELMT_CAMERA)
-			nb_c++;
-		else if (elmts[i].element_type == ELMT_AMBIENT)
+		if (elmts[i].element_type == ELMT_AMBIENT)
 			nb_a++;
+		else if (elmts[i].element_type == ELMT_CAMERA)
+			nb_c++;
 		else if (elmts[i].element_type == ELMT_LIGHT)
 			nb_l++;
 		i++;
@@ -86,7 +86,7 @@ static bool	check_nb_elements(t_element *elmts, int nb_elmts, t_world *w)
 	return (true);
 }*/
 
-static void	put_elements_into_world_and_camera(t_element *elmts, \
+static bool	put_elements_into_world_and_camera(t_element *elmts, \
 	int nb_elmts, t_world *w, t_camera *cam)
 {
 	int	i;
@@ -100,14 +100,16 @@ static void	put_elements_into_world_and_camera(t_element *elmts, \
 	{
 		if (elmts[i].element_type == ELMT_CAMERA)
 			put_elements_into_camera (elmts + i, cam);
-		if (elmts[i].element_type == ELMT_AMBIENT)
-			put_elements_into_lightning (elmts + i, 0, w);
-		if (elmts[i].element_type == ELMT_LIGHT)
+		else if (elmts[i].element_type == ELMT_AMBIENT \
+			&& put_elements_into_lightning (elmts + i, 0, w) == false)
+			return (false);
+		else if (elmts[i].element_type == ELMT_LIGHT)
 			put_elements_into_lightning (elmts + i, index_lights++, w);
 		else
 			put_elements_into_shapes (elmts + i, index_shapes++, w);
 		i++;
 	}
+	return (true);
 }
 
 bool	parser(char *filename, t_world *w, t_camera *cam)

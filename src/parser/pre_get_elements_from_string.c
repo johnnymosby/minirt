@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/10 13:59:59 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/10 19:52:10 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static bool	set_one_element(char *file_string, int *index, t_element *element)
 	else if (!ft_strncmp(file_string + *index, "sp ", 3))
 		return (parse_sphere(file_string, index, element));
 	else if (!ft_strncmp(file_string + *index, "pl ", 3))
-		return (true);
+		return (parse_plane(file_string, index, element));
 	else if (!ft_strncmp(file_string + *index, "cy ", 3))
-		return (true);
+		return (parse_cylinder(file_string, index, element));
 	print_error_parsing("wrong identifier at the start of the line\n");
 	return (false);
 }
