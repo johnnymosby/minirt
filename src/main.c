@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:43:54 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/09 16:17:29 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/10 11:03:24 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,21 @@ static void	parse_scene(t_world *w)
 	set_transform_in_camera(&cam, &cam.transform);
 	return (cam);
 } */
+
+static double	to_world_coordinate(t_camera *camera, double coordinate,
+	bool is_x)
+{
+	double	offset;
+	double	result;
+
+	offset = (0.5 + coordinate) * camera->pixel_size;
+	if (is_x == true)
+		result = camera->half_width - offset;
+	else
+		result = camera->half_height - offset;
+	return (result);
+}
+
 static void	render_sphere(t_world *w, t_canvas *c)
 {
 	t_ray	r;
@@ -197,27 +212,22 @@ static void	render_sphere(t_world *w, t_canvas *c)
 	int		x;
 	double	world_y;
 	double	world_x;
-	double	wall_z;
 	t_tuple	positioned;
 	t_tuple pos_minus_origin;
 	t_tuple	normalized;
 	t_hit	*h;
-	t_tuple pos;
-	t_tuple normal;
-	t_tuple eye;
-	wall_z = 100;
+	double	wall_z = 10;
 	origin = point(0, 0, -5);
-	// t_camera	cam = set_camera();
 
-	// r = ray_for_pixel(&cam, 0,0);
 	y = 0;
+	t_camera	cam = camera(WIN_HEIGHT, PCT_WIDTH, 2 / 2.5 * M_PI);
 	while (y < WIN_HEIGHT)
 	{
-		world_y = WIN_HEIGHT / 2 - y;
 		x = 0;
 		while (x < PCT_WIDTH)
 		{
-			world_x = -1 * PCT_WIDTH / 2 + x;
+			world_x = to_world_coordinate(&cam, x, true);
+			world_y = to_world_coordinate(&cam, y, false);
 			positioned = point(world_x, world_y, wall_z);
 			pos_minus_origin = substract_tuples(&positioned, &origin);
 			normalized = normalize(&pos_minus_origin);
@@ -228,9 +238,9 @@ static void	render_sphere(t_world *w, t_canvas *c)
 			h = hit(w->xs, true);
 			if (h != NULL)
 			{
-				pos = position(&r, h->t);
-				normal = normal_at_sphere(h->obj, &pos);
-				eye = negate_tuple(&r.direction);
+				// pos = position(&r, h->t);
+				// normal = normal_at_sphere(h->obj, &pos);
+				// eye = negate_tuple(&r.direction);
 				// t_comp comps = prepare_computations(h, &r);
 				// w->lightning.light = w->lights;
 				// w->lightning.material = &comps.object.material;
@@ -275,7 +285,7 @@ int	main(void)
 	free_canvas(c);
 	free(w.lights);
 	free(w.shape);
-	mlx_destroy_display(win.mlx_ptr);
+	// mlx_destroy_display(win.mlx_ptr);
 	free(win.mlx_ptr);
 	return (0);
 }
