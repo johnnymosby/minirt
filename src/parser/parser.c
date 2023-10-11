@@ -6,13 +6,16 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/11 12:26:29 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/11 18:10:56 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static bool	allocate_shapes_and_lights(t_world *w)
+/*
+	allocates memory to w->lights, w->shape, w->lightning.material
+*/
+static bool	allocate_shapes_lights_lightning(t_world *w)
 {
 	w->lights = ft_calloc(w->nb_lights, sizeof(t_light));
 	if (w->lights == NULL)
@@ -23,6 +26,9 @@ static bool	allocate_shapes_and_lights(t_world *w)
 		free(w->lights);
 		return (false);
 	}
+	w->lightning.material = ft_calloc(1, sizeof(t_material));
+	if (w->lightning.material == NULL)
+		return (false);
 	return (true);
 }
 
@@ -85,7 +91,10 @@ static bool	check_nb_elements(t_element *elmts, int nb_elmts, t_world *w)
 	// I need to write somewhere how many lights there are
 	return (true);
 }*/
-
+/*
+	allocates memory to:
+		w->lightning.material (put_elements_into_lightning > put_ambient_into_lightning)
+*/
 static bool	put_elements_into_world_and_camera(t_element *elmts, \
 	int nb_elmts, t_world *w, t_camera *cam)
 {
@@ -99,14 +108,27 @@ static bool	put_elements_into_world_and_camera(t_element *elmts, \
 	while (i < nb_elmts)
 	{
 		if (elmts[i].element_type == ELMT_CAMERA)
+		{	
+		//	printf("****i:%d******\n", i);
 			put_elements_into_camera (elmts + i, cam);
-		else if (elmts[i].element_type == ELMT_AMBIENT \
-			&& put_elements_into_lightning (elmts + i, 0, w) == false)
-			return (false);
+		}
+		else if (elmts[i].element_type == ELMT_AMBIENT)
+		{
+		//	printf("****i:%d******\n", i);
+			put_elements_into_lightning (elmts + i, 0, w);
+		}
 		else if (elmts[i].element_type == ELMT_LIGHT)
-			put_elements_into_lightning (elmts + i, index_lights++, w);
+		{	
+		//	printf("****i:%d******index light:%d****\n", i, index_lights);
+			put_elements_into_lightning (elmts + i, index_lights, w);
+			index_lights++;
+		}
 		else
-			put_elements_into_shapes (elmts + i, index_shapes++, w);
+		{	
+		//	printf("****i:%d******index shape:%d****\n", i, index_shapes);
+			put_elements_into_shapes (elmts + i, index_shapes, w);
+			index_shapes++;
+		}
 		i++;
 	}
 	return (true);
@@ -132,13 +154,12 @@ bool	parser(char *filename, t_world *w, t_camera *cam)
 		free (elmts);
 		return (false);
 	}
-	if (allocate_shapes_and_lights(w) == false)
+	if (allocate_shapes_lights_lightning(w) == false)
 	{	
 		free(elmts);
 		return (false);
 	}
 	put_elements_into_world_and_camera(elmts, nb_elmts, w, cam);
 	free(elmts);
-	(void) nb_elmts;
 	return (true);
 }

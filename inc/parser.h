@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:41:27 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/10 17:21:11 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/11 18:07:42 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef enum e_shape_type	t_shape_type;
 
 typedef enum e_element_type
 {
-	ELMT_CAMERA,
+	ELMT_CAMERA	,
 	ELMT_AMBIENT,
 	ELMT_LIGHT,
 	ELMT_SPHERE,
@@ -69,7 +69,7 @@ bool		parse_sphere(char *file_string, int *index, t_element *element);
 bool		parse_plane(char *file_string, int *index, t_element *element);
 bool		parse_cylinder(char *file_string, int *index, t_element *element);
 void		put_elements_into_camera(t_element *element, t_camera *cam);
-bool		put_elements_into_lightning(t_element *element, int index, t_world *w);
+void		put_elements_into_lightning(t_element *element, int index, t_world *w);
 void		put_elements_into_shapes(t_element *element, int index, t_world *w);
 void		*print_error_parsing(char *str);
 bool		parser(char *filename, t_world *w, t_camera *cam);
