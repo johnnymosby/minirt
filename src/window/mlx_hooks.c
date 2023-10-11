@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 17:55:59 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/11 11:36:46 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/11 21:35:47 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	close_button(t_win *win)
 		mlx_destroy_image(win->mlx_ptr, win->pct.img_ptr);
 	if (win->win_ptr)
 		mlx_destroy_window(win->mlx_ptr, win->win_ptr);
-	mlx_loop_end(win->mlx_ptr);
+	// mlx_loop_end(win->mlx_ptr);
 	return (0);
 }
 

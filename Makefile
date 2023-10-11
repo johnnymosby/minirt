@@ -7,7 +7,7 @@ INC_LIBFT	=	-I./lib/libft/inc
 UNAME	=	$(shell uname -s)
 
 CC		=	cc
-CFLAGS	+=	-Wall -Wextra -Werror
+CFLAGS	+=	-Wall -Wextra -Werror -Ofast -march=native
 
 MAIN	=	main.c
 

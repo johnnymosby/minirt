@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:43:54 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/11 11:36:40 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/11 23:39:06 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 
 
-static t_matrix	set_transform_for_second_scene_wall(bool is_left_wall)
+/* static t_matrix	set_transform_for_second_scene_wall(bool is_left_wall)
 {
 	t_matrix	m_translated;
 	t_matrix	m_rotated_y;
@@ -123,7 +123,7 @@ static void	parse_scene2(t_world *w)
 	light_color = color(1, 1, 1);
 	w->lights[0] = point_light(&light_color, &light_position);
 }
-
+ */
 
 /* static void	parse_scene(t_world *w)
 {
@@ -141,6 +141,22 @@ static void	parse_scene2(t_world *w)
 	w->lights[0] = point_light(&light_color, &light_position);
 } */
 
+static void	parse_scene3(t_world *w)
+{
+	t_tuple	light_position;
+	t_color	light_color;
+
+	light_position = point(-10, 10, -10);
+	light_color = color(1, 1, 1);
+	w->shape = ft_calloc(1, sizeof(t_shape));
+	w->shape[0] = create_cylinder();
+	w->shape[0].material.color = color(1, 0.2, 1);
+	w->nb_shapes = 1;
+	w->nb_lights = 1;
+	w->lights = ft_calloc(1, sizeof(t_light));
+	w->lights[0] = point_light(&light_color, &light_position);
+} 
+
 static t_camera	set_camera(void)
 {
 	t_camera	cam;
@@ -149,7 +165,7 @@ static t_camera	set_camera(void)
 	t_tuple		up;
 
 	cam = camera(PCT_WIDTH, WIN_HEIGHT, 2.2);
-	from = point(0, 1.5, -5);
+	from = point(0, 1, -5);
 	to = point(0, 1, 0);
 	up = vector(0, 1, 0);
 	cam.transform = view_transform(&from, &to, &up);
@@ -157,26 +173,42 @@ static t_camera	set_camera(void)
 	return (cam);
 }
 
-
-
-/* static void	print_matrix(t_matrix *m)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < 4)
-	{
-		j = 0;
-		while (j < 4)
-			printf("%f ", m->table[i][j++]);
-		printf("\n");
-		i++;
-	}
-	printf("\n");
-} */
-
 int	main(void)
+{
+	t_win		win;
+	t_world		w;
+	t_scene		scene;
+
+	scene.canvas = NULL;
+	scene.zoom = 2.2;
+	parse_scene3(&w);
+	scene.camera = set_camera();
+	scene.world = &w;
+	if (render(&scene) == false)
+		return (ERR_MEMORY_ALLOCATION);
+	if (initialise_mlx(&win) == false)
+	{
+		free_canvas(scene.canvas);
+		free(w.lights);
+		free(w.shape);
+		return (ERR_MLX_FUNCTION);
+	}
+	scene.canvas->win = &win;
+	canvas_to_mlx_image(scene.canvas, win.pct.addr);
+	mlx_put_image_to_window(win.mlx_ptr, win.win_ptr, win.pct.img_ptr, 0, 0);
+	catch_mlx_hooks(&win);
+	mlx_mouse_hook(win.win_ptr, mouse_hook, &scene);
+	mlx_loop(win.mlx_ptr);
+	free_canvas(scene.canvas);
+	free(w.lights);
+	free(w.shape);
+	// mlx_destroy_display(win.mlx_ptr);
+	free(win.mlx_ptr);
+	return (0);
+}
+
+
+/* int	main(void)
 {
 	t_win		win;
 	t_world		w;
@@ -205,7 +237,8 @@ int	main(void)
 	free_canvas(scene.canvas);
 	free(w.lights);
 	free(w.shape);
-	mlx_destroy_display(win.mlx_ptr);
+	// mlx_destroy_display(win.mlx_ptr);
 	free(win.mlx_ptr);
 	return (0);
 }
+ */

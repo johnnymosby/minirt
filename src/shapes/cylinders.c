@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   cylinders.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 15:00:48 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/11 17:52:10 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/11 23:26:41 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shapes.h"
+
+static void	swap_double(double *a, double *b)
+{
+	double	tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
 
 static bool	discriminant(t_cylinder *cylinder, t_ray *r, t_disc_calc *d_calc)
 {
@@ -26,30 +35,66 @@ static bool	discriminant(t_cylinder *cylinder, t_ray *r, t_disc_calc *d_calc)
 	return (true);
 }
 
-void	intersect_cylinder(t_shape *shape, t_ray *r, t_hit **hits)
+static bool	check_cap(t_ray *r, double t)
+{
+	double	x;
+	double	z;
+
+	x = r->origin.x + t * r->direction.x;
+	z = r->origin.z + t * r->direction.z;
+	return ((pow(x, 2) + pow(z, 2)) <= 1.0);
+}
+
+static void	intersect_caps(t_hit **hits, t_shape *shape, t_ray *r)
+{
+	double	t;
+
+	if (shape->cylinder.closed == false
+		|| are_equal_doubles(r->direction.y, 0) == true)
+		return ;
+	t = (shape->cylinder.min - r->origin.y) / r->direction.y;
+	if (check_cap(r, t))
+		add_intersection(hits, intersection(t, shape));
+	t = (shape->cylinder.max - r->origin.y) / r->direction.y;
+	if (check_cap(r, t))
+		add_intersection(hits, intersection(t, shape));
+}
+
+static void	intersect_cylinder(t_shape *shape, t_ray *r, t_hit **hits)
 {
 	t_disc_calc	d_calc;
 	double		d_squared;
 	double		t[2];
-	t_hit		*intrs[2];
+	double		y[2];
 
-	(void)hits;
+	intersect_caps(hits, shape, r);
 	if (discriminant(&shape->cylinder, r, &d_calc) == false)
 		return ;
 	if (d_calc.dscr < 0)
 		return ;
-	else if (d_calc.dscr >= 0)
-	{
-		d_squared = sqrt(d_calc.dscr);
-		t[0] = (-d_calc.b - d_squared) / (2 * d_calc.a);
-		t[1] = (-d_calc.b + d_squared) / (2 * d_calc.a);
-		intrs[0] = intersection(t[0], shape);
-		intrs[1] = intersection(t[1], shape);
-		intrs[0]->left = intrs[1];
-		intrs[1]->prev = intrs[0];
-		add_intersection(hits, intrs[0]);
-		add_intersection(hits, intrs[1]);
-	}
+	d_squared = sqrt(d_calc.dscr);
+	t[0] = (-d_calc.b - d_squared) / (2 * d_calc.a);
+	t[1] = (-d_calc.b + d_squared) / (2 * d_calc.a);
+	if (t[0] > t[1])
+		swap_double(t + 0, t + 1);
+	y[0] = r->origin.y + t[0] * r->direction.y;
+	y[1] = r->origin.y + t[1] * r->direction.y;
+	if (shape->cylinder.min < y[0] && y[0] < shape->cylinder.max)
+		add_intersection(hits, intersection(t[0], shape));
+	if (shape->cylinder.min < y[1] && y[1] < shape->cylinder.max)
+		add_intersection(hits, intersection(t[1], shape));
+}
+
+static t_tuple	normal_at_cylinder(t_shape *shape, t_tuple *point)
+{
+	double	dist;
+
+	dist = pow(point->x, 2) + pow(point->z, 2);
+	if (dist < 1 && point->y >= (shape->cylinder.max - EPSILON))
+		return (vector(0, 1, 0));
+	if (dist < 1 && point->y <= (shape->cylinder.min + EPSILON))
+		return (vector(0, -1, 0));
+	return (vector(point->x, 0, point->z));
 }
 
 t_shape	create_cylinder(void)
@@ -58,5 +103,9 @@ t_shape	create_cylinder(void)
 
 	set_shape_to_default(&shape);
 	shape.intersect = intersect_cylinder;
+	shape.normal_at = normal_at_cylinder;
+	shape.cylinder.max = INFINITY;
+	shape.cylinder.min = -INFINITY;
+	shape.cylinder.closed = false;
 	return (shape);
 }
