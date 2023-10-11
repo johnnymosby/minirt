@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:43:54 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/09 16:17:29 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/11 11:36:40 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 
 
-/* static t_matrix	set_transform_for_second_scene_wall(bool is_left_wall)
+static t_matrix	set_transform_for_second_scene_wall(bool is_left_wall)
 {
 	t_matrix	m_translated;
 	t_matrix	m_rotated_y;
@@ -122,44 +122,10 @@ static void	parse_scene2(t_world *w)
 	light_position = point(-10, 10, -10);
 	light_color = color(1, 1, 1);
 	w->lights[0] = point_light(&light_color, &light_position);
-} */
+}
 
 
-/* 
-int	main(void)
-{
-	t_canvas	*c;
-	t_win		win;
-	t_world		w;
-	t_camera	cam;
-
-	w.xs = NULL;
-	w = default_world();
-	// parse_scene2(&w);
-	cam = set_camera();
-	c = render(&cam, &w);
-	if (c == NULL)
-		return (ERR_MEMORY_ALLOCATION);
-	if (initialise_mlx(&win) == false)
-	{
-		free_canvas(c);
-		free(w.lights);
-		free(w.shape);
-		return (ERR_MLX_FUNCTION);
-	}
-	// render_sphere(&w, c);
-	catch_mlx_hooks(&win);
-	canvas_to_mlx_image(c, win.pct.addr);
-	mlx_put_image_to_window(win.mlx_ptr, win.win_ptr, win.pct.img_ptr, 0, 0);
-	mlx_loop(win.mlx_ptr);
-	free_canvas(c);
-	free(w.lights);
-	free(w.shape);
-	mlx_destroy_display(win.mlx_ptr);
-	free(win.mlx_ptr);
-	return (0);
-} */
-static void	parse_scene(t_world *w)
+/* static void	parse_scene(t_world *w)
 {
 	t_tuple	light_position;
 	t_color	light_color;
@@ -173,106 +139,70 @@ static void	parse_scene(t_world *w)
 	w->nb_lights = 1;
 	w->lights = ft_calloc(1, sizeof(t_light));
 	w->lights[0] = point_light(&light_color, &light_position);
-}
-/* static t_camera	set_camera(void)
+} */
+
+static t_camera	set_camera(void)
 {
 	t_camera	cam;
 	t_tuple		from;
 	t_tuple		to;
 	t_tuple		up;
 
-	from = point(0, 0, -15);
-	to = point(0, 0, 0);
-	up = vector(0, 0, -1);
-	cam = camera(PCT_WIDTH, WIN_HEIGHT, M_PI*100);
+	cam = camera(PCT_WIDTH, WIN_HEIGHT, 2.2);
+	from = point(0, 1.5, -5);
+	to = point(0, 1, 0);
+	up = vector(0, 1, 0);
 	cam.transform = view_transform(&from, &to, &up);
-	set_transform_in_camera(&cam, &cam.transform);
+	cam.inverse = inverse(&cam.transform);
 	return (cam);
-} */
-static void	render_sphere(t_world *w, t_canvas *c)
-{
-	t_ray	r;
-	t_tuple	origin;
-	int		y;
-	int		x;
-	double	world_y;
-	double	world_x;
-	double	wall_z;
-	t_tuple	positioned;
-	t_tuple pos_minus_origin;
-	t_tuple	normalized;
-	t_hit	*h;
-	t_tuple pos;
-	t_tuple normal;
-	t_tuple eye;
-	wall_z = 100;
-	origin = point(0, 0, -5);
-	// t_camera	cam = set_camera();
-
-	// r = ray_for_pixel(&cam, 0,0);
-	y = 0;
-	while (y < WIN_HEIGHT)
-	{
-		world_y = WIN_HEIGHT / 2 - y;
-		x = 0;
-		while (x < PCT_WIDTH)
-		{
-			world_x = -1 * PCT_WIDTH / 2 + x;
-			positioned = point(world_x, world_y, wall_z);
-			pos_minus_origin = substract_tuples(&positioned, &origin);
-			normalized = normalize(&pos_minus_origin);
-			r = ray(&origin, &normalized);
-			// r = ray_for_pixel(&cam, x, y);
-			w->xs = NULL;
-			intersect(w->shape, &r, &w->xs);
-			h = hit(w->xs, true);
-			if (h != NULL)
-			{
-				pos = position(&r, h->t);
-				normal = normal_at_sphere(h->obj, &pos);
-				eye = negate_tuple(&r.direction);
-				// t_comp comps = prepare_computations(h, &r);
-				// w->lightning.light = w->lights;
-				// w->lightning.material = &comps.object.material;
-				// w->lightning.point = &comps.point;
-				// w->lightning.eyev = &comps.eyev;
-				// w->lightning.normalv = &comps.normalv;
-				// write_pixel(c, x, y, shade_hit(w, &comps));
-				// write_pixel(c, x, y, lightning(&w->lightning));
-				write_pixel(c, x, y, color_at(w, &r));
-			}
-			x++;
-		}
-		y++;
-	}
 }
+
+
+
+/* static void	print_matrix(t_matrix *m)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < 4)
+	{
+		j = 0;
+		while (j < 4)
+			printf("%f ", m->table[i][j++]);
+		printf("\n");
+		i++;
+	}
+	printf("\n");
+} */
 
 int	main(void)
 {
-	t_canvas	*c;
 	t_win		win;
 	t_world		w;
+	t_scene		scene;
 
-	w.xs = NULL;
-	// w = default_world();
-	parse_scene(&w);
-	c = canvas(PCT_WIDTH, WIN_HEIGHT);
-	// c = render(&cam, &w);
-	if (c == NULL)
+	scene.canvas = NULL;
+	scene.zoom = 2.2;
+	parse_scene2(&w);
+	scene.camera = set_camera();
+	scene.world = &w;
+	if (render(&scene) == false)
 		return (ERR_MEMORY_ALLOCATION);
 	if (initialise_mlx(&win) == false)
 	{
-		free_canvas(c);
+		free_canvas(scene.canvas);
 		free(w.lights);
 		free(w.shape);
 		return (ERR_MLX_FUNCTION);
 	}
-	render_sphere(&w, c);
-	catch_mlx_hooks(&win);
-	canvas_to_mlx_image(c, win.pct.addr);
+	scene.canvas->win = &win;
+	canvas_to_mlx_image(scene.canvas, win.pct.addr);
 	mlx_put_image_to_window(win.mlx_ptr, win.win_ptr, win.pct.img_ptr, 0, 0);
+	catch_mlx_hooks(&win);
+	mlx_mouse_hook(win.win_ptr, mouse_hook, &scene);
 	mlx_loop(win.mlx_ptr);
-	free_canvas(c);
+	free_canvas(scene.canvas);
 	free(w.lights);
 	free(w.shape);
 	mlx_destroy_display(win.mlx_ptr);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 10:53:19 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/08 21:05:41 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/11 11:43:08 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ Test(camera, ray_camera_transformation)
 	cr_assert(are_equal_tuples(&r.direction, &v));
 }
 
+//to change the argument in render to t_scene
 Test(camera, render)
 {
 	t_world w = default_world();

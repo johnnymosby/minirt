@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_canvas.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 09:04:54 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/05 14:05:42 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/10 16:24:14 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	canvas_to_mlx_image(t_canvas *const canvas, int *img)
 {
 	int	i;
 
-	i = 0;
+	i = 0;/* 
+	ft_bzero(img, canvas->width * canvas->height); */
 	while (i < canvas->width * canvas->height)
 	{
 		img[i] = 0;

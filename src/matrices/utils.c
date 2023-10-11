@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 16:22:57 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/22 18:26:38 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/10 17:13:58 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ t_matrix	inverse(t_matrix *m)
 
 	det = determinant(m);
 	if (det == 0)
-		return (ft_bzero(&ret, sizeof(t_matrix)), ret);
+		return (identity_matrix());
 	ret.side_size = m->side_size;
 	row = 0;
 	while (row < m->side_size)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   computations.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:28:11 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/08 21:00:09 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/11 12:59:05 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_comp {
 	double	t;
 	t_shape	object;
 	t_tuple	point;
+	t_tuple	over_point;
 	t_tuple	normalv;
 	t_tuple	eyev;
 	bool	inside;
@@ -30,6 +31,7 @@ typedef struct s_comp {
 
 t_comp	prepare_computations(t_hit *intersection, t_ray *ray);
 t_color	shade_hit(t_world *w, t_comp *comps);
+bool	is_shadowed(t_world *world, t_tuple *point);
 t_color	color_at(t_world *w, t_ray *r);
 
 #endif

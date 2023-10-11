@@ -6,18 +6,20 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 16:19:52 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/11 16:04:23 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/11 18:35:52 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CAMERA_H
 # define CAMERA_H
 
-#include "matrices.h"
-#include "world.h"
-#include "computations.h"
-#include "rays.h"
-#include "canvas.h"
+# include "matrices.h"
+# include "world.h"
+# include "computations.h"
+# include "rays.h"
+# include "canvas.h"
+
+typedef struct s_canvas	t_canvas;
 
 #define HSIZE_DEFAULT	200
 #define VSIZE_DEFAULT	200
@@ -33,9 +35,18 @@ typedef struct s_camera {
 	t_matrix	inverse;
 }	t_camera;
 
+typedef struct s_scene
+{
+	t_camera	camera;
+	t_world		*world;
+	t_canvas	*canvas;
+	double		zoom;
+}	t_scene;
+
 t_camera	camera(int hsize, int vsize, double field_of_view);
 t_ray		ray_for_pixel(t_camera *camera, int px, int py);
 void		set_transform_in_camera(t_camera *shape, t_matrix *m);
-t_canvas	*render(t_camera *c, t_world *w);
+bool		render(t_scene *scene);
+void		set_size_values(t_camera *c);
 
 #endif

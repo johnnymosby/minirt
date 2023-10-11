@@ -41,7 +41,8 @@ RAYS	:=	$(addprefix rays/, $(RAYS))
 SHAPES	=	utils.c spheres.c intersection.c reflection.c material.c
 SHAPES	:=	$(addprefix shapes/, $(SHAPES))
 
-SCENE	=	create_world.c intersect_world_ray.c view_transform.c shade_hits.c prepare_computation.c
+SCENE	=	create_world.c intersect_world_ray.c view_transform.c shade_hits.c prepare_computation.c \
+			is_shadowed.c
 SCENE	:=	$(addprefix scene/, $(SCENE))
 
 CAMERA	=	create_camera.c ray_for_pixel.c render.c

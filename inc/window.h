@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 12:38:27 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/09 13:15:23 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/11 13:02:49 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@
 # include "mlx_keys.h"
 # include "stdio.h"
 
-# define WIN_HEIGHT 100
+# define WIN_HEIGHT 250
 # define MENU_WIDTH 100
-# define PCT_WIDTH 200
+# define PCT_WIDTH 500
+
+typedef struct s_scene	t_scene;
 
 typedef struct s_image
 {
@@ -45,10 +47,11 @@ typedef struct s_win
 	t_image	pct;
 }			t_win;
 
-t_win		window(void);
-bool		initialise_mlx(t_win *window);
-bool		initialise_picture(t_win *window);
-bool		initialise_menu(t_win *window);
-void		catch_mlx_hooks(t_win *window);
+t_win	window(void);
+bool	initialise_mlx(t_win *window);
+bool	initialise_picture(t_win *window);
+bool	initialise_menu(t_win *window);
+void	catch_mlx_hooks(t_win *window);
+int		mouse_hook(int keycode, int x, int y, t_scene *scene);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   canvas.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 23:48:26 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/06 17:33:20 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/10 22:28:04 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,15 @@
 # include "colors.h"
 # include "tuples.h"
 # include "matrices.h"
+# include "camera.h"
+# include "world.h"
+# include "window.h"
 
 typedef struct s_canvas {
 	int		width;
 	int		height;
 	t_color	*pixels;
+	t_win	*win;
 }	t_canvas;
 
 /*
