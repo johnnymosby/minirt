@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/10 20:00:38 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/11 12:26:29 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,5 +139,6 @@ bool	parser(char *filename, t_world *w, t_camera *cam)
 	}
 	put_elements_into_world_and_camera(elmts, nb_elmts, w, cam);
 	free(elmts);
+	(void) nb_elmts;
 	return (true);
 }

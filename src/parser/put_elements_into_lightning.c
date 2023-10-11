@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 13:34:53 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/10 17:36:42 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/11 13:34:26 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,23 @@ static bool	put_ambient_into_lightning(t_element *element, t_world *w)
 
 static void	put_light_into_lightning(t_element *element, int index, t_world *w)
 {
-	w->lights[index].position = element->coordinates;
-	w->lights[index].intensity = element->light_intensity;
+	/*t_light	l;
+	t_tuple p;
+	t_color	c;
+	
+	p = point(0, 0, 0);
+	c = color(1, 1, 1);*/
+	w->lights[index] = point_light(&element->light_intensity, &element->coordinates);
+	//l = point_light(&c, &p);
+	//w->lights[index] = temp;
+	
+	(void) w;
+	(void) element;
+	(void) index;
+	//w->lights[index].position = element->coordinates;
+	//w->lights[index].intensity = element->light_intensity;
+	//w->lights[index].position = point(0, 0, 0);
+	//w->lights[index].intensity = color(1,0,0);
 }
 /*		[BONUS]
 static void	put_light_into_lightning(t_element *element, int index, t_world *w)
