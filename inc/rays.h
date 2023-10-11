@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 18:49:06 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/22 17:48:51 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/11 11:59:28 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_hit
 	t_hit	*prev;
 	t_hit	*left;
 	t_hit	*right;
+	bool	is_shadowed;
 }	t_hit;
 
 typedef struct s_btree

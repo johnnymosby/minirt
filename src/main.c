@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:43:54 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/10 22:39:59 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/11 11:36:40 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,7 @@ int	main(void)
 	t_world		w;
 	t_scene		scene;
 
+	scene.canvas = NULL;
 	scene.zoom = 2.2;
 	parse_scene2(&w);
 	scene.camera = set_camera();
@@ -204,7 +205,7 @@ int	main(void)
 	free_canvas(scene.canvas);
 	free(w.lights);
 	free(w.shape);
-	// mlx_destroy_display(win.mlx_ptr);
+	mlx_destroy_display(win.mlx_ptr);
 	free(win.mlx_ptr);
 	return (0);
 }

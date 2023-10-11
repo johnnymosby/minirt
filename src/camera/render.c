@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 19:50:03 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/10 21:57:04 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/11 12:08:06 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ bool	render(t_scene *scene)
 		while (x < c->hsize)
 		{
 			r = ray_for_pixel(c, x, y);
-			scene->world->xs = NULL;
 			color = color_at(scene->world, &r);
 			write_pixel(scene->canvas, x, y, color);
 			x++;
