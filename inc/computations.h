@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:28:11 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/11 12:59:05 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/11 14:12:01 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 typedef struct s_comp {
 	double	t;
-	t_shape	object;
+	t_shape	*object;
 	t_tuple	point;
 	t_tuple	over_point;
 	t_tuple	normalv;

@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 11:51:29 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/23 16:28:00 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/11 14:13:14 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_disc_calc
 }	t_disc_calc;
 
 typedef void	(*t_intersect)(t_shape *, t_ray *, t_hit **);
+typedef t_tuple	(*t_normal_at)(t_shape *, t_tuple *);
 
 typedef struct s_material
 {
@@ -54,6 +55,7 @@ typedef struct s_shape
 	};
 	t_shape_type	shape_type;
 	t_intersect		intersect;
+	t_normal_at		normal_at;
 	t_matrix		transform;
 	t_matrix		inverse;
 	t_matrix		transpose;

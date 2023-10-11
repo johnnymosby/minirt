@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:55:05 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/09 15:51:42 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/11 14:09:50 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ t_shape	create_sphere(void)
 	shape.sphere.radius = 1;
 	shape.shape_type = SPHERE;
 	shape.intersect = intersect_sphere;
+	shape.normal_at = normal_at_sphere;
 	return (shape);
 }
 

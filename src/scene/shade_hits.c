@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 18:14:35 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/11 13:01:26 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/11 14:13:50 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_color	shade_hit(t_world *world, t_comp *comps)
 	ft_bzero(&l, sizeof(t_lightning));
 	comps->over_point = adjust_point_to_mitigate_acne_effect(comps);
 	l.in_shadow = is_shadowed(world, &comps->over_point);
-	l.material = &comps->object.material;
+	l.material = &comps->object->material;
 	l.light = world->lights;
 	l.point = &comps->over_point;
 	l.eyev = &comps->eyev;
