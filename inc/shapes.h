@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 11:51:29 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/12 14:17:42 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/12 15:00:03 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct s_shape
 	t_matrix		inverse;
 	t_matrix		transpose;
 	t_material		material;
+	t_matrix		original_transform;
 }	t_shape;
 
 /*

@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 12:38:27 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/12 14:42:33 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/12 15:43:09 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,26 @@
 # endif
 # include "mlx_keys.h"
 # include "stdio.h"
+# include "shapes.h"
 
-# define WIN_HEIGHT 80
+# define WIN_HEIGHT 200
 # define MENU_WIDTH 100
-# define PCT_WIDTH 120
+# define PCT_WIDTH 500
 
 typedef struct s_scene	t_scene;
+
+typedef enum e_control_state
+{
+	DEFAULT,
+	SHAPE_CHANGE
+}	t_control_state;
+
+typedef struct s_controls
+{
+	t_scene			*scene;
+	t_control_state	state;
+	t_shape			*shape_in_control;
+}	t_controls;
 
 typedef struct s_image
 {
@@ -52,6 +66,9 @@ bool	initialise_mlx(t_win *window);
 bool	initialise_picture(t_win *window);
 bool	initialise_menu(t_win *window);
 void	catch_mlx_hooks(t_win *window);
-int		mouse_hook(int keycode, int x, int y, t_scene *scene);
+int		mouse_hook(int keycode, int x, int y, t_controls *controls);
+void	change_camera_zoom(int keycode, t_scene *scene);
+void	respond_to_left_click(t_controls *controls, int x, int y);
+void	respond_to_right_click(t_controls *controls);
 
 #endif

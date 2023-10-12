@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 17:55:59 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/12 14:47:39 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/12 15:43:33 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,36 +60,20 @@ void	catch_mlx_hooks(t_win *window)
 	mlx_hook(window->win_ptr, 17, 1L << 17, &close_button, window);
 }
 
-static void	rerender(t_scene *scene)
-{
-	size_t		canvas_size;
-	t_canvas	*canvas;
-
-	canvas = scene->canvas;
-	canvas_size = canvas->width * canvas->height * sizeof(t_color);
-	ft_bzero(canvas->pixels, canvas_size);
-	set_size_values(&scene->camera);
-	render(scene);
-	canvas_to_mlx_image(canvas, canvas->win->pct.addr);
-	mlx_put_image_to_window(canvas->win->mlx_ptr, canvas->win->win_ptr,
-		canvas->win->pct.img_ptr, 0, 0);
-}
-
 //change so that when tanf changes sign the picture is not swapped
-int	mouse_hook(int keycode, int x, int y, t_scene *scene)
+int	mouse_hook(int keycode, int x, int y, t_controls *controls)
 {
+	t_scene	*scene;
+
+	scene = controls->scene;
 	(void)x;
 	(void)y;
-	if (keycode == KEY_ZOOM_IN && scene->camera.field_of_view > -2.85)
-	{
-		scene->camera.field_of_view /= 1.1;
-		rerender(scene);
-	}
-	else if (keycode == KEY_ZOOM_OUT
-		&& scene->camera.field_of_view < 2.85)
-	{
-		scene->camera.field_of_view *= 1.1;
-		rerender(scene);
-	}
+	if ((keycode == KEY_ZOOM_IN || keycode == KEY_ZOOM_OUT)
+		&& controls->state == DEFAULT)
+		change_camera_zoom(keycode, scene);
+	if (keycode == LEFT_CLICK)
+		respond_to_left_click(controls, x, y);
+	if (keycode == RIGHT_CLICK)
+		respond_to_right_click(controls);
 	return (0);
 }

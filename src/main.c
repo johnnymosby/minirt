@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:43:54 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/12 14:42:22 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/12 16:11:05 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 
 
-/* static t_matrix	set_transform_for_second_scene_wall(bool is_left_wall)
+static t_matrix	set_transform_for_second_scene_wall(bool is_left_wall)
 {
 	t_matrix	m_translated;
 	t_matrix	m_rotated_y;
@@ -123,7 +123,7 @@ static void	parse_scene2(t_world *w)
 	light_color = color(1, 1, 1);
 	w->lights[0] = point_light(&light_color, &light_position);
 }
- */
+
 
 /* static void	parse_scene(t_world *w)
 {
@@ -141,7 +141,7 @@ static void	parse_scene2(t_world *w)
 	w->lights[0] = point_light(&light_color, &light_position);
 } */
 
-static void	parse_scene3(t_world *w)
+/* static void	parse_scene3(t_world *w)
 {
 	t_tuple	light_position;
 	t_color	light_color;
@@ -155,7 +155,7 @@ static void	parse_scene3(t_world *w)
 	w->nb_lights = 1;
 	w->lights = ft_calloc(1, sizeof(t_light));
 	w->lights[0] = point_light(&light_color, &light_position);
-}
+} */
 
 static t_camera	set_camera(void)
 {
@@ -173,15 +173,24 @@ static t_camera	set_camera(void)
 	return (cam);
 }
 
+static void	set_controls(t_controls *controls, t_scene *scene)
+{
+	controls->scene = scene;
+	controls->state = DEFAULT;
+	controls->shape_in_control = NULL;
+}
+
 int	main(void)
 {
 	t_win		win;
 	t_world		w;
 	t_scene		scene;
+	t_controls	controls;
 
+	set_controls(&controls, &scene);
 	scene.canvas = NULL;
 	scene.camera = set_camera();
-	parse_scene3(&w);
+	parse_scene2(&w);
 	scene.world = &w;
 	if (render(&scene) == false)
 		return (ERR_MEMORY_ALLOCATION);
@@ -196,7 +205,7 @@ int	main(void)
 	canvas_to_mlx_image(scene.canvas, win.pct.addr);
 	mlx_put_image_to_window(win.mlx_ptr, win.win_ptr, win.pct.img_ptr, 0, 0);
 	catch_mlx_hooks(&win);
-	mlx_mouse_hook(win.win_ptr, mouse_hook, &scene);
+	mlx_mouse_hook(win.win_ptr, mouse_hook, &controls);
 	mlx_loop(win.mlx_ptr);
 	free_canvas(scene.canvas);
 	free(w.lights);

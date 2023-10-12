@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:55:05 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/11 17:30:30 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/12 16:11:35 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	intersect_sphere(t_shape *shape, t_ray *r, t_hit **hits)
 	t_disc_calc	d_calc;
 	double		d_squared;
 	double		t[2];
-	t_hit		*intrs[2];
+	// t_hit		*intrs[2];
 
 	discriminant(&shape->sphere, r, &d_calc);
 	if (d_calc.dscr > 0 || are_equal_doubles(d_calc.dscr, 0))
@@ -37,12 +37,8 @@ void	intersect_sphere(t_shape *shape, t_ray *r, t_hit **hits)
 		d_squared = sqrt(d_calc.dscr);
 		t[0] = (-d_calc.b - d_squared) / (2 * d_calc.a);
 		t[1] = (-d_calc.b + d_squared) / (2 * d_calc.a);
-		intrs[0] = intersection(t[0], shape);
-		intrs[1] = intersection(t[1], shape);
-		intrs[0]->left = intrs[1];
-		intrs[1]->prev = intrs[0];
-		add_intersection(hits, intrs[0]);
-		add_intersection(hits, intrs[1]);
+		add_intersection(hits, intersection(t[0], shape));
+		add_intersection(hits, intersection(t[1], shape));
 	}
 }
 

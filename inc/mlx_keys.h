@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_keys.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:40:48 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/08 11:48:35 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/12 15:06:34 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # define KEY_UP 126
 # define KEY_PLUS 24
 # define KEY_MINUS 27
+# define LEFT_CLICK 1
+# define RIGHT_CLICK 2
 #endif
 
 #ifdef __linux__
@@ -39,6 +41,8 @@
 # define KEY_DOWN 65364
 # define KEY_PLUS 61
 # define KEY_MINUS 45
+# define LEFT_CLICK 1
+# define RIGHT_CLICK 3
 #endif
 
 #endif
