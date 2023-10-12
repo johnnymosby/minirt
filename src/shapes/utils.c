@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 12:00:17 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/12 10:04:29 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/12 16:08:04 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	set_shape_to_default(t_shape *shape)
 
 t_tuple	normal_at(t_shape *shape, t_tuple *point)
 {
-	t_matrix	m1;
+	/*t_matrix	m1;
 	t_matrix	m2;
 	t_tuple		world_normal;
 	t_tuple		local_point;
@@ -41,5 +41,6 @@ t_tuple	normal_at(t_shape *shape, t_tuple *point)
 	m2 = transpose(&m1);
 	world_normal = multiply_matrix_by_tuple(&m2, &local_normal);
 	world_normal.w = 0;
-	return (normalize(&world_normal));
+	return (normalize(&world_normal));*/
+	return (shape->normal_at(shape, point));
 }
