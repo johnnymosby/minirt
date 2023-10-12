@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shapes.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 11:51:29 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/11 23:00:31 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/12 14:17:42 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,15 @@ typedef struct s_cylinder
 	bool	closed;
 }	t_cylinder;
 
+typedef struct s_cube
+{
+	t_tuple	origin;
+	double	radius;
+	float	max;
+	float	min;
+	bool	closed;
+}	t_cube;
+
 typedef struct s_disc_calc
 {
 	double	a;
@@ -56,6 +65,7 @@ typedef struct s_material
 	double	specular;
 	double	shininess;
 	t_color	color;
+	t_color	original_color;
 }	t_material;
 
 typedef struct s_shape

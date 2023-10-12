@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 12:38:27 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/11 23:43:09 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/12 14:42:33 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@
 # include "mlx_keys.h"
 # include "stdio.h"
 
-# define WIN_HEIGHT 800
+# define WIN_HEIGHT 80
 # define MENU_WIDTH 100
-# define PCT_WIDTH 1200
+# define PCT_WIDTH 120
 
 typedef struct s_scene	t_scene;
 

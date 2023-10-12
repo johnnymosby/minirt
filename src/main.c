@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:43:54 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/11 23:39:06 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/12 14:42:22 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ static void	parse_scene3(t_world *w)
 	w->nb_lights = 1;
 	w->lights = ft_calloc(1, sizeof(t_light));
 	w->lights[0] = point_light(&light_color, &light_position);
-} 
+}
 
 static t_camera	set_camera(void)
 {
@@ -180,9 +180,8 @@ int	main(void)
 	t_scene		scene;
 
 	scene.canvas = NULL;
-	scene.zoom = 2.2;
-	parse_scene3(&w);
 	scene.camera = set_camera();
+	parse_scene3(&w);
 	scene.world = &w;
 	if (render(&scene) == false)
 		return (ERR_MEMORY_ALLOCATION);
@@ -202,7 +201,7 @@ int	main(void)
 	free_canvas(scene.canvas);
 	free(w.lights);
 	free(w.shape);
-	// mlx_destroy_display(win.mlx_ptr);
+	mlx_destroy_display(win.mlx_ptr);
 	free(win.mlx_ptr);
 	return (0);
 }
