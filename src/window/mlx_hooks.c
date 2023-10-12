@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 17:55:59 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/12 16:37:11 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/12 17:23:34 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ int	mouse_hook(int keycode, int x, int y, t_controls *controls)
 	(void)y;
 	if (keycode == KEY_ZOOM_IN || keycode == KEY_ZOOM_OUT)
 	{
-		if (controls->state == DEFAULT)
+		if (controls->control_state == CAMERA)
 			change_camera_zoom(keycode, scene);
-		else if (controls->state == SHAPE_CHANGE)
+		else if (controls->control_state == SHAPE)
 			change_shape_size(keycode, controls);
 	}
 	if (keycode == LEFT_CLICK)

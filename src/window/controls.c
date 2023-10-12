@@ -6,27 +6,12 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 15:00:25 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/12 16:48:58 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/12 17:27:15 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "camera.h"
 #include "window.h"
-
-void	rerender(t_scene *scene)
-{
-	size_t		canvas_size;
-	t_canvas	*canvas;
-
-	canvas = scene->canvas;
-	canvas_size = canvas->width * canvas->height * sizeof(t_color);
-	ft_bzero(canvas->pixels, canvas_size);
-	set_size_values(&scene->camera);
-	render(scene);
-	canvas_to_mlx_image(canvas, canvas->win->pct.addr);
-	mlx_put_image_to_window(canvas->win->mlx_ptr, canvas->win->win_ptr,
-		canvas->win->pct.img_ptr, 0, 0);
-}
 
 static void	reset_to_default(t_controls *controls)
 {
@@ -35,7 +20,8 @@ static void	reset_to_default(t_controls *controls)
 		controls->shape_in_control->material.color
 			= controls->shape_in_control->material.original_color;
 		controls->shape_in_control = NULL;
-		controls->state = DEFAULT;
+		controls->control_state = CAMERA;
+		controls->position_state = TRANSLATION;
 	}
 }
 
@@ -51,7 +37,7 @@ void	respond_to_left_click(t_controls *controls, int x, int y)
 		controls->shape_in_control->material.original_color
 			= controls->shape_in_control->material.color;
 		controls->shape_in_control->material.color = color(1, 0, 0);
-		controls->state = SHAPE_CHANGE;
+		controls->control_state = SHAPE;
 	}
 	else
 	{
@@ -67,5 +53,5 @@ void	respond_to_right_click(t_controls *controls)
 		reset_to_default(controls);
 		rerender(controls->scene);
 	}
-	controls->state = DEFAULT;
+	controls->control_state = CAMERA;
 }

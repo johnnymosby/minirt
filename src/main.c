@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:43:54 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/12 16:11:05 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/12 18:00:26 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,14 +170,26 @@ static t_camera	set_camera(void)
 	up = vector(0, 1, 0);
 	cam.transform = view_transform(&from, &to, &up);
 	cam.inverse = inverse(&cam.transform);
+	cam.original_transform = cam.transform;
 	return (cam);
 }
 
 static void	set_controls(t_controls *controls, t_scene *scene)
 {
 	controls->scene = scene;
-	controls->state = DEFAULT;
+	controls->control_state = CAMERA;
+	controls->position_state = TRANSLATION;
 	controls->shape_in_control = NULL;
+}
+
+int	pressed_key(int keycode, t_controls *controls)
+{
+	if ((keycode == KEY_W || keycode == KEY_S || keycode == KEY_A
+			|| keycode == KEY_D || keycode == KEY_SPACE || keycode == KEY_CTRL)
+		&& controls->control_state == CAMERA)
+		translate_camera(keycode, controls);
+	printf("button: %d\n", keycode);
+	return (0);
 }
 
 int	main(void)
@@ -205,6 +217,7 @@ int	main(void)
 	canvas_to_mlx_image(scene.canvas, win.pct.addr);
 	mlx_put_image_to_window(win.mlx_ptr, win.win_ptr, win.pct.img_ptr, 0, 0);
 	catch_mlx_hooks(&win);
+	mlx_key_hook(win.win_ptr, pressed_key, &controls);
 	mlx_mouse_hook(win.win_ptr, mouse_hook, &controls);
 	mlx_loop(win.mlx_ptr);
 	free_canvas(scene.canvas);
