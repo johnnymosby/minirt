@@ -2,7 +2,7 @@ NAME		=	tests
 
 TESTS		=	parser.c tuples.c colors.c canvas.c matrices.c transformations.c \
 				rays.c spheres.c reflection.c world.c camera.c computations.c \
-				shadows.c cylinders.c shapes.c
+				shadows.c cylinders.c shapes.c planes.c
 
 SRC_DIR		=	../src
 OBJ_DIR		=	../obj
@@ -83,6 +83,7 @@ all: $(LIBFT) $(OBJ) $(MLX)
 	make transformations
 	make shadows
 	make shapes
+	make planes
 
 parser: $(LIBFT) $(OBJ) $(MLX) parser_elements.c parser_full_files.c parser_open_files.c parser_shapes.c
 	@$(call compile, "$^")
@@ -128,6 +129,9 @@ shadows: $(LIBFT) $(OBJ) $(MLX) shadows.c
 	@$(call compile, "$^")
 
 cylinders: $(LIBFT) $(OBJ) $(MLX) cylinders.c
+	@$(call compile, "$^")
+
+planes: $(LIBFT) $(OBJ) $(MLX) planes.c
 	@$(call compile, "$^")
 
 clean:

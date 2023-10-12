@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 15:49:47 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/12 16:26:04 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/12 16:27:48 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,8 @@ Test(shapes, Computing_the_normal_on_a_translated_shape)
 
 Test(shapes, Computing_the_normal_on_a_tranformed_shape)
 {
-	t_shape		s = create_test_shape();
+	//t_shape		s = create_test_shape();
+	t_shape		s = create_sphere();
 	t_matrix	sc = scaling(1, 0.5, 1);
 	t_matrix	rot = rotation_z(M_PI / 5);
 	t_matrix	m = multiply_matrices(&sc, &rot);
