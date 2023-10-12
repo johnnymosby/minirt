@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 12:38:27 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/12 15:43:09 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/12 16:49:34 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,8 @@ int		mouse_hook(int keycode, int x, int y, t_controls *controls);
 void	change_camera_zoom(int keycode, t_scene *scene);
 void	respond_to_left_click(t_controls *controls, int x, int y);
 void	respond_to_right_click(t_controls *controls);
+t_shape	*find_clicked_shape(t_controls *controls, int x, int y);
+void	rerender(t_scene *scene);
+void	change_shape_size(int keycode, t_controls *controls);
 
 #endif

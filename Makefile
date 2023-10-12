@@ -28,7 +28,8 @@ COLORS	:=	$(addprefix colors/, $(COLORS))
 CANVAS	=	create_canvas.c pixels.c save_canvas.c
 CANVAS	:=	$(addprefix canvas/, $(CANVAS))
 
-WINDOW	=	create_window.c mlx_hooks.c mlx_initialise.c controls.c
+WINDOW	=	create_window.c mlx_hooks.c mlx_initialise.c controls.c \
+			controls_camera.c controls_shapes.c
 WINDOW	:=	$(addprefix window/, $(WINDOW))
 
 MATRICES	=	utils.c logical_operations.c arithmetic_operations.c \
