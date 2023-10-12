@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_elements_into_camera.c                         :+:      :+:    :+:   */
+/*   parser_print_errors.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/30 13:30:52 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/11 16:32:59 by aguilmea         ###   ########.fr       */
+/*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
+/*   Updated: 2023/10/10 17:17:56 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-void	put_elements_into_camera(t_element *element, t_camera *cam)
+void	*print_error_parsing(char *str)
 {
-//	t_tuple	from;
-//	t_tuple	to;
-//	t_tuple	up;
-
-	*cam = camera(HSIZE_DEFAULT, VSIZE_DEFAULT, element->fov);
-	//cam->transform = view_transform(&from, &to, &up);
+	ft_putstr_fd(str, 2);
+	return (NULL);
 }

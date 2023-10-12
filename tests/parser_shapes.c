@@ -1,23 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_elements_into_camera.c                         :+:      :+:    :+:   */
+/*   parser_shapes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/30 13:30:52 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/11 16:32:59 by aguilmea         ###   ########.fr       */
+/*   Created: 2023/09/20 14:14:28 by aguilmea          #+#    #+#             */
+/*   Updated: 2023/10/06 11:06:21 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "tests.h"
 
-void	put_elements_into_camera(t_element *element, t_camera *cam)
-{
-//	t_tuple	from;
-//	t_tuple	to;
-//	t_tuple	up;
-
-	*cam = camera(HSIZE_DEFAULT, VSIZE_DEFAULT, element->fov);
-	//cam->transform = view_transform(&from, &to, &up);
-}

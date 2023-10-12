@@ -7,14 +7,14 @@ INC_LIBFT	=	-I./lib/libft/inc
 UNAME	=	$(shell uname -s)
 
 CC		=	cc
-CFLAGS	+=	-Wall -Wextra -Werror -Ofast -march=native
+CFLAGS	+=	-Wall -Wextra -Werror -Ofast -march=native -g
 
 MAIN	=	main.c
 
-PARSER	=	pre_open_file.c pre_put_file_into_string.c pre_get_elements_from_string.c \
+PARSER	=	parser__color.c parser__double.c parser__point.c\
+			parser_camera.c parser_light.c parser_lightning.c parser_objects.c parser_print_errors.c\
 			parser.c \
-			parser_camera.c parser_lightning.c parser_light.c parser_objects.c\
-			parser__color.c parser__double.c parser__point.c\
+			pre_get_elements_from_string.c pre_open_file.c pre_put_file_into_string.c \
 			put_elements_into_camera.c put_elements_into_lightning.c put_elements_into_shapes.c
 PARSER	:=	$(addprefix parser/, $(PARSER))
 

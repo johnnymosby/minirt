@@ -6,11 +6,19 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:24:21 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/11 14:13:22 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/12 12:38:04 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "computations.h"
+
+static void	calculate_over_point(t_comp *comps)
+{
+	t_tuple		product;
+
+	product = multiply_tuple_by_scalar(&comps->normalv, EPSILON);
+	comps->over_point = add_tuples(&comps->point, &product);
+}	
 
 t_comp	prepare_computations(t_hit *intersection, t_ray *ray)
 {
@@ -30,5 +38,6 @@ t_comp	prepare_computations(t_hit *intersection, t_ray *ray)
 	}
 	else
 		comps.inside = false;
+	calculate_over_point(&comps);
 	return (comps);
 }

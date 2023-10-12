@@ -3,41 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   pre_put_file_into_string.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:29:33 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/30 19:51:48 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/11 10:58:53 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static char	*read_file(int fd)
+static char	*read_whole_file(int fd)
 {
-	char	buf[BUFFER_SIZE];
-	char	*tmp;
+	char	buf[BUFFER_SIZE +1];
 	char	*file_string;
+	char	*tmp;
 	ssize_t	r;
-
-	ft_bzero(buf, BUFFER_SIZE);
-	file_string = ft_calloc(1, 1);
+	
+	file_string = ft_calloc(BUFFER_SIZE +1, 1);
 	if (file_string == NULL)
 		return (NULL);
-	r = BUFFER_SIZE -1;
-	while (r == BUFFER_SIZE -1)
+	(void) fd;
+	r = read(fd, file_string, BUFFER_SIZE);
+	while (r > 0)
 	{
-		r = read(fd, buf, BUFFER_SIZE -1);
-		if (r < 0)
-		{
-			free (file_string);
-			return (NULL);
-		}
+		ft_bzero(buf, BUFFER_SIZE +1);
+		r = read(fd, buf, BUFFER_SIZE);
 		tmp = file_string;
 		file_string = ft_strjoin(file_string, buf);
 		free(tmp);
 		if (file_string == NULL)
 			return (NULL);
 	}
+	if (r < 0)
+		free (file_string);
 	return (file_string);
 }
 
@@ -49,7 +47,7 @@ char	*put_file_into_string(char *filename)
 	fd = open_file(filename);
 	if (fd < 0)
 		return (NULL);
-	str = read_file(fd);
+	str = read_whole_file(fd);
 	if (str == NULL)
 	{
 		close (fd);

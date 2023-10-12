@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 16:19:52 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/10 21:52:51 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/11 18:35:52 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 # include "canvas.h"
 
 typedef struct s_canvas	t_canvas;
+
+#define HSIZE_DEFAULT	200
+#define VSIZE_DEFAULT	200
 
 typedef struct s_camera {
 	int			hsize;
