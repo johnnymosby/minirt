@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 12:00:43 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/08 14:50:44 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/12 10:34:37 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ Test(shapes, Intersecting_a_scaled_shape_with_a_ray)
 	xs = NULL;
 	intersect(&s, &r, &xs);
 	p = point(0, 0, -2.5);
-	printf("")
 	cr_assert(are_equal_tuples(&r.origin, &p));
 	v = vector(0, 0, 0.5);
 	cr_assert(are_equal_tuples(&r.direction, &p));
@@ -104,10 +103,28 @@ Test(shapes, Intersecting_a_translated_shape_with_a_ray)
 
 Test(shapes, Computing_the_normal_on_a_translated_shape)
 {
+	t_shape		s = create_test_shape();
+	t_matrix	translat = translation(0, 1, 0);
+	set_transform(&s, &translat);
+	//t_tuple	p = point(0, 1.70711, -0.70711);
+	//t_tuple	n = s.normal_at(&s, &p);
+	//t_tuple	check = vector(0, 1.70711, -0.70711);
+
+	//cr_assert(are_equal_tuples(&n, &check));
 	cr_assert(false);
 }
-
+#include <math.h>
 Test(shapes, Computing_the_normal_on_a_tranformed_shape)
 {
+	t_shape		s = create_test_shape();
+	t_matrix	sc = scaling(1, 0.5, 1);
+	t_matrix	rot = rotation_z(M_PI / 5);
+	t_matrix	m = multiply_matrices(&sc, &rot);
+	set_transform(&s, &m);
+	//t_tuple		p = point(0, sqrt(2)/ 2, -(sqrt(2)/2));
+	//t_tuple		n = s.normal_at(&s, &p);
+	//t_tuple		check = vector(0, 0.97014, -0.24254);
+
+	//cr_assert(are_equal_tuples(&n, &check));
 	cr_assert(false);
 }
