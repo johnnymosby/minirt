@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:55:05 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/09 15:51:42 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/11 17:30:30 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	intersect_sphere(t_shape *shape, t_ray *r, t_hit **hits)
 	t_hit		*intrs[2];
 
 	discriminant(&shape->sphere, r, &d_calc);
-	if (d_calc.dscr >= 0)
+	if (d_calc.dscr > 0 || are_equal_doubles(d_calc.dscr, 0))
 	{
 		d_squared = sqrt(d_calc.dscr);
 		t[0] = (-d_calc.b - d_squared) / (2 * d_calc.a);
@@ -58,6 +58,7 @@ t_shape	create_sphere(void)
 	shape.sphere.radius = 1;
 	shape.shape_type = SPHERE;
 	shape.intersect = intersect_sphere;
+	shape.normal_at = normal_at_sphere;
 	return (shape);
 }
 

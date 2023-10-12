@@ -7,7 +7,7 @@ INC_LIBFT	=	-I./lib/libft/inc
 UNAME	=	$(shell uname -s)
 
 CC		=	cc
-CFLAGS	+=	-Wall -Wextra -Werror -g
+CFLAGS	+=	-Wall -Wextra -Werror -Ofast -march=native -g
 
 MAIN	=	main.c
 
@@ -38,7 +38,8 @@ MATRICES	:=	$(addprefix matrices/, $(MATRICES))
 RAYS	=	utils.c light.c lightning.c
 RAYS	:=	$(addprefix rays/, $(RAYS))
 
-SHAPES	=	utils.c spheres.c intersection.c reflection.c material.c
+SHAPES	=	utils.c spheres.c intersection.c reflection.c material.c \
+			cylinders.c
 SHAPES	:=	$(addprefix shapes/, $(SHAPES))
 
 SCENE	=	create_world.c intersect_world_ray.c view_transform.c shade_hits.c prepare_computation.c \
