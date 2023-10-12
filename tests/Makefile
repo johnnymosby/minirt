@@ -1,7 +1,8 @@
 NAME		=	tests
 
 TESTS		=	parser.c tuples.c colors.c canvas.c matrices.c transformations.c \
-				rays.c spheres.c reflection.c world.c camera.c computations.c shapes.c\
+				rays.c spheres.c reflection.c world.c camera.c computations.c\
+				shadows.c
 
 SRC_DIR		=	../src
 OBJ_DIR		=	../obj
@@ -28,10 +29,13 @@ ifeq ($(UNAME), Linux)
 		INC_DIRS	= 	-I../inc/ -I../lib/libft/inc/ -I$(MLX_DIR)
 endif
 
-ifeq ($(CRITERION_EXISTS), yes)
+ifeq ($(UNAME), Darwin)
+		CRITERION_FLAGS := -lcriterion -I/Users/johnnymosby/.brew/Cellar/criterion/2.4.1_3/include/ \
+				-L/Users/johnnymosby/.brew/Cellar/criterion/2.4.1_3/lib/
+else ifeq ($(CRITERION_EXISTS), yes)
 		CRITERION_FLAGS:= $(shell pkg-config --cflags-only-I criterion | sed 's/-I//')
 else
-		CRITERION_FLAGS := -lcriterion  -L../lib/criterion/lib/
+		CRITERION_FLAGS := -lcriterion  -L../lib/criterion/lib/ -I$(realpath ../lib/criterion/include)
 		CRITERION_DIRS := -I..lib/criterion/include/
 		export LD_LIBRARY_PATH := $(LD_LIBRARY_PATH):$(realpath ../lib/criterion/lib)
 endif
@@ -61,7 +65,7 @@ $(TESTS): $(OBJ) $(LIBFT) $(MLX)
 	@$(call compile, "$^")
 
 define compile
- 	$(CC) $(CFLAGS) $^ $(LIBFT) $(INC_DIRS) $(MLX_FLAGS) -L../lib/criterion/lib/ -lcriterion -I$(realpath ../lib/criterion/include) -o $(basename $@ .c) && ./$(basename $@ .c) --verbose
+ 	$(CC) $(CFLAGS) $^ $(LIBFT) $(INC_DIRS) $(MLX_FLAGS) $(CRITERION_FLAGS) -o $(basename $@ .c) && ./$(basename $@ .c) --verbose
 endef
 
 # -------------------------------- TESTS ------------------------------------- #
@@ -75,9 +79,12 @@ all: $(LIBFT) $(OBJ) $(MLX)
 	make world
 	make camera
 	make computations
-	make shapes
+	make rays
+	make transformations
+	make shadows
+>>>>>>> main
 
-parser: $(LIBFT) $(OBJ) $(MLX) parser.c
+parser: $(LIBFT) $(OBJ) $(MLX) parser_elements.c parser_full_files.c parser_open_files.c parser_shapes.c
 	@$(call compile, "$^")
 
 tuples: $(LIBFT) $(OBJ) $(MLX) tuples.c
@@ -114,7 +121,11 @@ camera: $(LIBFT) $(OBJ) $(MLX) camera.c
 computations: $(LIBFT) $(OBJ) $(MLX) computations.c
 	@$(call compile, "$^")
 
+<<<<<<< HEAD
 shapes: $(LIBFT) $(OBJ) $(MLX) shapes.c
+=======
+shadows: $(LIBFT) $(OBJ) $(MLX) shadows.c
+>>>>>>> main
 	@$(call compile, "$^")
 
 clean:

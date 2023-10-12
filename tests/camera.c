@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 10:53:19 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/06 18:35:57 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/11 11:43:08 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,29 +49,53 @@ Test(camera, ray_center_of_canvas)
 	t_tuple		v = vector(0, 0, -1);
 	
 	cr_assert(are_equal_tuples(&r.origin, &p));
-	printf("%f %f %f\n", r.direction.x, r.direction.y, r.direction.z);
 	cr_assert(are_equal_tuples(&r.direction, &v));
 }
-/*
-Test(ray_corner_of_canvas, camera)
+
+Test(camera, ray_corner_of_canvas)
 {
 	t_camera	c;
 	t_ray		r;
+	t_tuple		p = point(0, 0, 0);
+	t_tuple		v = vector(0.66519, 0.33259, -0.66851);
 	
 	c = camera(201, 101, M_PI_2);
-	r = ray_for_pixel(c, 0, 0);
-	cr_assert(r.origin = point(0, 0, 0));
-	cr_assert(r.direction = vector(0.66519, 0.33259, -0.66851));
+	r = ray_for_pixel(&c, 0, 0);
+	cr_assert(are_equal_tuples(&r.origin, &p));
+	cr_assert(are_equal_tuples(&r.direction, &v));
 }
 
-Test(ray_camera_transformation, camera)
+Test(camera, ray_camera_transformation)
 {
 	t_camera	c;
 	t_ray		r;
+	t_tuple		p = point(0, 2, -5);
+	t_tuple		v = vector(sqrt(2)/2, 0, -sqrt(2)/2);
+	t_matrix	m_rotation_y = rotation_y(M_PI_4);
+	t_matrix	m_translation = translation(0, -2, 5);
+	t_matrix	m_transform = multiply_matrices(&m_rotation_y, &m_translation);
 	
 	c = camera(201, 101, M_PI_2);
-	c.transform = rotation_y(M_PI_4) * translation(0, -2, 5);
-	r = ray_for_pixel(c, 100, 50);
-	cr_assert(r.origin = point(0, 2, -5));
-	cr_assert(r.direction = vector(sqrt(M_PI_2)/2, 0, sqrt(-M_PI_2)/2);
-}*/
+	set_transform_in_camera(&c, &m_transform);
+	r = ray_for_pixel(&c, 100, 50);
+	
+
+	cr_assert(are_equal_tuples(&r.origin, &p));
+	cr_assert(are_equal_tuples(&r.direction, &v));
+}
+
+//to change the argument in render to t_scene
+Test(camera, render)
+{
+	t_world w = default_world();
+	t_camera c = camera(11, 11, M_PI_2);
+	t_tuple from = point(0, 0, -5);
+	t_tuple to = point(0, 0, 0);
+	t_tuple up = vector(0, 1, 0);
+	t_matrix transform = view_transform(&from, &to, &up);
+	set_transform_in_camera(&c, &transform);
+	t_canvas *image = render(&c, &w);
+	t_color col = color(0.38066, 0.47583, 0.2855);
+	t_color col2 = pixel_at(image, 5, 5);
+	cr_assert(are_equal_colors(&col, &col2));
+}

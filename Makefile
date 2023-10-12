@@ -7,14 +7,14 @@ INC_LIBFT	=	-I./lib/libft/inc
 UNAME	=	$(shell uname -s)
 
 CC		=	cc
-CFLAGS	+=	-Wall -Wextra -Werror
+CFLAGS	+=	-Wall -Wextra -Werror -g
 
 MAIN	=	main.c
 
-PARSER	=	pre_open_file.c pre_put_file_into_string.c pre_get_elements_from_string.c \
+PARSER	=	parser__color.c parser__double.c parser__point.c\
+			parser_camera.c parser_light.c parser_lightning.c parser_objects.c parser_print_errors.c\
 			parser.c \
-			parser_camera.c parser_lightning.c parser_light.c parser_objects.c\
-			parser__color.c parser__double.c parser__point.c\
+			pre_get_elements_from_string.c pre_open_file.c pre_put_file_into_string.c \
 			put_elements_into_camera.c put_elements_into_lightning.c put_elements_into_shapes.c
 PARSER	:=	$(addprefix parser/, $(PARSER))
 
@@ -41,10 +41,15 @@ RAYS	:=	$(addprefix rays/, $(RAYS))
 SHAPES	=	utils.c spheres.c intersection.c reflection.c material.c
 SHAPES	:=	$(addprefix shapes/, $(SHAPES))
 
-SCENE	=	create_world.c intersect_world_ray.c view_transform.c
+SCENE	=	create_world.c intersect_world_ray.c view_transform.c shade_hits.c prepare_computation.c \
+			is_shadowed.c
 SCENE	:=	$(addprefix scene/, $(SCENE))
 
-SOURCE	=	$(MAIN) $(PARSER) $(TUPLES) $(COLORS) $(CANVAS) $(WINDOW) $(MATRICES) $(RAYS) $(SHAPES) $(SCENE)
+CAMERA	=	create_camera.c ray_for_pixel.c render.c
+CAMERA	:=	$(addprefix camera/, $(CAMERA))
+
+SOURCE	=	$(MAIN) $(PARSER) $(TUPLES) $(COLORS) $(CANVAS) $(WINDOW) $(MATRICES) \
+			$(RAYS) $(SHAPES) $(SCENE) $(CAMERA)
 
 SRC_DIR	=	src/
 SRC		=	$(addprefix $(SRC_DIR), $(SOURCE))
@@ -53,7 +58,7 @@ OBJ_DIR	=	obj/
 OBJ		=	$(addprefix $(OBJ_DIR), $(SOURCE:.c=.o))
 
 ifeq ($(UNAME), Darwin)
-		MLX_DIR		=	../lib/mlx_osx/
+		MLX_DIR		=	./lib/mlx_osx/
 		MLX_FLAGS	=	-L $(MLX_DIR) -l mlx -framework OpenGl -framework Appkit
 		INC_DIRS	=	-I./inc -I./lib/libft/inc/ -I$(MLX_DIR)
 endif

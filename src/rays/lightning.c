@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:31:37 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/23 18:48:50 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/11 12:31:54 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_color	lightning(t_lightning *data)
 	calculate_for_lightning(&light_calc, data);
 	ambient = multiply_color_by_scalar(&light_calc.effective_color,
 			data->material->ambient);
-	if (light_calc.light_dot_normal < 0)
+	if (light_calc.light_dot_normal < 0 || data->in_shadow == true)
 		return (ambient);
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:55:05 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/02 17:20:35 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/09 15:51:42 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static void	discriminant(t_sphere *sphere, t_ray *r, t_disc_calc *d_calc)
 {
 	t_tuple	sphere_to_ray;
+
 
 	sphere_to_ray = substract_tuples(&r->origin, &sphere->origin);
 	d_calc->a = dot(&r->direction, &r->direction);

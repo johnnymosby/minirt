@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_window.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 12:58:41 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/19 21:36:56 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/08 11:46:26 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	free_mlx_memory(t_win *window)
 		mlx_destroy_window(window->mlx_ptr, window->win_ptr);
 	if (window->mlx_ptr)
 	{
-		mlx_destroy_display(window->mlx_ptr);
+		//mlx_destroy_display(window->mlx_ptr);
 		free(window->mlx_ptr);
 	}
 	window = NULL;
@@ -47,7 +47,7 @@ t_win	window(void)
 		WIN_HEIGHT, "MiniRT");
 	if (window.win_ptr == NULL)
 	{
-		mlx_destroy_display(window.mlx_ptr);
+		//mlx_destroy_display(window.mlx_ptr);
 		free(window.mlx_ptr);
 		ft_bzero(&window, sizeof(t_win));
 		return (window); /// print_error in an error.h src/error/error.c?

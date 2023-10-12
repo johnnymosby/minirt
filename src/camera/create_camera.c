@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   create_camera.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 11:35:55 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/06 18:51:53 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/10 21:25:10 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "camera.h"
 
-static void	set_size_values(t_camera *c)
+void	set_size_values(t_camera *c)
 {
 	double	half_view;
 	double	aspect;
@@ -30,6 +30,12 @@ static void	set_size_values(t_camera *c)
 		c->half_height = half_view;
 	}
 	c->pixel_size = (c->half_width * 2 / c->hsize);
+}
+
+void	set_transform_in_camera(t_camera *camera, t_matrix *m)
+{
+	camera->transform = *m;
+	camera->inverse = inverse(m);
 }
 
 t_camera	camera(int hsize, int vsize, double field_of_view)

@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 15:04:05 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/09/23 18:40:08 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/11 12:18:03 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_lightning
 	t_tuple		*point;
 	t_tuple		*eyev;
 	t_tuple		*normalv;
+	bool		in_shadow;
 }	t_lightning;
 
 /*
