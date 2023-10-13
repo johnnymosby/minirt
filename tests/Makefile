@@ -85,6 +85,12 @@ all: $(LIBFT) $(OBJ) $(MLX)
 
 parser: $(LIBFT) $(OBJ) $(MLX) parser_elements.c parser_full_files.c parser_open_files.c parser_shapes.c
 	@$(call compile, "$^")
+parser_elements: $(LIBFT) $(OBJ) $(MLX) parser_elements.c
+	@$(call compile, "$^")
+parser_full_files: $(LIBFT) $(OBJ) $(MLX) parser_full_files.c
+	@$(call compile, "$^")
+parser_open_files: $(LIBFT) $(OBJ) $(MLX) parser_open_files.c
+	@$(call compile, "$^")
 
 tuples: $(LIBFT) $(OBJ) $(MLX) tuples.c
 	@rm -f $(patsubst %.c,%,$(TESTS))
