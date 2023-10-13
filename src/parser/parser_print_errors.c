@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/13 17:35:15 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/13 19:28:25 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ static int	count_chars(char *file_string, int index, int newlines)
 	i = 0;
 	while (count < newlines)
 	{
-			if (file_string[i] == '\n')
-				count++;
+		if (file_string[i] == '\n')
+			count++;
 		i++;
 	}
 	return (index - i);
@@ -65,15 +65,16 @@ static int	count_lines(char *file_string, int index)
 	}
 	return (newlines);
 }
+
 int	print_localisation(int type, int nb)
 {
-	char *str;
+	char	*str;
 
 	str = ft_itoa(nb);
 	if (str == NULL)
 	{
 		ft_putstr_fd("\nERROR MEM. ALLOC. WHILE PRINTING ERROR MESSAGE\n", 2);
-		return (-1) ;
+		return (-1);
 	}
 	if (type == 1)
 		ft_putstr_fd("line: ", 2);
@@ -92,10 +93,9 @@ void	*print_error_parsing(char *file_string, int index, int err_code)
 
 	line_nb = count_lines(file_string, index);
 	char_nb = count_chars(file_string, index, line_nb);
-	
 	ft_putstr_fd("Error\n", 2);
 	if (index != 0)
-	{	
+	{
 		ft_putstr_fd("Error in parsing fount at:\n", 2);
 		if (print_localisation(1, line_nb))
 			return (NULL);
