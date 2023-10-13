@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:29:33 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/11 10:58:53 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/13 13:43:07 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,10 @@ static char	*read_whole_file(int fd)
 	char	*file_string;
 	char	*tmp;
 	ssize_t	r;
-	
+
 	file_string = ft_calloc(BUFFER_SIZE +1, 1);
 	if (file_string == NULL)
 		return (NULL);
-	(void) fd;
 	r = read(fd, file_string, BUFFER_SIZE);
 	while (r > 0)
 	{
@@ -51,6 +50,9 @@ char	*put_file_into_string(char *filename)
 	if (str == NULL)
 	{
 		close (fd);
+		ft_putstr_fd("Error reading the file ", 2);
+		ft_putstr_fd(filename, 2);
+		ft_putstr_fd("\n", 2);
 		return (NULL);
 	}
 	close (fd);

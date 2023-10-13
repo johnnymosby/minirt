@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser__color.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 17:08:51 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/09/30 19:53:47 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/13 13:13:12 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,21 @@ static bool	parse_primary(char *file_string, int *index, double *rgb)
 	return (true);
 }
 
-bool	parse_color(char *file_string, int *index, t_color *color)
+int	parse_color(char *file_string, int *index, t_color *color)
 {
 	if (parse_primary (file_string, index, &(color->red)) == false)
-		return (false);
+		return (VALUE_IS_NOT_A_DIGIT);
 	if (file_string[*index] != ',')
-		return (false);
+		return (MISSING_COMMA);
 	(*index)++;
 	if (parse_primary (file_string, index, &(color->green)) == false)
-		return (false);
+		return (VALUE_IS_NOT_A_DIGIT);
 	if (file_string[*index] != ',')
-		return (false);
+		return (MISSING_COMMA);
 	(*index)++;
 	if (parse_primary (file_string, index, &(color->blue)) == false)
-		return (false);
-	return (true);
+		return (VALUE_IS_NOT_A_DIGIT);
+	while (file_string[*index] == ' ')
+		(*index)++;
+	return (0);
 }

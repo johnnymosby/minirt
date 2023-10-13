@@ -6,14 +6,15 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/10 17:17:56 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/13 12:38:02 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-void	*print_error_parsing(char *str)
+void	*print_error_parsing(int err_code)
 {
-	ft_putstr_fd(str, 2);
+	// to be written;
+	printf("****ERROR CODE: %d****\n", err_code);
 	return (NULL);
 }
