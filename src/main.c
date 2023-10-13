@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:43:54 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/13 15:46:39 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/13 16:18:18 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 
 
-
+/* 
 static t_matrix	set_transform_for_second_scene_wall(bool is_left_wall)
 {
 	t_matrix	m_translated;
@@ -122,7 +122,7 @@ static void	parse_scene2(t_world *w)
 	light_position = point(-10, 10, -10);
 	light_color = color(1, 1, 1);
 	w->lights[0] = point_light(&light_color, &light_position);
-}
+} */
 
 
 /* static void	parse_scene(t_world *w)
@@ -141,7 +141,7 @@ static void	parse_scene2(t_world *w)
 	w->lights[0] = point_light(&light_color, &light_position);
 } */
 
-/* static void	parse_scene3(t_world *w)
+static void	parse_scene3(t_world *w)
 {
 	t_tuple	light_position;
 	t_color	light_color;
@@ -155,7 +155,7 @@ static void	parse_scene2(t_world *w)
 	w->nb_lights = 1;
 	w->lights = ft_calloc(1, sizeof(t_light));
 	w->lights[0] = point_light(&light_color, &light_position);
-} */
+}
 
 static t_camera	set_camera(void)
 {
@@ -190,6 +190,8 @@ int	pressed_key(int keycode, t_controls *controls)
 			translate_camera(keycode, controls);
 		else if (controls->control_state == SHAPE)
 			translate_shape(keycode, controls);
+		else if (controls->control_state == LIGHT)
+			translate_light(keycode, controls);
 	}
 	else if (keycode == KEY_Q || keycode == KEY_E || keycode == KEY_LEFT
 		|| keycode == KEY_RIGHT || keycode == KEY_UP || keycode == KEY_DOWN)
@@ -199,7 +201,15 @@ int	pressed_key(int keycode, t_controls *controls)
 		else if (controls->control_state == SHAPE)
 			rotate_shape(keycode, controls);
 	}
-	printf("button: %d\n", keycode);
+	else if (keycode == KEY_L)
+	{
+		if (controls->control_state != LIGHT)
+			controls->control_state = LIGHT;
+		else if (controls->control_state == LIGHT)
+			controls->control_state = CAMERA;
+	}
+	else if (keycode == KEY_ESC)
+		exit(0);
 	return (0);
 }
 
@@ -213,7 +223,7 @@ int	main(void)
 	set_controls(&controls, &scene);
 	scene.canvas = NULL;
 	scene.camera = set_camera();
-	parse_scene2(&w);
+	parse_scene3(&w);
 	scene.world = &w;
 	if (render(&scene) == false)
 		return (ERR_MEMORY_ALLOCATION);

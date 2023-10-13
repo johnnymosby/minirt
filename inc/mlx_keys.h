@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:40:48 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/13 14:48:07 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/13 16:05:35 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define KEY_D 2
 # define KEY_Q 12
 # define KEY_E 14
+# define KEY_L 37
 # define KEY_CTRL 256
 # define KEY_SPACE 49
 # define KEY_LEFT 123
@@ -45,6 +46,7 @@
 # define KEY_D 100
 # define KEY_Q 113
 # define KEY_E 101
+# define KEY_L 108
 # define KEY_CTRL 65507
 # define KEY_SPACE 32
 # define KEY_LEFT 65361

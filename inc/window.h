@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 12:38:27 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/13 15:48:14 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/13 16:03:30 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ typedef struct s_scene	t_scene;
 typedef enum e_control_state
 {
 	CAMERA,
-	SHAPE
+	SHAPE,
+	LIGHT
 }	t_control_state;
 
 typedef struct s_controls
@@ -79,5 +80,6 @@ void	rotate_camera(int keycode, t_controls *controls);
 void	translate_shape(int keycode, t_controls *controls);
 void	set_updated_transform_in_shape(t_controls *controls, t_matrix *m);
 void	rotate_shape(int keycode, t_controls *controls);
+void	translate_light(int keycode, t_controls *controls);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 15:00:25 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/13 14:58:41 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/13 16:10:07 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,20 @@ void	respond_to_right_click(t_controls *controls)
 		rerender(controls->scene);
 	}
 	controls->control_state = CAMERA;
+}
+
+void	translate_light(int keycode, t_controls *controls)
+{
+	t_light	*light;
+
+	reset_to_default(controls);
+	controls->control_state = LIGHT;
+	light = controls->scene->world->lights + 0;
+	if (keycode == KEY_W || keycode == KEY_S)
+		light->position.z += 1 - 2 * (keycode == KEY_S);
+	else if (keycode == KEY_A || keycode == KEY_D)
+		light->position.x += 1 - 2 * (keycode == KEY_A);
+	else if (keycode == KEY_SPACE || keycode == KEY_CTRL)
+		light->position.y += 1 - 2 * (keycode == KEY_CTRL);
+	rerender(controls->scene);
 }
