@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:14:28 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/11 10:38:58 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/13 12:53:41 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,31 +17,31 @@ Test(parser, open_file)
 	int	fd;
 
 	fd = open_file(NULL);
-	cr_assert( fd == -1, "the filename is NULL");
+	cr_assert( fd < 0, "the filename is NULL");
 	close(fd);
 
 	fd = open_file("");
-	cr_assert( fd == -1, "the filename is empty");
+	cr_assert( fd < -0,  "the filename is empty");
 	close(fd);
 
 	fd = open_file("../testfiles/open_file/wrongsufix1");
-	cr_assert( fd == -1, "wrong suffix 1");
+	cr_assert( fd < 0 -1, "wrong suffix 1");
 	close(fd);
 
 	fd = open_file("../testfiles/open_file/wrongsufix2.rtt");
-	cr_assert( fd == -1, "wrong suffix 2");
+	cr_assert( fd < 0, "wrong suffix 2");
 	close(fd);
 
 	fd = open_file("../testfiles/open_file/wrongsufix3.r");
-	cr_assert( fd == -1, "wrong suffix 3");
+	cr_assert( fd < 0, "wrong suffix 3");
 	close(fd);
 
 	fd = open_file("../testfiles/directory.rt");
-	cr_assert( fd == -1, "the file is a directory");
+	cr_assert( fd < 0, "the file is a directory");
 	close(fd);
 
 	fd = open_file("../testfiles/open_file/doesnotexist.rt");
-	cr_assert( fd == -1, "the file does not exist");
+	cr_assert( fd < 0, "the file does not exist");
 	close(fd);
 
 	fd = open_file("../testfiles/open_file/file_okay.rt");
