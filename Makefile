@@ -30,7 +30,7 @@ CANVAS	:=	$(addprefix canvas/, $(CANVAS))
 
 WINDOW	=	create_window.c mlx_hooks.c mlx_initialise.c controls.c \
 			controls_camera.c controls_shapes.c controls_utils.c \
-			translate_camera.c
+			translate_camera.c rotate_camera.c translate_shape.c rotate_shape.c
 WINDOW	:=	$(addprefix window/, $(WINDOW))
 
 MATRICES	=	utils.c logical_operations.c arithmetic_operations.c \

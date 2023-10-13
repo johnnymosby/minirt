@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:43:54 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/12 18:00:26 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/13 15:46:39 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ static t_camera	set_camera(void)
 	t_tuple		to;
 	t_tuple		up;
 
-	cam = camera(PCT_WIDTH, WIN_HEIGHT, 2.2);
+	cam = camera(PCT_WIDTH, WIN_HEIGHT, M_PI / 3);
 	from = point(0, 1, -5);
 	to = point(0, 1, 0);
 	up = vector(0, 1, 0);
@@ -178,16 +178,27 @@ static void	set_controls(t_controls *controls, t_scene *scene)
 {
 	controls->scene = scene;
 	controls->control_state = CAMERA;
-	controls->position_state = TRANSLATION;
 	controls->shape_in_control = NULL;
 }
 
 int	pressed_key(int keycode, t_controls *controls)
 {
-	if ((keycode == KEY_W || keycode == KEY_S || keycode == KEY_A
-			|| keycode == KEY_D || keycode == KEY_SPACE || keycode == KEY_CTRL)
-		&& controls->control_state == CAMERA)
-		translate_camera(keycode, controls);
+	if (keycode == KEY_W || keycode == KEY_S || keycode == KEY_A
+		|| keycode == KEY_D || keycode == KEY_SPACE || keycode == KEY_CTRL)
+	{
+		if (controls->control_state == CAMERA)
+			translate_camera(keycode, controls);
+		else if (controls->control_state == SHAPE)
+			translate_shape(keycode, controls);
+	}
+	else if (keycode == KEY_Q || keycode == KEY_E || keycode == KEY_LEFT
+		|| keycode == KEY_RIGHT || keycode == KEY_UP || keycode == KEY_DOWN)
+	{
+		if (controls->control_state == CAMERA)
+			rotate_camera(keycode, controls);
+		else if (controls->control_state == SHAPE)
+			rotate_shape(keycode, controls);
+	}
 	printf("button: %d\n", keycode);
 	return (0);
 }

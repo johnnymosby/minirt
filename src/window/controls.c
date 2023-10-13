@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 15:00:25 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/12 17:27:15 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/13 14:58:41 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static void	reset_to_default(t_controls *controls)
 			= controls->shape_in_control->material.original_color;
 		controls->shape_in_control = NULL;
 		controls->control_state = CAMERA;
-		controls->position_state = TRANSLATION;
 	}
 }
 
