@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 11:51:29 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/12 17:26:27 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/13 19:34:26 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,15 @@ typedef struct s_cylinder
 	bool	closed;
 }	t_cylinder;
 
+typedef struct s_cube
+{
+	t_tuple	origin;
+	double	radius;
+	float	max;
+	float	min;
+	bool	closed;
+}	t_cube;
+
 typedef struct s_disc_calc
 {
 	double	a;
@@ -56,6 +65,7 @@ typedef struct s_material
 	double	specular;
 	double	shininess;
 	t_color	color;
+	t_color	original_color;
 }	t_material;
 
 typedef struct s_shape
@@ -71,6 +81,7 @@ typedef struct s_shape
 	t_matrix		inverse;
 	t_matrix		transpose;
 	t_material		material;
+	t_matrix		original_transform;
 }	t_shape;
 
 /*

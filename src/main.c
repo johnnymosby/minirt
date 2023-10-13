@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:43:54 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/11 23:39:06 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/13 16:18:18 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 
 
 
-
-/* static t_matrix	set_transform_for_second_scene_wall(bool is_left_wall)
+/* 
+static t_matrix	set_transform_for_second_scene_wall(bool is_left_wall)
 {
 	t_matrix	m_translated;
 	t_matrix	m_rotated_y;
@@ -122,8 +122,8 @@ static void	parse_scene2(t_world *w)
 	light_position = point(-10, 10, -10);
 	light_color = color(1, 1, 1);
 	w->lights[0] = point_light(&light_color, &light_position);
-}
- */
+} */
+
 
 /* static void	parse_scene(t_world *w)
 {
@@ -155,7 +155,7 @@ static void	parse_scene3(t_world *w)
 	w->nb_lights = 1;
 	w->lights = ft_calloc(1, sizeof(t_light));
 	w->lights[0] = point_light(&light_color, &light_position);
-} 
+}
 
 static t_camera	set_camera(void)
 {
@@ -164,13 +164,53 @@ static t_camera	set_camera(void)
 	t_tuple		to;
 	t_tuple		up;
 
-	cam = camera(PCT_WIDTH, WIN_HEIGHT, 2.2);
+	cam = camera(PCT_WIDTH, WIN_HEIGHT, M_PI / 3);
 	from = point(0, 1, -5);
 	to = point(0, 1, 0);
 	up = vector(0, 1, 0);
 	cam.transform = view_transform(&from, &to, &up);
 	cam.inverse = inverse(&cam.transform);
+	cam.original_transform = cam.transform;
 	return (cam);
+}
+
+static void	set_controls(t_controls *controls, t_scene *scene)
+{
+	controls->scene = scene;
+	controls->control_state = CAMERA;
+	controls->shape_in_control = NULL;
+}
+
+int	pressed_key(int keycode, t_controls *controls)
+{
+	if (keycode == KEY_W || keycode == KEY_S || keycode == KEY_A
+		|| keycode == KEY_D || keycode == KEY_SPACE || keycode == KEY_CTRL)
+	{
+		if (controls->control_state == CAMERA)
+			translate_camera(keycode, controls);
+		else if (controls->control_state == SHAPE)
+			translate_shape(keycode, controls);
+		else if (controls->control_state == LIGHT)
+			translate_light(keycode, controls);
+	}
+	else if (keycode == KEY_Q || keycode == KEY_E || keycode == KEY_LEFT
+		|| keycode == KEY_RIGHT || keycode == KEY_UP || keycode == KEY_DOWN)
+	{
+		if (controls->control_state == CAMERA)
+			rotate_camera(keycode, controls);
+		else if (controls->control_state == SHAPE)
+			rotate_shape(keycode, controls);
+	}
+	else if (keycode == KEY_L)
+	{
+		if (controls->control_state != LIGHT)
+			controls->control_state = LIGHT;
+		else if (controls->control_state == LIGHT)
+			controls->control_state = CAMERA;
+	}
+	else if (keycode == KEY_ESC)
+		exit(0);
+	return (0);
 }
 
 int	main(void)
@@ -178,11 +218,12 @@ int	main(void)
 	t_win		win;
 	t_world		w;
 	t_scene		scene;
+	t_controls	controls;
 
+	set_controls(&controls, &scene);
 	scene.canvas = NULL;
-	scene.zoom = 2.2;
-	parse_scene3(&w);
 	scene.camera = set_camera();
+	parse_scene3(&w);
 	scene.world = &w;
 	if (render(&scene) == false)
 		return (ERR_MEMORY_ALLOCATION);
@@ -197,12 +238,13 @@ int	main(void)
 	canvas_to_mlx_image(scene.canvas, win.pct.addr);
 	mlx_put_image_to_window(win.mlx_ptr, win.win_ptr, win.pct.img_ptr, 0, 0);
 	catch_mlx_hooks(&win);
-	mlx_mouse_hook(win.win_ptr, mouse_hook, &scene);
+	mlx_key_hook(win.win_ptr, pressed_key, &controls);
+	mlx_mouse_hook(win.win_ptr, mouse_hook, &controls);
 	mlx_loop(win.mlx_ptr);
 	free_canvas(scene.canvas);
 	free(w.lights);
 	free(w.shape);
-	// mlx_destroy_display(win.mlx_ptr);
+	mlx_destroy_display(win.mlx_ptr);
 	free(win.mlx_ptr);
 	return (0);
 }

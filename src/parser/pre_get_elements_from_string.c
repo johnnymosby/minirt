@@ -6,13 +6,13 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/11 18:19:18 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/13 19:24:00 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static bool	set_one_element(char *file_string, int *index, t_element *element)
+static int	set_one_element(char *file_string, int *index, t_element *element)
 {
 	if (ft_strncmp(file_string + *index, "A ", 2) == 0)
 		return (parse_ambient(file_string, index, element));
@@ -26,8 +26,7 @@ static bool	set_one_element(char *file_string, int *index, t_element *element)
 		return (parse_plane(file_string, index, element));
 	else if (!ft_strncmp(file_string + *index, "cy ", 3))
 		return (parse_cylinder(file_string, index, element));
-	print_error_parsing("wrong identifier at the start of the line\n");
-	return (false);
+	return (ERR_IDENTIFIER_ELEMENT_WRONG);
 }
 
 static int	count_elements(char *file_string)
@@ -51,34 +50,49 @@ static int	count_elements(char *file_string)
 	return (nb_elements);
 }
 
+static int	set_elements(char *file_string, int *index, \
+					int *nb_elmts, t_element *elements)
+{
+	int	i;
+	int	ret;
+
+	i = 0;
+	while (i < *nb_elmts)
+	{
+		while (file_string[*index] == '\n')
+			(*index)++;
+		ret = set_one_element(file_string, index, elements + i);
+		if (ret != 0)
+		{
+			free(elements);
+			return (ret);
+		}
+		i++;
+	}
+	return (0);
+}
+
 /*
-*	calls the open function, count the number of elements.
-*	no file descriptor is open after returning the function.
+	calls the open function, count the number of elements.
+	no file descriptor is open after returning the function.
 */
 t_element	*get_elements(char *file_string, int *nb_elmts)
 {
 	t_element	*elements;
 	int			index;
-	int			i;
+	int			ret;
 
 	index = 0;
+	if (file_string == NULL)
+		return (print_error_parsing(file_string, 0, ERR_NB_MANDATORY_ELMTS));
 	*nb_elmts = count_elements(file_string);
 	if (*nb_elmts < 3)
-		return (print_error_parsing("wrong number of elements\n"));
+		return (print_error_parsing(file_string, 0, ERR_NB_MANDATORY_ELMTS));
 	elements = ft_calloc(*nb_elmts, sizeof(t_element));
 	if (elements == NULL)
-		return (NULL);
-	i = 0;
-	while (i < *nb_elmts)
-	{
-		while (file_string[index] == '\n')
-			index++;
-		if (set_one_element(file_string, &index, elements + i) == false)
-		{
-			free(elements);
-			return (NULL);
-		}
-		i++;
-	}
+		return (print_error_parsing(file_string, 0, ERR_MALLOC));
+	ret = set_elements(file_string, &index, nb_elmts, elements);
+	if (ret != 0)
+		return (print_error_parsing(file_string, index, ret));
 	return (elements);
 }
