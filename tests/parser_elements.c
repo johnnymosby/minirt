@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:14:28 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/13 13:25:23 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/13 17:36:38 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ Test(parser, get_number_elements)
 	char	*str;
 	
 	str = "";
-//	cr_assert(get_elements(str, &nb) == NULL, "string is empty" );
+	cr_assert(get_elements(str, &nb) == NULL, "string is empty" );
 	
 	nb = 99;
 	str = "A 0.2 255,255,255\nC -50,0,20 0,0,0 70\nL -40,0,30 0.7 255,255,255\npl 0,0,0 0,1.0,0 255,0,225\nsp 0,0,20 20 255,0,0\ncy 50.0,0.0,20.6 0,0,1.0 14.2 21.42 10,0,255";
@@ -48,6 +48,7 @@ Test(parser, get_number_elements)
 	str = "A 0.2 255,255,255\n\n\nC -50,0,20 0,0,0 70\nL -40,0,30 0.7 255,255,255\n\npl 0,0,0 0,1.0,0 255,0,225\nsp 0,0,20 20 255,0,0\ncy 50.0,0.0,20.6 0,0,1.0 14.2 21.42 10,0,255";
 	cr_assert(get_elements(str, &nb) != NULL, "6 elements NL_between_lines");
 	cr_assert(nb == 6);
+
 }
 
 static bool	are_equal_elt_camera(t_element *c1, t_element *c2)
@@ -59,6 +60,7 @@ static bool	are_equal_elt_camera(t_element *c1, t_element *c2)
 	if (!are_equal_doubles(c1->fov, c2->fov))
 		return (false);
 	return (true);
+
 }
 
 static bool	are_equal_elt_lightnings(t_element *l1, t_element *l2)
@@ -90,6 +92,7 @@ static bool	are_equal_elt_spheres(t_element *sp1, t_element *sp2)
 		return (false);
 	return (true);
 }
+
 static bool	are_equal_elements(t_element *elmt1, t_element *elmt2)
 {
 	if (elmt1->element_type == ELMT_SPHERE && elmt2->element_type == ELMT_SPHERE)
@@ -150,6 +153,7 @@ Test(parser, parse_sphere_exemple_subject)
 	parse_sphere(str, &index, &sh_parser);
 	cr_assert(are_equal_elements(&sh_parser, &sh_control));
 	cr_assert(index = ft_strlen(str));
+
 }
 
 Test(parser, parse_light_exemple_subject)
@@ -240,6 +244,7 @@ Test(parser, parse_ambient_exemple_subject)
 	parse_ambient(str, &index, &sh_parser);
 	cr_assert(are_equal_elements(&sh_parser, &sh_control));
 	cr_assert(index = ft_strlen(str));
+
 }
 
 Test(parser, parse_camera_exemple_subject)

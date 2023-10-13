@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 19:27:48 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/13 13:43:28 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/13 16:40:17 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	parse_brightness(char *file_string, int *index, t_element *element)
 	if (ret != 0)
 		return (ret);
 	if (onecolor < 0 || onecolor > 1.0)
-		return (VALUE_COLOR_WRONG);
+		return (ERR_VALUE_BRIGHTNESS_LIGHT);
 	element->light_intensity = color(onecolor, onecolor, onecolor);
 	return (0);
 }

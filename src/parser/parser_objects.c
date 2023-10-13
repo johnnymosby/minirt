@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/13 13:42:30 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/13 16:57:04 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ static int	parse_radius(char *file_string, int *index, t_element *element)
 	if (ret != 0)
 		return (ret);
 	element->radius *= 0.5;
-	if (element->radius < 0)
-		return (VALUE_RADIUS_WRONG);
+	if (element->radius < 0 && element->element_type == ELMT_SPHERE)
+		return (ERR_VALUE_DIAMETER_NEGATIV);
+	if (element->radius < 0 && element->element_type == ELMT_CYLINDER)
+		return (ERR_VALUE_DIAMETER_NEGATIV);
 	return (0);
 }
 

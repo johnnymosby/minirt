@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 14:31:05 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/13 13:18:16 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/13 16:42:40 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	set_absolut_result(char *file_string, int *index, double *result)
 	fraction = 0.1;
 	is_decimal = false;
 	if (!ft_isdigit(file_string[*index]))
-		return (VALUE_IS_NOT_A_DIGIT);
+		return (ERR_VALUE_IS_NOT_A_DIGIT);
 	while (ft_isdigit(file_string[*index]) || file_string[*index] == '.')
 	{
 		if (ft_isdigit(file_string[*index]) && is_decimal == false)
@@ -33,7 +33,7 @@ static int	set_absolut_result(char *file_string, int *index, double *result)
 		else if (file_string[*index] == '.' && is_decimal == false)
 			is_decimal = true;
 		else if (file_string[*index] == '.')
-			return (VALUE_IS_NOT_A_DIGIT);
+			return (ERR_VALUE_IS_NOT_A_DIGIT);
 		(*index)++;
 	}
 	return (0);

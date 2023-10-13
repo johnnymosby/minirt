@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:41:27 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/13 12:36:09 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/13 17:00:17 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,21 @@
 # include "world.h"
 # include "camera.h"
 
-# define VALUE_IS_NOT_A_DIGIT -1
-# define MISSING_COMMA -2
-# define MISSING_SPACE -3
-# define VALUE_FOV_WRONG -4
-# define VALUE_LIGHTNING_RATIO_WRONG -5
-# define VALUE_COLOR_WRONG -6
-# define VALUE_RADIUS_WRONG -7
-# define ERR_MALLOC -8
-# define NUMBER_MANDATORY_ELEMENTS_WRONG -9
-# define IDENTIFIER_ELEMENT_WRONG -11
-# define ERROR_OPEN_FILE -10
-# define NAME_FILE_WRONG -11
+# define ERR_OPEN_FILE -1
+# define ERR_NAME_FILE_WRONG -2
+# define ERR_NUMBER_MANDATORY_ELEMENTS_WRONG -3
+# define ERR_IDENTIFIER_ELEMENT_WRONG -4
+# define ERR_MALLOC -5
+# define ERR_VALUE_IS_NOT_A_DIGIT -6
+# define ERR_MISSING_COMMA -7
+# define ERR_MISSING_SPACE -8
+# define ERR_VALUE_FOV_WRONG -9
+# define ERR_VALUE_LIGHTNING_RATIO_WRONG -10
+# define ERR_VALUE_COLOR_WRONG -11
+# define ERR_VALUE_DIAMETER_NEGATIV -12
+# define ERR_VALUE_HEIGHT_NEGATIV -13
+# define ERR_VALUE_BRIGHTNESS_LIGHT -14
+# define ERR_VALUE_NORM_VECTOR -14
 
 typedef enum e_shape_type	t_shape_type;
 
@@ -83,7 +86,7 @@ int			parse_cylinder(char *file_string, int *index, t_element *element);
 void		put_elements_into_camera(t_element *element, t_camera *cam);
 void		put_elements_into_lightning(t_element *element, int index, t_world *w);
 void		put_elements_into_shapes(t_element *element, int index, t_world *w);
-void		*print_error_parsing(int err_code);
+void		*print_error_parsing(char *file_string, int index, int err_code);
 bool		parser(char *filename, t_world *w, t_camera *cam);
 
 #endif

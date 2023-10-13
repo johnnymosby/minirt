@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 19:43:18 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/13 13:23:57 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/13 16:43:45 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	parse_fov(char *file_string, int *index, t_element *element)
 	if (ret != 0)
 		return (ret);
 	if (element->fov < 0 || element->fov > 180.0)
-		return (VALUE_FOV_WRONG);
+		return (ERR_VALUE_FOV_WRONG);
 	return (0);
 }
 

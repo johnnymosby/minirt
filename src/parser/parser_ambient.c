@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_lightning.c                                 :+:      :+:    :+:   */
+/*   parser_ambient.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 09:48:43 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/13 13:14:46 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/13 16:43:16 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	parse_lightning_ratio(char *file_string, int *index, \
 		return (ret);
 	if (element->ambient_lightning_ratio < 0 \
 		|| element->ambient_lightning_ratio > 1.0)
-		return (VALUE_LIGHTNING_RATIO_WRONG);
+		return (ERR_VALUE_LIGHTNING_RATIO_WRONG);
 	return (0);
 }
 

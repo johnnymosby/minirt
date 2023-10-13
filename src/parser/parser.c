@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/13 13:39:56 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/13 17:41:01 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	allocate_shapes_lights_lightning(t_world *w)
 		ft_putstr_fd("Error in the memory allocation of the shapes\n", 2);
 		return (ERR_MALLOC);
 	}
-	return (ERR_MALLOC);
+	return (0);
 }
 
 static int	check_nb_elements(t_element *elmts, int nb_elmts, t_world *w)
@@ -61,7 +61,7 @@ static int	check_nb_elements(t_element *elmts, int nb_elmts, t_world *w)
 		i++;
 	}
 	if (nb_a != 1 || nb_c != 1 || nb_l != 1)
-		return (NUMBER_MANDATORY_ELEMENTS_WRONG);
+		return (ERR_NUMBER_MANDATORY_ELEMENTS_WRONG);
 	w->nb_shapes = nb_elmts - 3;
 	w->nb_lights = 1;
 	return (0);

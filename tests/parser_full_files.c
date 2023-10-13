@@ -6,12 +6,12 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:14:28 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/13 10:55:33 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/13 17:37:58 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tests.h"
-/*
+
 Test(parser, full_files_subject)
 {
 	t_world		w;
@@ -53,4 +53,4 @@ Test(parser, full_files_subject)
 		free(w.lights);
 	if (w.shape)
 		free(w.shape);
-}*/
+}
