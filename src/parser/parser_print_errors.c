@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_print_errors.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/13 19:28:25 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/14 18:52:25 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,13 @@ int	print_localisation(int type, int nb)
 	str = ft_itoa(nb);
 	if (str == NULL)
 	{
-		ft_putstr_fd("\nERROR MEM. ALLOC. WHILE PRINTING ERROR MESSAGE\n", 2);
+		ft_putstr_fd("Error\nERROR MEM. ALLOC. WHILE PRINTING ERR MESSAGE\n", 2);
 		return (-1);
 	}
 	if (type == 1)
-		ft_putstr_fd("line: ", 2);
+		ft_putstr_fd("line:\t", 2);
 	if (type == 2)
-		ft_putstr_fd("character: ", 2);
+		ft_putstr_fd("character:\t", 2);
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd("\n", 2);
 	free(str);

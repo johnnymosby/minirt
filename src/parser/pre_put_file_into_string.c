@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pre_put_file_into_string.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:29:33 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/13 19:01:29 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/14 18:16:37 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,22 @@ static int	open_file(char *filename)
 
 	if (filename == NULL || ft_strlen(filename) < 3)
 	{
-		ft_putstr_fd("The file name \"", 2);
+		ft_putstr_fd("Error\nThe file name \"", 2);
 		ft_putstr_fd(filename, 2);
 		ft_putstr_fd("\" should more than 3 characters\n", 2);
 		return (ERR_NAME_FILE_WRONG);
 	}
 	if (ft_strncmp(filename + ft_strlen(filename) -3, ".rt", 4))
 	{
+		ft_putstr_fd("Error\nThe file file extension of \"", 2);
 		ft_putstr_fd(filename, 2);
-		ft_putstr_fd(" file extension should be .rt\n", 2);
+		ft_putstr_fd("\" should be .rt\n", 2);
 		return (ERR_NAME_FILE_WRONG);
 	}
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_putstr_fd("Error opening the file: ", 2);
+		ft_putstr_fd("Error\n Error opening the file: ", 2);
 		ft_putstr_fd(filename, 2);
 		ft_putstr_fd("\n", 2);
 		return (ERR_OPEN_FILE);
@@ -81,9 +82,9 @@ char	*put_file_into_string(char *filename)
 	if (str == NULL)
 	{
 		close (fd);
-		ft_putstr_fd("Error reading the file ", 2);
+		ft_putstr_fd("Error\n Error while reading the file \"", 2);
 		ft_putstr_fd(filename, 2);
-		ft_putstr_fd("\n", 2);
+		ft_putstr_fd("\"\n", 2);
 		return (NULL);
 	}
 	close (fd);
