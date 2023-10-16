@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:41:27 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/13 19:30:22 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/16 10:24:59 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ typedef struct s_element
 	t_color			light_intensity;
 	double			cylinder_height;
 	double			fov;
-
 }	t_element;
 
 /*
@@ -91,7 +90,7 @@ int			parse_cylinder(char *file_string, int *index, t_element *element);
 ** ------------------------------- PARSER -------------------------------------
 */
 
-bool		parser(char *filename, t_world *w, t_camera *cam);
+bool		parser(char *filename, t_scene *scene);
 
 /*
 ** ------------------------------- PARSER PRINT_ERRORS-------------------------

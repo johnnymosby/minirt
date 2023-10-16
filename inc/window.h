@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 12:38:27 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/13 16:03:30 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/16 11:48:49 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ t_win	window(void);
 bool	initialise_mlx(t_win *window);
 bool	initialise_picture(t_win *window);
 bool	initialise_menu(t_win *window);
-void	catch_mlx_hooks(t_win *window);
+void	catch_close_hooks(t_win *window);
 int		mouse_hook(int keycode, int x, int y, t_controls *controls);
 void	change_camera_zoom(int keycode, t_scene *scene);
 void	respond_to_left_click(t_controls *controls, int x, int y);

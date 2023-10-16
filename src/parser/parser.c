@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/14 19:02:59 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/16 10:44:22 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,7 @@ static bool	check_nb_elements(t_element *elmts, int nb_elmts, t_world *w)
 	return (0);
 }*/
 
-static bool	put_elements_into_world_and_camera(t_element *elmts, \
-	int nb_elmts, t_world *w, t_camera *cam)
+static bool	put_elements_into_scene(t_element *elmts, int nb_elmts, t_scene *scene)
 {
 	int	i;
 	int	index_lights;
@@ -109,18 +108,18 @@ static bool	put_elements_into_world_and_camera(t_element *elmts, \
 	while (++i < nb_elmts)
 	{
 		if (elmts[i].element_type == ELMT_CAMERA)
-			put_elements_into_camera (elmts + i, cam);
+			put_elements_into_camera (elmts + i, &scene->camera);
 		else if (elmts[i].element_type == ELMT_AMBIENT)
-			put_elements_into_lightning (elmts + i, 0, w);
+			put_elements_into_lightning (elmts + i, 0, scene->world);
 		else if (elmts[i].element_type == ELMT_LIGHT)
-			put_elements_into_lightning (elmts + i, ++index_lights, w);
+			put_elements_into_lightning (elmts + i, ++index_lights, scene->world);
 		else
-			put_elements_into_shapes (elmts + i, ++index_shapes, w);
+			put_elements_into_shapes (elmts + i, ++index_shapes, scene->world);
 	}
 	return (true);
 }
 
-bool	parser(char *filename, t_world *w, t_camera *cam)
+bool	parser(char *filename, t_scene *scene)
 {
 	char		*file_string;
 	t_element	*elmts;
@@ -133,17 +132,17 @@ bool	parser(char *filename, t_world *w, t_camera *cam)
 	free(file_string);
 	if (elmts == NULL)
 		return (false);
-	if (check_nb_elements(elmts, nb_elmts, w) != 0)
+	if (check_nb_elements(elmts, nb_elmts, scene->world) != 0)
 	{
 		free (elmts);
 		return (false);
 	}
-	if (allocate_shapes_lights_lightning(w) != 0)
+	if (allocate_shapes_lights_lightning(scene->world) != 0)
 	{
 		free(elmts);
 		return (false);
 	}
-	put_elements_into_world_and_camera(elmts, nb_elmts, w, cam);
+	put_elements_into_scene(elmts, nb_elmts, scene);
 	free(elmts);
 	return (true);
 }

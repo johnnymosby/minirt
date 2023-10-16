@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_elements_into_camera_lightning.c               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 13:30:52 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/13 19:20:21 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/16 11:02:31 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,18 @@
 
 void	put_elements_into_camera(t_element *element, t_camera *cam)
 {
-//	t_tuple	from;
-//	t_tuple	to;
-//	t_tuple	up;
-	*cam = camera(HSIZE_DEFAULT, VSIZE_DEFAULT, element->fov);
-	//cam->transform = view_transform(&from, &to, &up);
+	t_tuple		from;
+	t_tuple		to;
+	t_tuple		up;
+
+	(void) element;
+	*cam = camera(PCT_WIDTH, WIN_HEIGHT, element->fov);
+	from = element->coordinates;
+	to = point(0, 0, 0); // check with ruslan if okay
+	up = element->orientation;
+	cam->transform = view_transform(&from, &to, &up);
+	cam->inverse = inverse(&cam->transform);
+	cam->original_transform = cam->transform;
 }
 /*		[BONUS]
 void	put_elements_into_lightning(t_element *element, int index, t_world *w)
