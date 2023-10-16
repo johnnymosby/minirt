@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pre_get_elements_from_string.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/13 19:24:00 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/16 15:05:54 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,28 +71,27 @@ static int	set_elements(char *file_string, int *index, \
 	}
 	return (0);
 }
-
+int	free_elements(char *file_string, int index, int err_code)
+{
+	print_error_parsing(file_string, index, err_code);
+	return(err_code);
+}
 /*
 	calls the open function, count the number of elements.
 	no file descriptor is open after returning the function.
 */
-t_element	*get_elements(char *file_string, int *nb_elmts)
+int	get_elements(char *file_string, int *nb_elmts, t_element *elmts)
 {
-	t_element	*elements;
 	int			index;
 	int			ret;
 
 	index = 0;
-	if (file_string == NULL)
-		return (print_error_parsing(file_string, 0, ERR_NB_MANDATORY_ELMTS));
 	*nb_elmts = count_elements(file_string);
-	if (*nb_elmts < 3)
-		return (print_error_parsing(file_string, 0, ERR_NB_MANDATORY_ELMTS));
-	elements = ft_calloc(*nb_elmts, sizeof(t_element));
-	if (elements == NULL)
-		return (print_error_parsing(file_string, 0, ERR_MALLOC));
-	ret = set_elements(file_string, &index, nb_elmts, elements);
+	elmts = ft_calloc(*nb_elmts, sizeof(t_element));
+	if (elmts == NULL)
+		return (free_elements(file_string, 0, ERR_MALLOC));
+	ret = set_elements(file_string, &index, nb_elmts, elmts);
 	if (ret != 0)
-		return (print_error_parsing(file_string, index, ret));
-	return (elements);
+		return (free_elements(file_string, index, ret));
+	return (0);
 }

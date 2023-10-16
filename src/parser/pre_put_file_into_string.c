@@ -6,13 +6,13 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:29:33 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/14 18:16:37 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/16 18:45:13 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static char	*read_whole_file(int fd)
+static char	*read_whole_file(int fd, int *ret)
 {
 	char	buf[BUFFER_SIZE +1];
 	char	*file_string;
@@ -21,7 +21,10 @@ static char	*read_whole_file(int fd)
 
 	file_string = ft_calloc(BUFFER_SIZE +1, 1);
 	if (file_string == NULL)
+	{	
+		*ret = ERR_MALLOC;
 		return (NULL);
+	}
 	r = read(fd, file_string, BUFFER_SIZE);
 	while (r > 0)
 	{
@@ -31,10 +34,16 @@ static char	*read_whole_file(int fd)
 		file_string = ft_strjoin(file_string, buf);
 		free(tmp);
 		if (file_string == NULL)
+		{	
+			*ret = ERR_MALLOC;
 			return (NULL);
+		}
 	}
 	if (r < 0)
+	{	
+		*ret = ERR_READ;
 		free (file_string);
+	}
 	return (file_string);
 }
 
@@ -70,21 +79,21 @@ static int	open_file(char *filename)
 	return (fd);
 }
 
-char	*put_file_into_string(char *filename)
+char	*put_file_into_string(char *filename, int *ret)
 {
 	char	*str;
 	int		fd;
 
 	fd = open_file(filename);
 	if (fd < 0)
+	{
+		*ret = fd;
 		return (NULL);
-	str = read_whole_file(fd);
+	}
+	str = read_whole_file(fd, ret);
 	if (str == NULL)
 	{
 		close (fd);
-		ft_putstr_fd("Error\n Error while reading the file \"", 2);
-		ft_putstr_fd(filename, 2);
-		ft_putstr_fd("\"\n", 2);
 		return (NULL);
 	}
 	close (fd);
