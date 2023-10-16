@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prepare_computation.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:24:21 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/12 12:38:04 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/16 23:44:12 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,19 @@ static void	calculate_over_point(t_comp *comps)
 	comps->over_point = add_tuples(&comps->point, &product);
 }	
 
+static t_tuple	normal_at(t_shape *shape, t_tuple *point)
+{
+	t_tuple		local_point;
+	t_tuple		local_normal;
+	t_tuple		world_normal;
+
+	local_point = multiply_matrix_by_tuple(&shape->inverse, point);
+	local_normal = shape->normal_at(shape, &local_point);
+	world_normal = multiply_matrix_by_tuple(&shape->transform, &local_normal);
+	world_normal.w = 0.0;
+	return (normalize(&world_normal));
+}
+
 t_comp	prepare_computations(t_hit *intersection, t_ray *ray)
 {
 	t_comp	comps;
@@ -29,8 +42,7 @@ t_comp	prepare_computations(t_hit *intersection, t_ray *ray)
 	comps.object = intersection->obj;
 	comps.point = position(ray, comps.t);
 	comps.eyev = negate_tuple(&ray->direction);
-	comps.normalv = comps.object->normal_at(comps.object, &comps.point);
-// normal_at will be refactored for all shapesin chapter 9
+	comps.normalv = normal_at(comps.object, &comps.point);
 	if (dot(&comps.normalv, &comps.eyev) < 0.0)
 	{
 		comps.inside = true;
