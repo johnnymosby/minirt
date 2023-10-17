@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pre_get_elements_from_string.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/16 15:05:54 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/17 13:26:41 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,7 @@ static int	set_one_element(char *file_string, int *index, t_element *element)
 	return (ERR_IDENTIFIER_ELEMENT_WRONG);
 }
 
-static int	count_elements(char *file_string)
-{
-	int		nb_elements;
-	char	*tmp;
 
-	nb_elements = 0;
-	tmp = file_string;
-	while (*tmp == '\n')
-		tmp++;
-	while (*tmp != '\0')
-	{
-		if (*tmp == '\n' && tmp != file_string
-			&& *(tmp +1) != '\n' && *(tmp +1) != '\0')
-			nb_elements++;
-		tmp++;
-	}
-	if (file_string != tmp && *tmp -1 != '\n')
-		nb_elements++;
-	return (nb_elements);
-}
 
 static int	set_elements(char *file_string, int *index, \
 					int *nb_elmts, t_element *elements)
@@ -86,10 +67,7 @@ int	get_elements(char *file_string, int *nb_elmts, t_element *elmts)
 	int			ret;
 
 	index = 0;
-	*nb_elmts = count_elements(file_string);
-	elmts = ft_calloc(*nb_elmts, sizeof(t_element));
-	if (elmts == NULL)
-		return (free_elements(file_string, 0, ERR_MALLOC));
+
 	ret = set_elements(file_string, &index, nb_elmts, elmts);
 	if (ret != 0)
 		return (free_elements(file_string, index, ret));

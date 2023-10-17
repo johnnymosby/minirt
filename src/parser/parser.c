@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/16 18:47:55 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/17 13:31:12 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,14 @@ static int	allocate_shapes_lights_lightning(t_world *w)
 	}
 	return (0);
 }
-
 static int	check_nb_elements(t_element *elmts, int nb_elmts, t_world *w)
 {
 	int		i;
 	int		nb[3];
 
-	i = -1;
+	i = 0;
 	ft_bzero(nb, sizeof(nb));
-	while (++i < nb_elmts)
+	while (i < nb_elmts)
 	{
 		if (elmts[i].element_type == ELMT_AMBIENT)
 			nb[ELMT_AMBIENT]++;
@@ -56,10 +55,11 @@ static int	check_nb_elements(t_element *elmts, int nb_elmts, t_world *w)
 			nb[ELMT_CAMERA]++;
 		else if (elmts[i].element_type == ELMT_LIGHT)
 			nb[ELMT_LIGHT]++;
+		i++;
 	}
 	if (nb[ELMT_AMBIENT] != 1 || nb[ELMT_CAMERA] != 1 || nb[ELMT_LIGHT] != 1)
 	{
-		print_error_parsing(NULL, 0, ERR_NB_MANDATORY_ELMTS);
+		//print_error_parsing(NULL, 0, ERR_NB_MANDATORY_ELMTS);
 		return (ERR_NB_MANDATORY_ELMTS);
 	}
 	w->nb_shapes = nb_elmts - 3;
@@ -123,7 +123,26 @@ static int	free_elements(t_element *elmmts, int err_code)
 	free (elmmts);
 	return (err_code);
 }
+static int	count_elements(char *file_string)
+{
+	int		nb_elements;
+	char	*tmp;
 
+	nb_elements = 0;
+	tmp = file_string;
+	while (*tmp == '\n')
+		tmp++;
+	while (*tmp != '\0')
+	{
+		if (*tmp == '\n' && tmp != file_string
+			&& *(tmp +1) != '\n' && *(tmp +1) != '\0')
+			nb_elements++;
+		tmp++;
+	}
+	if (file_string != tmp && *tmp -1 != '\n')
+		nb_elements++;
+	return (nb_elements);
+}
 
 int	parser(char *filename, t_scene *scene)
 {
@@ -132,10 +151,18 @@ int	parser(char *filename, t_scene *scene)
 	int			nb_elmts;
 	int			ret;
 
+	ret = 0;
 	file_string = put_file_into_string(filename, &ret);
 	if (ret != 0)
 		return (ret);
-	elmts = NULL;
+
+	nb_elmts = count_elements(file_string);
+	elmts = ft_calloc(nb_elmts, sizeof(t_element));
+	if (elmts == NULL)
+	{	
+		free (file_string);
+		return (ERR_MALLOC);
+	}
 	ret = get_elements(file_string, &nb_elmts, elmts);
 	free(file_string);
 	if (ret != 0)
