@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_print_errors.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/14 18:52:25 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/17 11:37:35 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	print_message(int err_code)
 	s[2] = "Name of the file is not correct\n";
 	s[3] = "Number of mandatory elements is not correct\n";
 	s[4] = "Identifier of element is not correct\n";
-	s[5] = "Nemmory allocation error while getting the data\n";
+	s[5] = "Memory allocation error while getting the data\n";
 	s[6] = "Value should be a digit\n";
 	s[7] = "A comma is missing\n";
 	s[8] = "A space is missing\n";

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pre_put_file_into_string.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:29:33 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/16 18:45:13 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/17 11:40:56 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	open_file(char *filename)
 {
 	int	fd;
 
-	if (filename == NULL || ft_strlen(filename) < 3)
+	if (filename == NULL || ft_strlen(filename) <= 3)
 	{
 		ft_putstr_fd("Error\nThe file name \"", 2);
 		ft_putstr_fd(filename, 2);
@@ -71,7 +71,7 @@ static int	open_file(char *filename)
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_putstr_fd("Error\n Error opening the file: ", 2);
+		ft_putstr_fd("Error\nError opening the file: ", 2);
 		ft_putstr_fd(filename, 2);
 		ft_putstr_fd("\n", 2);
 		return (ERR_OPEN_FILE);
