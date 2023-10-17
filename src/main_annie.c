@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:43:54 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/17 14:40:05 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/17 13:50:23 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,43 +19,12 @@
 #include "camera.h"
 #include "computations.h"
 #include "math.h"
+#include "parser.h"
 
 #define ERR_MEMORY_ALLOCATION	-1
 #define ERR_MLX_FUNCTION		-2
 
 
-static void	parse_scene3(t_world *w)
-{
-	t_tuple	light_position;
-	t_color	light_color;
-
-	light_position = point(-10, 10, -10);
-	light_color = color(1, 1, 1);
-	w->shape = ft_calloc(1, sizeof(t_shape));
-	w->shape[0] = create_cylinder();
-	w->shape[0].material.color = color(1, 0.2, 1);
-	w->nb_shapes = 1;
-	w->nb_lights = 1;
-	w->lights = ft_calloc(1, sizeof(t_light));
-	w->lights[0] = point_light(&light_color, &light_position);
-}
-
-static t_camera	set_camera(void)
-{
-	t_camera	cam;
-	t_tuple		from;
-	t_tuple		to;
-	t_tuple		up;
-
-	cam = camera(PCT_WIDTH, WIN_HEIGHT, M_PI / 3);
-	from = point(0, 1, -5);
-	to = point(0, 1, 0);
-	up = vector(0, 1, 0);
-	cam.transform = view_transform(&from, &to, &up);
-	cam.inverse = inverse(&cam.transform);
-	cam.original_transform = cam.transform;
-	return (cam);
-}
 
 static void	set_controls(t_controls *controls, t_scene *scene)
 {
@@ -91,10 +60,11 @@ int	pressed_key(int keycode, t_controls *controls)
 		else if (controls->control_state == LIGHT)
 			controls->control_state = CAMERA;
 	}
-	else if (keycode == KEY_ESC)
-		exit(0);
+//	else if (keycode == KEY_ESC)
+//		exit(0);
 	return (0);
 }
+
 static int	quit_scene(t_scene *scene, int err_code)
 {
 	if (scene && scene->canvas && scene->canvas->win)
@@ -122,27 +92,37 @@ static int	quit_scene(t_scene *scene, int err_code)
 	return (err_code);
 }
 
-int	main(void)
+static void	set_scene(t_scene *scene, t_world *world, t_win *window)
 {
-	t_win		win;
-	t_world		w;
-	t_scene		scene;
-	t_controls	controls;
+	ft_bzero(scene, sizeof(t_scene));
+	ft_bzero(world, sizeof(t_world));
+	ft_bzero(window, sizeof(t_win));
+	scene->world = world;
+	scene->canvas = canvas(PCT_WIDTH, WIN_HEIGHT);
+	scene->canvas->win = window;
+}
 
+int	main(int argc, char **argv)
+{
+	t_scene		scene;
+	t_win		win;
+	t_world		world;
+	t_controls	controls;
+	int			ret;
+
+	set_scene(&scene, &world, &win);
 	set_controls(&controls, &scene);
-	scene.canvas = NULL;
-	scene.camera = set_camera();
-	parse_scene3(&w);
-	scene.world = &w;
+	if (argc != 2)
+		return(quit_scene(NULL, ERR_NB_ARGUMENTS));
+	ret = parser(argv[1], &scene);
+	if (ret != 0)
+		return(quit_scene(&scene, ret));
 	if (render(&scene) == false)
-		return (ERR_MEMORY_ALLOCATION);
-	w.lightning.material = ft_calloc(1, sizeof(t_material));
+		return(quit_scene(&scene, ERR_MEMORY_ALLOCATION));
 	if (initialise_mlx(&win) == false)
 		return(quit_scene(&scene, ERR_MLX_FUNCTION));
-	scene.canvas->win = &win;
-	canvas_to_mlx_image(scene.canvas, win.pct.addr);
 	mlx_put_image_to_window(win.mlx_ptr, win.win_ptr, win.pct.img_ptr, 0, 0);
-	catch_close_hooks(&win);
+	catch_close_hooks(scene.canvas->win);
 	mlx_key_hook(win.win_ptr, pressed_key, &controls);
 	mlx_mouse_hook(win.win_ptr, mouse_hook, &controls);
 	mlx_loop(win.mlx_ptr);
