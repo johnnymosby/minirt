@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 12:38:27 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/16 11:48:49 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:31:25 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,14 @@
 # include "stdio.h"
 # include "shapes.h"
 
-# define WIN_HEIGHT 50
-# define MENU_WIDTH 100
-# define PCT_WIDTH 100
+# define WIN_HEIGHT 500
+# define MENU_WIDTH 200
+# define PCT_WIDTH 500
+
+# define WHITE 0x00FFFFFF
+# define LIGHT_GREY 0x004E4E4E
+# define DARK_GREY 0x00111111
+# define BLACK 0x00000000
 
 typedef struct s_scene	t_scene;
 
@@ -73,6 +78,7 @@ void	respond_to_left_click(t_controls *controls, int x, int y);
 void	respond_to_right_click(t_controls *controls);
 t_shape	*find_clicked_shape(t_controls *controls, int x, int y);
 void	rerender(t_scene *scene);
+void	render_menu(t_win *window);
 void	change_shape_size(int keycode, t_controls *controls);
 void	translate_camera(int keycode, t_controls *controls);
 void	set_updated_transform_in_camera(t_controls *controls, t_matrix *m);

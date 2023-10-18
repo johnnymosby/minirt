@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:43:54 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/17 14:40:05 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:26:46 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ static int	quit_scene(t_scene *scene, int err_code)
 	{
 		if (scene->canvas->win->menu.img_ptr != NULL)
 			mlx_destroy_image(scene->canvas->win->mlx_ptr, scene->canvas->win->menu.img_ptr);
-		if (scene->canvas->win->pct.img_ptr)
+		if (scene->canvas->win->pct.img_ptr != NULL)
 			mlx_destroy_image(scene->canvas->win->mlx_ptr, scene->canvas->win->pct.img_ptr);
 		if (scene->canvas->win->win_ptr)
 			mlx_destroy_window(scene->canvas->win->mlx_ptr, scene->canvas->win->win_ptr);
@@ -141,6 +141,7 @@ int	main(void)
 		return(quit_scene(&scene, ERR_MLX_FUNCTION));
 	scene.canvas->win = &win;
 	canvas_to_mlx_image(scene.canvas, win.pct.addr);
+	render_menu(scene.canvas->win);
 	mlx_put_image_to_window(win.mlx_ptr, win.win_ptr, win.pct.img_ptr, 0, 0);
 	catch_close_hooks(&win);
 	mlx_key_hook(win.win_ptr, pressed_key, &controls);
