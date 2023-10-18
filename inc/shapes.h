@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shapes.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 11:51:29 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/12 15:00:03 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/18 17:57:29 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ t_tuple	normal_at_sphere(t_shape *shape, t_tuple *point);
 */
 
 t_shape	create_cylinder(void);
+void	intersect_cylinder(t_shape *shape, t_ray *r, t_hit **hits);
+t_tuple	normal_at_cylinder(t_shape *shape, t_tuple *point);
 
 /*
 ** ------------------------------- UTILS -------------------------------------
