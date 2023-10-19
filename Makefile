@@ -42,7 +42,7 @@ RAYS	=	utils.c light.c lightning.c
 RAYS	:=	$(addprefix rays/, $(RAYS))
 
 SHAPES	=	utils.c spheres.c intersection.c reflection.c material.c \
-			cylinders.c
+			cylinders.c planes.c
 SHAPES	:=	$(addprefix shapes/, $(SHAPES))
 
 SCENE	=	create_world.c intersect_world_ray.c view_transform.c shade_hits.c prepare_computation.c \
