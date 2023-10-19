@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:29:33 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/17 11:40:56 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/19 11:03:50 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static char	*read_whole_file(int fd, int *ret)
 /*
 *	opens a file and returns ERR_FILE on error (no fd stays open)
 */
-static int	open_file(char *filename)
+int	open_file(char *filename)
 {
 	int	fd;
 

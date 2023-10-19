@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/17 13:31:12 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/19 11:18:39 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ static int	free_elements(t_element *elmmts, int err_code)
 	free (elmmts);
 	return (err_code);
 }
-static int	count_elements(char *file_string)
+int	count_elements(char *file_string)
 {
 	int		nb_elements;
 	char	*tmp;
@@ -155,7 +155,6 @@ int	parser(char *filename, t_scene *scene)
 	file_string = put_file_into_string(filename, &ret);
 	if (ret != 0)
 		return (ret);
-
 	nb_elmts = count_elements(file_string);
 	elmts = ft_calloc(nb_elmts, sizeof(t_element));
 	if (elmts == NULL)
