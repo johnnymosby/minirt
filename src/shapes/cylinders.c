@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 15:00:48 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/18 17:57:14 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/19 11:40:21 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static bool	check_cap(t_ray *r, double t)
 	return ((pow(x, 2) + pow(z, 2)) <= 1.0);
 }
 
-static void	intersect_caps(t_hit **hits, t_shape *shape, t_ray *r)
+void	intersect_caps(t_hit **hits, t_shape *shape, t_ray *r)
 {
 	double	t;
 

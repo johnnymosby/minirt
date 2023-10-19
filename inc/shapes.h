@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 11:51:29 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/19 10:45:34 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/19 11:42:16 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 typedef enum e_shape_type
 {
 	SPHERE,
-	CYLINDER
+	CYLINDER,
+	PLANES
 }	t_shape_type;
 
 typedef struct s_sphere
@@ -37,6 +38,13 @@ typedef struct s_cylinder
 	float	min;
 	bool	closed;
 }	t_cylinder;
+
+typedef struct s_plane
+{
+	t_tuple	origin;
+	double	radius;
+	t_tuple	null_point;
+}	t_plane;
 
 typedef struct s_cube
 {
@@ -73,6 +81,7 @@ typedef struct s_shape
 	union {
 		t_sphere	sphere;
 		t_cylinder	cylinder;
+		t_plane		plane;
 	};
 	t_shape_type	shape_type;
 	t_intersect		intersect;
