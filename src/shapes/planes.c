@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   planes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 16:35:50 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/19 13:17:42 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/19 14:31:09 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	intersect_plane(t_shape *shape, t_ray *r, t_hit **hits)
 	if (fabs(r->direction.y) < EPSILON)
 		return ;
 	t = -r->origin.y / r->direction.y;
-	intersection(t, shape);
+	add_intersection(hits, intersection(t, shape));
 	return ;
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   planes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:03:52 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/19 13:12:00 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/19 14:32:48 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,9 @@ Test(planes, a_ray_intersecting_a_plane_from_above)
 	t_hit	*xs = NULL;
 	intersect(&pl, &r, &xs);
 
-	printf("xs = %p\n", xs);
-	//cr_assert(count_intersections(xs, true) == 1);	
-	//cr_assert(xs[0].t == 1);
-	//cr_assert(xs[0].obj == &pl);
+	cr_assert(count_intersections(xs, true) == 1);	
+	cr_assert(xs[0].t == 1);
+	cr_assert(xs[0].obj == &pl);
 }
 
 
@@ -115,7 +114,7 @@ Test(planes, a_ray_intersecting_a_plane_from_below)
 	t_hit	*xs = NULL;
 	intersect(&pl, &r, &xs);
 
-	//cr_assert(count_intersections(xs, true) == 1);	
-	//cr_assert(xs[0].t == 1);
-	//cr_assert(xs[0].obj == &pl);
+	cr_assert(count_intersections(xs, true) == 1);	
+	cr_assert(xs[0].t == 1);
+	cr_assert(xs[0].obj == &pl);
 }
