@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/13 19:28:25 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/17 11:37:35 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	print_message(int err_code)
 	s[2] = "Name of the file is not correct\n";
 	s[3] = "Number of mandatory elements is not correct\n";
 	s[4] = "Identifier of element is not correct\n";
-	s[5] = "Nemmory allocation error while getting the data\n";
+	s[5] = "Memory allocation error while getting the data\n";
 	s[6] = "Value should be a digit\n";
 	s[7] = "A comma is missing\n";
 	s[8] = "A space is missing\n";
@@ -73,13 +73,13 @@ int	print_localisation(int type, int nb)
 	str = ft_itoa(nb);
 	if (str == NULL)
 	{
-		ft_putstr_fd("\nERROR MEM. ALLOC. WHILE PRINTING ERROR MESSAGE\n", 2);
+		ft_putstr_fd("Error\nERROR MEM. ALLOC. WHILE PRINTING ERR MESSAGE\n", 2);
 		return (-1);
 	}
 	if (type == 1)
-		ft_putstr_fd("line: ", 2);
+		ft_putstr_fd("line:\t", 2);
 	if (type == 2)
-		ft_putstr_fd("character: ", 2);
+		ft_putstr_fd("character:\t", 2);
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd("\n", 2);
 	free(str);

@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/13 19:24:00 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/17 13:26:41 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,7 @@ static int	set_one_element(char *file_string, int *index, t_element *element)
 	return (ERR_IDENTIFIER_ELEMENT_WRONG);
 }
 
-static int	count_elements(char *file_string)
-{
-	int		nb_elements;
-	char	*tmp;
 
-	nb_elements = 0;
-	tmp = file_string;
-	while (*tmp == '\n')
-		tmp++;
-	while (*tmp != '\0')
-	{
-		if (*tmp == '\n' && tmp != file_string
-			&& *(tmp +1) != '\n' && *(tmp +1) != '\0')
-			nb_elements++;
-		tmp++;
-	}
-	if (file_string != tmp && *tmp -1 != '\n')
-		nb_elements++;
-	return (nb_elements);
-}
 
 static int	set_elements(char *file_string, int *index, \
 					int *nb_elmts, t_element *elements)
@@ -71,28 +52,24 @@ static int	set_elements(char *file_string, int *index, \
 	}
 	return (0);
 }
-
+int	free_elements(char *file_string, int index, int err_code)
+{
+	print_error_parsing(file_string, index, err_code);
+	return(err_code);
+}
 /*
 	calls the open function, count the number of elements.
 	no file descriptor is open after returning the function.
 */
-t_element	*get_elements(char *file_string, int *nb_elmts)
+int	get_elements(char *file_string, int *nb_elmts, t_element *elmts)
 {
-	t_element	*elements;
 	int			index;
 	int			ret;
 
 	index = 0;
-	if (file_string == NULL)
-		return (print_error_parsing(file_string, 0, ERR_NB_MANDATORY_ELMTS));
-	*nb_elmts = count_elements(file_string);
-	if (*nb_elmts < 3)
-		return (print_error_parsing(file_string, 0, ERR_NB_MANDATORY_ELMTS));
-	elements = ft_calloc(*nb_elmts, sizeof(t_element));
-	if (elements == NULL)
-		return (print_error_parsing(file_string, 0, ERR_MALLOC));
-	ret = set_elements(file_string, &index, nb_elmts, elements);
+
+	ret = set_elements(file_string, &index, nb_elmts, elmts);
 	if (ret != 0)
-		return (print_error_parsing(file_string, index, ret));
-	return (elements);
+		return (free_elements(file_string, index, ret));
+	return (0);
 }

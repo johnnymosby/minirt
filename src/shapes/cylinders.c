@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinders.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 15:00:48 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/11 23:26:41 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/18 17:57:14 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void	intersect_caps(t_hit **hits, t_shape *shape, t_ray *r)
 		add_intersection(hits, intersection(t, shape));
 }
 
-static void	intersect_cylinder(t_shape *shape, t_ray *r, t_hit **hits)
+void	intersect_cylinder(t_shape *shape, t_ray *r, t_hit **hits)
 {
 	t_disc_calc	d_calc;
 	double		d_squared;
@@ -85,7 +85,7 @@ static void	intersect_cylinder(t_shape *shape, t_ray *r, t_hit **hits)
 		add_intersection(hits, intersection(t[1], shape));
 }
 
-static t_tuple	normal_at_cylinder(t_shape *shape, t_tuple *point)
+t_tuple	normal_at_cylinder(t_shape *shape, t_tuple *point)
 {
 	double	dist;
 
@@ -102,10 +102,11 @@ t_shape	create_cylinder(void)
 	t_shape	shape;
 
 	set_shape_to_default(&shape);
-	shape.intersect = intersect_cylinder;
-	shape.normal_at = normal_at_cylinder;
 	shape.cylinder.max = INFINITY;
 	shape.cylinder.min = -INFINITY;
 	shape.cylinder.closed = false;
+	shape.shape_type = CYLINDER;
+	shape.intersect = intersect_cylinder;
+	shape.normal_at = normal_at_cylinder;
 	return (shape);
 }

@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 11:51:29 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/13 19:34:26 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/19 10:45:34 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ t_tuple	normal_at_sphere(t_shape *shape, t_tuple *point);
 */
 
 t_shape	create_cylinder(void);
+void	intersect_cylinder(t_shape *shape, t_ray *r, t_hit **hits);
+t_tuple	normal_at_cylinder(t_shape *shape, t_tuple *point);
 
 /*
 ** ------------------------------- PLANES' FUNCTIONS --------------------------
