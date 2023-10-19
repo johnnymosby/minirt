@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 16:35:50 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/19 14:31:09 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/19 22:31:44 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,5 @@ t_shape	create_plane(void)
 	set_shape_to_default(&shape);
 	shape.intersect = intersect_plane;
 	shape.normal_at = normal_at_plane;
-	shape.cylinder.max = INFINITY;
-	shape.cylinder.min = -INFINITY;
-	shape.cylinder.closed = false;
 	return (shape);
 }
