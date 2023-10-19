@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:14:28 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/13 17:36:38 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/19 11:28:22 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,40 +14,42 @@
 
 Test(parser, get_number_elements)
 {
-	int		nb;
-	char	*str;
-	
+	int			nb;
+	char		*str;
+
 	str = "";
-	cr_assert(get_elements(str, &nb) == NULL, "string is empty" );
+	nb = count_elements(str);
+	cr_assert(nb == 0, "string is empty" );
 	
 	nb = 99;
 	str = "A 0.2 255,255,255\nC -50,0,20 0,0,0 70\nL -40,0,30 0.7 255,255,255\npl 0,0,0 0,1.0,0 255,0,225\nsp 0,0,20 20 255,0,0\ncy 50.0,0.0,20.6 0,0,1.0 14.2 21.42 10,0,255";
-	cr_assert(get_elements(str, &nb) != NULL, "6 elements basic");
-	cr_assert(nb == 6);	
+	nb = count_elements(str);
+	cr_assert(nb == 6, "6 elements basic");
 
 	nb = 99;
 	str = "\nA 0.2 255,255,255\nC -50,0,20 0,0,0 70\nL -40,0,30 0.7 255,255,255\npl 0,0,0 0,1.0,0 255,0,225\nsp 0,0,20 20 255,0,0\ncy 50.0,0.0,20.6 0,0,1.0 14.2 21.42 10,0,255";
-	cr_assert(get_elements(str, &nb) != NULL, "6 elements NL_start");
-	cr_assert(nb == 6);	
+	nb = count_elements(str);
+	cr_assert(nb == 6, "6 elements NL start");
 
 	nb = 99;
 	str = "\n\n\nA 0.2 255,255,255\nC -50,0,20 0,0,0 70\nL -40,0,30 0.7 255,255,255\npl 0,0,0 0,1.0,0 255,0,225\nsp 0,0,20 20 255,0,0\ncy 50.0,0.0,20.6 0,0,1.0 14.2 21.42 10,0,255";
-	cr_assert(get_elements(str, &nb) != NULL, "6 elements 2xNL_start");
-	cr_assert(nb == 6);	
+	nb = count_elements(str);
+	cr_assert(nb == 6, "6 elements 2xNL start");
 
 	nb = 99;
 	str = "A 0.2 255,255,255\nC -50,0,20 0,0,0 70\nL -40,0,30 0.7 255,255,255\npl 0,0,0 0,1.0,0 255,0,225\nsp 0,0,20 20 255,0,0\ncy 50.0,0.0,20.6 0,0,1.0 14.2 21.42 10,0,255\n";
-	cr_assert(get_elements(str, &nb) != NULL, "6 elements NL_end");
-	cr_assert(nb == 6);	
+	nb = count_elements(str);
+	cr_assert(nb == 6, "6 elements NL end");
+
 	nb = 99;
 	str = "A 0.2 255,255,255\nC -50,0,20 0,0,0 70\nL -40,0,30 0.7 255,255,255\npl 0,0,0 0,1.0,0 255,0,225\nsp 0,0,20 20 255,0,0\ncy 50.0,0.0,20.6 0,0,1.0 14.2 21.42 10,0,255\n\n";
-	cr_assert(get_elements(str, &nb) != NULL, "6 elements 2xNL_end");
-	cr_assert(nb == 6);	
+	nb = count_elements(str);
+	cr_assert(nb == 6, "6 elements 2xNL end");
 
 	nb = 99;
 	str = "A 0.2 255,255,255\n\n\nC -50,0,20 0,0,0 70\nL -40,0,30 0.7 255,255,255\n\npl 0,0,0 0,1.0,0 255,0,225\nsp 0,0,20 20 255,0,0\ncy 50.0,0.0,20.6 0,0,1.0 14.2 21.42 10,0,255";
-	cr_assert(get_elements(str, &nb) != NULL, "6 elements NL_between_lines");
-	cr_assert(nb == 6);
+	nb = count_elements(str);
+	cr_assert(nb == 6, "6 elements NL between lines");
 
 }
 

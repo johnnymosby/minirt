@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:41:27 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/16 19:16:24 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/19 11:18:56 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int		parse_cylinder(char *file_string, int *index, t_element *element);
 /*
 ** ------------------------------- PARSER -------------------------------------
 */
-
+int		count_elements(char *file_string);
 int		parser(char *filename, t_scene *scene);
 
 /*
@@ -108,6 +108,7 @@ int		get_elements(char *file_string, int *nb_elmts, t_element *elmts);
 ** ------------------------------- PUT FILE INTO STRING------------------------
 */
 
+int		open_file(char *filename);
 char	*put_file_into_string(char *filename, int *ret);
 
 /*

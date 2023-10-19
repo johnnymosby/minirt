@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/17 13:26:41 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/19 11:20:08 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int	get_elements(char *file_string, int *nb_elmts, t_element *elmts)
 	int			ret;
 
 	index = 0;
-
 	ret = set_elements(file_string, &index, nb_elmts, elmts);
 	if (ret != 0)
 		return (free_elements(file_string, index, ret));
