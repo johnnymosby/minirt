@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 19:43:18 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/13 16:43:45 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/20 17:04:58 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	parse_fov(char *file_string, int *index, t_element *element)
 	if (ret != 0)
 		return (ret);
 	if (element->fov < 0 || element->fov > 180.0)
-		return (ERR_VALUE_FOV_WRONG);
+		return (ERR_VALUE_RANGE);
 	return (0);
 }
 
@@ -34,17 +34,17 @@ int	parse_camera(char *file_string, int *index, t_element *element)
 		(*index)++;
 	ret = parse_coordinates(file_string, index, element);
 	if (ret != 0)
-		return (ret);
+		return (print_error_int(file_string, *index, ret, ERR_CAMERA));
 	while (file_string[*index] == ' ')
 		(*index)++;
 	ret = parse_orientation(file_string, index, element);
 	if (ret != 0)
-		return (ret);
+		return (print_error_int(file_string, *index, ret, ERR_CAMERA));
 	while (file_string[*index] == ' ')
 		(*index)++;
 	ret = parse_fov(file_string, index, element);
 	if (ret != 0)
-		return (ret);
+		return (print_error_int(file_string, *index, ret, ERR_CAMERA));
 	while (file_string[*index] == ' ')
 		(*index)++;
 	return (0);

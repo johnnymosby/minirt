@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:41:27 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/19 11:18:56 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/20 16:43:24 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,7 @@
 # include "shapes.h"
 # include "world.h"
 # include "camera.h"
-
-# define ERR_OPEN_FILE -1
-# define ERR_NAME_FILE_WRONG -2
-# define ERR_NB_MANDATORY_ELMTS -3
-# define ERR_IDENTIFIER_ELEMENT_WRONG -4
-# define ERR_MALLOC -5
-# define ERR_VALUE_IS_NOT_A_DIGIT -6
-# define ERR_MISSING_COMMA -7
-# define ERR_MISSING_SPACE -8
-# define ERR_VALUE_FOV_WRONG -9
-# define ERR_VALUE_LIGHTNING_RATIO_WRONG -10
-# define ERR_VALUE_COLOR_WRONG -11
-# define ERR_VALUE_DIAMETER_NEGATIV -12
-# define ERR_VALUE_HEIGHT_NEGATIV -13
-# define ERR_VALUE_BRIGHTNESS_LIGHT -14
-# define ERR_VALUE_NORM_VECTOR -15
-# define ERR_READ -16
-# define ERR_NB_ARGUMENTS -17
+# include "errors.h"
 
 typedef enum e_shape_type	t_shape_type;
 
@@ -89,14 +72,8 @@ int		parse_cylinder(char *file_string, int *index, t_element *element);
 /*
 ** ------------------------------- PARSER -------------------------------------
 */
-int		count_elements(char *file_string);
-int		parser(char *filename, t_scene *scene);
-
-/*
-** ------------------------------- PARSER PRINT_ERRORS-------------------------
-*/
-
-void	*print_error_parsing(char *file_string, int index, int err_code);
+t_element	*count_elements(char *file_string, int *nb);
+int			parser(char *filename, t_scene *scene);
 
 /*
 ** ------------------------------- GET ELEMENTS -------------------------------

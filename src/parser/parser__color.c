@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 17:08:51 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/13 17:34:37 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/20 15:44:29 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	parse_primary(char *file_string, int *index, double *rgb)
 		(*index)++;
 	}
 	if (*rgb > 255)
-		return (ERR_VALUE_COLOR_WRONG);
+		return (ERR_VALUE_RANGE);
 	*rgb /= 255;
 	return (0);
 }

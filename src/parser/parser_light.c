@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 19:27:48 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/18 17:07:32 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/20 17:05:16 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	parse_brightness(char *file_string, int *index, t_element *element)
 	if (ret != 0)
 		return (ret);
 	if (onecolor < 0 || onecolor > 1.0)
-		return (ERR_VALUE_BRIGHTNESS_LIGHT);
+		return (ERR_VALUE_RANGE);
 	element->light_intensity = color(onecolor, onecolor, onecolor);
 	return (0);
 }
@@ -51,16 +51,16 @@ int	parse_light(char *file_string, int *index, t_element *element)
 		(*index)++;
 	ret = parse_coordinates(file_string, index, element);
 	if (ret != 0)
-		return (ret);
+		return (print_error_int(file_string, *index, ret, ERR_LIGHT));
 	while (file_string[*index] == ' ')
 		(*index)++;
 	ret = parse_brightness(file_string, index, element);
 	if (ret != 0)
-		return (ret);
+		return (print_error_int(file_string, *index, ret, ERR_LIGHT));
 	while (file_string[*index] == ' ')
 		(*index)++;
 	ret = modify_brightness_with_color(file_string, index, element);
 	if (ret != 0)
-		return (ret);
+		return (print_error_int(file_string, *index, ret, ERR_LIGHT));
 	return (0);
 }

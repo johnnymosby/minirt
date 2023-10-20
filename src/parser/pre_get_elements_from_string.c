@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/19 11:20:08 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/20 16:14:37 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,46 +29,27 @@ static int	set_one_element(char *file_string, int *index, t_element *element)
 	return (ERR_IDENTIFIER_ELEMENT_WRONG);
 }
 
-
-
-static int	set_elements(char *file_string, int *index, \
-					int *nb_elmts, t_element *elements)
-{
-	int	i;
-	int	ret;
-
-	i = 0;
-	while (i < *nb_elmts)
-	{
-		while (file_string[*index] == '\n')
-			(*index)++;
-		ret = set_one_element(file_string, index, elements + i);
-		if (ret != 0)
-		{
-			free(elements);
-			return (ret);
-		}
-		i++;
-	}
-	return (0);
-}
-int	free_elements(char *file_string, int index, int err_code)
-{
-	print_error_parsing(file_string, index, err_code);
-	return(err_code);
-}
 /*
 	calls the open function, count the number of elements.
 	no file descriptor is open after returning the function.
 */
 int	get_elements(char *file_string, int *nb_elmts, t_element *elmts)
 {
-	int			index;
-	int			ret;
+	int	index;
+	int	ret;
+	int	i;
 
 	index = 0;
-	ret = set_elements(file_string, &index, nb_elmts, elmts);
-	if (ret != 0)
-		return (free_elements(file_string, index, ret));
+	i = 0;
+	while (i < *nb_elmts)
+	{
+		while (file_string[index] == '\n')
+			(index)++;
+		ret = set_one_element(file_string, &index, elmts + i);
+		if (ret != 0)
+			return (ret);
+		i++;
+	}
+	return (0);
 	return (0);
 }

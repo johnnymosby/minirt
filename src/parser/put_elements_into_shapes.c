@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_elements_into_shapes.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 13:35:23 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/19 23:47:06 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/20 19:01:10 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	put_element_into_sphere(t_element *element, int index, t_world *w)
 			element->coordinates.z);
 	scale = scaling(element->radius, element->radius, element->radius);
 	res = multiply_matrices(&trans, &scale);
-	set_transform(w->shape +index, &res);
+	set_transform(w->shape + index, &res);
 	w->shape[index].sphere.radius = element->radius;
 	w->shape[index].material.color = element->color;
 }
@@ -51,16 +51,17 @@ static void	put_element_into_plane(t_element *element, int index, t_world *w)
 	t_matrix	rotx;
 	t_matrix	roty;
 	t_matrix	rotz;
-	
+
 	w->shape[index] = create_plane();
-	trans = translation(element->coordinates.x,element->coordinates.y, element->coordinates.z );
+	trans = translation(element->coordinates.x, \
+		element->coordinates.y, element->coordinates.z);
 	rotx = rotation_x(element->orientation.x);
 	roty = rotation_y(element->orientation.y);
 	rotz = rotation_z(element->orientation.z);
-	set_transform(w->shape +index, &trans);
-	set_transform(w->shape +index, &rotx);
-	set_transform(w->shape +index, &roty);
-	set_transform(w->shape +index, &rotz);
+	set_transform(w->shape + index, &trans);
+	set_transform(w->shape + index, &rotx);
+	set_transform(w->shape + index, &roty);
+	set_transform(w->shape + index, &rotz);
 	w->shape[index].material.color = element->color;
 	//w->shape[index].material.color = color(1, 0.9, 0.9);
 }

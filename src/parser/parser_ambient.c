@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 09:48:43 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/13 16:43:16 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/20 18:43:40 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	parse_lightning_ratio(char *file_string, int *index, \
 		return (ret);
 	if (element->ambient_lightning_ratio < 0 \
 		|| element->ambient_lightning_ratio > 1.0)
-		return (ERR_VALUE_LIGHTNING_RATIO_WRONG);
+		return (ERR_VALUE_RANGE);
 	return (0);
 }
 
@@ -38,11 +38,11 @@ int	parse_ambient(char *file_string, int *index, t_element *element)
 		(*index)++;
 	ret = parse_lightning_ratio(file_string, index, element);
 	if (ret != 0)
-		return (ret);
+		return (print_error_int(file_string, *index, ret, ERR_LIGHTNING));
 	while (file_string[*index] == ' ')
 		(*index)++;
 	ret = parse_color(file_string, index, &element->color);
 	if (ret != 0)
-		return (ret);
+		return (print_error_int(file_string, *index, ret, ERR_LIGHTNING));
 	return (0);
 }

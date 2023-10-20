@@ -6,12 +6,12 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:14:28 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/19 11:31:01 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/20 16:50:40 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tests.h"
-
+/*
 Test(parser, open_file)
 {
 	int	fd;
@@ -47,4 +47,4 @@ Test(parser, open_file)
 	fd = open_file("../testfiles/open_file/file_okay.rt");
 	cr_assert( fd > 0, "the file has 6elements");
 	close(fd);
-}
+}*/

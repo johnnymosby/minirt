@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:14:28 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/19 11:28:22 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/20 16:56:03 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,40 +17,40 @@ Test(parser, get_number_elements)
 	int			nb;
 	char		*str;
 
+	nb = 0;
 	str = "";
-	nb = count_elements(str);
+	count_elements(str, &nb);
 	cr_assert(nb == 0, "string is empty" );
 	
-	nb = 99;
+	nb = 0;
 	str = "A 0.2 255,255,255\nC -50,0,20 0,0,0 70\nL -40,0,30 0.7 255,255,255\npl 0,0,0 0,1.0,0 255,0,225\nsp 0,0,20 20 255,0,0\ncy 50.0,0.0,20.6 0,0,1.0 14.2 21.42 10,0,255";
-	nb = count_elements(str);
+	count_elements(str, &nb);
 	cr_assert(nb == 6, "6 elements basic");
 
-	nb = 99;
+	nb = 0;
 	str = "\nA 0.2 255,255,255\nC -50,0,20 0,0,0 70\nL -40,0,30 0.7 255,255,255\npl 0,0,0 0,1.0,0 255,0,225\nsp 0,0,20 20 255,0,0\ncy 50.0,0.0,20.6 0,0,1.0 14.2 21.42 10,0,255";
-	nb = count_elements(str);
+	count_elements(str, &nb);
 	cr_assert(nb == 6, "6 elements NL start");
 
-	nb = 99;
+	nb = 0;
 	str = "\n\n\nA 0.2 255,255,255\nC -50,0,20 0,0,0 70\nL -40,0,30 0.7 255,255,255\npl 0,0,0 0,1.0,0 255,0,225\nsp 0,0,20 20 255,0,0\ncy 50.0,0.0,20.6 0,0,1.0 14.2 21.42 10,0,255";
-	nb = count_elements(str);
+	count_elements(str, &nb);
 	cr_assert(nb == 6, "6 elements 2xNL start");
 
-	nb = 99;
+	nb = 0;
 	str = "A 0.2 255,255,255\nC -50,0,20 0,0,0 70\nL -40,0,30 0.7 255,255,255\npl 0,0,0 0,1.0,0 255,0,225\nsp 0,0,20 20 255,0,0\ncy 50.0,0.0,20.6 0,0,1.0 14.2 21.42 10,0,255\n";
-	nb = count_elements(str);
+	count_elements(str, &nb);
 	cr_assert(nb == 6, "6 elements NL end");
 
-	nb = 99;
+	nb = 0;
 	str = "A 0.2 255,255,255\nC -50,0,20 0,0,0 70\nL -40,0,30 0.7 255,255,255\npl 0,0,0 0,1.0,0 255,0,225\nsp 0,0,20 20 255,0,0\ncy 50.0,0.0,20.6 0,0,1.0 14.2 21.42 10,0,255\n\n";
-	nb = count_elements(str);
+	count_elements(str, &nb);
 	cr_assert(nb == 6, "6 elements 2xNL end");
 
-	nb = 99;
+	nb = 0;
 	str = "A 0.2 255,255,255\n\n\nC -50,0,20 0,0,0 70\nL -40,0,30 0.7 255,255,255\n\npl 0,0,0 0,1.0,0 255,0,225\nsp 0,0,20 20 255,0,0\ncy 50.0,0.0,20.6 0,0,1.0 14.2 21.42 10,0,255";
-	nb = count_elements(str);
+	count_elements(str, &nb);
 	cr_assert(nb == 6, "6 elements NL between lines");
-
 }
 
 static bool	are_equal_elt_camera(t_element *c1, t_element *c2)

@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 12:47:17 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/13 19:27:21 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/20 16:13:26 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	check_value_vector(double coord[3])
 	if (coord[0] < -1.0 || coord[0] > 1.0
 		||coord[1] < -1.0 || coord[1] > 1.0
 		||coord[2] < -1.0 || coord[2] > 1.0)
-		return (ERR_VALUE_NORM_VECTOR);
+		return (ERR_VALUE_RANGE);
 	return (0);
 }
 
