@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_objects.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/20 17:06:17 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/21 23:35:12 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,17 @@ int	parse_sphere(char *file_string, int *index, t_element *element)
 		(*index)++;
 	ret = parse_coordinates(file_string, index, element);
 	if (ret != 0)
-		return (print_error_int(file_string, *index, ret, ERR_SPHERE));
+		return (print_error(file_string, *index, ret, ERR_SPHERE));
 	while (file_string[*index] == ' ')
 		(*index)++;
 	ret = parse_radius(file_string, index, element);
 	if (ret != 0)
-		return (print_error_int(file_string, *index, ret, ERR_SPHERE));
+		return (print_error(file_string, *index, ret, ERR_SPHERE));
 	while (file_string[*index] == ' ')
 		(*index)++;
 	ret = parse_color(file_string, index, &element->color);
 	if (ret != 0)
-		return (print_error_int(file_string, *index, ret, ERR_SPHERE));
+		return (print_error(file_string, *index, ret, ERR_SPHERE));
 	return (0);
 }
 
@@ -57,17 +57,17 @@ int	parse_cylinder_end(char *file_string, int *index, t_element *element)
 
 	ret = parse_radius(file_string, index, element);
 	if (ret != 0)
-		return (print_error_int(file_string, *index, ret, ERR_CYLINDER));
+		return (print_error(file_string, *index, ret, ERR_CYLINDER));
 	while (file_string[*index] == ' ')
 		(*index)++;
 	ret = parse_double(file_string, index, &element->cylinder_height);
 	if (ret != 0)
-		return (print_error_int(file_string, *index, ret, ERR_CYLINDER));
+		return (print_error(file_string, *index, ret, ERR_CYLINDER));
 	while (file_string[*index] == ' ')
 		(*index)++;
 	ret = parse_color(file_string, index, &element->color);
 	if (ret != 0)
-		return (print_error_int(file_string, *index, ret, ERR_CYLINDER));
+		return (print_error(file_string, *index, ret, ERR_CYLINDER));
 	return (0);
 }
 
@@ -81,12 +81,12 @@ int	parse_cylinder(char *file_string, int *index, t_element *element)
 		(*index)++;
 	ret = parse_coordinates(file_string, index, element);
 	if (ret != 0)
-		return (print_error_int(file_string, *index, ret, ERR_CYLINDER));
+		return (print_error(file_string, *index, ret, ERR_CYLINDER));
 	while (file_string[*index] == ' ')
 		(*index)++;
 	ret = parse_orientation(file_string, index, element);
 	if (ret != 0)
-		return (print_error_int(file_string, *index, ret, ERR_CYLINDER));
+		return (print_error(file_string, *index, ret, ERR_CYLINDER));
 	while (file_string[*index] == ' ')
 		(*index)++;
 	return (parse_cylinder_end(file_string, index, element));
@@ -102,16 +102,16 @@ int	parse_plane(char *file_string, int *index, t_element *element)
 		(*index)++;
 	ret = parse_coordinates(file_string, index, element);
 	if (ret != 0)
-		return (print_error_int(file_string, *index, ret, ERR_PLANE));
+		return (print_error(file_string, *index, ret, ERR_PLANE));
 	while (file_string[*index] == ' ')
 		(*index)++;
 	ret = parse_orientation(file_string, index, element);
 	if (ret != 0)
-		return (print_error_int(file_string, *index, ret, ERR_PLANE));
+		return (print_error(file_string, *index, ret, ERR_PLANE));
 	while (file_string[*index] == ' ')
 		(*index)++;
 	ret = parse_color(file_string, index, &element->color);
 	if (ret != 0)
-		return (print_error_int(file_string, *index, ret, ERR_PLANE));
+		return (print_error(file_string, *index, ret, ERR_PLANE));
 	return (0);
 }

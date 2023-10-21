@@ -3,42 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   pre_put_file_into_string.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:29:33 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/20 18:43:19 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/22 00:04:53 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static char	*read_whole_file(int fd, int *ret)
+static char	*clean_and_return(int *ret, char *file_string, char *buf)
 {
-	char	buf[BUFFER_SIZE +1];
-	char	*file_string;
-	char	*tmp;
-	ssize_t	r;
+	if (*ret == ERR_READ)
+		free(file_string);
+	free(buf);
+	return (file_string);
+}
 
-	ft_bzero(buf, BUFFER_SIZE +1);
-	file_string = ft_calloc(1, 1);
-	if (file_string == NULL)
-		return (NULL);
-	tmp = file_string;
-	r = read(fd, buf, BUFFER_SIZE);
-	while (*ret == 0 && r != 0)
+static char	*read_whole_file(int fd, int *ret, char *file_string)
+{
+	char	*buf;
+	char	*tmp;
+	int		r;
+
+	buf = ft_calloc(BUFFER_SIZE +1, 1);
+	if (buf == NULL)
+		*ret = ERR_MALLOC;
+	r = BUFFER_SIZE;
+	while (r == BUFFER_SIZE && *ret == 0)
 	{
-		file_string = ft_strjoin(file_string, buf);
-		free(tmp);
-		tmp = file_string;
-		if (file_string == NULL)
-			*ret = ERR_MALLOC;
 		r = read(fd, buf, BUFFER_SIZE);
 		if (r < 0)
+		{	
 			*ret = ERR_READ;
+			break;
+		}
+		buf[r] = 0;
+		tmp = file_string;
+		file_string = ft_strjoin(file_string, buf);
+		free(tmp);
+		if (file_string == NULL)
+			*ret = ERR_MALLOC;
 	}
-	if (*ret == ERR_READ)
-		free (file_string);
-	return (file_string);
+	return (clean_and_return(ret, file_string, buf));
 }
 
 char	*put_file_into_string(char *filename, int *ret)
@@ -58,7 +65,14 @@ char	*put_file_into_string(char *filename, int *ret)
 		*ret = ERR_OPEN_FILE;
 		return (NULL);
 	}
-	str = read_whole_file(fd, ret);
+	str = ft_calloc(BUFFER_SIZE +1, 1);
+	if (str == NULL)
+	{
+		*ret = ERR_OPEN_FILE;
+		close (fd);
+		return (NULL);
+	}
+	str = read_whole_file(fd, ret, str);
 	close (fd);
 	return (str);
 }

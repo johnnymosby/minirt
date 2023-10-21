@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:43:54 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/19 22:25:21 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/21 17:04:08 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return(quit_scene(NULL, ERR_NB_ARGUMENTS));
+	ft_bzero(&world, sizeof(t_world));
 	set_controls(&controls, &scene);
 	scene.canvas = NULL;
 	scene.world = &world;

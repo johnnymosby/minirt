@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_elements_into_shapes.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 13:35:23 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/20 19:01:10 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/21 16:41:25 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,19 @@ static void	put_element_into_sphere(t_element *element, int index, t_world *w)
 
 static void	put_element_into_cylinder(t_element *element, int index, t_world *w)
 {
-	(void)element;
-	(void)index;
-	(void)w;
-//	t_matrix	trans;
+	t_matrix	trans;
+	t_matrix	scale;
+	t_matrix	res;
+	
 	w->shape[index] = create_cylinder();
-//	w->shape[index].transform = scaling(10.00, 0.01, 10.0);
-//	w->shape[index].material.color = color(1, 0.9, 0.9);
-//	trans = translation(element->coordinates.x, element->coordinates.y,
-//			element->coordinates.z);
-//	set_transform(w->shape +index, &trans);
-//	w->shape[index].cylinder.radius = element->radius;
-//	w->shape[index].cylinder.radius = element->radius;
-//	w->shape[index].material.color = element->color;
+	trans = translation(element->coordinates.x, element->coordinates.y,
+			element->coordinates.z);
+	scale = scaling(element->radius, element->radius, element->radius);
+	res = multiply_matrices(&trans, &scale);
+	set_transform(w->shape + index, &res);
+	w->shape[index].material.color = element->color;
+//	w->shape[index].cyliner.max = element.color;
+//	w->shape[index].cyliner.min = element.color;
 }
 
 static void	put_element_into_plane(t_element *element, int index, t_world *w)

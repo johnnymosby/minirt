@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/20 17:44:03 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/22 00:40:01 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ static int	allocate_shapes_lights_lightning(t_world *w)
 {
 	w->lights = ft_calloc(w->nb_lights, sizeof(t_light));
 	if (w->lights == NULL)
-		return (print_error_int(NULL, 0, ERR_MALLOC, ERR_LIGHT));
+		return (print_error(NULL, -1, ERR_MALLOC, ERR_LIGHT));
 	w->shape = ft_calloc(w->nb_shapes, sizeof(t_shape));
 	if (w->shape == NULL)
-		return (print_error_int(NULL, 0, ERR_MALLOC, ERR_SHAPES));
+		return (print_error(NULL, -1, ERR_MALLOC, ERR_SHAPES));
 	w->lightning.material = ft_calloc(1, sizeof(t_material));
 	if (w->lightning.material == NULL)
-		return (print_error_int(NULL, 0, ERR_MALLOC, ERR_LIGHTNING));
+		return (print_error(NULL, -1, ERR_MALLOC, ERR_LIGHTNING));
 	return (0);
 }
 
@@ -44,7 +44,7 @@ static int	check_nb_elements(t_element *elmts, int nb_elmts, t_world *w)
 		i++;
 	}
 	if (nb[ELMT_AMBIENT] != 1 || nb[ELMT_CAMERA] != 1 || nb[ELMT_LIGHT] != 1)
-		return (print_error_int(NULL, 0, ERR_NB_MANDATORY_ELMTS, 0));
+		return (print_error(NULL, -1, ERR_NB_MANDATORY_ELMTS, 0));
 	w->nb_shapes = nb_elmts - 3;
 	w->nb_lights = 1;
 	return (0);
@@ -84,14 +84,16 @@ t_element	*count_elements(char *file_string, int *nb)
 		tmp++;
 	while (*tmp != '\0')
 	{
-		if (*tmp == '\n' && tmp != file_string
-			&& *(tmp +1) != '\n' && *(tmp +1) != '\0')
+		if (tmp != file_string 
+			&& *tmp == '\n' && *(tmp +1) != '\n' && *(tmp +1) != '\0')
 			(*nb)++;
 		tmp++;
 	}
 	if (file_string != tmp && *tmp -1 != '\n')
 		(*nb)++;
 	el = ft_calloc(*nb, sizeof(t_element));
+	if (el == NULL)
+		free (file_string);
 	return (el);
 }
 
@@ -105,18 +107,18 @@ int	parser(char *filename, t_scene *scene)
 	nb_elmts = 0;
 	ret = 0;
 	file_string = put_file_into_string(filename, &ret);
-	if (ret != 0)
-		return (print_error_int(NULL, 0, ret, 0));
+	if (file_string == NULL)
+		return (print_error(NULL, -1, ret, 0));
 	elmts = count_elements(file_string, &nb_elmts);
 	if (elmts == NULL)
-	{
-		free (file_string);
-		return (print_error_int(NULL, 0, ERR_MALLOC, ERR_ELEMENTS));
-	}
+		return (print_error(NULL, -1, ERR_MALLOC, ERR_ELEMENTS));
 	ret = get_elements(file_string, &nb_elmts, elmts);
 	free(file_string);
 	if (ret != 0)
+	{	
+		free (elmts);
 		return (ret);
+	}
 	if (check_nb_elements(elmts, nb_elmts, scene->world) == 0
 		&& allocate_shapes_lights_lightning(scene->world) == 0)
 		return (put_elements_into_scene(elmts, nb_elmts, scene));

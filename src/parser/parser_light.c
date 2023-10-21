@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_light.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 19:27:48 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/20 17:05:16 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/21 23:32:42 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,16 @@ int	parse_light(char *file_string, int *index, t_element *element)
 		(*index)++;
 	ret = parse_coordinates(file_string, index, element);
 	if (ret != 0)
-		return (print_error_int(file_string, *index, ret, ERR_LIGHT));
+		return (print_error(file_string, *index, ret, ERR_LIGHT));
 	while (file_string[*index] == ' ')
 		(*index)++;
 	ret = parse_brightness(file_string, index, element);
 	if (ret != 0)
-		return (print_error_int(file_string, *index, ret, ERR_LIGHT));
+		return (print_error(file_string, *index, ret, ERR_LIGHT));
 	while (file_string[*index] == ' ')
 		(*index)++;
 	ret = modify_brightness_with_color(file_string, index, element);
 	if (ret != 0)
-		return (print_error_int(file_string, *index, ret, ERR_LIGHT));
+		return (print_error(file_string, *index, ret, ERR_LIGHT));
 	return (0);
 }

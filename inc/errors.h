@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 13:49:17 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/20 17:55:53 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/21 23:31:43 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,6 @@
 # define ERR_SHAPES		7
 # define ERR_ELEMENTS	8
 
-int		print_error_int(char *file_string, int index, int err, int elmt);
+int		print_error(char *file_string, int index, int err, int elmt);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_camera.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 19:43:18 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/20 17:04:58 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/21 23:32:19 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,17 @@ int	parse_camera(char *file_string, int *index, t_element *element)
 		(*index)++;
 	ret = parse_coordinates(file_string, index, element);
 	if (ret != 0)
-		return (print_error_int(file_string, *index, ret, ERR_CAMERA));
+		return (print_error(file_string, *index, ret, ERR_CAMERA));
 	while (file_string[*index] == ' ')
 		(*index)++;
 	ret = parse_orientation(file_string, index, element);
 	if (ret != 0)
-		return (print_error_int(file_string, *index, ret, ERR_CAMERA));
+		return (print_error(file_string, *index, ret, ERR_CAMERA));
 	while (file_string[*index] == ' ')
 		(*index)++;
 	ret = parse_fov(file_string, index, element);
 	if (ret != 0)
-		return (print_error_int(file_string, *index, ret, ERR_CAMERA));
+		return (print_error(file_string, *index, ret, ERR_CAMERA));
 	while (file_string[*index] == ' ')
 		(*index)++;
 	return (0);

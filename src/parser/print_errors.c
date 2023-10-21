@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_errors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/20 18:56:21 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/22 00:47:05 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ static void	count_lines_and_chars(char *file_str, int index, int *nl, int *ch)
 		i++;
 	}
 	i = 0;
-	while (count < *nl)
+	while (count < *nl -1)
 	{
 		if (file_str[i] == '\n')
 			count++;
 		i++;
 	}
-	*ch = index - i;
+	*ch = index - i + 1;
 }
 
 static int	print_localisation(int type, int nb)
@@ -67,7 +67,7 @@ static int	print_localisation(int type, int nb)
 	if (type == PRINTLINE)
 		ft_putstr_fd("line:\t", 2);
 	if (type == PRINTCHAR)
-		ft_putstr_fd("character:\t", 2);
+		ft_putstr_fd("colomn:\t", 2);
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd("\n", 2);
 	free(str);
@@ -76,7 +76,7 @@ static int	print_localisation(int type, int nb)
 
 static void	print_element(int element)
 {
-	char	*s[8];
+	char	*s[20];
 
 	s[0] = "";
 	s[1] = "Lightning: ";
@@ -90,7 +90,7 @@ static void	print_element(int element)
 	ft_putstr_fd(s[element], 2);
 }
 
-int	print_error_int(char *file_string, int index, int err, int elmt)
+int	print_error(char *file_string, int index, int err, int elmt)
 {
 	int	line_nb;
 	int	char_nb;	
@@ -99,7 +99,7 @@ int	print_error_int(char *file_string, int index, int err, int elmt)
 	char_nb = 1;
 	count_lines_and_chars(file_string, index, &line_nb, &char_nb);
 	ft_putstr_fd("Error\n", 2);
-	if (index != 0)
+	if (index >= 0)
 	{
 		ft_putstr_fd("Error in parsing fount at:\n", 2);
 		if (print_localisation(PRINTLINE, line_nb))
