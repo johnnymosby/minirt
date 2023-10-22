@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/22 12:44:54 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/22 19:33:31 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void	print_message(int err)
 	s[12] = "Pronlem while initialising the MLX window\n";
 	s[13] = "Problem while initialising the MLX image of the picture\n";
 	s[14] = "Problem while initialising the MLX image of the menu\n";
+	s[15] = "The vector is not normalised\n";
 	ft_putstr_fd(s[-err], 2);
 }
 
@@ -90,6 +91,7 @@ static void	print_element(int element)
 	s[6] = "Cylinder: ";
 	s[6] = "Shapes: ";
 	s[7] = "Elements: ";
+	s[8] = "Canvas: ";
 	ft_putstr_fd(s[element], 2);
 }
 

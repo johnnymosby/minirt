@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 13:49:17 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/22 13:47:48 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/22 19:27:03 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define ERR_MLX_WIN -12
 # define ERR_MLX_PCT -13
 # define ERR_MLX_MENU -14
+# define ERR_NORM_VECTOR -15
 
 # define PRINTLINE 0
 # define PRINTCHAR 1
