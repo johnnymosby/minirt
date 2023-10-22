@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/22 13:30:29 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/22 19:13:39 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,18 @@ static int	put_elements_into_scene(t_element *el, int nb, t_scene *scene)
 	{
 		if (el[i].element_type == ELMT_CAMERA)
 			put_elements_into_camera (el + i, &scene->camera);
-		else if (el[i].element_type == ELMT_AMBIENT)
-			put_elements_into_lightning (el + i, 0, scene->world);
 		else if (el[i].element_type == ELMT_LIGHT)
-			put_elements_into_lightning (el + i, ++index_lights, scene->world);
-		else
+			put_elements_into_light (el + i, ++index_lights, scene->world);
+		else if (el[i].element_type == ELMT_PLANE 
+			|| el[i].element_type == ELMT_SPHERE
+			|| el[i].element_type == ELMT_CYLINDER)
 			put_elements_into_shapes (el + i, ++index_shapes, scene->world);
+	}
+	i = -1;
+	while (++i < nb)
+	{		
+		if (el[i].element_type == ELMT_AMBIENT)
+			put_elements_into_ambient (el + i, scene->world);
 	}
 	free(el);
 	return (0);

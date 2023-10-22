@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:41:27 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/22 13:50:00 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/22 18:57:53 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ char		*put_file_into_string(char *filename, int *ret);
 */
 
 void		put_elements_into_camera(t_element *element, t_camera *cam);
-void		put_elements_into_lightning(t_element *element,
+void		put_elements_into_ambient(t_element *element, t_world *w);
+void		put_elements_into_light(t_element *element,
 				int index, t_world *w);
 void		put_elements_into_shapes(t_element *element, int index, t_world *w);
 

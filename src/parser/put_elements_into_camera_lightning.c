@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 13:30:52 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/20 18:58:54 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/22 19:18:04 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,26 @@ void	put_elements_into_camera(t_element *element, t_camera *cam)
 	cam->original_transform = cam->transform;
 }
 
-void	put_elements_into_lightning(t_element *element, int index, t_world *w)
+void	put_elements_into_ambient(t_element *element, t_world *w)
 {
-	if (element->element_type == ELMT_AMBIENT)
+	int	i;
+
+	i = 0;
+	while (i < w->nb_shapes)
 	{
-		//it makes no difference 
-		//what the ambient value is (ratio or color) - why?
-		w->lightning.material->ambient = element->ambient_lightning_ratio;
-		w->lightning.material->color = element->color;
+		w->shape[i].material.ambient = element->ambient_lightning_ratio;
+		i++;
 	}
-	else if (element->element_type == ELMT_LIGHT)
-		w->lights[index]
-			= point_light(&element->light_intensity, &element->coordinates);
+	i = 0;
+	while (i < w->nb_lights)
+	{
+		w->lights[i].intensity = multiply_colors(&w->lights[i].intensity, &element->color);
+		i++;
+	}
+}
+
+void	put_elements_into_light(t_element *element, int index, t_world *w)
+{
+	w->lights[index]
+		= point_light(&element->light_intensity, &element->coordinates);
 }
