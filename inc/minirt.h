@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 19:16:29 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/08/06 19:17:28 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/22 13:50:33 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-#include <stdbool.h>
+# include <stdbool.h>
 
 #endif

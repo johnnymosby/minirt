@@ -6,16 +6,16 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:41:27 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/20 16:43:24 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/22 13:50:00 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-# include <fcntl.h> // open
-# include <unistd.h> // read
-# include <stdio.h> // NULL macro
+# include <fcntl.h>
+# include <unistd.h>
+# include <stdio.h>
 # include "libft.h"
 
 # include "colors.h"
@@ -53,21 +53,23 @@ typedef struct s_element
 ** ------------------------------- PARSER__ -----------------------------------
 */
 
-int		parse_color(char *file_string, int *index, t_color *color);
-int		parse_double(char *file_string, int *index, double *result);
-int		parse_coordinates(char *file_string, int *index, t_element *element);
-int		parse_orientation(char *file_string, int *index, t_element *element);
+int			parse_color(char *file_string, int *index, t_color *color);
+int			parse_double(char *file_string, int *index, double *result);
+int			parse_coordinates(char *file_string,
+				int *index, t_element *element);
+int			parse_orientation(char *file_string,
+				int *index, t_element *element);
 
 /*
 ** ------------------------------- PARSER_ ------------------------------------
 */
 
-int		parse_ambient(char *file_string, int *index, t_element *element);
-int		parse_camera(char *file_string, int *index, t_element *element);
-int		parse_light(char *file_string, int *index, t_element *element);
-int		parse_sphere(char *file_string, int *index, t_element *element);
-int		parse_plane(char *file_string, int *index, t_element *element);
-int		parse_cylinder(char *file_string, int *index, t_element *element);
+int			parse_ambient(char *file_string, int *index, t_element *element);
+int			parse_camera(char *file_string, int *index, t_element *element);
+int			parse_light(char *file_string, int *index, t_element *element);
+int			parse_sphere(char *file_string, int *index, t_element *element);
+int			parse_plane(char *file_string, int *index, t_element *element);
+int			parse_cylinder(char *file_string, int *index, t_element *element);
 
 /*
 ** ------------------------------- PARSER -------------------------------------
@@ -79,21 +81,22 @@ int			parser(char *filename, t_scene *scene);
 ** ------------------------------- GET ELEMENTS -------------------------------
 */
 
-int		get_elements(char *file_string, int *nb_elmts, t_element *elmts);
+int			get_elements(char *file_string, int *nb_elmts, t_element *elmts);
 
 /*
 ** ------------------------------- PUT FILE INTO STRING------------------------
 */
 
-int		open_file(char *filename);
-char	*put_file_into_string(char *filename, int *ret);
+int			open_file(char *filename);
+char		*put_file_into_string(char *filename, int *ret);
 
 /*
 ** ------------------------------- PUT ELEMENTS INTRO FINAL STRUCT-------------
 */
 
-void	put_elements_into_camera(t_element *element, t_camera *cam);
-void	put_elements_into_lightning(t_element *element, int index, t_world *w);
-void	put_elements_into_shapes(t_element *element, int index, t_world *w);
+void		put_elements_into_camera(t_element *element, t_camera *cam);
+void		put_elements_into_lightning(t_element *element,
+				int index, t_world *w);
+void		put_elements_into_shapes(t_element *element, int index, t_world *w);
 
 #endif

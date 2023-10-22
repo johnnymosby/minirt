@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   planes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 16:35:50 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/19 22:31:44 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/22 13:27:59 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static void	intersect_plane(t_shape *shape, t_ray *r, t_hit **hits)
 	add_intersection(hits, intersection(t, shape));
 	return ;
 }
-
 
 static t_tuple	normal_at_plane(t_shape *shape, t_tuple *point)
 {

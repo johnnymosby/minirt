@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 15:00:48 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/19 11:40:21 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/22 13:29:32 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static bool	discriminant(t_cylinder *cylinder, t_ray *r, t_disc_calc *d_calc)
 		+ 2 * r->origin.z * r->direction.z;
 	d_calc->c = pow(r->origin.x, 2) + pow(r->origin.z, 2) - 1;
 	d_calc->dscr = pow(d_calc->b, 2) - 4 * d_calc->a * d_calc->c;
-
 	return (true);
 }
 

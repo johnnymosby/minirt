@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:24:21 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/19 11:47:27 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/22 13:45:57 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	calculate_over_point(t_comp *comps)
 
 	product = multiply_tuple_by_scalar(&comps->normalv, EPSILON);
 	comps->over_point = add_tuples(&comps->point, &product);
-}	
+}
 
 t_comp	prepare_computations(t_hit *intersection, t_ray *ray)
 {

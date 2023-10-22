@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 16:09:02 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/11 12:08:53 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/22 13:51:02 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ typedef struct s_world
 	int			nb_shapes;
 }	t_world;
 
-#endif
-
 t_world		default_world(void);
 t_hit		*intersect_world(t_world *w, t_ray *ray);
 t_matrix	view_transform(t_tuple *from, t_tuple *to, t_tuple *up);
+
+#endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   translate_camera.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:17:31 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/13 16:14:54 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/22 13:35:41 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	translate_camera(int keycode, t_controls *controls)
 	transformed_direction
 		= multiply_matrix_by_tuple(&controls->scene->camera.original_transform,
 			&original_direction);
-	m_translated = translation(transformed_direction.x, 
+	m_translated = translation(transformed_direction.x,
 			transformed_direction.y, transformed_direction.z);
 	set_updated_transform_in_camera(controls, &m_translated);
 	rerender(scene);

@@ -3,60 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_keys.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:40:48 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/13 16:05:35 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/22 13:47:25 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MLX_KEYS_H
 # define MLX_KEYS_H
 
-#ifdef __APPLE__
-# define KEY_ESC 53
-# define KEY_ZOOM_IN 4
-# define KEY_ZOOM_OUT 5
-# define KEY_W 13
-# define KEY_A 0
-# define KEY_S 1
-# define KEY_D 2
-# define KEY_Q 12
-# define KEY_E 14
-# define KEY_L 37
-# define KEY_CTRL 256
-# define KEY_SPACE 49
-# define KEY_LEFT 123
-# define KEY_RIGHT 124
-# define KEY_UP 126
-# define KEY_DOWN 125
-# define KEY_PLUS 24
-# define KEY_MINUS 27
-# define LEFT_CLICK 1
-# define RIGHT_CLICK 2
-#endif
+# ifdef __APPLE__
+#  define KEY_ESC 53
+#  define KEY_ZOOM_IN 4
+#  define KEY_ZOOM_OUT 5
+#  define KEY_W 13
+#  define KEY_A 0
+#  define KEY_S 1
+#  define KEY_D 2
+#  define KEY_Q 12
+#  define KEY_E 14
+#  define KEY_L 37
+#  define KEY_CTRL 256
+#  define KEY_SPACE 49
+#  define KEY_LEFT 123
+#  define KEY_RIGHT 124
+#  define KEY_UP 126
+#  define KEY_DOWN 125
+#  define KEY_PLUS 24
+#  define KEY_MINUS 27
+#  define LEFT_CLICK 1
+#  define RIGHT_CLICK 2
+# endif
 
-#ifdef __linux__
-# define KEY_ESC 65307
-# define KEY_ZOOM_IN 4
-# define KEY_ZOOM_OUT 5
-# define KEY_W 119
-# define KEY_A 97
-# define KEY_S 115
-# define KEY_D 100
-# define KEY_Q 113
-# define KEY_E 101
-# define KEY_L 108
-# define KEY_CTRL 65507
-# define KEY_SPACE 32
-# define KEY_LEFT 65361
-# define KEY_RIGHT 65363
-# define KEY_UP 65362
-# define KEY_DOWN 65364
-# define KEY_PLUS 61
-# define KEY_MINUS 45
-# define LEFT_CLICK 1
-# define RIGHT_CLICK 3
-#endif
+# ifdef __linux__
+#  define KEY_ESC 65307
+#  define KEY_ZOOM_IN 4
+#  define KEY_ZOOM_OUT 5
+#  define KEY_W 119
+#  define KEY_A 97
+#  define KEY_S 115
+#  define KEY_D 100
+#  define KEY_Q 113
+#  define KEY_E 101
+#  define KEY_L 108
+#  define KEY_CTRL 65507
+#  define KEY_SPACE 32
+#  define KEY_LEFT 65361
+#  define KEY_RIGHT 65363
+#  define KEY_UP 65362
+#  define KEY_DOWN 65364
+#  define KEY_PLUS 61
+#  define KEY_MINUS 45
+#  define LEFT_CLICK 1
+#  define RIGHT_CLICK 3
+# endif
 
 #endif

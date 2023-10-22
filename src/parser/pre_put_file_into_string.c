@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pre_put_file_into_string.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:29:33 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/22 00:04:53 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/22 13:30:52 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ static char	*read_whole_file(int fd, int *ret, char *file_string)
 	{
 		r = read(fd, buf, BUFFER_SIZE);
 		if (r < 0)
-		{	
+		{
 			*ret = ERR_READ;
-			break;
+			break ;
 		}
 		buf[r] = 0;
 		tmp = file_string;

@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 09:04:54 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/22 12:51:46 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/22 13:33:02 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	canvas_to_mlx_image(t_canvas *const canvas, int *img)
 {
 	int	i;
 
-	i = 0; 
+	i = 0;
 	while (i < canvas->width * canvas->height)
 	{
 		img[i] = 0;

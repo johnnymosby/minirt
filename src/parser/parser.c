@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/22 00:40:01 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/22 13:30:29 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ t_element	*count_elements(char *file_string, int *nb)
 		tmp++;
 	while (*tmp != '\0')
 	{
-		if (tmp != file_string 
+		if (tmp != file_string
 			&& *tmp == '\n' && *(tmp +1) != '\n' && *(tmp +1) != '\0')
 			(*nb)++;
 		tmp++;
@@ -115,7 +115,7 @@ int	parser(char *filename, t_scene *scene)
 	ret = get_elements(file_string, &nb_elmts, elmts);
 	free(file_string);
 	if (ret != 0)
-	{	
+	{
 		free (elmts);
 		return (ret);
 	}

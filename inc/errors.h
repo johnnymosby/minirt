@@ -6,14 +6,12 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 13:49:17 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/22 12:55:49 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/22 13:47:48 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ERRORS_H
 # define ERRORS_H
-
-#include "error.h"
 
 # define ERR_OPEN_FILE -1
 # define ERR_NAME_FILE_WRONG -2

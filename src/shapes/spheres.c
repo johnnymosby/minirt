@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   spheres.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:55:05 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/19 21:22:07 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/22 13:28:16 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static void	discriminant(t_sphere *sphere, t_ray *r, t_disc_calc *d_calc)
 {
 	t_tuple	sphere_to_ray;
-
 
 	sphere_to_ray = substract_tuples(&r->origin, &sphere->origin);
 	d_calc->a = dot(&r->direction, &r->direction);
