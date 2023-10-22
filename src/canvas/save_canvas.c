@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   save_canvas.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 09:04:54 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/10 16:24:14 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/22 12:51:46 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "canvas.h"
 
-inline static void	correct_values(int i, int *img, t_canvas *const canvas)
+static void	correct_values(int i, int *img, t_canvas *const canvas)
+// do we need it (it checks if the value of the colors are above 1 less than 0)
 {
 	if (canvas->pixels[i].red > 1)
 		img[i] += 255 << 16;
@@ -29,12 +30,10 @@ inline static void	correct_values(int i, int *img, t_canvas *const canvas)
 }
 
 void	canvas_to_mlx_image(t_canvas *const canvas, int *img)
-// name of the function in the book: canvas_to_ppm
 {
 	int	i;
 
-	i = 0;/* 
-	ft_bzero(img, canvas->width * canvas->height); */
+	i = 0; 
 	while (i < canvas->width * canvas->height)
 	{
 		img[i] = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_planes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:43:54 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/19 19:31:36 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/22 12:35:48 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,7 +223,7 @@ int	main(int argc, char **argv)
 	fake_parser(&scene);
 	if (render(&scene) == false)
 		return(quit_scene(&scene, ERR_MEMORY_ALLOCATION));
-	if (initialise_mlx(&win) == false)
+	if (initialise_mlx(&win) != 0)
 		return(quit_scene(&scene, ERR_MLX_FUNCTION));
 	scene.canvas->win = &win;
 	canvas_to_mlx_image(scene.canvas, win.pct.addr);

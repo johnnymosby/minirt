@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_annie.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:43:54 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/18 19:38:44 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/22 12:35:02 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,9 @@ int	main(int argc, char **argv)
 		return(quit_scene(&scene, ret));
 	if (render(&scene) == false)
 		return(quit_scene(&scene, ERR_MEMORY_ALLOCATION));
-	if (initialise_mlx(&win) == false)
-		return(quit_scene(&scene, ERR_MLX_FUNCTION));
+	ret = initialise_mlx(&win);
+	if (ret != 0)
+		return(quit_scene(&scene, ret));
 	scene.canvas->win = &win;
 	canvas_to_mlx_image(scene.canvas, win.pct.addr);
 	render_menu(scene.canvas->win);

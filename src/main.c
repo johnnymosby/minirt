@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:43:54 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/21 17:04:08 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/22 13:11:02 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include "computations.h"
 #include "math.h"
 #include "parser.h"
+#include "error.h"
 
 #define ERR_MEMORY_ALLOCATION	-1
 #define ERR_MLX_FUNCTION		-2
@@ -98,7 +99,7 @@ int	main(int argc, char **argv)
 	int			ret;
 
 	if (argc != 2)
-		return(quit_scene(NULL, ERR_NB_ARGUMENTS));
+		return(print_error(NULL, -1, ERR_NB_ARGUMENTS, 0));
 	ft_bzero(&world, sizeof(t_world));
 	set_controls(&controls, &scene);
 	scene.canvas = NULL;
@@ -108,8 +109,9 @@ int	main(int argc, char **argv)
 		return(quit_scene(&scene, ret));
 	if (render(&scene) == false)
 		return(quit_scene(&scene, ERR_MEMORY_ALLOCATION));
-	if (initialise_mlx(&win) == false)
-		return(quit_scene(&scene, ERR_MLX_FUNCTION));
+	ret = initialise_mlx(&win);
+	if (ret != 0)
+		return(quit_scene(&scene, ret));
 	scene.canvas->win = &win;
 	canvas_to_mlx_image(scene.canvas, win.pct.addr);
 	render_menu(scene.canvas->win);

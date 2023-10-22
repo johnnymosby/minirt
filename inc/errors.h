@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 13:49:17 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/21 23:31:43 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/22 12:55:49 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@
 # define ERR_VALUE_RANGE -9
 # define ERR_READ -10
 # define ERR_NB_ARGUMENTS -11
+# define ERR_MLX_WIN -12
+# define ERR_MLX_PCT -13
+# define ERR_MLX_MENU -14
 
 # define PRINTLINE 0
 # define PRINTCHAR 1
@@ -38,6 +41,7 @@
 # define ERR_CYLINDER	6
 # define ERR_SHAPES		7
 # define ERR_ELEMENTS	8
+# define ERR_CANVAS		9
 
 int		print_error(char *file_string, int index, int err, int elmt);
 

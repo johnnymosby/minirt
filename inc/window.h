@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 12:38:27 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/18 13:31:25 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/22 12:32:51 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include "mlx_keys.h"
 # include "stdio.h"
 # include "shapes.h"
+# include "errors.h"
 
 # define WIN_HEIGHT 500
 # define MENU_WIDTH 200
@@ -68,7 +69,7 @@ typedef struct s_win
 }			t_win;
 
 t_win	window(void);
-bool	initialise_mlx(t_win *window);
+int		initialise_mlx(t_win *window);
 bool	initialise_picture(t_win *window);
 bool	initialise_menu(t_win *window);
 void	catch_close_hooks(t_win *window);

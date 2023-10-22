@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_original.c                                    :+:      :+:    :+:   */
+/*   main_ruslan_copy.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:43:54 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/16 09:59:08 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/22 12:35:59 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,7 +227,7 @@ int	main(void)
 	scene.world = &w;
 	if (render(&scene) == false)
 		return (ERR_MEMORY_ALLOCATION);
-	if (initialise_mlx(&win) == false)
+	if (initialise_mlx(&win) != 0)
 	{
 		free_canvas(scene.canvas);
 		free(w.lights);

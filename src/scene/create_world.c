@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   create_world.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 12:54:29 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/06 14:47:46 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/22 12:26:05 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "world.h"
-
+/*
 static void	set_default_spheres(t_shape *s)
 {
 	t_matrix	m;
@@ -50,12 +50,13 @@ static void	set_world_to_default(t_world *w)
 	w->shape = s;
 	w->nb_lights = 1;
 	w->nb_shapes = 2;
-}
+}*/
 
 t_world	default_world(void)
 {
 	t_world	w;
 
-	set_world_to_default(&w);
+//	set_world_to_default(&w);
+	ft_bzero(&w, sizeof(t_world));
 	return (w);
 }

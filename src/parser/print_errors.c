@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_errors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/22 00:47:05 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/22 12:44:54 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	print_message(int err)
 {
-	char	*s[70];
+	char	*s[80];
 
 	s[1] = "Opening the file is not possible\n";
 	s[2] = "Name of the file is not correct\n";
@@ -27,6 +27,9 @@ static void	print_message(int err)
 	s[9] = "The value is not in the expected range\n";
 	s[10] = "A problem occured while reading\n";
 	s[11] = "Number of arguments is not correct\n";
+	s[12] = "Pronlem while initialising the MLX window\n";
+	s[13] = "Problem while initialising the MLX image of the picture\n";
+	s[14] = "Problem while initialising the MLX image of the menu\n";
 	ft_putstr_fd(s[-err], 2);
 }
 
@@ -67,7 +70,7 @@ static int	print_localisation(int type, int nb)
 	if (type == PRINTLINE)
 		ft_putstr_fd("line:\t", 2);
 	if (type == PRINTCHAR)
-		ft_putstr_fd("colomn:\t", 2);
+		ft_putstr_fd("column:\t", 2);
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd("\n", 2);
 	free(str);
