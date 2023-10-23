@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 23:47:18 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/22 13:34:02 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/23 18:26:32 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_canvas	*canvas(int width, int height)
 	if (canvas->pixels == NULL)
 	{
 		free(canvas);
+		canvas = NULL;
 		print_error(NULL, -1, ERR_MALLOC, ERR_CANVAS);
 		return (NULL);
 	}

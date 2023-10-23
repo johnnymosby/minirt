@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:29:33 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/22 13:30:52 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/23 18:30:14 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,12 @@
 static char	*clean_and_return(int *ret, char *file_string, char *buf)
 {
 	if (*ret == ERR_READ)
+	{	
 		free(file_string);
+		file_string = NULL;
+	}
 	free(buf);
+	buf = NULL;
 	return (file_string);
 }
 
@@ -42,6 +46,7 @@ static char	*read_whole_file(int fd, int *ret, char *file_string)
 		tmp = file_string;
 		file_string = ft_strjoin(file_string, buf);
 		free(tmp);
+		tmp = NULL;
 		if (file_string == NULL)
 			*ret = ERR_MALLOC;
 	}

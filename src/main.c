@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:43:54 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/23 17:29:12 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/23 18:34:19 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,9 @@ static int	quit_scene(t_scene *scene, int err_code)
 {
 	t_win	*win;
 
-	win = scene->canvas->win;
+	win = NULL;
+	if (scene && scene->canvas && scene->canvas->win)
+		win = scene->canvas->win;
 	if (scene && scene->canvas && win && win->menu.img_ptr != NULL)
 		mlx_destroy_image(win->mlx_ptr, win->menu.img_ptr);
 	if (scene && scene->canvas && win && win->pct.img_ptr)

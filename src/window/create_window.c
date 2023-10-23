@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_window.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 12:58:41 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/08 11:46:26 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/23 18:31:09 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void	free_mlx_memory(t_win *window)
 	{
 		//mlx_destroy_display(window->mlx_ptr);
 		free(window->mlx_ptr);
+		window->mlx_ptr = NULL;
 	}
 	window = NULL;
 	return ;
@@ -49,6 +50,7 @@ t_win	window(void)
 	{
 		//mlx_destroy_display(window.mlx_ptr);
 		free(window.mlx_ptr);
+		window.mlx_ptr = NULL;
 		ft_bzero(&window, sizeof(t_win));
 		return (window); /// print_error in an error.h src/error/error.c?
 	}

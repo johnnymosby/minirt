@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/23 11:46:13 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/23 18:30:26 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ static int	print_localisation(int type, int nb)
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd("\n", 2);
 	free(str);
+	str = NULL;
 	return (0);
 }
 
