@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 12:47:17 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/23 10:59:34 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/23 17:39:47 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	parse_orientation(char *file_string, int *index, t_element *element)
 	t_tuple	coord;
 	int		ret;
 
-	coord = vector(0,0,0);
+	coord = vector(0, 0, 0);
 	ret = parse_double (file_string, index, &coord.x);
 	if (ret != 0)
 		return (ret);
