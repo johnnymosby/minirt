@@ -1,4 +1,4 @@
-NAME	=	minirt
+NAME	=	miniRT
 
 LIBFT		=	./lib/libft/libft.a
 LIBFT_MAKE	=	./lib/libft/Makefile
@@ -7,7 +7,8 @@ INC_LIBFT	=	-I./lib/libft/inc
 UNAME	=	$(shell uname -s)
 
 CC		=	cc
-CFLAGS	+=	-Wall -Wextra -Werror -Ofast -march=native -g
+CFLAGS	=	-Wall -Wextra -Werror
+#CFLAGS	+=	-Ofast -march=native -g
 
 MAIN	=	main.c
 
@@ -69,7 +70,7 @@ endif
 
 ifeq ($(UNAME), Linux)
 		MLX_DIR		=	./lib/mlx_linux/
-		MLX_FLAGS	=	-L $(MLX_DIR) -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+		MLX_FLAGS	=	-l mlx -lXext -lX11
 		INC_DIRS	= 	-I./inc/ -I./lib/libft/inc/ -I$(MLX_DIR)
 endif
 
@@ -78,7 +79,7 @@ MLX		=	$(MLX_DIR)libmlx.a
 all:		$(NAME)
 
 $(NAME):	$(OBJ) $(LIBFT) $(MLX)
-			$(CC) $(OBJ) $(CFLAGS) $(MLX_FLAGS) $(INC_DIRS) -lm $(RDL_LIB) $(LIBFT) -o $(NAME)
+			$(CC) $(OBJ) $(CFLAGS) $(MLX_FLAGS) -lm $(INC_DIRS) $(RDL_LIB) $(LIBFT) -o $(NAME)
 
 $(MLX):
 			make -C $(MLX_DIR)
