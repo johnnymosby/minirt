@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 11:35:55 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/12 17:44:55 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/23 18:22:27 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ t_camera	camera(int hsize, int vsize, double field_of_view)
 	c.vsize = vsize;
 	c.field_of_view = field_of_view;
 	c.transform = identity_matrix();
+	c.original_transform = identity_matrix();
 	c.inverse = inverse(&c.transform);
 	set_size_values(&c);
 	return (c);

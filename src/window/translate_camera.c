@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   translate_camera.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:17:31 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/22 13:35:41 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/23 18:25:18 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ void	translate_camera(int keycode, t_controls *controls)
 
 	scene = controls->scene;
 	if (keycode == KEY_W || keycode == KEY_S)
-		original_direction = vector(0, 0, 1 - 2 * (keycode == KEY_W));
+		original_direction = vector(0, 0, 1 - 2 * (keycode == KEY_S));
 	else if (keycode == KEY_A || keycode == KEY_D)
-		original_direction = vector(1 - 2 * (keycode == KEY_D), 0, 0);
+		original_direction = vector(1 - 2 * (keycode == KEY_A), 0, 0);
 	else if (keycode == KEY_SPACE || keycode == KEY_CTRL)
 		original_direction = vector(0, 1 - 2 * (keycode == KEY_SPACE), 0);
 	transformed_direction
