@@ -2,7 +2,8 @@ NAME		=	tests
 
 TESTS		=	parser.c tuples.c colors.c canvas.c matrices.c transformations.c \
 				rays.c spheres.c reflection.c world.c camera.c computations.c \
-				shadows.c cylinders.c shapes.c planes.c
+				shadows.c cylinders.c shapes.c planes.c parser_elements.c \
+				parser_full_files.c parser_open_files.c parser_shapes.c
 
 SRC_DIR		=	../src
 OBJ_DIR		=	../obj

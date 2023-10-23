@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   spheres.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:55:05 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/22 13:28:16 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/23 15:12:11 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,9 @@ t_shape	create_sphere(void)
 
 t_tuple	normal_at_sphere(t_shape *shape, t_tuple *point)
 {
-	t_tuple	object_point;
 	t_tuple	object_normal;
-	t_tuple	world_normal;
-	t_tuple	world_normal_normalized;
 
-	object_point = multiply_matrix_by_tuple(&shape->inverse, point);
-	object_normal = substract_tuples(&object_point, &shape->sphere.null_point);
-	world_normal = multiply_matrix_by_tuple(&shape->transpose, &object_normal);
-	world_normal.w = 0;
-	world_normal_normalized = normalize(&world_normal);
-	return (world_normal_normalized);
+	object_normal = substract_tuples(point, &shape->sphere.null_point);
+	object_normal.w = 0;
+	return (normalize(&object_normal));
 }
