@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinders.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 15:00:48 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/22 13:29:32 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/23 23:39:00 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ t_shape	create_cylinder(void)
 	set_shape_to_default(&shape);
 	shape.cylinder.max = INFINITY;
 	shape.cylinder.min = -INFINITY;
-	shape.cylinder.closed = false;
+	shape.cylinder.closed = true;
 	shape.shape_type = CYLINDER;
 	shape.intersect = intersect_cylinder;
 	shape.normal_at = normal_at_cylinder;

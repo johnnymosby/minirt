@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:43:54 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/23 20:04:37 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/23 23:18:14 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include "computations.h"
 #include "math.h"
 #include "parser.h"
-#include "error.h"
+#include "errors.h"
 
 static void	set_start(t_controls *controls, t_scene *scene, t_world *world)
 {
@@ -72,7 +72,7 @@ static int	quit_scene(t_scene *scene, int err_code)
 		mlx_destroy_window(win->mlx_ptr, win->win_ptr);
 	if (scene && scene->canvas && win && win->mlx_ptr)
 	{
-		mlx_destroy_display(win->mlx_ptr);
+		// mlx_destroy_display(win->mlx_ptr);
 		free(win->mlx_ptr);
 	}
 	if (scene && scene->canvas)
