@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 10:38:48 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/22 13:37:16 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/23 17:31:41 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static void	put_pixel(unsigned char *s, int color)
 	*(s + 0) = (color % 256);
 }
 
-
 static void	print_background(t_win *window)
 {
 	int	h;
@@ -59,7 +58,6 @@ static void	print_background(t_win *window)
 		h++;
 	}
 }
-
 
 /*
 $ xlsfonts '*fixed*' | less
