@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 13:49:17 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/22 19:27:03 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/23 11:46:31 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,14 @@
 # define ERR_VALUE_IS_NOT_A_DIGIT -6
 # define ERR_MISSING_COMMA -7
 # define ERR_MISSING_SPACE -8
-# define ERR_VALUE_RANGE -9
-# define ERR_READ -10
-# define ERR_NB_ARGUMENTS -11
-# define ERR_MLX_WIN -12
-# define ERR_MLX_PCT -13
-# define ERR_MLX_MENU -14
-# define ERR_NORM_VECTOR -15
+# define ERR_MISSING_NL -9
+# define ERR_VALUE_RANGE -10
+# define ERR_READ -11
+# define ERR_NB_ARGUMENTS -12
+# define ERR_MLX_WIN -13
+# define ERR_MLX_PCT -14
+# define ERR_MLX_MENU -15
+# define ERR_NORM_VECTOR -16
 
 # define PRINTLINE 0
 # define PRINTCHAR 1

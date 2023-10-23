@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 13:30:52 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/22 19:18:04 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/23 11:38:22 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,16 @@ void	put_elements_into_camera(t_element *element, t_camera *cam)
 
 	*cam = camera(PCT_WIDTH, WIN_HEIGHT, element->fov);
 	from = element->coordinates;
-	to = point(0, 0, 0);
-	up = element->orientation;
+//	t_tuple inv;
+//	inv = vector(-element->orientation.x, -element->orientation.y, -element->orientation.z);
+//	to = add_tuples(&element->coordinates, &inv);
+	to = add_tuples(&element->coordinates, &element->orientation);
+	up = vector(0,1,0);
 	cam->transform = view_transform(&from, &to, &up);
 	cam->inverse = inverse(&cam->transform);
 	cam->original_transform = cam->transform;
+//	cam->inverse = view_transform(&from, &to, &up);
+//	cam->original_transform = view_transform(&from, &to, &up);
 }
 
 void	put_elements_into_ambient(t_element *element, t_world *w)

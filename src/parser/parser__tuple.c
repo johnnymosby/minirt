@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser__tuple.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 12:47:17 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/22 21:28:21 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/23 10:59:34 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,40 +38,40 @@ int	parse_coordinates(char *file_string, int *index, t_element *element)
 	return (0);
 }
 
-static int	check_value_vector(double coord[3])
+static int	check_value_vector(t_tuple *coord)
 {
-	if (coord[0] < -1.0 || coord[0] > 1.0
-		||coord[1] < -1.0 || coord[1] > 1.0
-		||coord[2] < -1.0 || coord[2] > 1.0)
+	if (coord->x < -1.0 || coord->x > 1.0
+		||coord->y < -1.0 || coord->y > 1.0
+		||coord->z < -1.0 || coord->z > 1.0)
 		return (ERR_VALUE_RANGE);
-	if (!are_equal_doubles(sqrt(coord[0] * coord[0]
-		+ coord[1] * coord[1] + coord[2] * coord[2]), 1))
+	if (!are_equal_doubles(magnitude(coord), 1))
 		return (ERR_NORM_VECTOR);
 	return (0);
 }
 
 int	parse_orientation(char *file_string, int *index, t_element *element)
 {
-	double	coord[3];
+	t_tuple	coord;
 	int		ret;
 
-	ret = parse_double (file_string, index, coord);
+	coord = vector(0,0,0);
+	ret = parse_double (file_string, index, &coord.x);
 	if (ret != 0)
 		return (ret);
 	if (file_string[*index] != ',')
 		return (ERR_MISSING_COMMA);
 	(*index)++;
-	ret = parse_double (file_string, index, coord +1);
+	ret = parse_double (file_string, index, &coord.y);
 	if (ret != 0)
 		return (ret);
 	if (file_string[*index] != ',')
 		return (ERR_MISSING_COMMA);
 	(*index)++;
-	ret = parse_double (file_string, index, coord +2);
+	ret = parse_double (file_string, index, &coord.z);
 	if (ret != 0)
 		return (ret);
-	element->orientation = vector(coord[0], coord[1], coord[2]);
+	element->orientation = coord;
 	while (file_string[*index] == ' ')
 		(*index)++;
-	return (check_value_vector(coord));
+	return (check_value_vector(&element->orientation));
 }

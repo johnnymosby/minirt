@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 17:08:51 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/22 13:05:40 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/23 11:47:27 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ int	parse_color(char *file_string, int *index, t_color *color)
 	ret = parse_primary (file_string, index, &(color->blue));
 	if (ret != 0)
 		return (ret);
-	while (file_string[*index] == ' ')
+	if (file_string[*index] != '\n' && file_string[*index] != '\0')
+		return (ERR_MISSING_NL);
+	while (file_string[*index] == '\n')
 		(*index)++;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/22 19:33:31 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/23 11:46:13 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,14 @@ static void	print_message(int err)
 	s[6] = "Value should be a digit\n";
 	s[7] = "A comma is missing\n";
 	s[8] = "A space is missing\n";
-	s[9] = "The value is not in the expected range\n";
-	s[10] = "A problem occured while reading\n";
-	s[11] = "Number of arguments is not correct\n";
-	s[12] = "Pronlem while initialising the MLX window\n";
-	s[13] = "Problem while initialising the MLX image of the picture\n";
-	s[14] = "Problem while initialising the MLX image of the menu\n";
-	s[15] = "The vector is not normalised\n";
+	s[9] = "A newline is missing\n";
+	s[10] = "The value is not in the expected range\n";
+	s[11] = "A problem occured while reading\n";
+	s[12] = "Number of arguments is not correct\n";
+	s[13] = "Pronlem while initialising the MLX window\n";
+	s[14] = "Problem while initialising the MLX image of the picture\n";
+	s[15] = "Problem while initialising the MLX image of the menu\n";
+	s[16] = "The vector is not normalised\n";
 	ft_putstr_fd(s[-err], 2);
 }
 

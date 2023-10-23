@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_camera.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 19:43:18 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/21 23:32:19 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/23 10:36:38 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	parse_fov(char *file_string, int *index, t_element *element)
 		return (ret);
 	if (element->fov < 0 || element->fov > 180.0)
 		return (ERR_VALUE_RANGE);
+	element->fov *= (M_PI /180);
 	return (0);
 }
 
