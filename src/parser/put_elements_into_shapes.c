@@ -6,7 +6,7 @@
 /*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 13:35:23 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/22 19:20:34 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/23 17:43:51 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	put_element_into_cylinder(t_element *element, int index, t_world *w)
 	set_transform(w->shape + index, &res);
 	w->shape[index].material.color = element->color;
 	w->shape[index].cylinder.max = element->cylinder_height / 2;
-	w->shape[index].cylinder.min = - element->cylinder_height / 2;
+	w->shape[index].cylinder.min = -element->cylinder_height / 2;
 }
 
 static void	put_element_into_plane(t_element *element, int index, t_world *w)
