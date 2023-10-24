@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 17:55:59 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/23 23:19:42 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/24 12:38:20 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 static int	close_button(t_win *window)
 {
 	(void)window;
-	// mlx_loop_end(window->mlx_ptr);
+	mlx_loop_end(window->mlx_ptr);
 	return (0);
 }
 
@@ -24,8 +24,8 @@ static int	escape_key(int keysym, t_win *window)
 {
 	(void)window;
 	(void)keysym;
-	// if (keysym == KEY_ESC)
-	// 	mlx_loop_end(window->mlx_ptr);
+	if (keysym == KEY_ESC)
+		mlx_loop_end(window->mlx_ptr);
 	return (0);
 }
 

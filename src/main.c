@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:43:54 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/23 23:18:14 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/24 13:11:02 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,9 @@ static int	quit_scene(t_scene *scene, int err_code)
 {
 	t_win	*win;
 
-	win = scene->canvas->win;
+	win = NULL;
+	if (scene && scene->canvas)
+		win = scene->canvas->win;
 	if (scene && scene->canvas && win && win->menu.img_ptr != NULL)
 		mlx_destroy_image(win->mlx_ptr, win->menu.img_ptr);
 	if (scene && scene->canvas && win && win->pct.img_ptr)
@@ -72,7 +74,7 @@ static int	quit_scene(t_scene *scene, int err_code)
 		mlx_destroy_window(win->mlx_ptr, win->win_ptr);
 	if (scene && scene->canvas && win && win->mlx_ptr)
 	{
-		// mlx_destroy_display(win->mlx_ptr);
+		mlx_destroy_display(win->mlx_ptr);
 		free(win->mlx_ptr);
 	}
 	if (scene && scene->canvas)

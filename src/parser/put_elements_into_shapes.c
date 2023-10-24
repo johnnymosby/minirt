@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_elements_into_shapes.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 13:35:23 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/24 00:48:31 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/24 12:43:26 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@ static void	put_element_into_sphere(t_element *element, int index, t_world *w)
 	w->shape[index] = create_sphere();
 	trans = translation(element->coordinates.x, element->coordinates.y,
 			element->coordinates.z);
-	scale = scaling(element->radius / 2, element->radius / 2, element->radius / 2);
+	scale = scaling(element->radius, element->radius, element->radius);
 	res = multiply_matrices(&trans, &scale);
 	set_transform(w->shape + index, &res);
 	w->shape[index].material.color = element->color;
 }
+
 static void	calculate_angles(t_tuple *direction, double *x, double *z)
 {
 	double	x_projection;
@@ -33,6 +34,10 @@ static void	calculate_angles(t_tuple *direction, double *x, double *z)
 	x_projection = sqrt((direction->z * direction->z)
 			+ (direction->y * direction->y));
 	*z = acos(x_projection);
+	if ((direction->z * direction->y) > 0)
+		*z = acos(x_projection);
+	else if ((direction->z * direction->y) < 0)
+		*z = acos(x_projection) + M_PI_2;
 	if (are_equal_doubles(x_projection, 0))
 		*x = M_PI_2;
 	else
