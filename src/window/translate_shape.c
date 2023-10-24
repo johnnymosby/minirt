@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:24:20 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/13 16:19:34 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/24 16:24:32 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,6 @@ void	set_updated_transform_in_shape(t_controls *controls, t_matrix *m)
 	set_transform(controls->shape_in_control, &m_new_transform);
 }
 
-/* static void	translate_cylinder(int keycode, t_controls *controls)
-{
-	t_cylinder	*cylinder;
-
-	cylinder = &controls->shape_in_control->cylinder;
-	if (keycode == KEY_W || keycode == KEY_S)
-		cylinder->origin.z += 1 - 2 * (keycode == KEY_S);
-	else if (keycode == KEY_A || keycode == KEY_D)
-		cylinder->origin.x += 1 - 2 * (keycode == KEY_A);
-	else if (keycode == KEY_SPACE || keycode == KEY_CTRL)
-		cylinder->origin.y += 1 - 2 * (keycode == KEY_CTRL);
-	rerender(controls->scene);
-} */
-
 void	translate_shape(int keycode, t_controls *controls)
 {
 	t_matrix	m_translated;
@@ -45,8 +31,6 @@ void	translate_shape(int keycode, t_controls *controls)
 	t_tuple		original_direction;
 	t_tuple		transformed_direction;
 
-/* 	if (controls->shape_in_control->shape_type == CYLINDER)
-		return (translate_cylinder(keycode, controls)); */
 	scene = controls->scene;
 	if (keycode == KEY_W || keycode == KEY_S)
 		original_direction = vector(0, 0, 1 - 2 * (keycode == KEY_W));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arithmetic_operations.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 22:49:16 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/10 20:09:19 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/24 16:22:07 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,6 @@ t_tuple	add_tuples(t_tuple *a, t_tuple *b)
 	c.y = a->y + b->y;
 	c.z = a->z + b->z;
 	c.w = a->w + b->w;
-	// if (are_equal_doubles(c.w, 0.0) == false
-	// 	&& are_equal_doubles(c.w, 1.0) == false)
-	// {
-	// 	/* ft_putstr_fd("Wrong tuples. The sum is set to a vector\n",
-	// 		STDOUT_FILENO);
-	// 	ft_putnbr_fd(a->w, STDOUT_FILENO);
-	// 	ft_putnbr_fd(b->w, STDOUT_FILENO); */
-	// 	c.w = 1.0;
-	// }
 	return (c);
 }
 
@@ -40,13 +31,6 @@ t_tuple	substract_tuples(t_tuple *a, t_tuple *b)
 	c.y = a->y - b->y;
 	c.z = a->z - b->z;
 	c.w = a->w - b->w;
-	// if (are_equal_doubles(c.w, 0.0) == false
-	// 	&& are_equal_doubles(c.w, 1.0) == false)
-	// {
-	// 	// ft_putstr_fd("Wrong tuples. The substraction is set to a vector\n",
-	// 	// 	STDOUT_FILENO);
-	// 	c.w = 0.0;
-	// }
 	return (c);
 }
 

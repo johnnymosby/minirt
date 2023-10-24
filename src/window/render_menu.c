@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_menu.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 10:38:48 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/23 23:20:10 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/24 16:24:53 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ static void	print_infos(t_win *win)
 
 	m = win->mlx_ptr;
 	p = win->win_ptr;
-	// mlx_set_font(m, p,
-		// "-sony-fixed-medium-r-normal--24-170-100-100-c-120-jisx0201.1976-0");
+	mlx_set_font(m, p,
+		"-sony-fixed-medium-r-normal--24-170-100-100-c-120-jisx0201.1976-0");
 	mlx_string_put(m, p, PCT_WIDTH + 5, 50, WHITE, "Control Keys");
-	// mlx_set_font(m, p,
-		// "-misc-fixed-medium-r-normal--0-0-75-75-c-0-iso10646-1");
+	mlx_set_font(m, p,
+		"-misc-fixed-medium-r-normal--0-0-75-75-c-0-iso10646-1");
 	mlx_string_put(m, p, PCT_WIDTH + 5, 90, DARK_GREY, "translate");
 	mlx_string_put(m, p, PCT_WIDTH + 20, 110, WHITE, "WASD, space, control");
 	mlx_string_put(m, p, PCT_WIDTH + 5, 150, DARK_GREY, "rotate");

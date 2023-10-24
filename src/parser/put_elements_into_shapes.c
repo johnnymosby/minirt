@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 13:35:23 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/24 15:56:00 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/24 16:20:44 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,40 +25,6 @@ static void	put_element_into_sphere(t_element *element, int index, t_world *w)
 	res = multiply_matrices(&trans, &scale);
 	set_transform(w->shape + index, &res);
 	w->shape[index].material.color = element->color;
-}
-
-static void	calculate_angles(t_tuple *direction, double *x, double *z)
-{
-	double	x_projection;
-
-	x_projection = sqrt((direction->z * direction->z)
-			+ (direction->y * direction->y));
-	if ((direction->x * direction->y) >= 0)
-		*z = acos(x_projection);
-	else
-		*z = acos(x_projection) - M_PI_2;
-	if (are_equal_doubles(x_projection, 0))
-		*x = M_PI_2;
-	else
-	{
-		if ((direction->z * direction->y) >= 0)
-			*x = acos(direction->y / x_projection);
-		else
-			*x = acos(direction->y / x_projection) - M_PI_2;
-	}
-}
-
-t_matrix	calculate_rotation(t_tuple *direction)
-{
-	double		x_angle;
-	double		z_angle;
-	t_matrix	m_rotated_z;
-	t_matrix	m_rotated_x;
-
-	calculate_angles(direction, &x_angle, &z_angle);
-	m_rotated_z = rotation_z(z_angle);
-	m_rotated_x = rotation_x(x_angle);
-	return (multiply_matrices(&m_rotated_x, &m_rotated_z));
 }
 
 static void	put_element_into_cylinder(t_element *element, int index, t_world *w)

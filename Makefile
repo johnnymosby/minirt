@@ -16,7 +16,8 @@ PARSER	=	parser__color.c parser__double.c parser__tuple.c\
 			parser_camera.c parser_light.c parser_ambient.c parser_objects.c print_errors.c\
 			parser.c \
 			pre_get_elements_from_string.c pre_put_file_into_string.c \
-			put_elements_into_camera_lightning.c put_elements_into_shapes.c
+			put_elements_into_camera_lightning.c put_elements_into_shapes.c \
+			calculate_rotation.c
 PARSER	:=	$(addprefix parser/, $(PARSER))
 
 TUPLES	=	create_tuple.c logical_operations.c arithmetic_operations.c \
@@ -43,7 +44,7 @@ RAYS	=	utils.c light.c lightning.c
 RAYS	:=	$(addprefix rays/, $(RAYS))
 
 SHAPES	=	utils.c spheres.c intersection.c reflection.c material.c \
-			cylinders.c planes.c
+			cylinders.c planes.c cylinders_utils.c
 SHAPES	:=	$(addprefix shapes/, $(SHAPES))
 
 SCENE	=	create_world.c intersect_world_ray.c view_transform.c shade_hits.c prepare_computation.c \

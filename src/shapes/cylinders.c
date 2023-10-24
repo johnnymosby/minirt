@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinders.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 15:00:48 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/23 23:39:00 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/24 16:19:02 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,30 +82,4 @@ void	intersect_cylinder(t_shape *shape, t_ray *r, t_hit **hits)
 		add_intersection(hits, intersection(t[0], shape));
 	if (shape->cylinder.min < y[1] && y[1] < shape->cylinder.max)
 		add_intersection(hits, intersection(t[1], shape));
-}
-
-t_tuple	normal_at_cylinder(t_shape *shape, t_tuple *point)
-{
-	double	dist;
-
-	dist = pow(point->x, 2) + pow(point->z, 2);
-	if (dist < 1 && point->y >= (shape->cylinder.max - EPSILON))
-		return (vector(0, 1, 0));
-	if (dist < 1 && point->y <= (shape->cylinder.min + EPSILON))
-		return (vector(0, -1, 0));
-	return (vector(point->x, 0, point->z));
-}
-
-t_shape	create_cylinder(void)
-{
-	t_shape	shape;
-
-	set_shape_to_default(&shape);
-	shape.cylinder.max = INFINITY;
-	shape.cylinder.min = -INFINITY;
-	shape.cylinder.closed = true;
-	shape.shape_type = CYLINDER;
-	shape.intersect = intersect_cylinder;
-	shape.normal_at = normal_at_cylinder;
-	return (shape);
 }

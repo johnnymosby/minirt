@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:55:05 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/23 15:12:11 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/24 16:17:25 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	intersect_sphere(t_shape *shape, t_ray *r, t_hit **hits)
 	t_disc_calc	d_calc;
 	double		d_squared;
 	double		t[2];
-	// t_hit		*intrs[2];
 
 	discriminant(&shape->sphere, r, &d_calc);
 	if (d_calc.dscr > 0 || are_equal_doubles(d_calc.dscr, 0))

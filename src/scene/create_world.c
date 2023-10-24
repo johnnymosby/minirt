@@ -3,60 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   create_world.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 12:54:29 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/22 12:26:05 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/24 16:26:49 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "world.h"
-/*
-static void	set_default_spheres(t_shape *s)
-{
-	t_matrix	m;
-
-	s[0] = create_sphere();
-	s[0].material.color = color(0.8, 1.0, 0.6);
-	s[0].material.diffuse = 0.7;
-	s[0].material.specular = 0.2;
-	s[0].sphere.radius = 1;
-	s[1] = create_sphere();
-	m = scaling(0.5, 0.5, 0.5);
-	set_transform(s + 1, &m);
-}
-
-static void	set_default_light(t_light *l)
-{
-	t_color		intensity;
-	t_tuple		position;
-
-	intensity = color(1, 1, 1);
-	position = point(-10, 10, -10);
-	l[0] = point_light(&intensity, &position);
-}
-
-static void	set_world_to_default(t_world *w)
-{
-	t_light		*l;
-	t_shape		*s;
-
-	l = ft_calloc(1, sizeof(t_light));
-	s = ft_calloc(2, sizeof(t_shape));
-	set_default_light(l);
-	set_default_spheres(s);
-	w->xs = NULL;
-	w->lights = l;
-	w->shape = s;
-	w->nb_lights = 1;
-	w->nb_shapes = 2;
-}*/
 
 t_world	default_world(void)
 {
 	t_world	w;
 
-//	set_world_to_default(&w);
 	ft_bzero(&w, sizeof(t_world));
 	return (w);
 }

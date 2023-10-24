@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 13:30:52 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/23 19:57:11 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/24 16:19:47 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ void	put_elements_into_ambient(t_element *element, t_world *w)
 	i = 0;
 	while (i < w->nb_lights)
 	{
-		w->lights[i].intensity = multiply_colors(&w->lights[i].intensity, &element->color);
+		w->lights[i].intensity = multiply_colors(&w->lights[i].intensity,
+				&element->color);
 		i++;
 	}
 }
