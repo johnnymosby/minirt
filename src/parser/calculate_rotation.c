@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 16:21:09 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/24 16:21:20 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/24 17:58:50 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,20 @@
 static void	calculate_angles(t_tuple *direction, double *x, double *z)
 {
 	double	x_projection;
+	double	z_projection;
 
 	x_projection = sqrt((direction->z * direction->z)
+			+ (direction->y * direction->y));
+	z_projection = sqrt((direction->x * direction->x)
 			+ (direction->y * direction->y));
 	if ((direction->x * direction->y) >= 0)
 		*z = acos(x_projection);
 	else
 		*z = acos(x_projection) - M_PI_2;
-	if (are_equal_doubles(x_projection, 0))
-		*x = M_PI_2;
+	if ((direction->z * direction->y) >= 0)
+		*x = acos(z_projection);
 	else
-	{
-		if ((direction->z * direction->y) >= 0)
-			*x = acos(direction->y / x_projection);
-		else
-			*x = acos(direction->y / x_projection) - M_PI_2;
-	}
+		*x = acos(z_projection) - M_PI_2;
 }
 
 t_matrix	calculate_rotation(t_tuple *direction)
