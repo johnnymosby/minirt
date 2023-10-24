@@ -8,7 +8,7 @@ UNAME	=	$(shell uname -s)
 
 CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror
-CFLAGS	+=	-Ofast -march=native -g
+# CFLAGS	+=	-Ofast -march=native -g
 
 MAIN	=	main.c
 

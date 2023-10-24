@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 16:26:30 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/12 17:30:11 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/24 14:29:02 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	change_shape_size(int keycode, t_controls *controls)
 	t_matrix	m_new_transform;
 	t_scene		*scene;
 
+	if (controls->shape_in_control->shape_type == PLANE)
+		return ;
 	scene = controls->scene;
 	if (keycode == KEY_ZOOM_IN && scene->camera.field_of_view > -2.85)
 	{

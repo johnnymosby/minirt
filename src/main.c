@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:43:54 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/24 13:11:02 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/24 14:30:10 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ int	pressed_key(int keycode, t_controls *controls)
 	{
 		if (controls->control_state == CAMERA)
 			rotate_camera(keycode, controls);
-		else if (controls->control_state == SHAPE)
+		else if (controls->control_state == SHAPE
+			|| controls->control_state == PLANE)
 			rotate_shape(keycode, controls);
 	}
 	else if (keycode == KEY_L && controls->control_state != LIGHT)

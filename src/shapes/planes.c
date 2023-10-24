@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   planes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 16:35:50 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/22 13:27:59 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/24 14:34:59 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ t_shape	create_plane(void)
 	t_shape	shape;
 
 	set_shape_to_default(&shape);
+	shape.shape_type = PLANE;
 	shape.intersect = intersect_plane;
 	shape.normal_at = normal_at_plane;
 	return (shape);

@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 13:35:23 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/24 12:43:26 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/24 14:39:39 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,20 +80,15 @@ static void	put_element_into_cylinder(t_element *element, int index, t_world *w)
 static void	put_element_into_plane(t_element *element, int index, t_world *w)
 {
 	t_matrix	trans;
-	t_matrix	rotx;
-	t_matrix	roty;
-	t_matrix	rotz;
+	t_matrix	rotation;
+	t_matrix	res;
 
 	w->shape[index] = create_plane();
-	trans = translation(element->coordinates.x, \
-		element->coordinates.y, element->coordinates.z);
-	rotx = rotation_x(element->orientation.x);
-	roty = rotation_y(element->orientation.y);
-	rotz = rotation_z(element->orientation.z);
-	set_transform(w->shape + index, &trans);
-	set_transform(w->shape + index, &rotx);
-	set_transform(w->shape + index, &roty);
-	set_transform(w->shape + index, &rotz);
+	trans = translation(element->coordinates.x, element->coordinates.y,
+			element->coordinates.z);
+	rotation = calculate_rotation(&element->orientation);
+	res = multiply_matrices(&trans, &rotation);
+	set_transform(w->shape + index, &res);
 	w->shape[index].material.color = element->color;
 }
 
