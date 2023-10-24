@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:41:27 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/22 18:57:53 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/24 16:31:11 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,11 @@ void		put_elements_into_ambient(t_element *element, t_world *w);
 void		put_elements_into_light(t_element *element,
 				int index, t_world *w);
 void		put_elements_into_shapes(t_element *element, int index, t_world *w);
+
+/*
+** ------------------------------- CALCULATE ROTATION -------------------------
+*/
+
+t_matrix	calculate_rotation(t_tuple *direction);
 
 #endif
