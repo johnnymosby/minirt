@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 13:35:23 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/24 14:39:39 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/24 15:56:00 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,19 @@ static void	calculate_angles(t_tuple *direction, double *x, double *z)
 
 	x_projection = sqrt((direction->z * direction->z)
 			+ (direction->y * direction->y));
-	*z = acos(x_projection);
-	if ((direction->z * direction->y) > 0)
+	if ((direction->x * direction->y) >= 0)
 		*z = acos(x_projection);
-	else if ((direction->z * direction->y) < 0)
-		*z = acos(x_projection) + M_PI_2;
+	else
+		*z = acos(x_projection) - M_PI_2;
 	if (are_equal_doubles(x_projection, 0))
 		*x = M_PI_2;
 	else
-		*x = acos(direction->y / x_projection);
+	{
+		if ((direction->z * direction->y) >= 0)
+			*x = acos(direction->y / x_projection);
+		else
+			*x = acos(direction->y / x_projection) - M_PI_2;
+	}
 }
 
 t_matrix	calculate_rotation(t_tuple *direction)
@@ -67,7 +71,7 @@ static void	put_element_into_cylinder(t_element *element, int index, t_world *w)
 	w->shape[index] = create_cylinder();
 	trans = translation(element->coordinates.x, element->coordinates.y,
 			element->coordinates.z);
-	scale = scaling(element->radius, element->radius, element->radius);
+	scale = scaling(1, element->radius, element->radius);
 	rotation = calculate_rotation(&element->orientation);
 	res = multiply_matrices(&scale, &rotation);
 	res = multiply_matrices(&trans, &res);
