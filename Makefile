@@ -12,6 +12,9 @@ CFLAGS	=	-Wall -Wextra -Werror
 
 MAIN	=	main.c
 
+PLATFORM_DEPENDENT_FILES = src/main.c src/window/create_window.c src/window/mlx_hooks.c \
+			src/window/render_menu.c
+
 PARSER	=	parser__color.c parser__double.c parser__tuple.c\
 			parser_camera.c parser_light.c parser_ambient.c parser_objects.c print_errors.c\
 			parser.c \
@@ -82,6 +85,20 @@ all:		$(NAME)
 $(NAME):	$(OBJ) $(LIBFT) $(MLX)
 			$(CC) $(OBJ) $(CFLAGS) $(MLX_FLAGS) -lm $(INC_DIRS) $(RDL_LIB) $(LIBFT) -o $(NAME)
 
+$(PLATFORM_DEPENDENT_FILES):
+ifeq ($(UNAME), Darwin)
+		cp src/platform_dependent/main_mac.c src/main.c
+		cp src/platform_dependent/create_window_mac.c src/window/create_window.c
+		cp src/platform_dependent/mlx_hooks_mac.c src/window/mlx_hooks.c
+		cp src/platform_dependent/render_menu_mac.c src/window/render_menu.c
+endif
+ifeq ($(UNAME), Linux)
+		cp src/platform_dependent/main_linux.c src/main.c
+		cp src/platform_dependent/render_menu_linux.c src/window/render_menu.c
+		cp src/platform_dependent/mlx_hooks_linux.c src/window/mlx_hooks.c
+		cp src/platform_dependent/render_menu_linux.c src/window/render_menu.c
+endif
+
 $(MLX):
 			make -C $(MLX_DIR)
 
@@ -95,6 +112,9 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(LIBFT)
 			@mkdir -p $(@D)
 			$(CC) $(CFLAGS) $(INC_DIRS) -c $< -o $@
 
+run:	$(NAME)
+			./$(NAME) testfiles
+
 clean:
 			make clean -C ./lib/libft/
 			make clean -C ./tests/
@@ -103,7 +123,7 @@ clean:
 fclean:		clean
 			make fclean -C ./lib/libft/
 			make fclean -C ./tests/
-			rm -f $(NAME)
+			rm -f $(NAME) $(PLATFORM_DEPENDENT_FILES)
 
 re:			fclean all
 
