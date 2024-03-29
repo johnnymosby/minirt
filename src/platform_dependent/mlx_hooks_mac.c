@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 17:55:59 by aguilmea          #+#    #+#             */
-/*   Updated: 2024/03/28 17:59:03 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2024/03/28 21:28:48 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 static int	close_button(t_win *window)
 {
 	(void)window;
-	//mlx_loop_end(window->mlx_ptr);
 	return (0);
 }
 
@@ -24,8 +23,6 @@ static int	escape_key(int keysym, t_win *window)
 {
 	(void)window;
 	(void)keysym;
-	//if (keysym == KEY_ESC)
-	//	mlx_loop_end(window->mlx_ptr);
 	return (0);
 }
 

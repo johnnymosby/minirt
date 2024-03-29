@@ -6,7 +6,7 @@
 /*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:43:54 by aguilmea          #+#    #+#             */
-/*   Updated: 2024/03/28 17:14:50 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2024/03/28 21:29:49 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,13 @@ static int	quit_scene(t_scene *scene, int err_code)
 	return (err_code);
 }
 
+static int	exit_program(t_scene *scene)
+{
+	quit_scene(scene, 0);
+	exit (0);
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_scene		scene;
@@ -109,6 +116,7 @@ int	main(int argc, char **argv)
 	mlx_put_image_to_window(scene.canvas->win->mlx_ptr,
 		scene.canvas->win->win_ptr, scene.canvas->win->pct.img_ptr, 0, 0);
 	catch_close_hooks(scene.canvas->win);
+	mlx_hook(scene.canvas->win->win_ptr, 17, 0L, exit_program, &scene);
 	mlx_key_hook(scene.canvas->win->win_ptr, pressed_key, &controls);
 	mlx_mouse_hook(scene.canvas->win->win_ptr, mouse_hook, &controls);
 	mlx_loop(scene.canvas->win->mlx_ptr);
