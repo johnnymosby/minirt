@@ -18,7 +18,8 @@ An object can be resized by zooming the mouse in/out.
 To run the program, an input file must be provided, specifying the scene to render. The formatting rules are in the appendix below.
 
 You may run the following command to get the rendered ball as in the first example:
-`./miniRT testfiles/full_files/scene02.rt`
+######
+	./miniRT testfiles/full_files/scene02.rt
 
 ## Examples
 ### A ball
@@ -35,27 +36,24 @@ Each line of the input file specifies one setting. The first word is the entity 
 
 Ambient light:
 A [ value of the intensity in the range [0.0,1.0] ] [ RGB in integer range [0, 255] ]:
-
-`A   0.1                  255,255,255`
-
+######
+	A	0.1	255,255,255
 Camera:
 C [coordinates of the view point] [3D normalized orientation vector] [ FOV in [0, 180] ]:
-
-`C   7,5,0              -0.8,-0.6,0           20`
-
+######
+	C	7,5,0	-0.8,-0.6,0	20`
 Light:
 L [ coordinates of the light point] [the brightness ratio in [0.0, 1.0] ]:
-`L   10,12,-5             1               255,255,255`
-
+######
+	L	10,12,-5	1	255,255,255
 Sphere:
 sp [coordinates of the sphere centre] [diameter]
 Plane:
 pl [coordinates of a point in the plane] [3D normalized normal vector] [ RGB in range [0-255] ]:
-
-`sp  0,0,0                1               255,51,255`
-
+######
+	sp	0,0,0	1	255,51,255
 Cylinder:
 cy [3D normalized normal vector of the cylinder's axis] [diameter] [height] [ RGB in range [0,255] ]:
-
-`cy  0,0,0                0,1,0    1 5    10,0,255`
+######
+	cy	0,0,0	0,1,0	1 5	10,0,255
 
