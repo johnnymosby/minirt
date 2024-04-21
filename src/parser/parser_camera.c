@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_camera.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 19:43:18 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/24 16:20:02 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/24 18:24:42 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	parse_fov(char *file_string, int *index, t_element *element)
 	ret = parse_double(file_string, index, &element->fov);
 	if (ret != 0)
 		return (ret);
-	if (element->fov < 0 || element->fov > 180.0)
+	if (element->fov <= 0 || element->fov > 180.0)
 		return (ERR_VALUE_RANGE);
 	element->fov *= (M_PI / 180);
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 12:21:49 by rbasyrov          #+#    #+#             */
-/*   Updated: 2023/10/18 18:33:02 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/24 19:17:19 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	add_intersection(t_hit **hits, t_hit *intrs)
 		this = this->left;
 	}
 	intrs->prev = prev;
-	prev->left = intrs;
+	if (prev != NULL)
+		prev->left = intrs;
 	intrs->left = this;
 }
 

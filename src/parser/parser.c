@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/23 17:38:01 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/24 18:57:29 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ t_element	*count_elements(char *file_string, int *nb)
 	char		*tmp;
 	t_element	*el;
 
+	if (file_string == NULL)
+		return (NULL);
 	tmp = file_string;
 	while (*tmp == '\n')
 		tmp++;

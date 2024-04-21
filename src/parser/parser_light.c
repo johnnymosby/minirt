@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_light.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 19:27:48 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/21 23:32:42 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/24 17:52:09 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,8 @@ static int	modify_brightness_with_color(char *file_string, int *index, \
 	ret = parse_color(file_string, index, &modif);
 	if (ret != 0)
 		return (ret);
-	element->light_intensity.red *= modif.red;
-	element->light_intensity.green *= modif.green;
-	element->light_intensity.blue *= modif.blue;
+	(void) modif;
+	(void) element;
 	return (0);
 }
 

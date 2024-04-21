@@ -1,19 +1,13 @@
 NAME	=	miniRT
 
 LIBFT		=	./lib/libft/libft.a
-LIBFT_MAKE	=	./lib/libft/Makefile
 INC_LIBFT	=	-I./lib/libft/inc
-
-UNAME	=	$(shell uname -s)
 
 CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror
-# CFLAGS	+=	-Ofast -march=native -g
+# CFLAGS	+=	-Ofast -march=native
 
 MAIN	=	main.c
-
-PLATFORM_DEPENDENT_FILES = src/main.c src/window/create_window.c src/window/mlx_hooks.c \
-			src/window/render_menu.c
 
 PARSER	=	parser__color.c parser__double.c parser__tuple.c\
 			parser_camera.c parser_light.c parser_ambient.c parser_objects.c print_errors.c\
@@ -50,7 +44,7 @@ SHAPES	=	utils.c spheres.c intersection.c reflection.c material.c \
 			cylinders.c planes.c cylinders_utils.c
 SHAPES	:=	$(addprefix shapes/, $(SHAPES))
 
-SCENE	=	create_world.c intersect_world_ray.c view_transform.c shade_hits.c prepare_computation.c \
+SCENE	=	intersect_world_ray.c view_transform.c shade_hits.c prepare_computation.c \
 			is_shadowed.c
 SCENE	:=	$(addprefix scene/, $(SCENE))
 
@@ -66,64 +60,28 @@ SRC		=	$(addprefix $(SRC_DIR), $(SOURCE))
 OBJ_DIR	=	obj/
 OBJ		=	$(addprefix $(OBJ_DIR), $(SOURCE:.c=.o))
 
-ifeq ($(UNAME), Darwin)
-		MLX_DIR		=	./lib/mlx_osx/
-		MLX_FLAGS	=	-L $(MLX_DIR) -l mlx -framework OpenGl -framework Appkit
-		INC_DIRS	=	-I./inc -I./lib/libft/inc/ -I$(MLX_DIR)
-endif
-
-ifeq ($(UNAME), Linux)
-		MLX_DIR		=	./lib/mlx_linux/
-		MLX_FLAGS	=	-l mlx -lXext -lX11
-		INC_DIRS	= 	-I./inc/ -I./lib/libft/inc/ -I$(MLX_DIR)
-endif
-
-MLX		=	$(MLX_DIR)libmlx.a
+MLX_FLAGS	=	-l mlx -lXext -lX11
+INC_DIRS	= 	-I./inc/ -I./lib/libft/inc/
 
 all:		$(NAME)
 
-$(NAME):	$(OBJ) $(LIBFT) $(MLX)
-			$(CC) $(OBJ) $(CFLAGS) $(MLX_FLAGS) -lm $(INC_DIRS) $(RDL_LIB) $(LIBFT) -o $(NAME)
-
-$(PLATFORM_DEPENDENT_FILES):
-ifeq ($(UNAME), Darwin)
-		cp src/platform_dependent/main_mac.c src/main.c
-		cp src/platform_dependent/create_window_mac.c src/window/create_window.c
-		cp src/platform_dependent/mlx_hooks_mac.c src/window/mlx_hooks.c
-		cp src/platform_dependent/render_menu_mac.c src/window/render_menu.c
-endif
-ifeq ($(UNAME), Linux)
-		cp src/platform_dependent/main_linux.c src/main.c
-		cp src/platform_dependent/render_menu_linux.c src/window/render_menu.c
-		cp src/platform_dependent/mlx_hooks_linux.c src/window/mlx_hooks.c
-		cp src/platform_dependent/render_menu_linux.c src/window/render_menu.c
-endif
-
-$(MLX):
-			make -C $(MLX_DIR)
+$(NAME):	$(OBJ) $(LIBFT)
+			$(CC) $(OBJ) $(CFLAGS) $(MLX_FLAGS) -lm $(INC_DIRS) $(LIBFT) -o $(NAME)
 
 $(LIBFT):
-			if [ ! -e $(LIBFT_MAKE) ]; then \
-				git submodule update --init --recursive; \
-			fi
 			make -C ./lib/libft/
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(LIBFT)
 			@mkdir -p $(@D)
 			$(CC) $(CFLAGS) $(INC_DIRS) -c $< -o $@
 
-run:	$(NAME)
-			./$(NAME) testfiles
-
 clean:
 			make clean -C ./lib/libft/
-			make clean -C ./tests/
 			rm -rf $(OBJ_DIR)
 
 fclean:		clean
 			make fclean -C ./lib/libft/
-			make fclean -C ./tests/
-			rm -f $(NAME) $(PLATFORM_DEPENDENT_FILES)
+			rm -f $(NAME)
 
 re:			fclean all
 

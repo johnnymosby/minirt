@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pre_put_file_into_string.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:29:33 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/22 13:30:52 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/24 19:02:39 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 static char	*clean_and_return(int *ret, char *file_string, char *buf)
 {
-	if (*ret == ERR_READ)
-		free(file_string);
 	free(buf);
+	if (*ret == ERR_READ)
+	{
+		free(file_string);
+		return (NULL);
+	}
 	return (file_string);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_errors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:09:14 by aguilmea          #+#    #+#             */
-/*   Updated: 2024/03/28 20:43:08 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/23 11:46:13 by aguilmea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int	print_error(char *file_string, int index, int err, int elmt)
 	ft_putstr_fd("Error\n", 2);
 	if (index >= 0)
 	{
-		ft_putstr_fd("Error in parsing found at:\n", 2);
+		ft_putstr_fd("Error in parsing fount at:\n", 2);
 		if (print_localisation(PRINTLINE, line_nb))
 			return (err);
 		if (print_localisation(PRINTCHAR, char_nb))

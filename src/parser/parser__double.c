@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser__double.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguilmea <aguilmea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 14:31:05 by aguilmea          #+#    #+#             */
-/*   Updated: 2023/10/13 16:42:40 by aguilmea         ###   ########.fr       */
+/*   Updated: 2023/10/24 19:13:08 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	parse_double(char *file_string, int *index, double *result)
 
 	*result = 0;
 	is_negative = false;
-	ret = 0;
 	if (file_string[*index] == '-')
 	{
 		is_negative = true;

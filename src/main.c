@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_mac.c                                         :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbasyrov <rbasyrov@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: rbasyrov <rbasyrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:43:54 by aguilmea          #+#    #+#             */
-/*   Updated: 2024/03/28 21:29:49 by rbasyrov         ###   ########.fr       */
+/*   Updated: 2023/10/24 19:05:45 by rbasyrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,7 @@ int	pressed_key(int keycode, t_controls *controls)
 	{
 		if (controls->control_state == CAMERA)
 			rotate_camera(keycode, controls);
-		else if (controls->control_state == SHAPE
-			|| controls->control_state == PLANE)
+		else if (controls->control_state == SHAPE)
 			rotate_shape(keycode, controls);
 	}
 	else if (keycode == KEY_L && controls->control_state != LIGHT)
@@ -75,6 +74,7 @@ static int	quit_scene(t_scene *scene, int err_code)
 		mlx_destroy_window(win->mlx_ptr, win->win_ptr);
 	if (scene && scene->canvas && win && win->mlx_ptr)
 	{
+		mlx_destroy_display(win->mlx_ptr);
 		free(win->mlx_ptr);
 	}
 	if (scene && scene->canvas)
@@ -86,13 +86,6 @@ static int	quit_scene(t_scene *scene, int err_code)
 	if (scene && scene->world && scene->world->shape)
 		free(scene->world->shape);
 	return (err_code);
-}
-
-static int	exit_program(t_scene *scene)
-{
-	quit_scene(scene, 0);
-	exit (0);
-	return (0);
 }
 
 int	main(int argc, char **argv)
@@ -116,7 +109,6 @@ int	main(int argc, char **argv)
 	mlx_put_image_to_window(scene.canvas->win->mlx_ptr,
 		scene.canvas->win->win_ptr, scene.canvas->win->pct.img_ptr, 0, 0);
 	catch_close_hooks(scene.canvas->win);
-	mlx_hook(scene.canvas->win->win_ptr, 17, 0L, exit_program, &scene);
 	mlx_key_hook(scene.canvas->win->win_ptr, pressed_key, &controls);
 	mlx_mouse_hook(scene.canvas->win->win_ptr, mouse_hook, &controls);
 	mlx_loop(scene.canvas->win->mlx_ptr);
